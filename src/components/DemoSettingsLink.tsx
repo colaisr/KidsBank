@@ -20,16 +20,21 @@ export function DemoSettingsLink({ onGradient = false }: DemoSettingsLinkProps) 
       }`}
       aria-label={t('ui.app.settings')}
     >
-      <ChatIcon />
+      <SettingsIcon />
     </Link>
   );
 }
 
-function ChatIcon() {
+function SettingsIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M5 18.5V7.8A2.8 2.8 0 0 1 7.8 5h8.4A2.8 2.8 0 0 1 19 7.8v5.4A2.8 2.8 0 0 1 16.2 16H9l-4 2.5Z"
+        d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      />
+      <path
+        d="M19.4 13.5a7.4 7.4 0 0 0 .1-3l2-1.1-2-3.5-2.3.6a7.5 7.5 0 0 0-2.6-1.5L14.5 2h-5l-.1 2.9a7.5 7.5 0 0 0-2.6 1.5l-2.3-.6-2 3.5 2 1.1a7.4 7.4 0 0 0 0 3l-2 1.1 2 3.5 2.3-.6a7.5 7.5 0 0 0 2.6 1.5l.1 2.9h5l.1-2.9a7.5 7.5 0 0 0 2.6-1.5l2.3.6 2-3.5-2-1.1Z"
         stroke="currentColor"
         strokeWidth="1.7"
         strokeLinejoin="round"
