@@ -1,0 +1,12 @@
+{
+  "name": "kidsbank",
+  "private": true,
+  "description": "KidsBank prototype — OpenSpec / PlanDocs / agent roles. App scaffold comes in work-plan phase 1.",
+  "scripts": {
+    "openspec": "openspec",
+    "openspec:doctor": "openspec doctor"
+  },
+  "devDependencies": {
+    "@fission-ai/openspec": "^1.5.0"
+  }
+}

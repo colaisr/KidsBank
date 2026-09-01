@@ -1,0 +1,31 @@
+schema: spec-driven
+
+# Shown to AI when creating each OpenSpec artifact.
+context: |
+  KidsBank — throwaway mobile-web prototype of kids/family banking for investor and bank demos.
+  Product baseline: Surf concept https://surf.ru/bank-for-kids/ (education + play + child finance, parent+child).
+  Deviations from Surf only via explicit OpenSpec change. Not a real bank: no backend, DB, KYC, payment gateway.
+  Two visual themes: AMIO (cyan/smile) and Evoca (violet/V-arrow); one screen set, CSS data-theme.
+  Three locales from day one: hy, ru, en — UI and demo fixture copy both live in i18n catalogs and switch together.
+  Appearance screen ("Оформление") switches bank + language and is always reachable. Role (child/parent) is a separate control.
+  Stack: Vite + React + TypeScript + Tailwind. Demo entities by id in src/data/, strings in src/locales/.
+  localStorage + ?bank=&lang=. Static deploy later. Entry: AGENTS.md. Work plan: PlanDocs/19.
+  Design: PlanDocs/17 + 17-theme-bank-1 (AMIO) + 17-theme-bank-2 (Evoca). Architecture: PlanDocs/15.
+  Invariants: docs/INVARIANTS.md. Roles: docs/roles/{product,designer,developer,devops}.md.
+  No QA/SEO/marketing agents. Never commit secrets.
+
+rules:
+  proposal:
+    - "Start from docs/INVARIANTS.md and PlanDocs/19 (current phase). List what must not break."
+    - "Say whether this is Surf baseline or an explicit delta. Include Non-goals. Prefer smallest change."
+    - "Acceptance must mention both themes (amio/evoca) and three locales (hy/ru/en) if UI or demo copy changes."
+    - "Tiny bugfix with no product ambiguity may skip a full change; still note acceptance."
+    - "Describe what/why, not low-level how (leave how to design/tasks)."
+  design:
+    - "UI must map to PlanDocs/17 and the active bank theme files. One layout, token themes, no layout forks."
+    - "All user-facing strings are i18n keys (ui.* / demo.*). Demo data is ids, not hardcoded language."
+    - "Оформление is in-app (bank + language). Do not invent a separate demo HUD."
+  tasks:
+    - "Last group is always validation: both themes, three languages, mobile viewport, against acceptance."
+    - "Include a task to update touched PlanDocs / openspec specs when behavior changes."
+    - "Do not add a backend, database, or auth unless the change explicitly says so."
