@@ -17,7 +17,7 @@
 - Пользовательские строки не хардкодить: только ключи i18n (`ui.*`, `demo.*`).
 - Секреты не коммитить.
 
-Детали: [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md). План работ: [`PlanDocs/19-work-plan.md`](PlanDocs/19-work-plan.md).
+Детали: [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md). Конкуренты: [`PlanDocs/02-competitive-landscape.md`](PlanDocs/02-competitive-landscape.md). План работ: [`PlanDocs/19-work-plan.md`](PlanDocs/19-work-plan.md).
 
 ## 2. Стек прототипа
 
@@ -44,6 +44,8 @@ npm run dev
 | Индекс PlanDocs | [`PlanDocs/README.md`](PlanDocs/README.md) |
 | Конституция, аудитория показа | [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md) |
 | Блоки Surf / демо-сценарии | [`PlanDocs/01-surf-baseline.md`](PlanDocs/01-surf-baseline.md) |
+| Конкуренты, кто с kids-приложением | [`PlanDocs/02-competitive-landscape.md`](PlanDocs/02-competitive-landscape.md) |
+| Откуда какой референс | [`PlanDocs/references/README.md`](PlanDocs/references/README.md) |
 | Стек, i18n, демо-данные | [`PlanDocs/15-architecture.md`](PlanDocs/15-architecture.md) |
 | Деплой | [`PlanDocs/16-ops-deploy.md`](PlanDocs/16-ops-deploy.md) |
 | UI-принципы, свитчер «Оформление» | [`PlanDocs/17-design-guidelines.md`](PlanDocs/17-design-guidelines.md) |
@@ -57,13 +59,13 @@ npm run dev
 
 ## 5. Процесс
 
-1. **product** — ценность, non-goals, acceptance; дельта от Surf только явно.
+1. **product** — ценность, non-goals, acceptance, сверка с [`02`](PlanDocs/02-competitive-landscape.md); дельта от Surf только явно.
 2. **designer** — UI по `17` + теме банка; три языка; не впритык под русский.
-3. `/opsx:propose` → proposal + design + tasks.
+3. `/opsx:propose` → proposal + design + tasks (в tasks — пункт обновить затронутые PlanDocs).
 4. Утверждение владельцем.
 5. `/opsx:apply` (**developer**) строго по tasks.
 6. **devops** — только если нужен публичный URL.
-7. `/opsx:archive`.
+7. **Feedback loop (обязателен):** PlanDocs выровнять под то, что реально добавили (игра → `01`/`19`, новый референс → `02` + `references/README.md`). Затем `/opsx:archive` (влить delta specs). Архив **без** этой правки — нарушение процесса.
 
 Мелочь (опечатка, однострочный баг без продуктовой двусмысленности) — без полного change, с acceptance и инвариантами.
 

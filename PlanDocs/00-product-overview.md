@@ -57,3 +57,4 @@
 - Два кабинета, две темы, три языка с дня 1.
 - Стек демо: Vite + React + TS + Tailwind — [`15`](15-architecture.md).
 - План работ — [`19`](19-work-plan.md).
+- Конкуренты и «кто уже с kids-приложением» — [`02`](02-competitive-landscape.md).

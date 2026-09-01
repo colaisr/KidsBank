@@ -7,6 +7,10 @@ description: Archive a completed change in the experimental workflow
 
 Archive a completed change in the experimental workflow.
 
+**KidsBank — до шага 1 OpenSpec (жёсткий гейт):**
+
+Не архивировать, пока PlanDocs не описывают то, что добавили в этом change. Пример: новая игра → строка в `PlanDocs/01-surf-baseline.md` (+ `19`, при новом референсе/`02`). Прочитай `docs/roles/product.md` секцию «до archive». Если правки PlanDocs нет в diff change — **остановись**, допиши документы, затем продолжай шаги ниже. Синк `openspec/specs/` не заменяет выравнивание PlanDocs.
+
 **Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
 
 **Input**: Optionally specify a change name after `/opsx:archive` (e.g., `/opsx:archive add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.

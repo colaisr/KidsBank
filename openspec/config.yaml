@@ -27,5 +27,5 @@ rules:
     - "Оформление is in-app (bank + language). Do not invent a separate demo HUD."
   tasks:
     - "Last group is always validation: both themes, three languages, mobile viewport, against acceptance."
-    - "Include a task to update touched PlanDocs / openspec specs when behavior changes."
+    - "Include an explicit task to update PlanDocs so they describe the new behavior (01 scenarios, 02 competitors/references, 17/themes, 19 phase journal — whichever apply). Archive is forbidden until that task is done."
     - "Do not add a backend, database, or auth unless the change explicitly says so."

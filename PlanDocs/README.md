@@ -9,7 +9,8 @@ PlanDocs = «зачем и что задумано». Как система ра
 | Файл | Статус | Что внутри | Здесь НЕ искать |
 | --- | --- | --- | --- |
 | [`00-product-overview.md`](00-product-overview.md) | Актуален | Цель прототипа, кабинеты, банки, языки, non-goals | Фазы работ → `19`. Экраны по блокам → `01` |
-| [`01-surf-baseline.md`](01-surf-baseline.md) | Актуален | Карта блоков Surf → демо-сценарии | Пиксели → `17` + theme |
+| [`01-surf-baseline.md`](01-surf-baseline.md) | Актуален | Карта блоков Surf → демо-сценарии. Новая игра/экран **дописывается сюда до archive** | Пиксели → `17` + theme |
+| [`02-competitive-landscape.md`](02-competitive-landscape.md) | Актуален | У кого есть kids-приложение, чем не мы, откуда референс | Файлы скринов → `references/` |
 
 ## Стек и ops
 
@@ -36,6 +37,7 @@ PlanDocs = «зачем и что задумано». Как система ра
 
 | Путь | Что |
 | --- | --- |
+| [`references/README.md`](references/README.md) | Индекс: какой референс откуда |
 | [`references/surf-bank-for-kids.md`](references/surf-bank-for-kids.md) | Канон Surf + вторичный SBI |
 | [`references/bank-1/`](references/bank-1/) | AMIO: скрины + ссылки |
 | [`references/bank-2/`](references/bank-2/) | Evoca: брендбук + ссылки |
