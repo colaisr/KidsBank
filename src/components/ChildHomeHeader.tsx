@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { PresenterBadgeWithSheet } from './PresenterBadgeWithSheet';
 import { DemoSettingsLink } from './DemoSettingsLink';
 
 export function ChildHomeHeader() {
@@ -17,7 +18,10 @@ export function ChildHomeHeader() {
       >
         <StarIcon />
       </Link>
-      <h1 className="font-heading text-lg font-semibold">{t('ui.home.title')}</h1>
+      <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5">
+        <h1 className="font-heading text-lg font-semibold">{t('ui.home.title')}</h1>
+        <PresenterBadgeWithSheet presenterId="child-home" variant="onGradient" />
+      </div>
       <DemoSettingsLink onGradient />
     </header>
   );

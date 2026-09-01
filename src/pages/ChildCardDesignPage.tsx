@@ -20,7 +20,12 @@ export function ChildCardDesignPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.cardDesign.title" backTo="/child" showSettingsLink={false} />
+      <ChildPageTitle
+        titleKey="ui.cardDesign.title"
+        backTo="/child"
+        showSettingsLink={false}
+        presenterId="child-card-design"
+      />
 
       <div className="flex flex-1 flex-col px-4 py-4">
         <div className="mb-5 flex items-start gap-3 rounded-card border border-primary/20 bg-primary/10 px-4 py-3">

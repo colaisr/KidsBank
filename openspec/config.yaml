@@ -21,6 +21,7 @@ rules:
     - "Acceptance must mention both themes (amio/evoca) and three locales (hy/ru/en) if UI or demo copy changes."
     - "Tiny bugfix with no product ambiguity may skip a full change; still note acceptance."
     - "Describe what/why, not low-level how (leave how to design/tasks)."
+    - "New screens or major mechanics need a presenter value sheet (muted ℹ️ → child/bank/demo script) unless proposal explicitly justifies skip — see PlanDocs/01 and 17 §6."
   design:
     - "UI must map to PlanDocs/17 and the active bank theme files. One layout, token themes, no layout forks."
     - "All user-facing strings are i18n keys (ui.* / demo.*). Demo data is ids, not hardcoded language."

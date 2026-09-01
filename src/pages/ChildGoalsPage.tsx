@@ -8,7 +8,7 @@ export function ChildGoalsPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.nav.goals" />
+      <ChildPageTitle titleKey="ui.nav.goals" presenterId="child-goals" />
       <div className="space-y-4 px-4 py-4">
         <StarsWalletCard />
         <div className="space-y-3">

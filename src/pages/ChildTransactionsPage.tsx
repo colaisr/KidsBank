@@ -9,7 +9,7 @@ export function ChildTransactionsPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.nav.transactions" />
+      <ChildPageTitle titleKey="ui.nav.transactions" presenterId="child-transactions" />
       <div className="space-y-2 px-4 py-4">
         {demo.transactions.length > 0 ? (
           demo.transactions.map((tx) => <TransactionRow key={tx.id} transaction={tx} />)

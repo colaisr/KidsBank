@@ -132,7 +132,7 @@ Surf задаёт идею «задания vs своё дело»; **источ
 
 ### Презентерский бейдж (демо)
 
-Маленький muted ℹ️ у бейджа уровня → bottom sheet с таблицами ценности (ребёнок / банк / сценарий 90 с). Для показа инвестору, не часть «клиентского» нарратива.
+Маленький muted ℹ️ у бейджа уровня → общий bottom sheet (`presenterId` `child-pet`, см. § «Presenter value sheets»). Для показа инвестору, не часть «клиентского» нарратива.
 
 ### Сценарий показа (~90 с)
 
@@ -143,3 +143,34 @@ Surf задаёт идею «задания vs своё дело»; **источ
 5. Пузырь → «Цели» (велосипед)
 
 Питомец (таб) ≠ маскот B5 (чат-наставник, фаза 4): питомец — эмоция и привычка; маскот — термины.
+
+## Presenter value sheets (change `presenter-value-sheets`)
+
+На **каждом экране показа** (где уместно) — muted ℹ️ → bottom sheet с тремя блоками: **ценность для ребёнка**, **ценность для банка**, **сценарий демо**. Для ведущего на встрече с инвестором/банком; не часть клиентского нарратива.
+
+**Два уровня copy:**
+
+1. **`child-home` — North Star:** глобальная ценность приложения (привычка, финграмотность, ранний LTV, семья в экосистеме). Заголовок: «KidsBank — продуктовая ценность».
+2. **Остальные sheet'ы — рычаги:** как конкретный экран/механика доставляет общую ценность. Заголовки вида «Задания — рычаг: семейный контракт». Не дублируют манифест главной.
+
+Компоненты: `PresenterInfoBadge`, `PresenterValueSheet`, `PresenterBadgeWithSheet`; конфиг строк — `src/data/presenterSheets.ts`; copy — `src/locales/presenter.{hy,ru,en}.json` → `ui.presenter.sheets.<id>.*`.
+
+| Route / место | `presenterId` | Где ℹ️ |
+|---------------|---------------|--------|
+| `/child` | `child-home` | Шапка главной |
+| `/child` → «Счета» | `child-accounts` | Заголовок секции |
+| `/child` → «Задания» (превью) | `child-tasks` | Заголовок секции |
+| `/child` → «Цели» (превью) | `child-goals` | Заголовок секции |
+| `/child/tasks` | `child-tasks` | `ChildPageTitle` |
+| `/child/goals` | `child-goals` | `ChildPageTitle` |
+| `/child/piggy` | `child-piggy` | `ChildPageTitle` |
+| `/child/card-design` | `child-card-design` | `ChildPageTitle` |
+| `/child/transactions` | `child-transactions` | `ChildPageTitle` |
+| `/child/pet` | `child-pet` | У бейджа уровня |
+| `/child/hub` | `child-hub` | `ChildPageTitle` |
+| `/parent` | `parent-home` | Карточка баланса ребёнка |
+| `/appearance` | `appearance` | Шапка экрана |
+
+**Не делаем:** `/child/profile`, layout-shell'ы, модалки (Transfer, Limit, AddTask…) — достаточно sheet родительского/дочернего экрана.
+
+**Правило на будущее:** каждый новый экран или крупная механика в proposal обязана либо включать presenter sheet, либо явно обосновать skip (см. `17` §6, `docs/roles/product.md`).

@@ -57,7 +57,7 @@ export function ChildHubPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.nav.hub" />
+      <ChildPageTitle titleKey="ui.nav.hub" presenterId="child-hub" />
       <div className="space-y-4 px-4 py-4">
         <div className="grid grid-cols-2 gap-3">
           {HUB_LINKS.map((item) => (

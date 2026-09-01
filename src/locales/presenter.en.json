@@ -1,0 +1,180 @@
+{
+  "open": "About this feature",
+  "close": "Got it",
+  "subtitle": "For investor / bank demo",
+  "section": {
+    "childTitle": "Value for the child",
+    "bankTitle": "Value for the bank",
+    "demoTitle": "Demo script"
+  },
+  "sheets": {
+    "child-home": {
+      "title": "KidsBank — product value",
+      "child": {
+        "habit": { "topic": "Daily habit", "meaning": "Open the bank app every day — money and rewards as part of life" },
+        "literacy": { "topic": "Learning by doing", "meaning": "Practice spending, saving, and choosing — not a lecture" },
+        "agency": { "topic": "Agency", "meaning": "Earn ★ → decide: pet, goal, or spend" }
+      },
+      "bank": {
+        "retention": { "effect": "Daily engagement", "meaning": "Reason to return every day → higher DAU" },
+        "ltv": { "effect": "Early LTV", "meaning": "Brand from age 8–12: “my bank”, not “mom’s bank”" },
+        "family": { "effect": "Family in ecosystem", "meaning": "Parent in the same app — transfers, tasks, control" }
+      },
+      "demo": {
+        "step1": "Show three accounts — full economy on one screen",
+        "step2": "Tap card → personalization (brand identity)",
+        "step3": "Task preview → family contract",
+        "step4": "Goal preview → delayed gratification",
+        "step5": "FAB → hub: real spend and limit"
+      }
+    },
+    "child-accounts": {
+      "title": "Accounts — lever: three wallets",
+      "child": {
+        "threeWallets": { "topic": "Three wallets", "meaning": "Spend (card) · save (piggy) · earn ★" },
+        "roles": { "topic": "Different jobs", "meaning": "One app — three money habits" }
+      },
+      "bank": {
+        "crossSell": { "effect": "Product bundle", "meaning": "Card + piggy + ★ without separate apps" },
+        "engagement": { "effect": "Gateway to mechanics", "meaning": "From here → tasks, goals, card design" }
+      },
+      "demo": { "step1": "Card → pick skin", "step2": "Piggy → link and deposits" }
+    },
+    "child-tasks": {
+      "title": "Tasks — lever: family contract",
+      "child": {
+        "contract": { "topic": "Home deal", "meaning": "Do a chore — get ★, rules are clear" },
+        "reward": { "topic": "Fair reward", "meaning": "Parent confirms — trust, not arguments" },
+        "habit": { "topic": "Regularity", "meaning": "Repeating chores → habit of earning" }
+      },
+      "bank": {
+        "family": { "effect": "Parent ↔ child", "meaning": "Agreements in-app, not in conflict" },
+        "engagement": { "effect": "Child retention", "meaning": "Return for ★; taskBuff links to pet" },
+        "noPayout": { "effect": "No bank payout", "meaning": "★ are family play currency, not bank margin" }
+      },
+      "demo": {
+        "step1": "Checkbox → waiting for parent",
+        "step2": "Parent confirm → +★",
+        "step3": "taskBuff → free pet care"
+      }
+    },
+    "child-goals": {
+      "title": "Goals — lever: delayed gratification",
+      "child": {
+        "dream": { "topic": "My dream", "meaning": "Save ★ for something I chose" },
+        "delay": { "topic": "Delayed", "meaning": "Don't spend everything at once — learn to wait" },
+        "exchange": { "topic": "Real-world link", "meaning": "Goal → AMD on card, not abstract points" }
+      },
+      "bank": {
+        "savings": { "effect": "Soft savings", "meaning": "Financial literacy without a boring deposit" },
+        "amdLink": { "effect": "★ → AMD bridge", "meaning": "Gamification tied to a real product" },
+        "motivation": { "effect": "Long horizon", "meaning": "A goal pulls the child back for weeks" }
+      },
+      "demo": { "step1": "+50 ★ to bike", "step2": "Complete → Redeem", "step3": "Card balance grows" }
+    },
+    "child-piggy": {
+      "title": "Piggy bank — lever: family money",
+      "child": {
+        "separate": { "topic": "Separate from card", "meaning": "Piggy for saving, card for spending" },
+        "share": { "topic": "Share link", "meaning": "Grandma and mom top up without verbal transfers" },
+        "grow": { "topic": "Visible growth", "meaning": "Each deposit motivates saving more" }
+      },
+      "bank": {
+        "viral": { "effect": "Viral loop", "meaning": "New touchpoints: relatives in the bank ecosystem" },
+        "familyMoney": { "effect": "Family P2P", "meaning": "Money circulates inside the family via the bank" },
+        "deposits": { "effect": "Deposits", "meaning": "Cashback and gifts encourage balance growth" }
+      },
+      "demo": { "step1": "Copy share link", "step2": "Deposit list", "step3": "Card to piggy" }
+    },
+    "child-card-design": {
+      "title": "Card design — lever: identity",
+      "child": {
+        "identity": { "topic": "My bank", "meaning": "Pick a skin — the app feels mine" },
+        "fun": { "topic": "Emotional bond", "meaning": "Personalization strengthens brand attachment" }
+      },
+      "bank": {
+        "personalization": { "effect": "Early brand love", "meaning": "Identity from childhood → loyalty in adult DBO" },
+        "oneCodebase": { "effect": "White-label", "meaning": "Skin retokens whole UI — one code, two banks" }
+      },
+      "demo": { "step1": "Pick skin → Apply", "step2": "Home — new accents" }
+    },
+    "child-transactions": {
+      "title": "Transactions — lever: awareness",
+      "child": {
+        "awareness": { "topic": "Where money went", "meaning": "See every spend — learn to plan" },
+        "history": { "topic": "Talk at home", "meaning": "History is a reason to discuss with parent" }
+      },
+      "bank": {
+        "literacy": { "effect": "Financial literacy", "meaning": "Education through real operations, not slides" },
+        "parentMirror": { "effect": "Family transparency", "meaning": "Same spends on parent home → trust and control" }
+      },
+      "demo": { "step1": "Show list", "step2": "Hub purchase → new row" }
+    },
+    "child-pet": {
+      "title": "Pet — lever: daily return",
+      "child": {
+        "regularity": { "topic": "Every day", "meaning": "Keks has needs — reason to come back" },
+        "earnSpend": { "topic": "Earn → spend", "meaning": "★ from tasks pay for care — mechanics linked" },
+        "choice": { "topic": "Choice", "meaning": "Spend on pet or save for a goal" },
+        "responsibility": { "topic": "Responsibility", "meaning": "Forgot — sad; returned — reward" }
+      },
+      "bank": {
+        "retention": { "effect": "DAU mechanic", "meaning": "Tamagotchi + revisit decay = daily hook" },
+        "ltv": { "effect": "Brand emotion", "meaning": "“My Keks in my bank” — not a utility account" },
+        "differentiation": { "effect": "Differentiation", "meaning": "Play inside banking, not adult DBO in kid UI" },
+        "family": { "effect": "Bridge to tasks", "meaning": "taskBuff after parent confirm — family in one loop" }
+      },
+      "demo": {
+        "step1": "Pet tab — “Feed me!”",
+        "step2": "Feed (−5 ★) → level-up",
+        "step3": "Revisit tab → bars drop",
+        "step4": "Confirm task → free care",
+        "step5": "Bubble → Goals",
+        "step6": "Red dot on tab"
+      }
+    },
+    "child-hub": {
+      "title": "Hub (FAB) — lever: real spending",
+      "child": {
+        "spend": { "topic": "Spend myself", "meaning": "I buy — I see balance drop" },
+        "limit": { "topic": "Learn limits", "meaning": "Parent sets bounds — I plan within them" },
+        "transfer": { "topic": "Link to parent", "meaning": "Can send money — trust and responsibility" }
+      },
+      "bank": {
+        "realSpend": { "effect": "Real product", "meaning": "Demo purchase like adult DBO — not a toy" },
+        "control": { "effect": "Parental control", "meaning": "Limit blocks overspend — bank as parent partner" },
+        "demo": { "effect": "Quick script", "meaning": "Spend + block + transfer in 30 s on demo" }
+      },
+      "demo": { "step1": "Purchase 600 AMD", "step2": "Limit → blocked", "step3": "Transfer 200 to parent" }
+    },
+    "parent-home": {
+      "title": "Parent — lever: family stickiness",
+      "child": {
+        "rules": { "topic": "Clear rules", "meaning": "Child knows boundaries — fewer fights at home" },
+        "support": { "topic": "Support, not surveillance", "meaning": "Help save and learn, not only forbid" }
+      },
+      "bank": {
+        "control": { "effect": "Parent activity", "meaning": "Transfers, limits, confirm — parent in app more often" },
+        "familyProduct": { "effect": "Family bundle", "meaning": "Two cabinets — one product, one relationship" },
+        "trust": { "effect": "Trust in bank", "meaning": "Spend transparency without toxic monitoring" }
+      },
+      "demo": {
+        "step1": "Transfer to card / piggy",
+        "step2": "Add task → confirm",
+        "step3": "Set card limit",
+        "step4": "Add goal",
+        "step5": "Spend history below"
+      }
+    },
+    "appearance": {
+      "title": "Appearance — demo settings",
+      "child": { "meta": { "topic": "Meta screen", "meaning": "Switch bank and language for the demo" } },
+      "bank": {
+        "whiteLabel": { "effect": "White-label", "meaning": "AMIO and Evoca — one prototype, two brands" },
+        "locales": { "effect": "3 languages", "meaning": "hy / ru / en — Armenia market built in" },
+        "reset": { "effect": "Scenario reset", "meaning": "Clean demo run in one tap" }
+      },
+      "demo": { "step1": "AMIO → Evoca", "step2": "ru → hy", "step3": "Reset scenario" }
+    }
+  }
+}

@@ -97,7 +97,7 @@ export function ChildPiggyBankPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.home.piggy" backTo="/child" />
+      <ChildPageTitle titleKey="ui.home.piggy" backTo="/child" presenterId="child-piggy" />
       <div className="space-y-5 px-4 py-4">
         <section className="text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center text-primary">

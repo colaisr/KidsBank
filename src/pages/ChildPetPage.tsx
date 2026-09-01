@@ -5,8 +5,7 @@ import { PetActionButtons } from '../components/pet/PetActionButtons';
 import { PetCharacter } from '../components/pet/PetCharacter';
 import { PetLevelBadge } from '../components/pet/PetLevelBadge';
 import { PetNeedBars } from '../components/pet/PetNeedBars';
-import { PetPresenterSheet } from '../components/pet/PetPresenterSheet';
-import { PresenterInfoBadge } from '../components/pet/PresenterInfoBadge';
+import { PresenterBadgeWithSheet } from '../components/PresenterBadgeWithSheet';
 import { PetSpeechBubble } from '../components/pet/PetSpeechBubble';
 import { applyPetAction } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
@@ -15,7 +14,6 @@ import { getPetHint, petLevel, tickPetOnVisit, type PetActionId } from '../lib/p
 export function ChildPetPage() {
   const { t } = useTranslation();
   const { demo, setDemo } = useDemoState();
-  const [presenterOpen, setPresenterOpen] = useState(false);
   const [levelUpLevel, setLevelUpLevel] = useState<number | null>(null);
   const [pulse, setPulse] = useState(false);
   const tickedRef = useRef(false);
@@ -69,7 +67,7 @@ export function ChildPetPage() {
       <div className="space-y-4 px-4 py-4">
         <div className="flex items-center justify-center gap-2">
           <PetLevelBadge xp={demo.pet.xp} />
-          <PresenterInfoBadge onClick={() => setPresenterOpen(true)} />
+          <PresenterBadgeWithSheet presenterId="child-pet" />
         </div>
 
         <PetSpeechBubble pet={demo.pet} starsBalance={demo.starsBalance} hint={hint} />
@@ -85,8 +83,6 @@ export function ChildPetPage() {
           onAction={handleAction}
         />
       </div>
-
-      <PetPresenterSheet open={presenterOpen} onClose={() => setPresenterOpen(false)} />
     </div>
   );
 }

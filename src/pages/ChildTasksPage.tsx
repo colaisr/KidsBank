@@ -10,7 +10,7 @@ export function ChildTasksPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.tasks.pageTitle" backTo="/child" />
+      <ChildPageTitle titleKey="ui.tasks.pageTitle" backTo="/child" presenterId="child-tasks" />
       <div className="space-y-4 px-4 py-4">
         <TaskStatsCards stats={demo.taskStats} />
         <div className="space-y-3">

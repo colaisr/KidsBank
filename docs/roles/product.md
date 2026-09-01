@@ -24,6 +24,7 @@
 - [ ] Референс назван (ID из `references/README.md` или новый, который заведём в этом change)
 - [ ] Non-goals заполнены (не KYC, не шлюз, не форк темы)
 - [ ] Три языка и обе темы учтены в acceptance
+- [ ] **Presenter sheet:** новый экран или крупная механика — либо `presenterId` + copy (child / bank / demo) в hy/ru/en, либо явный skip с причиной в proposal (см. `01` §Presenter, `17` §6)
 - [ ] Вердикт: **go / переформулировать / не делать**
 
 ### После реализации, **до archive** (feedback loop)

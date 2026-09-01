@@ -58,9 +58,11 @@ src/locales/en.json
 src/
   main.tsx, App.tsx, index.css
   components/     PhoneFrame, AppHeader, RoleToggle, AppearanceButton,
-                  ChildHomeHeader, ChildPageTitle, ChildProfileCard,
-                  ChildTabBar, AccountsSection, CardSkinTile, GoalCard, TaskCard, TaskStatsCards,
-                  TaskCompleteBurst, ParentTaskRow, AddTaskModal, EditTaskModal, TaskRow,
+                  ChildHomeHeader, ChildPageTitle, HomeSectionHeading,
+                  ChildProfileCard, ChildTabBar, AccountsSection, CardSkinTile,
+                  GoalCard, TaskCard, TaskStatsCards, TaskCompleteBurst,
+                  PresenterInfoBadge, PresenterValueSheet, PresenterBadgeWithSheet,
+                  ParentTaskRow, AddTaskModal, EditTaskModal, TaskRow,
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
@@ -71,12 +73,13 @@ src/
                   ChildPetPage, ChildHubPage, ChildProfilePage,
                   ParentShell, ParentHomePage, AppearancePage
   components/pet/ PetLevelBadge, PetSpeechBubble, PetCharacter, PetNeedBars,
-                  PetActionButtons, PetPresenterSheet, PresenterInfoBadge
+                  PetActionButtons
   context/        PreferencesContext (bank, locale, role, cardSkin + persistence),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
-  data/           demoBaseline v4, taskTemplates.ts, cardSkins.ts, starEconomy.ts, children, tasks, goals
-  locales/        hy.json, ru.json, en.json
+  data/           demoBaseline v4, taskTemplates.ts, cardSkins.ts, starEconomy.ts,
+                  presenterSheets.ts, children, tasks, goals
+  locales/        hy.json, ru.json, en.json, presenter.hy.json, presenter.ru.json, presenter.en.json
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
   lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge)

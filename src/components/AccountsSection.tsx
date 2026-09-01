@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { PresenterBadgeWithSheet } from './PresenterBadgeWithSheet';
 import { usePreferences } from '../context/PreferencesContext';
 import { useDemoState } from '../context/DemoStateContext';
 import { formatCurrency, formatNumber } from '../lib/format';
@@ -13,7 +14,10 @@ export function AccountsSection() {
 
   return (
     <section>
-      <h2 className="mb-3 font-heading text-base font-semibold text-text">{t('ui.home.accounts')}</h2>
+      <div className="mb-3 flex items-center gap-1.5">
+        <h2 className="font-heading text-base font-semibold text-text">{t('ui.home.accounts')}</h2>
+        <PresenterBadgeWithSheet presenterId="child-accounts" variant="compact" />
+      </div>
       <Link
         to="/child/card-design"
         className="kb-pay-card block rounded-card px-5 py-5 shadow-lg transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]"

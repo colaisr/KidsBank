@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { AccountsSection } from '../components/AccountsSection';
 import { ChildHomeHeader } from '../components/ChildHomeHeader';
 import { ChildProfileCard } from '../components/ChildProfileCard';
 import { GoalCard } from '../components/GoalCard';
+import { HomeSectionHeading } from '../components/HomeSectionHeading';
 import { TaskCard } from '../components/TaskCard';
 import { useDemoState } from '../context/DemoStateContext';
 import { getActiveGoals } from '../lib/goals';
@@ -23,7 +22,11 @@ export function ChildHomePage() {
         <AccountsSection />
 
         <section>
-          <SectionHeading titleKey="ui.home.tasks" to="/child/tasks" />
+          <HomeSectionHeading
+            titleKey="ui.home.tasks"
+            to="/child/tasks"
+            presenterId="child-tasks"
+          />
           <div className="space-y-2">
             {homeTasks.map((task) => (
               <TaskCard key={task.id} task={task} compact />
@@ -32,7 +35,11 @@ export function ChildHomePage() {
         </section>
 
         <section>
-          <SectionHeading titleKey="ui.home.goals" to="/child/goals" />
+          <HomeSectionHeading
+            titleKey="ui.home.goals"
+            to="/child/goals"
+            presenterId="child-goals"
+          />
           <div className="space-y-3">
             {homeGoals.map((goal) => (
               <GoalCard key={goal.id} goal={goal} compact />
@@ -40,19 +47,6 @@ export function ChildHomePage() {
           </div>
         </section>
       </div>
-    </div>
-  );
-}
-
-function SectionHeading({ titleKey, to }: { titleKey: string; to: string }) {
-  const { t } = useTranslation();
-
-  return (
-    <div className="mb-3 flex items-baseline justify-between gap-2">
-      <h2 className="font-heading text-base font-semibold text-text">{t(titleKey)}</h2>
-      <Link to={to} className="shrink-0 text-sm font-medium text-primary">
-        {t('ui.home.seeAll')}
-      </Link>
     </div>
   );
 }

@@ -31,3 +31,9 @@
 
 - Не коммитить `.env`, ключи, пароли.
 - `git push --force` в основную ветку запрещён, когда remote появится.
+
+## 6. Presenter value sheets (демо для инвестора)
+
+- Экраны показа с продуктовой механикой **должны** иметь muted ℹ️ → bottom sheet (ценность ребёнку / банку / сценарий), если не обоснован skip в change.
+- Copy — `ui.presenter.*` в `presenter.{hy,ru,en}.json`, не хардкод.
+- Пропуск уместен для: `/child/profile`, layout-shell'ов, модалок. Новая фича без sheet — только с явным обоснованием в proposal.
