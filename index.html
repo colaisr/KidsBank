@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru" dir="ltr" data-theme="amio">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>KidsBank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        var VALID_BANKS = { amio: 1, evoca: 1 };
+        var VALID_LANGS = { hy: 1, ru: 1, en: 1 };
+        var params = new URLSearchParams(location.search);
+        var bank = params.get('bank');
+        var lang = params.get('lang');
+        if (!bank || !VALID_BANKS[bank]) {
+          try {
+            bank = localStorage.getItem('kidsbank.bank');
+          } catch (e) {}
+        }
+        if (!lang || !VALID_LANGS[lang]) {
+          try {
+            lang = localStorage.getItem('kidsbank.lang');
+          } catch (e) {}
+        }
+        bank = VALID_BANKS[bank] ? bank : 'amio';
+        lang = VALID_LANGS[lang] ? lang : 'ru';
+        document.documentElement.setAttribute('data-theme', bank);
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', 'ltr');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

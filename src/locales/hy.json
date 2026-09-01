@@ -1,0 +1,38 @@
+{
+  "ui": {
+    "app": {
+      "title": "KidsBank",
+      "back": "Հետ",
+      "appearance": "Ձևավորում"
+    },
+    "appearance": {
+      "title": "Ձևավորում",
+      "bankSection": "Բանկ",
+      "languageSection": "Լեզու",
+      "bankAmio": "AMIO",
+      "bankEvoca": "Evoca",
+      "langHy": "Հայերեն",
+      "langRu": "Русский",
+      "langEn": "English"
+    },
+    "role": {
+      "child": "Երեխա",
+      "parent": "Ծնող",
+      "childTitle": "Երեխայի հաշիվ",
+      "parentTitle": "Ծնողի հաշիվ"
+    },
+    "shell": {
+      "greeting": "Բարև, {{name}}!",
+      "parentGreeting": "Բարև!",
+      "emptyChild": "Հիմնական էկրանը կհայտնվի հաջորդ փուլում։ Այստեղ կլինեն քարտը, խնայարանը և առաջադրանքները։",
+      "emptyParent": "Ծնողի վահանակը կհայտնվի հաջորդ փուլում։ Այստեղ կլինեն փոխանցումները, սահմանները և պատմությունը։"
+    }
+  },
+  "demo": {
+    "child": {
+      "david": {
+        "name": "Դավիթ"
+      }
+    }
+  }
+}

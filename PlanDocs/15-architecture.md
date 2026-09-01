@@ -9,7 +9,7 @@
 | Приложение | Vite + React + TypeScript |
 | Стили | Tailwind + CSS-переменные на `data-theme` |
 | i18n | `i18next` + `react-i18next` |
-| Роутинг | React Router (когда появится `src/`) |
+| Роутинг | React Router (`/child`, `/parent`, `/appearance`) |
 | Данные | нет сервера, нет БД |
 | Деплой | статический хостинг |
 
@@ -39,6 +39,23 @@ src/locales/en.json
 
 Числа/даты/валюта: locale `hy-AM` / `ru-RU` / `en-US`, валюта демо AMD (пока не решат иначе).
 
-## 4. Чего нет
+## 4. Структура `src/` (фаза 1)
+
+```text
+src/
+  main.tsx, App.tsx, index.css
+  components/     PhoneFrame, AppHeader
+  pages/          ChildShell, ParentShell, AppearancePage
+  context/        PreferencesContext (bank, locale, role + persistence)
+  data/           id сущностей без текстов
+  locales/        hy.json, ru.json, en.json
+  i18n/           инициализация i18next
+  themes/         amio.css, evoca.css — CSS-токены на [data-theme]
+  lib/            format.ts — Intl для валюты/дат
+```
+
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`.
+
+## 5. Чего нет
 
 Auth, API, Prisma, Docker runtime, микросервисы. Если задача требует сервер — это смена конституции, не «заодно».

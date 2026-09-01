@@ -1,0 +1,14 @@
+html[data-theme='evoca'] {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #8448ff;
+  --kb-accent-kids: #c4ff00;
+  --kb-accent-secondary: #ff2d61;
+  --kb-surface: #ffffff;
+  --kb-surface-muted: #f4eaf6;
+  --kb-text: #1a1a1a;
+  --kb-text-muted: #7f7f7f;
+  --kb-border: #e8dff0;
+  --kb-radius-card: 1rem;
+  --kb-font-heading: 'Montserrat', 'Noto Sans', 'Noto Sans Armenian', system-ui, sans-serif;
+  --kb-header-gradient: linear-gradient(135deg, #6400dc 0%, #8448ff 100%);
+}

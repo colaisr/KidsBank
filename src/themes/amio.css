@@ -1,0 +1,14 @@
+html[data-theme='amio'] {
+  --kb-primary: #05a9c7;
+  --kb-primary-dark: #086f83;
+  --kb-accent-kids: #f6ad55;
+  --kb-accent-secondary: #f6ad55;
+  --kb-surface: #ffffff;
+  --kb-surface-muted: #f7f9fa;
+  --kb-text: #1a1a1a;
+  --kb-text-muted: #6b7280;
+  --kb-border: #e5e7eb;
+  --kb-radius-card: 1.5rem;
+  --kb-font-heading: 'Noto Sans', 'Noto Sans Armenian', system-ui, sans-serif;
+  --kb-header-gradient: linear-gradient(135deg, #05a9c7 0%, #086f83 100%);
+}

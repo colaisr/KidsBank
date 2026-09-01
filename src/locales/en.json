@@ -1,0 +1,38 @@
+{
+  "ui": {
+    "app": {
+      "title": "KidsBank",
+      "back": "Back",
+      "appearance": "Appearance"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "bankSection": "Bank",
+      "languageSection": "Language",
+      "bankAmio": "AMIO",
+      "bankEvoca": "Evoca",
+      "langHy": "Հայերեն",
+      "langRu": "Русский",
+      "langEn": "English"
+    },
+    "role": {
+      "child": "Child",
+      "parent": "Parent",
+      "childTitle": "Child account",
+      "parentTitle": "Parent account"
+    },
+    "shell": {
+      "greeting": "Hi, {{name}}!",
+      "parentGreeting": "Hello!",
+      "emptyChild": "The main screen arrives in the next phase. Card, piggy bank, and tasks will live here.",
+      "emptyParent": "The parent dashboard arrives in the next phase. Transfers, limits, and history will live here."
+    }
+  },
+  "demo": {
+    "child": {
+      "david": {
+        "name": "David"
+      }
+    }
+  }
+}

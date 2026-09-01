@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+@import './themes/amio.css';
+@import './themes/evoca.css';
+
+/* inline: keep var() references so theme switch updates utilities at runtime */
+@theme inline {
+  --color-primary: var(--kb-primary);
+  --color-primary-dark: var(--kb-primary-dark);
+  --color-accent-kids: var(--kb-accent-kids);
+  --color-accent-secondary: var(--kb-accent-secondary);
+  --color-surface: var(--kb-surface);
+  --color-surface-muted: var(--kb-surface-muted);
+  --color-text: var(--kb-text);
+  --color-text-muted: var(--kb-text-muted);
+  --color-border: var(--kb-border);
+  --radius-card: var(--kb-radius-card);
+  --font-sans: 'Noto Sans', 'Noto Sans Armenian', system-ui, sans-serif;
+  --font-heading: var(--kb-font-heading);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--kb-text);
+  background: #e8eaed;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+}

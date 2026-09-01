@@ -1,0 +1,38 @@
+{
+  "ui": {
+    "app": {
+      "title": "KidsBank",
+      "back": "Назад",
+      "appearance": "Оформление"
+    },
+    "appearance": {
+      "title": "Оформление",
+      "bankSection": "Банк",
+      "languageSection": "Язык",
+      "bankAmio": "AMIO",
+      "bankEvoca": "Evoca",
+      "langHy": "Հայերեն",
+      "langRu": "Русский",
+      "langEn": "English"
+    },
+    "role": {
+      "child": "Ребёнок",
+      "parent": "Родитель",
+      "childTitle": "Кабинет ребёнка",
+      "parentTitle": "Кабинет родителя"
+    },
+    "shell": {
+      "greeting": "Привет, {{name}}!",
+      "parentGreeting": "Привет!",
+      "emptyChild": "Главный экран появится на следующем этапе. Здесь будут карта, копилка и задания.",
+      "emptyParent": "Панель родителя появится на следующем этапе. Здесь будут переводы, лимиты и история."
+    }
+  },
+  "demo": {
+    "child": {
+      "david": {
+        "name": "Давид"
+      }
+    }
+  }
+}
