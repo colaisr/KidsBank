@@ -1,4 +1,4 @@
-import type { DemoGoal, GoalIconId } from './goals';
+import type { DemoGoal } from './goals';
 import type { DemoTask } from './tasks';
 
 export type TaskStatusId = 'open' | 'inProgress' | 'waitingParent' | 'done';
@@ -8,6 +8,8 @@ export type DemoTaskState = DemoTask & {
 };
 
 export type DemoGoalState = DemoGoal & {
+  templateId: string;
+  customTitle?: string;
   amdValue: number;
   redeemed: boolean;
 };
@@ -126,7 +128,8 @@ export const DEMO_BASELINE: DemoState = {
   goals: [
     {
       id: 'bike',
-      iconId: 'bike' as GoalIconId,
+      templateId: 'bike',
+      iconId: 'gift',
       currentStars: 650,
       targetStars: 800,
       amdValue: 120000,
@@ -134,7 +137,8 @@ export const DEMO_BASELINE: DemoState = {
     },
     {
       id: 'ps5',
-      iconId: 'gamepad' as GoalIconId,
+      templateId: 'ps5',
+      iconId: 'gamepad',
       currentStars: 150,
       targetStars: 1500,
       amdValue: 250000,

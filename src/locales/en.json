@@ -117,8 +117,12 @@
       "transfer": "Transfer",
       "limit": "Limit",
       "addTask": "Task",
+      "addGoal": "Goal",
       "childTasks": "Child tasks",
       "childTasksEmpty": "No active tasks",
+      "childGoals": "Child goals",
+      "childGoalsEmpty": "No active goals",
+      "goalRedeemValue": "Redeem: {{amount}}",
       "editTask": "Edit",
       "cancelTask": "Cancel",
       "pendingTasks": "Awaiting confirmation",
@@ -157,12 +161,35 @@
       "customTitlePlaceholder": "e.g. Water the plants",
       "customTitleRequired": "Enter a task name"
     },
+    "addGoal": {
+      "title": "New goal",
+      "hint": "The child will see it in their savings list",
+      "template": "Saving for",
+      "target": "Star target",
+      "amdValue": "Redeem amount",
+      "create": "Add",
+      "cancel": "Cancel",
+      "duplicate": "This goal is already active",
+      "other": "Other",
+      "customTitle": "Goal name",
+      "customTitlePlaceholder": "e.g. New tablet",
+      "customTitleRequired": "Enter a goal name"
+    },
     "editTask": {
       "title": "Edit task",
       "reward": "Reward",
       "deadline": "Deadline",
       "save": "Save",
       "cancel": "Cancel"
+    },
+    "icons": {
+      "label": "Icon",
+      "book": "Study",
+      "paw": "Pet",
+      "home": "Home",
+      "utensils": "Kitchen",
+      "gamepad": "Games",
+      "gift": "Gift"
     },
     "transactions": {
       "empty": "No transactions yet"
@@ -224,6 +251,9 @@
       },
       "bike": {
         "title": "Bicycle"
+      },
+      "headphones": {
+        "title": "Headphones"
       }
     },
     "transactions": {

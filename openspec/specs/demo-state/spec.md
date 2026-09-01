@@ -36,7 +36,7 @@ The appearance screen and child profile settings SHALL include a control to rese
 
 ### Requirement: Demo state covers star economy display fields
 
-Demo state SHALL include at minimum: card balance, piggy balance with `shareSlug`, `starsBalance`, `taskStats` (`starsEarned`, `tasksCompleted`), task list with `id`, `templateId`, optional `customTitle` (when `templateId` is `other`), `rewardStars`, `dueTime`, and `statusId`, goals with `currentStars` and `targetStars`, optional `cardLimit`, parent wallet balance, and a `transactions` array that MAY include piggy deposit type ids (`piggyCashback`, `piggyGiftMom`, `piggyGiftGrandma`, `parentToPiggy`).
+Demo state SHALL include at minimum: card balance, piggy balance with `shareSlug`, `starsBalance`, `taskStats` (`starsEarned`, `tasksCompleted`), task list with `id`, `templateId`, optional `customTitle` (when `templateId` is `other`), `rewardStars`, `dueTime`, and `statusId`, goals with `id`, `templateId`, optional `customTitle`, `iconId`, `currentStars`, `targetStars`, `amdValue`, and `redeemed`, optional `cardLimit`, parent wallet balance, and a `transactions` array that MAY include piggy deposit type ids (`piggyCashback`, `piggyGiftMom`, `piggyGiftGrandma`, `parentToPiggy`).
 
 #### Scenario: Star fields in state
 
@@ -56,7 +56,12 @@ Demo state SHALL include at minimum: card balance, piggy balance with `shareSlug
 #### Scenario: Reset includes piggy seed deposits
 
 - **WHEN** the user resets the demo scenario
-- **THEN** piggy balance, `shareSlug`, seed piggy deposit transactions, task stats, and task list restore from `DEMO_BASELINE`
+- **THEN** piggy balance, `shareSlug`, seed piggy deposit transactions, task stats, task list, and goals restore from `DEMO_BASELINE`
+
+#### Scenario: Goal fields in state
+
+- **WHEN** the goals page reads demo state
+- **THEN** each goal exposes `templateId`, optional `customTitle`, `iconId`, star progress, and `amdValue`
 
 #### Scenario: Task fields in state
 

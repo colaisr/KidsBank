@@ -7,7 +7,9 @@ import {
   type DemoTaskState,
   type TaskStats,
 } from '../data/demoBaseline';
+import { normalizeActivityIconId } from '../data/activityIcons';
 import { TASK_TEMPLATE_DEFAULT_DUE } from '../data/taskTemplates';
+import { GOAL_TEMPLATE_DEFAULT_ICONS, CUSTOM_GOAL_DEFAULT_ICON, CUSTOM_GOAL_TEMPLATE_ID } from '../data/goalTemplates';
 
 export const DEMO_STORAGE_KEY = 'kidsbank.demo';
 
@@ -51,6 +53,21 @@ function normalizeTask(task: DemoTaskState): DemoTaskState {
   };
 }
 
+function normalizeGoal(goal: DemoGoalState): DemoGoalState {
+  const templateId = goal.templateId ?? goal.id;
+  const defaultIcon =
+    templateId === CUSTOM_GOAL_TEMPLATE_ID
+      ? CUSTOM_GOAL_DEFAULT_ICON
+      : GOAL_TEMPLATE_DEFAULT_ICONS[templateId as keyof typeof GOAL_TEMPLATE_DEFAULT_ICONS] ??
+        CUSTOM_GOAL_DEFAULT_ICON;
+
+  return {
+    ...goal,
+    templateId,
+    iconId: normalizeActivityIconId(goal.iconId, defaultIcon),
+  };
+}
+
 function normalizeDemoState(state: DemoState): DemoState {
   const baseline = cloneDemoBaseline();
   return {
@@ -62,6 +79,7 @@ function normalizeDemoState(state: DemoState): DemoState {
     },
     taskStats: state.taskStats ?? { ...baseline.taskStats },
     tasks: state.tasks.map((task) => normalizeTask(task)),
+    goals: state.goals.map((goal) => normalizeGoal(goal)),
   };
 }
 
@@ -89,6 +107,7 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
       const baseGoal = baseline.goals.find((g) => g.id === goal.id);
       return {
         ...goal,
+        templateId: goal.id,
         amdValue: baseGoal?.amdValue ?? 100000,
         redeemed: false,
       };

@@ -8,12 +8,12 @@ Provides the parent cabinet home with money control, spending visibility, and pe
 
 ### Requirement: Parent home shows control dashboard
 
-The parent home SHALL display: child summary (card balance, piggy balance), quick actions for transfer, add task, and limit, an **active child tasks** section with edit/cancel (and confirm for `waitingParent`), and spending history preview.
+The parent home SHALL display: child summary (card balance, piggy balance), quick actions for transfer, add task, add goal, and limit, an **active child tasks** section with edit/cancel (and confirm for `waitingParent`), an **active child goals** section, and spending history preview.
 
 #### Scenario: Parent home loads
 
 - **WHEN** the active role is `parent` and the user opens `/parent`
-- **THEN** a localized dashboard shows quick actions and the active child tasks section
+- **THEN** a localized dashboard shows quick actions including «Цель», the active child tasks section, and the active child goals section
 
 ### Requirement: Parent home uses bank-themed layout variants
 
@@ -60,3 +60,17 @@ The parent home SHALL list all non-`done` tasks with localized title, reward, de
 
 - **WHEN** a task has status `done`
 - **THEN** it does not appear in the parent active tasks section
+
+### Requirement: Parent home lists active child goals
+
+The parent home SHALL list all non-`redeemed` goals with localized title, progress (`currentStars` / `targetStars`), and demo AMD redeem value.
+
+#### Scenario: Active goals visible
+
+- **WHEN** the parent opens `/parent` and the child has two active goals
+- **THEN** both appear in the child goals section
+
+#### Scenario: Redeemed goals hidden
+
+- **WHEN** a goal has `redeemed` true
+- **THEN** it does not appear in the parent active goals section

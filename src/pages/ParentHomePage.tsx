@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AddGoalModal } from '../components/AddGoalModal';
 import { AddTaskModal } from '../components/AddTaskModal';
 import { EditTaskModal } from '../components/EditTaskModal';
 import { LimitModal } from '../components/LimitModal';
+import { ParentGoalRow } from '../components/ParentGoalRow';
 import { ParentTaskRow } from '../components/ParentTaskRow';
 import { TransactionRow } from '../components/TransactionRow';
 import { TransferModal } from '../components/TransferModal';
@@ -11,6 +13,7 @@ import { cancelTask, confirmTask } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
+import { getActiveGoals } from '../lib/goals';
 import { getActiveTasksForParent } from '../lib/tasks';
 
 export function ParentHomePage() {
@@ -20,9 +23,11 @@ export function ParentHomePage() {
   const [transferOpen, setTransferOpen] = useState(false);
   const [limitOpen, setLimitOpen] = useState(false);
   const [addTaskOpen, setAddTaskOpen] = useState(false);
+  const [addGoalOpen, setAddGoalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<DemoTaskState | null>(null);
 
   const activeTasks = getActiveTasksForParent(demo.tasks);
+  const activeGoals = getActiveGoals(demo.goals);
   const recentTx = demo.transactions.slice(0, 5);
 
   function handleConfirm(taskId: string) {
@@ -71,6 +76,16 @@ export function ParentHomePage() {
               ✓
             </span>
             <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.addTask')}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setAddGoalOpen(true)}
+            className="parent-action-card"
+          >
+            <span className="text-lg" aria-hidden="true">
+              ★
+            </span>
+            <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.addGoal')}</span>
           </button>
           <button
             type="button"
@@ -129,6 +144,23 @@ export function ParentHomePage() {
 
       <section className="mt-5">
         <h2 className="mb-3 font-heading text-base font-semibold text-text">
+          {t('ui.parent.childGoals')}
+        </h2>
+        {activeGoals.length > 0 ? (
+          <div className="space-y-2">
+            {activeGoals.map((goal) => (
+              <ParentGoalRow key={goal.id} goal={goal} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-card border border-border bg-surface-muted p-5">
+            <p className="text-sm text-text-muted">{t('ui.parent.childGoalsEmpty')}</p>
+          </div>
+        )}
+      </section>
+
+      <section className="mt-5">
+        <h2 className="mb-3 font-heading text-base font-semibold text-text">
           {t('ui.parent.spending')}
         </h2>
         {recentTx.length > 0 ? (
@@ -147,6 +179,7 @@ export function ParentHomePage() {
       <TransferModal open={transferOpen} onClose={() => setTransferOpen(false)} />
       <LimitModal open={limitOpen} onClose={() => setLimitOpen(false)} />
       <AddTaskModal open={addTaskOpen} onClose={() => setAddTaskOpen(false)} />
+      <AddGoalModal open={addGoalOpen} onClose={() => setAddGoalOpen(false)} />
       <EditTaskModal
         task={editingTask}
         open={editingTask !== null}

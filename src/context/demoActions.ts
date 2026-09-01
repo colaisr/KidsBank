@@ -1,4 +1,7 @@
 import type { DemoState, DemoTransaction, TransactionTypeId } from '../data/demoBaseline';
+import type { ActivityIconId } from '../data/activityIcons';
+import { CUSTOM_GOAL_TEMPLATE_ID } from '../data/goalTemplates';
+import { isActiveGoalTemplate } from '../lib/goals';
 import { isActiveTaskTemplate } from '../lib/tasks';
 
 function txId(): string {
@@ -136,6 +139,50 @@ export function updateTask(
     tasks: state.tasks.map((t) =>
       t.id === taskId ? { ...t, ...patch } : t,
     ),
+  };
+}
+
+export type AddGoalInput = {
+  templateId: string;
+  customTitle?: string;
+  iconId: ActivityIconId;
+  targetStars: number;
+  amdValue: number;
+};
+
+export function addGoal(
+  state: DemoState,
+  input: AddGoalInput,
+): DemoState | 'duplicate' | 'emptyTitle' {
+  if (input.templateId === CUSTOM_GOAL_TEMPLATE_ID) {
+    const customTitle = input.customTitle?.trim();
+    if (!customTitle) {
+      return 'emptyTitle';
+    }
+  } else if (isActiveGoalTemplate(state.goals, input.templateId)) {
+    return 'duplicate';
+  }
+
+  const customTitle =
+    input.templateId === CUSTOM_GOAL_TEMPLATE_ID ? input.customTitle?.trim() : undefined;
+
+  const goal = {
+    id:
+      input.templateId === CUSTOM_GOAL_TEMPLATE_ID
+        ? `custom-${Date.now()}`
+        : `${input.templateId}-${Date.now()}`,
+    templateId: input.templateId,
+    iconId: input.iconId,
+    currentStars: 0,
+    targetStars: input.targetStars,
+    amdValue: input.amdValue,
+    redeemed: false,
+    ...(customTitle ? { customTitle } : {}),
+  };
+
+  return {
+    ...state,
+    goals: [goal, ...state.goals],
   };
 }
 

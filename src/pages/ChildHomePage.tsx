@@ -6,12 +6,13 @@ import { ChildProfileCard } from '../components/ChildProfileCard';
 import { GoalCard } from '../components/GoalCard';
 import { TaskCard } from '../components/TaskCard';
 import { useDemoState } from '../context/DemoStateContext';
+import { getActiveGoals } from '../lib/goals';
 import { getActiveTasks } from '../lib/tasks';
 
 export function ChildHomePage() {
   const { demo } = useDemoState();
   const homeTasks = getActiveTasks(demo.tasks).slice(0, 2);
-  const homeGoals = demo.goals.slice(0, 1);
+  const homeGoals = getActiveGoals(demo.goals).slice(0, 1);
 
   return (
     <div className="bg-surface-muted">

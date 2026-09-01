@@ -117,8 +117,12 @@
       "transfer": "Փոխանցում",
       "limit": "Սահմանաչափ",
       "addTask": "Առաջադրանք",
+      "addGoal": "Նպատակ",
       "childTasks": "Երեխայի առաջադրանքներ",
       "childTasksEmpty": "Ակտիվ առաջադրանքներ չկան",
+      "childGoals": "Երեխայի նպատակներ",
+      "childGoalsEmpty": "Ակտիվ նպատակներ չկան",
+      "goalRedeemValue": "Փոխանակում՝ {{amount}}",
       "editTask": "Խմբագրել",
       "cancelTask": "Չեղարկել",
       "pendingTasks": "Սպասում են հաստատման",
@@ -157,12 +161,35 @@
       "customTitlePlaceholder": "Օրինակ՝ ջուր տալ ծաղիկներին",
       "customTitleRequired": "Մուտքագրեք առաջադրանքի անվանումը"
     },
+    "addGoal": {
+      "title": "Նոր նպատակ",
+      "hint": "Երեխան կտեսնի այն խնայողության ցանկում",
+      "template": "Ինչի համար ենք կուտակում",
+      "target": "Նպատակ աստղերով",
+      "amdValue": "Փոխանակման գումար",
+      "create": "Ավելացնել",
+      "cancel": "Չեղարկել",
+      "duplicate": "Այդ նպատակն արդեն ակտիվ է",
+      "other": "Այլ",
+      "customTitle": "Նպատակի անվանում",
+      "customTitlePlaceholder": "Օրինակ՝ նոր պլանշետ",
+      "customTitleRequired": "Մուտքագրեք նպատակի անվանումը"
+    },
     "editTask": {
       "title": "Խմբագրել առաջադրանքը",
       "reward": "Պարգև",
       "deadline": "Ժամկետ",
       "save": "Պահպանել",
       "cancel": "Չեղարկել"
+    },
+    "icons": {
+      "label": "Պատկերակ",
+      "book": "Ուսում",
+      "paw": "Կենդանի",
+      "home": "Տուն",
+      "utensils": "Խոհանոց",
+      "gamepad": "Խաղեր",
+      "gift": "Նվեր"
     },
     "transactions": {
       "empty": "Գործարքներ դեռ չկան"
@@ -224,6 +251,9 @@
       },
       "bike": {
         "title": "Հեծանիվ"
+      },
+      "headphones": {
+        "title": "Ականջակալներ"
       }
     },
     "transactions": {

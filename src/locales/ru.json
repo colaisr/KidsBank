@@ -117,8 +117,12 @@
       "transfer": "Перевод",
       "limit": "Лимит",
       "addTask": "Задание",
+      "addGoal": "Цель",
       "childTasks": "Задания ребёнка",
       "childTasksEmpty": "Нет активных заданий",
+      "childGoals": "Цели ребёнка",
+      "childGoalsEmpty": "Нет активных целей",
+      "goalRedeemValue": "Обмен: {{amount}}",
       "editTask": "Изменить",
       "cancelTask": "Отменить",
       "pendingTasks": "Ждут подтверждения",
@@ -157,12 +161,35 @@
       "customTitlePlaceholder": "Например: Полить цветы",
       "customTitleRequired": "Введите название задания"
     },
+    "addGoal": {
+      "title": "Новая цель",
+      "hint": "Ребёнок увидит цель в списке накоплений",
+      "template": "На что копим",
+      "target": "Цель в звёздах",
+      "amdValue": "Сумма при обмене",
+      "create": "Добавить",
+      "cancel": "Отмена",
+      "duplicate": "Такая цель уже активна",
+      "other": "Другое",
+      "customTitle": "Название цели",
+      "customTitlePlaceholder": "Например: Новый планшет",
+      "customTitleRequired": "Введите название цели"
+    },
     "editTask": {
       "title": "Изменить задание",
       "reward": "Награда",
       "deadline": "Срок",
       "save": "Сохранить",
       "cancel": "Отмена"
+    },
+    "icons": {
+      "label": "Иконка",
+      "book": "Учёба",
+      "paw": "Питомец",
+      "home": "Дом",
+      "utensils": "Кухня",
+      "gamepad": "Игры",
+      "gift": "Подарок"
     },
     "transactions": {
       "empty": "Пока нет операций"
@@ -224,6 +251,9 @@
       },
       "bike": {
         "title": "Велосипед"
+      },
+      "headphones": {
+        "title": "Наушники"
       }
     },
     "transactions": {
