@@ -115,6 +115,16 @@ Pet fields including `taskBuff` SHALL live in `kidsbank.demo` and reset with Â«Ð
 
 Pet UI SHALL use one layout for AMIO and Evoca, with character colors driven by `data-theme` tokens.
 
+#### Scenario: Same layout in Evoca
+
+- **WHEN** bank switches to Evoca on `/child/pet`
+- **THEN** the pet screen structure stays the same and accent colors follow theme tokens
+
 ### Requirement: Localized pet copy
 
 All pet UI strings SHALL use i18n keys (`ui.pet.*`, `demo.pet.*`) in hy, ru, and en.
+
+#### Scenario: Pet strings follow locale
+
+- **WHEN** the user switches locale on Appearance and opens `/child/pet`
+- **THEN** need labels, action buttons, and speech hints render from `ui.pet.*` and `demo.pet.*` keys
