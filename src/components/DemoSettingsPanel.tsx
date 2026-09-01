@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePreferences } from '../context/PreferencesContext';
 import { useDemoState } from '../context/DemoStateContext';
-import type { Bank, Locale } from '../context/preferences';
+import { DEFAULT_CARD_SKIN, type Bank, type Locale } from '../context/preferences';
 
 const BANKS: { id: Bank; labelKey: string; swatch: string }[] = [
   { id: 'amio', labelKey: 'ui.appearance.bankAmio', swatch: '#05A9C7' },
@@ -17,7 +17,7 @@ const LANGUAGES: { id: Locale; labelKey: string }[] = [
 
 export function DemoSettingsPanel() {
   const { t } = useTranslation();
-  const { bank, locale, setBank, setLocale } = usePreferences();
+  const { bank, locale, setBank, setLocale, setCardSkin } = usePreferences();
   const { resetDemo } = useDemoState();
   const [resetDone, setResetDone] = useState(false);
 
@@ -31,6 +31,7 @@ export function DemoSettingsPanel() {
 
   function handleReset() {
     resetDemo();
+    setCardSkin(DEFAULT_CARD_SKIN);
     setResetDone(true);
   }
 

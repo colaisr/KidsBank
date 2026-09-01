@@ -1,0 +1,161 @@
+/* Card skin token overlays — scoped to child cabinet only (parent keeps bank base tokens). */
+
+/* AMIO skins */
+
+html[data-theme='amio'][data-card-skin='space'] .kb-child-shell {
+  --kb-primary: #2563eb;
+  --kb-primary-dark: #1e3a8a;
+  --kb-accent-kids: #fb923c;
+  --kb-accent-secondary: #fb923c;
+  --kb-header-gradient: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  --kb-fab: #fb923c;
+  --kb-fab-fg: #1a1a1a;
+  --kb-fab-glow: 0 8px 24px rgb(251 146 60 / 0.5);
+}
+
+html[data-theme='amio'][data-card-skin='dinosaurs'] .kb-child-shell {
+  --kb-primary: #16a34a;
+  --kb-primary-dark: #14532d;
+  --kb-accent-kids: #fde047;
+  --kb-accent-secondary: #fde047;
+  --kb-header-gradient: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+  --kb-fab: #fde047;
+  --kb-fab-fg: #1a1a1a;
+  --kb-fab-glow: 0 8px 24px rgb(253 224 71 / 0.45);
+}
+
+html[data-theme='amio'][data-card-skin='unicorns'] .kb-child-shell {
+  --kb-primary: #db2777;
+  --kb-primary-dark: #9d174d;
+  --kb-accent-kids: #f9a8d4;
+  --kb-accent-secondary: #f9a8d4;
+  --kb-header-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+  --kb-fab: #f472b6;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(244 114 182 / 0.45);
+}
+
+html[data-theme='amio'][data-card-skin='robots'] .kb-child-shell {
+  --kb-primary: #4b5563;
+  --kb-primary-dark: #1f2937;
+  --kb-accent-kids: #93c5fd;
+  --kb-accent-secondary: #93c5fd;
+  --kb-header-gradient: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
+  --kb-fab: #93c5fd;
+  --kb-fab-fg: #1a1a1a;
+  --kb-fab-glow: 0 8px 24px rgb(147 197 253 / 0.45);
+}
+
+html[data-theme='amio'][data-card-skin='racing'] .kb-child-shell {
+  --kb-primary: #ea580c;
+  --kb-primary-dark: #c2410c;
+  --kb-accent-kids: #fef08a;
+  --kb-accent-secondary: #fef08a;
+  --kb-header-gradient: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+  --kb-fab: #ea580c;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.45);
+}
+
+/* Evoca skins — violet anchor preserved */
+
+html[data-theme='evoca'][data-card-skin='space'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #312e81;
+  --kb-accent-kids: #fbbf24;
+  --kb-header-gradient: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+  --kb-fab: #6400dc;
+  --kb-fab-glow: 0 8px 24px rgb(100 0 220 / 0.45);
+}
+
+html[data-theme='evoca'][data-card-skin='dinosaurs'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #14532d;
+  --kb-accent-kids: #c4ff00;
+  --kb-header-gradient: linear-gradient(135deg, #166534 0%, #6400dc 100%);
+  --kb-fab: #16a34a;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(22 163 74 / 0.4);
+}
+
+html[data-theme='evoca'][data-card-skin='unicorns'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #9d174d;
+  --kb-accent-kids: #ff2d61;
+  --kb-header-gradient: linear-gradient(135deg, #db2777 0%, #6400dc 100%);
+  --kb-fab: #db2777;
+  --kb-fab-glow: 0 8px 24px rgb(219 39 119 / 0.4);
+}
+
+html[data-theme='evoca'][data-card-skin='robots'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #1f2937;
+  --kb-accent-kids: #c4ff00;
+  --kb-header-gradient: linear-gradient(135deg, #374151 0%, #6400dc 100%);
+  --kb-fab: #4b5563;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(75 85 99 / 0.4);
+}
+
+html[data-theme='evoca'][data-card-skin='racing'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #c2410c;
+  --kb-accent-kids: #c4ff00;
+  --kb-header-gradient: linear-gradient(135deg, #ea580c 0%, #6400dc 100%);
+  --kb-fab: #ea580c;
+  --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.4);
+}
+
+/* Pay-card ornaments per skin */
+
+html[data-card-skin='space'] .kb-child-shell .kb-pay-card::after {
+  content: '✦';
+  position: absolute;
+  right: 1rem;
+  bottom: 2.5rem;
+  font-size: 1.25rem;
+  color: rgb(251 146 60 / 0.9);
+  pointer-events: none;
+}
+
+html[data-card-skin='dinosaurs'] .kb-child-shell .kb-pay-card::after {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50% 50% 0 50%;
+  background: rgb(20 83 45 / 0.55);
+  pointer-events: none;
+}
+
+html[data-card-skin='unicorns'] .kb-child-shell .kb-pay-card::after {
+  content: '♥';
+  position: absolute;
+  right: 1rem;
+  bottom: 2.5rem;
+  font-size: 1.1rem;
+  color: rgb(255 255 255 / 0.75);
+  pointer-events: none;
+}
+
+html[data-card-skin='robots'] .kb-child-shell .kb-pay-card::after {
+  content: '▣';
+  position: absolute;
+  right: 1rem;
+  bottom: 2.25rem;
+  font-size: 1.1rem;
+  color: rgb(147 197 253 / 0.85);
+  pointer-events: none;
+}
+
+html[data-card-skin='racing'] .kb-child-shell .kb-pay-card::after {
+  content: '⚡';
+  position: absolute;
+  right: 1rem;
+  bottom: 2.25rem;
+  font-size: 1.1rem;
+  color: rgb(255 255 255 / 0.9);
+  pointer-events: none;
+}

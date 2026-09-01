@@ -15,6 +15,7 @@ import {
   STORAGE_KEYS,
   syncUrlParams,
   type Bank,
+  type CardSkin,
   type Locale,
   type Role,
 } from './preferences';
@@ -23,9 +24,11 @@ type PreferencesContextValue = {
   bank: Bank;
   locale: Locale;
   role: Role;
+  cardSkin: CardSkin;
   setBank: (bank: Bank) => void;
   setLocale: (locale: Locale) => void;
   setRole: (role: Role) => void;
+  setCardSkin: (cardSkin: CardSkin) => void;
 };
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
@@ -34,14 +37,14 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const [prefs, setPrefs] = useState(readInitialPreferences);
 
-  const persistBankLocale = useCallback((bank: Bank, locale: Locale) => {
+  const persistBankLocale = useCallback((bank: Bank, locale: Locale, cardSkin: CardSkin) => {
     try {
       localStorage.setItem(STORAGE_KEYS.bank, bank);
       localStorage.setItem(STORAGE_KEYS.lang, locale);
     } catch {
       // localStorage may be unavailable in private mode
     }
-    applyDocumentPreferences(bank, locale);
+    applyDocumentPreferences(bank, locale, cardSkin);
     void i18n.changeLanguage(locale);
     syncUrlParams(bank, locale);
   }, []);
@@ -50,7 +53,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     (bank: Bank) => {
       setPrefs((current) => {
         const next = { ...current, bank };
-        persistBankLocale(next.bank, next.locale);
+        persistBankLocale(next.bank, next.locale, next.cardSkin);
         return next;
       });
     },
@@ -61,12 +64,25 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     (locale: Locale) => {
       setPrefs((current) => {
         const next = { ...current, locale };
-        persistBankLocale(next.bank, next.locale);
+        persistBankLocale(next.bank, next.locale, next.cardSkin);
         return next;
       });
     },
     [persistBankLocale],
   );
+
+  const setCardSkin = useCallback((cardSkin: CardSkin) => {
+    setPrefs((current) => {
+      const next = { ...current, cardSkin };
+      try {
+        localStorage.setItem(STORAGE_KEYS.cardSkin, cardSkin);
+      } catch {
+        // ignore
+      }
+      applyDocumentPreferences(next.bank, next.locale, next.cardSkin);
+      return next;
+    });
+  }, []);
 
   const setRole = useCallback(
     (role: Role) => {
@@ -82,19 +98,21 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    persistBankLocale(prefs.bank, prefs.locale);
-  }, [persistBankLocale, prefs.bank, prefs.locale]);
+    persistBankLocale(prefs.bank, prefs.locale, prefs.cardSkin);
+  }, [persistBankLocale, prefs.bank, prefs.locale, prefs.cardSkin]);
 
   const value = useMemo(
     () => ({
       bank: prefs.bank,
       locale: prefs.locale,
       role: prefs.role,
+      cardSkin: prefs.cardSkin,
       setBank,
       setLocale,
       setRole,
+      setCardSkin,
     }),
-    [prefs.bank, prefs.locale, prefs.role, setBank, setLocale, setRole],
+    [prefs.bank, prefs.locale, prefs.role, prefs.cardSkin, setBank, setLocale, setRole, setCardSkin],
   );
 
   return <PreferencesContext.Provider value={value}>{children}</PreferencesContext.Provider>;

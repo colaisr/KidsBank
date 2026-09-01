@@ -14,7 +14,11 @@ export function AccountsSection() {
   return (
     <section>
       <h2 className="mb-3 font-heading text-base font-semibold text-text">{t('ui.home.accounts')}</h2>
-      <article className="kb-pay-card rounded-card px-5 py-5 shadow-lg">
+      <Link
+        to="/child/card-design"
+        className="kb-pay-card block rounded-card px-5 py-5 shadow-lg transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]"
+        aria-label={t('ui.cardDesign.title')}
+      >
         <div className="relative z-10 flex items-start justify-between">
           <CardChipIcon />
           <span className="text-lg text-accent-kids" aria-hidden="true">
@@ -36,7 +40,7 @@ export function AccountsSection() {
           </p>
         ) : null}
         <span className="kb-card-mark" aria-hidden="true" />
-      </article>
+      </Link>
 
       <div className="mt-3 grid grid-cols-2 gap-3">
         <Link

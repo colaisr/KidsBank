@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './themes/amio.css';
 @import './themes/evoca.css';
+@import './themes/card-skins.css';
 
 /* inline: keep var() references so theme switch updates utilities at runtime */
 @theme inline {

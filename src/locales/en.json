@@ -12,8 +12,8 @@
       "languageSection": "Language",
       "demoSection": "Demo",
       "resetDemo": "Reset scenario",
-      "resetDone": "Scenario reset — balances and tasks restored",
-      "resetHint": "Restore tasks, goals, stars, and balances to the starting state. Bank, language, and cabinet stay the same.",
+      "resetDone": "Scenario reset — balances, tasks, and card design restored",
+      "resetHint": "Restore tasks, goals, stars, balances, and card design to the starting state. Bank, language, and cabinet stay the same.",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
       "langHy": "Հայերեն",
@@ -53,6 +53,19 @@
     "card": {
       "masked": "•• {{last4}}",
       "limit": "Limit: {{amount}}"
+    },
+    "cardDesign": {
+      "title": "Card design",
+      "banner": "Pick a skin — the whole app will match your new style",
+      "apply": "Apply design",
+      "skins": {
+        "ocean": "Ocean",
+        "space": "Space",
+        "dinosaurs": "Dinosaurs",
+        "unicorns": "Unicorns",
+        "robots": "Robots",
+        "racing": "Racing"
+      }
     },
     "tasks": {
       "rewardStars": "{{count}} ★",

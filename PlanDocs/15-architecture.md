@@ -42,6 +42,7 @@ src/locales/en.json
 | Ключ | Что хранит | Сброс |
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
+| `kidsbank.cardSkin` | скин карты ребёнка (`ocean` … `racing`) | «Сбросить сценарий» → `ocean` |
 | `kidsbank.demo` | живое демо v2: карта, копилка (`shareSlug`), ★, задания, цели, лимит карты, кошелёк родителя, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`) | «Сбросить сценарий» в настройках или «Оформлении» |
 
 Компоненты читают сценарий через `DemoStateContext`; мутации — `demoActions.ts`. При отсутствии ключа — `DEMO_BASELINE`; v1 мигрирует в v2 при загрузке.
@@ -57,28 +58,29 @@ src/
   main.tsx, App.tsx, index.css
   components/     PhoneFrame, AppHeader, RoleToggle, AppearanceButton,
                   ChildHomeHeader, ChildPageTitle, ChildProfileCard,
-                  ChildTabBar, AccountsSection, GoalCard, TaskRow,
+                  ChildTabBar, AccountsSection, CardSkinTile, GoalCard, TaskRow,
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
   pages/          ChildShell (layout + Outlet), ChildHomePage,
                   ChildTasksPage, ChildGoalsPage, ChildPiggyBankPage,
+                  ChildCardDesignPage,
                   ChildTransactionsPage,
                   ChildPetPage, ChildHubPage, ChildProfilePage,
                   ParentShell, ParentHomePage, AppearancePage
-  context/        PreferencesContext (bank, locale, role + persistence),
+  context/        PreferencesContext (bank, locale, role, cardSkin + persistence),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
-  data/           demoBaseline v2, starEconomy.ts, children, tasks, goals
+  data/           demoBaseline v2, cardSkins.ts, starEconomy.ts, children, tasks, goals
   locales/        hy.json, ru.json, en.json
   i18n/           инициализация i18next
-  themes/         amio.css, evoca.css — CSS-токены на [data-theme]
+  themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
   lib/            format.ts — Intl для валюты/дат/чисел; piggy.ts — demo share URL
 ```
 
-Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
+Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
 
-Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.demo` (v2).
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v2).
 
 Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 
