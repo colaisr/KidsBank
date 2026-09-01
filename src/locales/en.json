@@ -81,6 +81,13 @@
     "goals": {
       "targetStars": "{{count}} ★",
       "done": "Done",
+      "inProgress": "In progress",
+      "select": "Select",
+      "deselect": "Remove from my goals",
+      "selectedSection": "My goals",
+      "vitrineSection": "Showcase",
+      "selectedEmpty": "Pick a goal from the showcase — it will appear here and on home",
+      "starsBanner": "You have {{count}} stars — save for a new goal",
       "addStars": "+{{count}} ★",
       "redeem": "Redeem for {{amount}}",
       "redeemed": "Redeemed",
@@ -123,6 +130,7 @@
       "childGoals": "Child goals",
       "childGoalsEmpty": "No active goals",
       "goalRedeemValue": "Redeem: {{amount}}",
+      "goalInVitrine": "In showcase",
       "editTask": "Edit",
       "cancelTask": "Cancel",
       "pendingTasks": "Awaiting confirmation",
@@ -163,7 +171,7 @@
     },
     "addGoal": {
       "title": "New goal",
-      "hint": "The child will see it in their savings list",
+      "hint": "The goal goes to the showcase — the child chooses whether to save for it",
       "template": "Saving for",
       "target": "Star target",
       "amdValue": "Redeem amount",
@@ -274,13 +282,22 @@
     },
     "goals": {
       "ps5": {
-        "title": "PS 5"
+        "title": "Game console"
       },
       "bike": {
         "title": "Bicycle"
       },
       "headphones": {
         "title": "Headphones"
+      },
+      "sneakers": {
+        "title": "Sneakers"
+      },
+      "skateboard": {
+        "title": "Skateboard"
+      },
+      "book": {
+        "title": "Book"
       }
     },
     "transactions": {

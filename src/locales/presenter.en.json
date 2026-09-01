@@ -63,14 +63,21 @@
       "child": {
         "dream": { "topic": "My dream", "meaning": "Save ★ for something I chose" },
         "delay": { "topic": "Delayed", "meaning": "Don't spend everything at once — learn to wait" },
-        "exchange": { "topic": "Real-world link", "meaning": "Goal → AMD on card, not abstract points" }
+        "exchange": { "topic": "Real-world link", "meaning": "Goal → AMD on card, not abstract points" },
+        "choice": { "topic": "Dream catalog", "meaning": "Select — child picks a goal from the grid" }
       },
       "bank": {
         "savings": { "effect": "Soft savings", "meaning": "Financial literacy without a boring deposit" },
         "amdLink": { "effect": "★ → AMD bridge", "meaning": "Gamification tied to a real product" },
-        "motivation": { "effect": "Long horizon", "meaning": "A goal pulls the child back for weeks" }
+        "motivation": { "effect": "Long horizon", "meaning": "A goal pulls the child back for weeks" },
+        "catalog": { "effect": "Engagement", "meaning": "Goal storefront — desire, not an empty list" }
       },
-      "demo": { "step1": "+50 ★ to bike", "step2": "Complete → Redeem", "step3": "Card balance grows" }
+      "demo": {
+        "step1": "★ banner + goal grid",
+        "step2": "Select bicycle → active card",
+        "step3": "Tap → +50 ★ to goal",
+        "step4": "Complete → Redeem → card balance"
+      }
     },
     "child-piggy": {
       "title": "Piggy bank — lever: family money",

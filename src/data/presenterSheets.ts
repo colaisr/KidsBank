@@ -37,9 +37,9 @@ export const PRESENTER_SHEET_CONFIG: Record<PresenterSheetId, PresenterSheetConf
     demoSteps: ['step1', 'step2', 'step3'],
   },
   'child-goals': {
-    childRows: ['dream', 'delay', 'exchange'],
-    bankRows: ['savings', 'amdLink', 'motivation'],
-    demoSteps: ['step1', 'step2', 'step3'],
+    childRows: ['dream', 'delay', 'exchange', 'choice'],
+    bankRows: ['savings', 'amdLink', 'motivation', 'catalog'],
+    demoSteps: ['step1', 'step2', 'step3', 'step4'],
   },
   'child-piggy': {
     childRows: ['separate', 'share', 'grow'],

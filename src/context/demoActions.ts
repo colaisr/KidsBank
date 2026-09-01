@@ -1,7 +1,7 @@
 import type { DemoState, DemoTransaction, TransactionTypeId } from '../data/demoBaseline';
 import type { ActivityIconId } from '../data/activityIcons';
 import { CUSTOM_GOAL_TEMPLATE_ID } from '../data/goalTemplates';
-import { isActiveGoalTemplate } from '../lib/goals';
+import { isGoalTemplateInUse } from '../lib/goals';
 import {
   PET_ACTION_COSTS,
   applyPetNeedEffects,
@@ -180,7 +180,7 @@ export function addGoal(
     if (!customTitle) {
       return 'emptyTitle';
     }
-  } else if (isActiveGoalTemplate(state.goals, input.templateId)) {
+  } else if (isGoalTemplateInUse(state.goals, input.templateId)) {
     return 'duplicate';
   }
 
@@ -198,12 +198,40 @@ export function addGoal(
     targetStars: input.targetStars,
     amdValue: input.amdValue,
     redeemed: false,
+    selected: false,
     ...(customTitle ? { customTitle } : {}),
   };
 
   return {
     ...state,
     goals: [goal, ...state.goals],
+  };
+}
+
+export function selectGoal(state: DemoState, goalId: string): DemoState {
+  const goal = state.goals.find((g) => g.id === goalId);
+  if (!goal || goal.redeemed || goal.selected) {
+    return state;
+  }
+
+  return {
+    ...state,
+    goals: state.goals.map((g) => (g.id === goalId ? { ...g, selected: true } : g)),
+  };
+}
+
+export function deselectGoal(state: DemoState, goalId: string): DemoState {
+  const goal = state.goals.find((g) => g.id === goalId);
+  if (!goal || !goal.selected || goal.redeemed) {
+    return state;
+  }
+
+  return {
+    ...state,
+    starsBalance: state.starsBalance + goal.currentStars,
+    goals: state.goals.map((g) =>
+      g.id === goalId ? { ...g, selected: false, currentStars: 0 } : g,
+    ),
   };
 }
 
@@ -229,7 +257,7 @@ export function allocateStarsToGoal(
   }
 
   const goal = state.goals.find((g) => g.id === goalId);
-  if (!goal || goal.redeemed) {
+  if (!goal || goal.redeemed || !goal.selected) {
     return state;
   }
 
@@ -250,7 +278,7 @@ export function allocateStarsToGoal(
 
 export function redeemGoal(state: DemoState, goalId: string): DemoState {
   const goal = state.goals.find((g) => g.id === goalId);
-  if (!goal || goal.redeemed || goal.currentStars < goal.targetStars) {
+  if (!goal || goal.redeemed || !goal.selected || goal.currentStars < goal.targetStars) {
     return state;
   }
 

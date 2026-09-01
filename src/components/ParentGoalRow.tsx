@@ -20,6 +20,7 @@ export function ParentGoalRow({ goal }: ParentGoalRowProps) {
         {t('ui.parent.goalRedeemValue', {
           amount: formatCurrency(goal.amdValue, locale),
         })}
+        {!goal.selected ? ` · ${t('ui.parent.goalInVitrine')}` : null}
       </p>
     </article>
   );

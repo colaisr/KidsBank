@@ -66,6 +66,7 @@ function normalizeGoal(goal: DemoGoalState): DemoGoalState {
     ...goal,
     templateId,
     iconId: normalizeActivityIconId(goal.iconId, defaultIcon),
+    selected: goal.selected ?? goal.currentStars > 0,
   };
 }
 
@@ -131,6 +132,7 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
         templateId: goal.id,
         amdValue: baseGoal?.amdValue ?? 100000,
         redeemed: false,
+        selected: baseGoal?.selected ?? goal.currentStars > 0,
       };
     }),
     transactions: [...baseline.transactions],
@@ -138,13 +140,42 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
   return migrateV2ToV3(migrated);
 }
 
+type LegacyDemoStateV4 = Omit<DemoState, 'version' | 'goals'> & {
+  version: 4;
+  goals: Array<Omit<DemoGoalState, 'selected'> & { selected?: boolean }>;
+};
+
+function migrateV4ToV5(v4: LegacyDemoStateV4): DemoState {
+  const baseline = cloneDemoBaseline();
+  const migratedGoals = v4.goals.map((goal) => ({
+    ...goal,
+    selected: goal.selected ?? goal.currentStars > 0,
+  }));
+
+  const usedTemplates = new Set(
+    migratedGoals.filter((goal) => !goal.redeemed).map((goal) => goal.templateId),
+  );
+  const vitrineFromBaseline = baseline.goals.filter(
+    (goal) => !goal.selected && !usedTemplates.has(goal.templateId),
+  );
+
+  return normalizeDemoState({
+    ...v4,
+    version: DEMO_STATE_VERSION,
+    goals: [...migratedGoals, ...vitrineFromBaseline.map((goal) => ({ ...goal }))],
+  });
+}
+
 function migrateV3ToV4(v3: LegacyDemoStateV3): DemoState {
   const baseline = cloneDemoBaseline();
-  return normalizeDemoState({
+  const v4: LegacyDemoStateV4 = {
     ...v3,
-    version: DEMO_STATE_VERSION,
+    version: 4,
+    taskStats: v3.taskStats ?? cloneDemoBaseline().taskStats,
+    tasks: v3.tasks.map((task) => normalizeTask(task)),
     pet: v3.pet ?? baseline.pet,
-  });
+  };
+  return migrateV4ToV5(v4);
 }
 
 function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
@@ -156,7 +187,7 @@ function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
   });
 }
 
-function isDemoStateV4(value: unknown): value is DemoState {
+function isDemoStateV5(value: unknown): value is DemoState {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -174,6 +205,24 @@ function isDemoStateV4(value: unknown): value is DemoState {
     typeof candidate.taskStats.tasksCompleted === 'number' &&
     candidate.pet !== undefined &&
     typeof candidate.pet.xp === 'number'
+  );
+}
+
+function isDemoStateV4(value: unknown): value is LegacyDemoStateV4 {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as LegacyDemoStateV4;
+  return (
+    candidate.version === 4 &&
+    typeof candidate.parentWallet === 'number' &&
+    Array.isArray(candidate.tasks) &&
+    Array.isArray(candidate.goals) &&
+    Array.isArray(candidate.transactions) &&
+    typeof candidate.starsBalance === 'number' &&
+    candidate.taskStats !== undefined &&
+    candidate.pet !== undefined
   );
 }
 
@@ -228,8 +277,11 @@ export function readDemoState(): DemoState {
     }
 
     const parsed: unknown = JSON.parse(raw);
-    if (isDemoStateV4(parsed)) {
+    if (isDemoStateV5(parsed)) {
       return normalizeDemoState(parsed);
+    }
+    if (isDemoStateV4(parsed)) {
+      return migrateV4ToV5(parsed);
     }
     if (isDemoStateV3(parsed)) {
       return migrateV3ToV4(parsed);

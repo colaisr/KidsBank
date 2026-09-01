@@ -2,26 +2,35 @@ import type { ActivityIconId } from './activityIcons';
 
 export const CUSTOM_GOAL_TEMPLATE_ID = 'other' as const;
 
-export const GOAL_TEMPLATES = ['bike', 'ps5', 'headphones'] as const;
+export const GOAL_TEMPLATES = ['bike', 'ps5', 'headphones', 'sneakers', 'skateboard', 'book'] as const;
 
 export type GoalTemplateId = (typeof GOAL_TEMPLATES)[number];
 
 export const GOAL_TEMPLATE_DEFAULT_TARGETS: Record<GoalTemplateId, number> = {
-  bike: 800,
+  bike: 2200,
   ps5: 1500,
-  headphones: 500,
+  headphones: 1100,
+  sneakers: 430,
+  skateboard: 900,
+  book: 150,
 };
 
 export const GOAL_TEMPLATE_DEFAULT_AMD: Record<GoalTemplateId, number> = {
   bike: 120000,
   ps5: 250000,
   headphones: 50000,
+  sneakers: 35000,
+  skateboard: 80000,
+  book: 15000,
 };
 
 export const GOAL_TEMPLATE_DEFAULT_ICONS: Record<GoalTemplateId, ActivityIconId> = {
   bike: 'gift',
   ps5: 'gamepad',
   headphones: 'gift',
+  sneakers: 'gift',
+  skateboard: 'gift',
+  book: 'book',
 };
 
 export const GOAL_TARGET_PRESETS = [500, 800, 1000, 1500] as const;

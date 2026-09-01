@@ -81,6 +81,13 @@
     "goals": {
       "targetStars": "{{count}} ★",
       "done": "Պատրաստ է",
+      "inProgress": "Ընթացքում",
+      "select": "Ընտրել",
+      "deselect": "Հեռացնել իմ նպատակներից",
+      "selectedSection": "Իմ նպատակները",
+      "vitrineSection": "Վիտրինա",
+      "selectedEmpty": "Ընտրիր նպատակ վիտրինայից — այն կհայտնվի այստեղ և գլխավորում",
+      "starsBanner": "Քո {{count}} աստղ — կուտակիր նոր նպատակի համար",
       "addStars": "+{{count}} ★",
       "redeem": "Փոխանակել {{amount}}-ով",
       "redeemed": "Փոխանակված",
@@ -123,6 +130,7 @@
       "childGoals": "Երեխայի նպատակներ",
       "childGoalsEmpty": "Ակտիվ նպատակներ չկան",
       "goalRedeemValue": "Փոխանակում՝ {{amount}}",
+      "goalInVitrine": "Վիտրինայում",
       "editTask": "Խմբագրել",
       "cancelTask": "Չեղարկել",
       "pendingTasks": "Սպասում են հաստատման",
@@ -163,7 +171,7 @@
     },
     "addGoal": {
       "title": "Նոր նպատակ",
-      "hint": "Երեխան կտեսնի այն խնայողության ցանկում",
+      "hint": "Նպատակը կգնա վիտրինա — երեխան ինքը կընտրի, կուտակել դրա վրա թե ոչ",
       "template": "Ինչի համար ենք կուտակում",
       "target": "Նպատակ աստղերով",
       "amdValue": "Փոխանակման գումար",
@@ -274,13 +282,22 @@
     },
     "goals": {
       "ps5": {
-        "title": "PS 5"
+        "title": "Կոնսոլ"
       },
       "bike": {
         "title": "Հեծանիվ"
       },
       "headphones": {
         "title": "Ականջակալներ"
+      },
+      "sneakers": {
+        "title": "Կոշիկներ"
+      },
+      "skateboard": {
+        "title": "Սքեյթ"
+      },
+      "book": {
+        "title": "Գիրք"
       }
     },
     "transactions": {

@@ -15,7 +15,7 @@ import {
 } from '../data/goalTemplates';
 import type { ActivityIconId } from '../data/activityIcons';
 import { IconPicker } from './IconPicker';
-import { isActiveGoalTemplate } from '../lib/goals';
+import { isGoalTemplateInUse } from '../lib/goals';
 import { formatCurrency } from '../lib/format';
 import { usePreferences } from '../context/PreferencesContext';
 
@@ -38,7 +38,7 @@ export function AddGoalModal({ open, onClose }: AddGoalModalProps) {
   const [errorKey, setErrorKey] = useState<string | null>(null);
 
   const availableTemplates = GOAL_TEMPLATES.filter(
-    (id) => !isActiveGoalTemplate(demo.goals, id),
+    (id) => !isGoalTemplateInUse(demo.goals, id),
   );
   const isCustom = templateId === CUSTOM_GOAL_TEMPLATE_ID;
 
@@ -48,7 +48,7 @@ export function AddGoalModal({ open, onClose }: AddGoalModalProps) {
     }
 
     const available = GOAL_TEMPLATES.filter(
-      (id) => !isActiveGoalTemplate(demo.goals, id),
+      (id) => !isGoalTemplateInUse(demo.goals, id),
     );
     const nextTemplate: AddGoalSelection =
       available.length > 0 ? available[0] : CUSTOM_GOAL_TEMPLATE_ID;

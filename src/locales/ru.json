@@ -81,6 +81,13 @@
     "goals": {
       "targetStars": "{{count}} ★",
       "done": "Готово",
+      "inProgress": "В процессе",
+      "select": "Выбрать",
+      "deselect": "Убрать из моих целей",
+      "selectedSection": "Мои цели",
+      "vitrineSection": "Витрина",
+      "selectedEmpty": "Выбери цель из витрины — она появится здесь и на главной",
+      "starsBanner": "У тебя {{count}} звёзд — копи на новую цель",
       "addStars": "+{{count}} ★",
       "redeem": "Обменять на {{amount}}",
       "redeemed": "Обменяно",
@@ -123,6 +130,7 @@
       "childGoals": "Цели ребёнка",
       "childGoalsEmpty": "Нет активных целей",
       "goalRedeemValue": "Обмен: {{amount}}",
+      "goalInVitrine": "В витрине",
       "editTask": "Изменить",
       "cancelTask": "Отменить",
       "pendingTasks": "Ждут подтверждения",
@@ -163,7 +171,7 @@
     },
     "addGoal": {
       "title": "Новая цель",
-      "hint": "Ребёнок увидит цель в списке накоплений",
+      "hint": "Цель попадёт в витрину — ребёнок сам выберет, копить на неё или нет",
       "template": "На что копим",
       "target": "Цель в звёздах",
       "amdValue": "Сумма при обмене",
@@ -274,13 +282,22 @@
     },
     "goals": {
       "ps5": {
-        "title": "PS 5"
+        "title": "Приставка"
       },
       "bike": {
         "title": "Велосипед"
       },
       "headphones": {
         "title": "Наушники"
+      },
+      "sneakers": {
+        "title": "Кроссовки"
+      },
+      "skateboard": {
+        "title": "Скейтборд"
+      },
+      "book": {
+        "title": "Книга"
       }
     },
     "transactions": {

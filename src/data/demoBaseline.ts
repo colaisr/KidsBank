@@ -12,6 +12,8 @@ export type DemoGoalState = DemoGoal & {
   customTitle?: string;
   amdValue: number;
   redeemed: boolean;
+  /** Child chose to pursue this goal; false = parent vitrine only */
+  selected: boolean;
 };
 
 export type TransactionTypeId =
@@ -69,7 +71,7 @@ export type PetState = {
 };
 
 export type DemoState = {
-  version: 4;
+  version: 5;
   parentWallet: number;
   card: {
     last4: string;
@@ -88,7 +90,7 @@ export type DemoState = {
   pet: PetState;
 };
 
-export const DEMO_STATE_VERSION = 4 as const;
+export const DEMO_STATE_VERSION = 5 as const;
 
 function createBaselinePet(): PetState {
   return {
@@ -159,22 +161,64 @@ export const DEMO_BASELINE: DemoState = {
   ],
   goals: [
     {
-      id: 'bike',
-      templateId: 'bike',
-      iconId: 'gift',
-      currentStars: 650,
-      targetStars: 800,
-      amdValue: 120000,
-      redeemed: false,
-    },
-    {
       id: 'ps5',
       templateId: 'ps5',
       iconId: 'gamepad',
-      currentStars: 150,
+      currentStars: 600,
       targetStars: 1500,
       amdValue: 250000,
       redeemed: false,
+      selected: true,
+    },
+    {
+      id: 'sneakers',
+      templateId: 'sneakers',
+      iconId: 'gift',
+      currentStars: 86,
+      targetStars: 430,
+      amdValue: 35000,
+      redeemed: false,
+      selected: true,
+    },
+    {
+      id: 'bike',
+      templateId: 'bike',
+      iconId: 'gift',
+      currentStars: 0,
+      targetStars: 2200,
+      amdValue: 120000,
+      redeemed: false,
+      selected: false,
+    },
+    {
+      id: 'skateboard',
+      templateId: 'skateboard',
+      iconId: 'gift',
+      currentStars: 0,
+      targetStars: 900,
+      amdValue: 80000,
+      redeemed: false,
+      selected: false,
+    },
+    {
+      id: 'book',
+      templateId: 'book',
+      iconId: 'book',
+      currentStars: 0,
+      targetStars: 150,
+      amdValue: 15000,
+      redeemed: false,
+      selected: false,
+    },
+    {
+      id: 'headphones',
+      templateId: 'headphones',
+      iconId: 'gift',
+      currentStars: 0,
+      targetStars: 1100,
+      amdValue: 50000,
+      redeemed: false,
+      selected: false,
     },
   ],
   transactions: [],
