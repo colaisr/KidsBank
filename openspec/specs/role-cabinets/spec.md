@@ -7,12 +7,12 @@ Lets demo presenters switch between child and parent cabinet shells as separate 
 
 ### Requirement: Two role shells exist
 
-The system SHALL provide a child cabinet shell and a parent cabinet shell. Each shell is a placeholder home view for its role, ready for phase-2 content.
+The system SHALL provide a child cabinet shell and a parent cabinet shell. The child shell SHALL host the Junior child home and bottom navigation. The parent shell SHALL remain a placeholder until phase 3.
 
 #### Scenario: Child shell content
 
 - **WHEN** the active role is `child`
-- **THEN** the child shell displays a localized title, demo child name from `demo.*`, and empty-state placeholder text
+- **THEN** the child shell displays the Junior home (accounts, stars, tasks, goals) with bottom navigation, not an empty-state placeholder
 
 #### Scenario: Parent shell content
 

@@ -9,6 +9,9 @@
       "title": "Appearance",
       "bankSection": "Bank",
       "languageSection": "Language",
+      "demoSection": "Demo",
+      "resetDemo": "Reset scenario",
+      "resetHint": "Restore tasks, goals, stars, and balances to the starting state. Bank, language, and cabinet stay the same.",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
       "langHy": "Հայերեն",
@@ -24,14 +27,77 @@
     "shell": {
       "greeting": "Hi, {{name}}!",
       "parentGreeting": "Hello!",
-      "emptyChild": "The main screen arrives in the next phase. Card, piggy bank, and tasks will live here.",
       "emptyParent": "The parent dashboard arrives in the next phase. Transfers, limits, and history will live here."
+    },
+    "nav": {
+      "home": "Home",
+      "goals": "Goals",
+      "transactions": "Transactions",
+      "pet": "Pet",
+      "hub": "Menu"
+    },
+    "home": {
+      "title": "Home",
+      "accounts": "Accounts",
+      "productAmio": "AMIO Junior",
+      "productEvoca": "Evoca TEENZ",
+      "piggy": "Piggy bank",
+      "stars": "Stars",
+      "goals": "Goals",
+      "tasks": "Tasks",
+      "seeAll": "All",
+      "chat": "Mentor chat"
+    },
+    "card": {
+      "masked": "•• {{last4}}"
+    },
+    "tasks": {
+      "rewardStars": "{{count}} ★"
+    },
+    "goals": {
+      "targetStars": "{{count}} ★",
+      "done": "Done"
+    },
+    "profile": {
+      "settings": "Profile settings",
+      "subtitle": "Demo profile",
+      "appearance": "Appearance",
+      "role": "Cabinet"
+    },
+    "hub": {
+      "profile": "Profile",
+      "appearance": "Appearance",
+      "tasks": "Tasks",
+      "goals": "Goals"
+    },
+    "placeholder": {
+      "transactions": "Transaction history arrives in the next phase.",
+      "pet": "Pet arrives in the next phase."
     }
   },
   "demo": {
     "child": {
       "david": {
         "name": "David"
+      }
+    },
+    "tasks": {
+      "homework": {
+        "title": "Do homework"
+      },
+      "walkDog": {
+        "title": "Walk the dog"
+      },
+      "tidyRoom": {
+        "title": "Tidy the room"
+      }
+    },
+    "goals": {
+      "ps5": {
+        "title": "PS 5"
+      },
+      "bike": {
+        "title": "Bicycle"
       }
     }
   }

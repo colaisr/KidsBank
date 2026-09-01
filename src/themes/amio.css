@@ -11,4 +11,7 @@ html[data-theme='amio'] {
   --kb-radius-card: 1.5rem;
   --kb-font-heading: 'Noto Sans', 'Noto Sans Armenian', system-ui, sans-serif;
   --kb-header-gradient: linear-gradient(135deg, #05a9c7 0%, #086f83 100%);
+  --kb-fab: #f6ad55;
+  --kb-fab-fg: #1a1a1a;
+  --kb-fab-glow: 0 8px 24px rgb(246 173 85 / 0.55);
 }

@@ -9,6 +9,9 @@
       "title": "Оформление",
       "bankSection": "Банк",
       "languageSection": "Язык",
+      "demoSection": "Демо",
+      "resetDemo": "Сбросить сценарий",
+      "resetHint": "Вернуть задания, цели, звёзды и балансы к стартовому состоянию. Банк, язык и кабинет не меняются.",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
       "langHy": "Հայերեն",
@@ -24,14 +27,77 @@
     "shell": {
       "greeting": "Привет, {{name}}!",
       "parentGreeting": "Привет!",
-      "emptyChild": "Главный экран появится на следующем этапе. Здесь будут карта, копилка и задания.",
       "emptyParent": "Панель родителя появится на следующем этапе. Здесь будут переводы, лимиты и история."
+    },
+    "nav": {
+      "home": "Главная",
+      "goals": "Цели",
+      "transactions": "Транзакции",
+      "pet": "Питомец",
+      "hub": "Меню"
+    },
+    "home": {
+      "title": "Главный",
+      "accounts": "Счета",
+      "productAmio": "AMIO Junior",
+      "productEvoca": "Evoca TEENZ",
+      "piggy": "Копилка",
+      "stars": "Звёзды",
+      "goals": "Цели",
+      "tasks": "Задания",
+      "seeAll": "Все",
+      "chat": "Чат с наставником"
+    },
+    "card": {
+      "masked": "•• {{last4}}"
+    },
+    "tasks": {
+      "rewardStars": "{{count}} ★"
+    },
+    "goals": {
+      "targetStars": "{{count}} ★",
+      "done": "Готово"
+    },
+    "profile": {
+      "settings": "Настройки профиля",
+      "subtitle": "Демо-профиль",
+      "appearance": "Оформление",
+      "role": "Кабинет"
+    },
+    "hub": {
+      "profile": "Профиль",
+      "appearance": "Оформление",
+      "tasks": "Задания",
+      "goals": "Цели"
+    },
+    "placeholder": {
+      "transactions": "История операций появится на следующем этапе.",
+      "pet": "Питомец появится на следующем этапе."
     }
   },
   "demo": {
     "child": {
       "david": {
         "name": "Давид"
+      }
+    },
+    "tasks": {
+      "homework": {
+        "title": "Сделать уроки"
+      },
+      "walkDog": {
+        "title": "Погулять с собакой"
+      },
+      "tidyRoom": {
+        "title": "Убрать в комнате"
+      }
+    },
+    "goals": {
+      "ps5": {
+        "title": "PS 5"
+      },
+      "bike": {
+        "title": "Велосипед"
       }
     }
   }

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { usePreferences } from '../context/PreferencesContext';
+import { useDemoState } from '../context/DemoStateContext';
 import type { Bank, Locale } from '../context/preferences';
 
 const BANKS: { id: Bank; labelKey: string; swatch: string }[] = [
@@ -17,6 +18,7 @@ const LANGUAGES: { id: Locale; labelKey: string }[] = [
 export function AppearancePage() {
   const { t } = useTranslation();
   const { bank, locale, role, setBank, setLocale } = usePreferences();
+  const { resetDemo } = useDemoState();
   const backPath = role === 'parent' ? '/parent' : '/child';
 
   return (
@@ -88,6 +90,20 @@ export function AppearancePage() {
               );
             })}
           </div>
+        </section>
+
+        <section>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-text-muted">
+            {t('ui.appearance.demoSection')}
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-text-muted">{t('ui.appearance.resetHint')}</p>
+          <button
+            type="button"
+            onClick={resetDemo}
+            className="w-full rounded-2xl border border-border bg-surface-muted px-4 py-3 text-left text-sm font-semibold text-text transition-colors duration-200 hover:border-primary/40"
+          >
+            {t('ui.appearance.resetDemo')}
+          </button>
         </section>
       </main>
     </div>

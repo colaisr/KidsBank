@@ -9,6 +9,9 @@
       "title": "Ձևավորում",
       "bankSection": "Բանկ",
       "languageSection": "Լեզու",
+      "demoSection": "Դեմո",
+      "resetDemo": "Վերականգնել սցենարը",
+      "resetHint": "Վերադարձնել առաջադրանքները, նպատակները, աստղերը և մնացորդները սկզբնական վիճակին։ Բանկը, լեզուն և հաշիվը չեն փոխվում։",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
       "langHy": "Հայերեն",
@@ -24,14 +27,77 @@
     "shell": {
       "greeting": "Բարև, {{name}}!",
       "parentGreeting": "Բարև!",
-      "emptyChild": "Հիմնական էկրանը կհայտնվի հաջորդ փուլում։ Այստեղ կլինեն քարտը, խնայարանը և առաջադրանքները։",
       "emptyParent": "Ծնողի վահանակը կհայտնվի հաջորդ փուլում։ Այստեղ կլինեն փոխանցումները, սահմանները և պատմությունը։"
+    },
+    "nav": {
+      "home": "Գլխավոր",
+      "goals": "Նպատակներ",
+      "transactions": "Գործարքներ",
+      "pet": "Կենդանի",
+      "hub": "Մենյու"
+    },
+    "home": {
+      "title": "Գլխավոր",
+      "accounts": "Հաշիվներ",
+      "productAmio": "AMIO Junior",
+      "productEvoca": "Evoca TEENZ",
+      "piggy": "Խնայարան",
+      "stars": "Աստղեր",
+      "goals": "Նպատակներ",
+      "tasks": "Առաջադրանքներ",
+      "seeAll": "Բոլորը",
+      "chat": "Խորհրդատուի չատ"
+    },
+    "card": {
+      "masked": "•• {{last4}}"
+    },
+    "tasks": {
+      "rewardStars": "{{count}} ★"
+    },
+    "goals": {
+      "targetStars": "{{count}} ★",
+      "done": "Պատրաստ է"
+    },
+    "profile": {
+      "settings": "Պրոֆիլի կարգավորումներ",
+      "subtitle": "Ցուցադրական պրոֆիլ",
+      "appearance": "Ձևավորում",
+      "role": "Հաշիվ"
+    },
+    "hub": {
+      "profile": "Պրոֆիլ",
+      "appearance": "Ձևավորում",
+      "tasks": "Առաջադրանքներ",
+      "goals": "Նպատակներ"
+    },
+    "placeholder": {
+      "transactions": "Գործարքների պատմությունը կհայտնվի հաջորդ փուլում։",
+      "pet": "Կենդանին կհայտնվի հաջորդ փուլում։"
     }
   },
   "demo": {
     "child": {
       "david": {
         "name": "Դավիթ"
+      }
+    },
+    "tasks": {
+      "homework": {
+        "title": "Տնային աշխատանք"
+      },
+      "walkDog": {
+        "title": "Շան զբոսանք"
+      },
+      "tidyRoom": {
+        "title": "Սենյակը հավաքել"
+      }
+    },
+    "goals": {
+      "ps5": {
+        "title": "PS 5"
+      },
+      "bike": {
+        "title": "Հեծանիվ"
       }
     }
   }

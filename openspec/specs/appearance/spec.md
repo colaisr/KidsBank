@@ -37,6 +37,20 @@ The appearance screen SHALL offer exactly three language options labeled Հայ�
 - **WHEN** the user taps Հայերեն
 - **THEN** all `ui.*` and `demo.*` strings update to Armenian without page reload
 
+### Requirement: Appearance includes demo scenario reset
+
+In addition to bank and language controls, the appearance screen SHALL offer «Сбросить сценарий» that resets `kidsbank.demo` to baseline without changing bank, locale, or role.
+
+#### Scenario: Reset section visible
+
+- **WHEN** the user views Appearance
+- **THEN** a demo section with reset control and hint text is shown below language
+
+#### Scenario: Reset hint localized
+
+- **WHEN** locale is `hy`, `ru`, or `en`
+- **THEN** reset label and hint use `ui.appearance.*` keys in that locale
+
 ### Requirement: Appearance is separate from role control
 
 The appearance screen SHALL NOT include the child/parent role switcher. Role switching MUST remain a distinct control elsewhere in the shell.
@@ -44,7 +58,7 @@ The appearance screen SHALL NOT include the child/parent role switcher. Role swi
 #### Scenario: No role toggle on appearance
 
 - **WHEN** the user views the appearance screen
-- **THEN** only bank and language controls are shown; role is unchanged
+- **THEN** bank, language, and demo-reset controls are shown; role is unchanged
 
 ### Requirement: Appearance screen strings are localized
 

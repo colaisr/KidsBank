@@ -11,4 +11,7 @@ html[data-theme='evoca'] {
   --kb-radius-card: 1rem;
   --kb-font-heading: 'Montserrat', 'Noto Sans', 'Noto Sans Armenian', system-ui, sans-serif;
   --kb-header-gradient: linear-gradient(135deg, #6400dc 0%, #8448ff 100%);
+  --kb-fab: #6400dc;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(100 0 220 / 0.4);
 }
