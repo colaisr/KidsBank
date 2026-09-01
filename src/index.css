@@ -82,3 +82,49 @@ html[data-theme='evoca'] .kb-card-mark::after {
 .kb-fab {
   box-shadow: var(--kb-fab-glow);
 }
+
+.parent-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+html[data-theme='evoca'] .parent-quick-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.parent-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: var(--kb-radius-card);
+  border: 1px solid var(--kb-border);
+  background: var(--kb-surface);
+  padding: 1rem;
+  text-align: left;
+  color: var(--kb-text);
+  transition: border-color 0.2s ease;
+}
+
+.parent-action-card:hover {
+  border-color: color-mix(in srgb, var(--kb-primary) 40%, transparent);
+}
+
+html[data-theme='evoca'] .parent-action-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+html[data-theme='evoca'] .parent-action-card span:last-child {
+  margin-top: 0;
+}
+
+.parent-action-card-text {
+  min-width: 0;
+}
+
+html[data-theme='amio'] .parent-action-card-text {
+  margin-top: 0.5rem;
+}

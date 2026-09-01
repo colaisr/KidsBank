@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePreferences } from '../context/PreferencesContext';
 import { useDemoState } from '../context/DemoStateContext';
@@ -29,6 +30,11 @@ export function AccountsSection() {
         <p className="relative z-10 mt-4 font-heading text-3xl font-semibold tracking-tight">
           {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
         </p>
+        {demo.cardLimit !== null ? (
+          <p className="relative z-10 mt-2 text-xs font-medium text-white/80">
+            {t('ui.card.limit', { amount: formatCurrency(demo.cardLimit, locale) })}
+          </p>
+        ) : null}
         <span className="kb-card-mark" aria-hidden="true" />
       </article>
 
@@ -40,7 +46,10 @@ export function AccountsSection() {
             {formatCurrency(demo.piggy.balance, locale)}
           </p>
         </article>
-        <article className="min-w-0 rounded-card border border-border bg-surface p-4">
+        <Link
+          to="/child/goals"
+          className="min-w-0 rounded-card border border-border bg-surface p-4 transition-colors duration-200 hover:border-primary/40"
+        >
           <span className="text-lg text-accent-kids" aria-hidden="true">
             ★
           </span>
@@ -48,7 +57,7 @@ export function AccountsSection() {
           <p className="mt-1 font-heading text-lg font-semibold text-text">
             {formatNumber(demo.starsBalance, locale)}
           </p>
-        </article>
+        </Link>
       </div>
     </section>
   );

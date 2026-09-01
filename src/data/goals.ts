@@ -8,6 +8,6 @@ export type DemoGoal = {
 };
 
 export const demoGoals: readonly DemoGoal[] = [
-  { id: 'ps5', iconId: 'gamepad', currentStars: 600, targetStars: 1500 },
-  { id: 'bike', iconId: 'bike', currentStars: 370, targetStars: 1000 },
+  { id: 'bike', iconId: 'bike', currentStars: 650, targetStars: 800 },
+  { id: 'ps5', iconId: 'gamepad', currentStars: 150, targetStars: 1500 },
 ];

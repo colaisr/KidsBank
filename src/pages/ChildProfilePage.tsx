@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { ChildPageTitle } from '../components/ChildPageTitle';
+import { DemoSettingsPanel } from '../components/DemoSettingsPanel';
 import { RoleToggle } from '../components/RoleToggle';
 import { demoChild } from '../data/children';
 
+type ProfileLocationState = {
+  from?: string;
+};
+
 export function ChildProfilePage() {
   const { t } = useTranslation();
+  const location = useLocation();
   const childName = t(`demo.${demoChild.id}.name`);
+  const backTo = (location.state as ProfileLocationState | null)?.from ?? '/child';
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.profile.settings" />
+      <ChildPageTitle titleKey="ui.profile.settings" showSettingsLink={false} backTo={backTo} />
       <div className="space-y-4 px-4 py-4">
         <article className="flex items-center gap-4 rounded-card border border-border bg-surface p-4">
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-semibold text-white">
@@ -29,15 +36,7 @@ export function ChildProfilePage() {
           <RoleToggle />
         </section>
 
-        <Link
-          to="/appearance"
-          className="flex items-center justify-between rounded-card border border-border bg-surface px-4 py-4 transition-colors duration-200 hover:border-primary/40"
-        >
-          <span className="font-heading text-sm font-semibold text-text">{t('ui.profile.appearance')}</span>
-          <span className="text-primary" aria-hidden="true">
-            →
-          </span>
-        </Link>
+        <DemoSettingsPanel />
       </div>
     </div>
   );

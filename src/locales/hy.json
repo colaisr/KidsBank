@@ -3,7 +3,8 @@
     "app": {
       "title": "KidsBank",
       "back": "Հետ",
-      "appearance": "Ձևավորում"
+      "appearance": "Ձևավորում",
+      "settings": "Կարգավորումներ"
     },
     "appearance": {
       "title": "Ձևավորում",
@@ -11,6 +12,7 @@
       "languageSection": "Լեզու",
       "demoSection": "Դեմո",
       "resetDemo": "Վերականգնել սցենարը",
+      "resetDone": "Սցենարը վերականգնված է — մնացորդներն ու առաջադրանքները սկզբնական վիճակում են",
       "resetHint": "Վերադարձնել առաջադրանքները, նպատակները, աստղերը և մնացորդները սկզբնական վիճակին։ Բանկը, լեզուն և հաշիվը չեն փոխվում։",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
@@ -49,14 +51,24 @@
       "chat": "Խորհրդատուի չատ"
     },
     "card": {
-      "masked": "•• {{last4}}"
+      "masked": "•• {{last4}}",
+      "limit": "Սահմանաչափ՝ {{amount}}"
     },
     "tasks": {
-      "rewardStars": "{{count}} ★"
+      "rewardStars": "{{count}} ★",
+      "accept": "Ընդունել",
+      "complete": "Պատրաստ է",
+      "waitingParent": "Սպասում է հաստատման",
+      "done": "Կատարված"
     },
     "goals": {
       "targetStars": "{{count}} ★",
-      "done": "Պատրաստ է"
+      "done": "Պատրաստ է",
+      "addStars": "+{{count}} ★",
+      "redeem": "Փոխանակել {{amount}}-ով",
+      "redeemed": "Փոխանակված",
+      "availableStars": "Հասանելի աստղեր",
+      "availableHint": "Սեղմիր «+{{count}} ★» նպատակի վրա — փոխանակմանը մոտ 3–4 սեղմում"
     },
     "profile": {
       "settings": "Պրոֆիլի կարգավորումներ",
@@ -68,7 +80,48 @@
       "profile": "Պրոֆիլ",
       "appearance": "Ձևավորում",
       "tasks": "Առաջադրանքներ",
-      "goals": "Նպատակներ"
+      "goals": "Նպատակներ",
+      "demoActions": "Դեմո գործողություններ",
+      "demoHint": "Ստուգել սահմանաչափը և փոխանցումը ծնողին",
+      "demoSpend": "Ծախսել {{amount}}",
+      "sendToParent": "Ուղարկել ծնողին {{amount}}",
+      "cardBalance": "Քարտի մնացորդ՝ {{amount}}",
+      "spendDone": "{{amount}} գնում — գանձվել է քարտից",
+      "transferDone": "{{amount}} ուղարկվել է ծնողին",
+      "insufficient": "Քարտի վրա բավարար միջոցներ չկան"
+    },
+    "parent": {
+      "subtitle": "Հաշվի և առաջադրանքների վերահսկում",
+      "childBalance": "Երեխայի քարտի մնացորդ",
+      "piggyBalance": "Խնայարան՝ {{amount}}",
+      "limitActive": "Ծախսերի սահմանաչափ՝ {{amount}}",
+      "limitNotSet": "Չի սահմանված",
+      "quickActions": "Արագ գործողություններ",
+      "transfer": "Փոխանցում",
+      "limit": "Սահմանաչափ",
+      "pendingTasks": "Սպասում են հաստատման",
+      "confirmTask": "Հաստատել առաջադրանքը",
+      "spending": "Ծախսերի պատմություն"
+    },
+    "transfer": {
+      "title": "Փոխանցում երեխային",
+      "wallet": "Ձեր դրամապանակը՝ {{amount}}",
+      "target": {
+        "card": "Քարտին",
+        "piggy": "Խնայարան"
+      },
+      "send": "Փոխանցել",
+      "cancel": "Չեղարկել"
+    },
+    "limit": {
+      "title": "Ծախսերի սահմանաչափ",
+      "hint": "Օրական սահմանաչափ երեխայի քարտի վրա",
+      "set": "Սահմանել",
+      "clear": "Հանել սահմանաչափը",
+      "blocked": "Գերազանցվել է ծախսերի սահմանաչափը"
+    },
+    "transactions": {
+      "empty": "Գործարքներ դեռ չկան"
     },
     "placeholder": {
       "transactions": "Գործարքների պատմությունը կհայտնվի հաջորդ փուլում։",
@@ -99,6 +152,13 @@
       "bike": {
         "title": "Հեծանիվ"
       }
+    },
+    "transactions": {
+      "parentToCard": "Փոխանցում քարտին",
+      "parentToPiggy": "Փոխանցում խնայարան",
+      "childToParent": "Փոխանցում ծնողին",
+      "spend": "Գնում",
+      "goalRedeem": "Նպատակի փոխանակում"
     }
   }
 }

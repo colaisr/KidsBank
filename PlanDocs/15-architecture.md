@@ -27,12 +27,13 @@
 ## 3. Где живут демо-данные
 
 ```text
-src/data/demoBaseline.ts   # стартовое состояние сценария (балансы, задания, цели, ★)
+src/data/demoBaseline.ts   # стартовое состояние сценария v2 (балансы, задания, цели, ★, лимит, транзакции)
+src/data/starEconomy.ts      # шаг распределения ★ (STAR_ALLOCATE_STEP)
 src/data/                  # id сущностей и типы; тексты — только в locales
 src/locales/hy.json
 src/locales/ru.json
 src/locales/en.json
-  ui.*             # табы, кнопки, «Оформление»
+  ui.*             # табы, кнопки, «Оформление», модалки
   demo.*           # имена, задания, операции, реплики маскота
 ```
 
@@ -41,29 +42,32 @@ src/locales/en.json
 | Ключ | Что хранит | Сброс |
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
-| `kidsbank.demo` | живое демо: карта, копилка, баланс ★, статусы заданий, прогресс целей | «Сбросить сценарий» в «Оформлении» |
+| `kidsbank.demo` | живое демо v2: карта, копилка, ★, задания, цели, лимит карты, кошелёк родителя, `transactions[]` | «Сбросить сценарий» в настройках или «Оформлении» |
 
-Компоненты читают сценарий через `DemoStateContext`; при отсутствии ключа — `DEMO_BASELINE`.
+Компоненты читают сценарий через `DemoStateContext`; мутации — `demoActions.ts`. При отсутствии ключа — `DEMO_BASELINE`; v1 мигрирует в v2 при загрузке.
 
 Компоненты: `t('demo.tasks.homework')`, не `task.title`. Смена языка перерисовывает UI и фикстуры одним locale.
 
 Числа/даты/валюта: locale `hy-AM` / `ru-RU` / `en-US`, валюта демо AMD (пока не решат иначе).
 
-## 4. Структура `src/` (фаза 2)
+## 4. Структура `src/` (фаза 3)
 
 ```text
 src/
   main.tsx, App.tsx, index.css
   components/     PhoneFrame, AppHeader, RoleToggle, AppearanceButton,
                   ChildHomeHeader, ChildPageTitle, ChildProfileCard,
-                  ChildTabBar, AccountsSection, GoalCard, TaskRow
+                  ChildTabBar, AccountsSection, GoalCard, TaskRow,
+                  TransactionRow, TransferModal, LimitModal,
+                  DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
   pages/          ChildShell (layout + Outlet), ChildHomePage,
                   ChildTasksPage, ChildGoalsPage, ChildTransactionsPage,
                   ChildPetPage, ChildHubPage, ChildProfilePage,
-                  ParentShell, AppearancePage
+                  ParentShell, ParentHomePage, AppearancePage
   context/        PreferencesContext (bank, locale, role + persistence),
-                  DemoStateContext (сценарий демо + reset)
-  data/           demoBaseline, children, tasks, goals — ids и числа
+                  DemoStateContext (сценарий демо + reset),
+                  demoActions.ts (чистые мутации состояния)
+  data/           demoBaseline v2, starEconomy.ts, children, tasks, goals
   locales/        hy.json, ru.json, en.json
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css — CSS-токены на [data-theme]
@@ -72,7 +76,7 @@ src/
 
 Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
 
-Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.demo`.
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.demo` (v2).
 
 Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 

@@ -7,7 +7,7 @@ Lets demo presenters switch between child and parent cabinet shells as separate 
 
 ### Requirement: Two role shells exist
 
-The system SHALL provide a child cabinet shell and a parent cabinet shell. The child shell SHALL host the Junior child home and bottom navigation. The parent shell SHALL remain a placeholder until phase 3.
+The system SHALL provide a child cabinet shell and a parent cabinet shell. The child shell SHALL host the Junior child home and bottom navigation. The parent shell SHALL host the parent control dashboard from phase 3.
 
 #### Scenario: Child shell content
 
@@ -17,7 +17,7 @@ The system SHALL provide a child cabinet shell and a parent cabinet shell. The c
 #### Scenario: Parent shell content
 
 - **WHEN** the active role is `parent`
-- **THEN** the parent shell displays a localized title and empty-state placeholder text distinct from the child shell
+- **THEN** the parent shell displays the parent dashboard (transfers, limits, spending, task queue), not the phase-2 empty placeholder
 
 ### Requirement: Role switcher is separate from bank and language
 

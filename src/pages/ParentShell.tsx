@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { AppHeader } from '../components/AppHeader';
+import { ParentHomePage } from './ParentHomePage';
 
 export function ParentShell() {
   const { t } = useTranslation();
@@ -12,12 +13,9 @@ export function ParentShell() {
         style={{ background: 'var(--kb-header-gradient)' }}
       >
         <p className="font-heading text-2xl font-semibold">{t('ui.shell.parentGreeting')}</p>
+        <p className="mt-1 text-sm text-white/80">{t('ui.parent.subtitle')}</p>
       </div>
-      <main className="flex flex-1 flex-col px-4 py-6">
-        <div className="rounded-card border border-border bg-surface-muted p-5">
-          <p className="text-sm leading-relaxed text-text-muted">{t('ui.shell.emptyParent')}</p>
-        </div>
-      </main>
+      <ParentHomePage />
     </div>
   );
 }

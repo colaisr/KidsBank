@@ -3,7 +3,8 @@
     "app": {
       "title": "KidsBank",
       "back": "Back",
-      "appearance": "Appearance"
+      "appearance": "Appearance",
+      "settings": "Settings"
     },
     "appearance": {
       "title": "Appearance",
@@ -11,6 +12,7 @@
       "languageSection": "Language",
       "demoSection": "Demo",
       "resetDemo": "Reset scenario",
+      "resetDone": "Scenario reset — balances and tasks restored",
       "resetHint": "Restore tasks, goals, stars, and balances to the starting state. Bank, language, and cabinet stay the same.",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
@@ -49,14 +51,24 @@
       "chat": "Mentor chat"
     },
     "card": {
-      "masked": "•• {{last4}}"
+      "masked": "•• {{last4}}",
+      "limit": "Limit: {{amount}}"
     },
     "tasks": {
-      "rewardStars": "{{count}} ★"
+      "rewardStars": "{{count}} ★",
+      "accept": "Accept",
+      "complete": "Done",
+      "waitingParent": "Awaiting parent",
+      "done": "Completed"
     },
     "goals": {
       "targetStars": "{{count}} ★",
-      "done": "Done"
+      "done": "Done",
+      "addStars": "+{{count}} ★",
+      "redeem": "Redeem for {{amount}}",
+      "redeemed": "Redeemed",
+      "availableStars": "Stars available",
+      "availableHint": "Tap «+{{count}} ★» on a goal — about 3–4 taps to redeem"
     },
     "profile": {
       "settings": "Profile settings",
@@ -68,7 +80,48 @@
       "profile": "Profile",
       "appearance": "Appearance",
       "tasks": "Tasks",
-      "goals": "Goals"
+      "goals": "Goals",
+      "demoActions": "Demo actions",
+      "demoHint": "Test limit and transfer to parent",
+      "demoSpend": "Spend {{amount}}",
+      "sendToParent": "Send to parent {{amount}}",
+      "cardBalance": "Card balance: {{amount}}",
+      "spendDone": "Purchase of {{amount}} — charged to card",
+      "transferDone": "{{amount}} sent to parent",
+      "insufficient": "Not enough funds on card"
+    },
+    "parent": {
+      "subtitle": "Account control and tasks",
+      "childBalance": "Child card balance",
+      "piggyBalance": "Piggy bank: {{amount}}",
+      "limitActive": "Spending limit: {{amount}}",
+      "limitNotSet": "Not set",
+      "quickActions": "Quick actions",
+      "transfer": "Transfer",
+      "limit": "Limit",
+      "pendingTasks": "Awaiting confirmation",
+      "confirmTask": "Confirm task",
+      "spending": "Spending history"
+    },
+    "transfer": {
+      "title": "Transfer to child",
+      "wallet": "Your wallet: {{amount}}",
+      "target": {
+        "card": "To card",
+        "piggy": "To piggy bank"
+      },
+      "send": "Transfer",
+      "cancel": "Cancel"
+    },
+    "limit": {
+      "title": "Spending limit",
+      "hint": "Daily limit on child's card",
+      "set": "Set limit",
+      "clear": "Remove limit",
+      "blocked": "Spending limit exceeded"
+    },
+    "transactions": {
+      "empty": "No transactions yet"
     },
     "placeholder": {
       "transactions": "Transaction history arrives in the next phase.",
@@ -99,6 +152,13 @@
       "bike": {
         "title": "Bicycle"
       }
+    },
+    "transactions": {
+      "parentToCard": "Transfer to card",
+      "parentToPiggy": "Transfer to piggy bank",
+      "childToParent": "Transfer to parent",
+      "spend": "Purchase",
+      "goalRedeem": "Goal redeemed"
     }
   }
 }

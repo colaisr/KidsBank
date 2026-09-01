@@ -26,7 +26,7 @@ The accounts section SHALL show a themed product card with masked number and AMD
 
 ### Requirement: Stars shown on home; tasks and goals use star units
 
-The home SHALL show a star balance counter. Task rewards and goal targets SHALL display in ★, not AMD.
+The home SHALL show a star balance counter. Task rewards and goal targets SHALL display in ★, not AMD. Goals SHALL offer star allocation when the user has available balance. Stars card and header star icon SHALL link to `/child/goals`.
 
 #### Scenario: Star rewards on tasks
 
@@ -38,23 +38,38 @@ The home SHALL show a star balance counter. Task rewards and goal targets SHALL 
 - **WHEN** the child home renders a goal
 - **THEN** the goal shows a progress bar and target in ★
 
-### Requirement: Tasks are display-only in phase 2
+#### Scenario: Allocate stars to goal
 
-Tapping a task SHALL NOT start parent confirmation or change demo state until phase 3.
+- **WHEN** the user allocates stars to a goal from the goals page
+- **THEN** `starsBalance` and `goal.currentStars` update per `task-flow`
 
-#### Scenario: Task tap does not confirm
+#### Scenario: Stars link to goals
 
-- **WHEN** the user taps a task
-- **THEN** no confirmation or payout flow opens
+- **WHEN** the user taps the stars card or header star icon on home
+- **THEN** `/child/goals` opens
+
+### Requirement: Tasks support interactive status flow
+
+The child home and tasks list SHALL allow task status transitions per `task-flow`. Tapping a task SHALL accept or mark complete when status permits.
+
+#### Scenario: Accept task from home
+
+- **WHEN** the user taps an `open` task on the child home or tasks page
+- **THEN** task status becomes `inProgress`
+
+#### Scenario: Complete task from list
+
+- **WHEN** the user taps an `inProgress` task
+- **THEN** task status becomes `waitingParent`
 
 ### Requirement: Demo state is persisted and resettable
 
-Scenario values (balances, tasks, goals, stars) SHALL be read from `kidsbank.demo` with baseline in `demoBaseline.ts`. Reset is via Appearance (see `demo-state` spec).
+Scenario values (balances, tasks, goals, stars, transactions, limits) SHALL be read from `kidsbank.demo` v2 with baseline in `demoBaseline.ts`. Reset is via profile settings or Appearance (see `demo-state` spec).
 
 #### Scenario: Reset restores baseline
 
-- **WHEN** the user taps «Сбросить сценарий» on Appearance
-- **THEN** card, piggy, stars, tasks, and goals return to `DEMO_BASELINE`
+- **WHEN** the user taps «Сбросить сценарий» in settings
+- **THEN** demo state returns to `DEMO_BASELINE` with a visible confirmation
 
 ### Requirement: One layout for both themes
 

@@ -3,7 +3,8 @@
     "app": {
       "title": "KidsBank",
       "back": "Назад",
-      "appearance": "Оформление"
+      "appearance": "Оформление",
+      "settings": "Настройки"
     },
     "appearance": {
       "title": "Оформление",
@@ -11,6 +12,7 @@
       "languageSection": "Язык",
       "demoSection": "Демо",
       "resetDemo": "Сбросить сценарий",
+      "resetDone": "Сценарий сброшен — балансы и задания восстановлены",
       "resetHint": "Вернуть задания, цели, звёзды и балансы к стартовому состоянию. Банк, язык и кабинет не меняются.",
       "bankAmio": "AMIO",
       "bankEvoca": "Evoca",
@@ -49,14 +51,24 @@
       "chat": "Чат с наставником"
     },
     "card": {
-      "masked": "•• {{last4}}"
+      "masked": "•• {{last4}}",
+      "limit": "Лимит: {{amount}}"
     },
     "tasks": {
-      "rewardStars": "{{count}} ★"
+      "rewardStars": "{{count}} ★",
+      "accept": "Принять",
+      "complete": "Готово",
+      "waitingParent": "Ждёт подтверждения",
+      "done": "Выполнено"
     },
     "goals": {
       "targetStars": "{{count}} ★",
-      "done": "Готово"
+      "done": "Готово",
+      "addStars": "+{{count}} ★",
+      "redeem": "Обменять на {{amount}}",
+      "redeemed": "Обменяно",
+      "availableStars": "Доступно звёзд",
+      "availableHint": "Нажми «+{{count}} ★» у цели — до обмена 3–4 нажатия"
     },
     "profile": {
       "settings": "Настройки профиля",
@@ -68,7 +80,48 @@
       "profile": "Профиль",
       "appearance": "Оформление",
       "tasks": "Задания",
-      "goals": "Цели"
+      "goals": "Цели",
+      "demoActions": "Демо-действия",
+      "demoHint": "Проверить лимит и перевод родителю",
+      "demoSpend": "Потратить {{amount}}",
+      "sendToParent": "Отправить родителю {{amount}}",
+      "cardBalance": "Баланс карты: {{amount}}",
+      "spendDone": "Покупка на {{amount}} — списано с карты",
+      "transferDone": "{{amount}} отправлено родителю",
+      "insufficient": "Недостаточно средств на карте"
+    },
+    "parent": {
+      "subtitle": "Контроль счёта и заданий",
+      "childBalance": "Баланс карты ребёнка",
+      "piggyBalance": "Копилка: {{amount}}",
+      "limitActive": "Лимит трат: {{amount}}",
+      "limitNotSet": "Не установлен",
+      "quickActions": "Быстрые действия",
+      "transfer": "Перевод",
+      "limit": "Лимит",
+      "pendingTasks": "Ждут подтверждения",
+      "confirmTask": "Подтвердить задание",
+      "spending": "История трат"
+    },
+    "transfer": {
+      "title": "Перевод ребёнку",
+      "wallet": "Ваш кошелёк: {{amount}}",
+      "target": {
+        "card": "На карту",
+        "piggy": "В копилку"
+      },
+      "send": "Перевести",
+      "cancel": "Отмена"
+    },
+    "limit": {
+      "title": "Лимит трат",
+      "hint": "Дневной лимит на карту ребёнка",
+      "set": "Установить",
+      "clear": "Снять лимит",
+      "blocked": "Превышен лимит трат"
+    },
+    "transactions": {
+      "empty": "Пока нет операций"
     },
     "placeholder": {
       "transactions": "История операций появится на следующем этапе.",
@@ -99,6 +152,13 @@
       "bike": {
         "title": "Велосипед"
       }
+    },
+    "transactions": {
+      "parentToCard": "Перевод на карту",
+      "parentToPiggy": "Перевод в копилку",
+      "childToParent": "Перевод родителю",
+      "spend": "Покупка",
+      "goalRedeem": "Обмен цели"
     }
   }
 }
