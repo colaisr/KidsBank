@@ -68,6 +68,10 @@
       }
     },
     "tasks": {
+      "pageTitle": "Tasks",
+      "statsEarned": "Earned",
+      "statsCompleted": "Completed",
+      "deadline": "by {{time}}",
       "rewardStars": "{{count}} ★",
       "accept": "Accept",
       "complete": "Done",
@@ -112,6 +116,11 @@
       "quickActions": "Quick actions",
       "transfer": "Transfer",
       "limit": "Limit",
+      "addTask": "Task",
+      "childTasks": "Child tasks",
+      "childTasksEmpty": "No active tasks",
+      "editTask": "Edit",
+      "cancelTask": "Cancel",
       "pendingTasks": "Awaiting confirmation",
       "confirmTask": "Confirm task",
       "spending": "Spending history"
@@ -132,6 +141,28 @@
       "set": "Set limit",
       "clear": "Remove limit",
       "blocked": "Spending limit exceeded"
+    },
+    "addTask": {
+      "title": "New task",
+      "hint": "The child will see it in their task list",
+      "template": "What to do",
+      "reward": "Reward",
+      "deadline": "Deadline",
+      "create": "Add",
+      "cancel": "Cancel",
+      "duplicate": "This task is already active",
+      "allActive": "All templates are already in the list",
+      "other": "Other",
+      "customTitle": "Task name",
+      "customTitlePlaceholder": "e.g. Water the plants",
+      "customTitleRequired": "Enter a task name"
+    },
+    "editTask": {
+      "title": "Edit task",
+      "reward": "Reward",
+      "deadline": "Deadline",
+      "save": "Save",
+      "cancel": "Cancel"
     },
     "transactions": {
       "empty": "No transactions yet"
@@ -178,7 +209,13 @@
         "title": "Walk the dog"
       },
       "tidyRoom": {
-        "title": "Tidy the room"
+        "title": "Clean the room"
+      },
+      "hangLaundry": {
+        "title": "Hang laundry after washing"
+      },
+      "dishes": {
+        "title": "Wash the dishes"
       }
     },
     "goals": {

@@ -6,28 +6,28 @@ Implements the Surf B4 task and star economy loop: accept task, parent confirm, 
 
 ## Requirements
 
-### Requirement: Child can accept and complete tasks
+### Requirement: Child can mark tasks done for parent review
 
-The child SHALL be able to move tasks through statuses: `open` → `inProgress` → `waitingParent`. Tapping an open task accepts it; tapping in-progress marks it waiting for parent.
+The child SHALL mark an active task (`open` or `inProgress`) as `waitingParent` with a **single** checkbox tap on `/child/tasks` or the home preview. A brief star-burst celebration animation SHALL play on submit unless `prefers-reduced-motion` is set.
 
-#### Scenario: Accept open task
+#### Scenario: Single tap marks waiting
 
-- **WHEN** the child taps a task with status `open`
-- **THEN** status becomes `inProgress`
+- **WHEN** the child taps the checkbox on a task with status `open`
+- **THEN** status becomes `waitingParent` immediately
 
-#### Scenario: Mark task done by child
+#### Scenario: Celebration on submit
 
-- **WHEN** the child taps a task with status `inProgress`
-- **THEN** status becomes `waitingParent`
+- **WHEN** the child taps the checkbox on an active task
+- **THEN** a localized star animation plays at the checkbox before the card shows the waiting state
 
 ### Requirement: Parent confirmation pays stars
 
-When the parent confirms a `waitingParent` task, the system SHALL set status to `done` and add `rewardStars` to `starsBalance`.
+When the parent confirms a `waitingParent` task, the system SHALL set status to `done`, add `rewardStars` to `starsBalance`, and increment `taskStats.starsEarned` by `rewardStars` and `taskStats.tasksCompleted` by 1.
 
 #### Scenario: Star payout on confirm
 
 - **WHEN** the parent confirms a `waitingParent` task with reward 25
-- **THEN** task status is `done` and `starsBalance` increases by 25
+- **THEN** task status is `done`, `starsBalance` increases by 25, `taskStats.starsEarned` increases by 25, and `taskStats.tasksCompleted` increases by 1
 
 ### Requirement: Child can allocate stars to a goal
 
@@ -55,3 +55,30 @@ When `currentStars` reaches `targetStars`, the child MAY redeem the goal. Redemp
 
 - **WHEN** a goal has `currentStars >= targetStars` and the child redeems
 - **THEN** card balance increases by the goal's demo AMD value and the goal is marked redeemed
+
+### Requirement: Tasks carry template id and deadline
+
+Each task in demo state SHALL include `templateId` (for i18n title lookup) and `dueTime` as a 24-hour `HH:MM` string shown to the child as «до HH:MM» while the task is active.
+
+#### Scenario: Deadline displayed
+
+- **WHEN** a task has `dueTime` `18:00` and status `open`
+- **THEN** the child tasks page shows a localized deadline line containing `18:00`
+
+### Requirement: Lifetime task statistics are tracked
+
+Demo state SHALL include `taskStats` with `starsEarned` (lifetime stars from confirmed tasks) and `tasksCompleted` (count of confirmed tasks). Baseline seed SHALL match the mockup values (860 and 31).
+
+#### Scenario: Stats on tasks page
+
+- **WHEN** the user opens `/child/tasks` after baseline reset
+- **THEN** `taskStats.starsEarned` is 860 and `taskStats.tasksCompleted` is 31
+
+### Requirement: Cancelled tasks do not pay stars
+
+Removing a task before it reaches `done` SHALL NOT change `starsBalance` or `taskStats`. Only parent confirmation of `waitingParent` triggers payout per existing rules.
+
+#### Scenario: No payout on cancel
+
+- **WHEN** the parent cancels a `waitingParent` task that had reward 25
+- **THEN** `starsBalance` and `taskStats.starsEarned` remain unchanged

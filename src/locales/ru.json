@@ -68,6 +68,10 @@
       }
     },
     "tasks": {
+      "pageTitle": "Задания",
+      "statsEarned": "Заработано",
+      "statsCompleted": "Выполнено",
+      "deadline": "до {{time}}",
       "rewardStars": "{{count}} ★",
       "accept": "Принять",
       "complete": "Готово",
@@ -112,6 +116,11 @@
       "quickActions": "Быстрые действия",
       "transfer": "Перевод",
       "limit": "Лимит",
+      "addTask": "Задание",
+      "childTasks": "Задания ребёнка",
+      "childTasksEmpty": "Нет активных заданий",
+      "editTask": "Изменить",
+      "cancelTask": "Отменить",
       "pendingTasks": "Ждут подтверждения",
       "confirmTask": "Подтвердить задание",
       "spending": "История трат"
@@ -132,6 +141,28 @@
       "set": "Установить",
       "clear": "Снять лимит",
       "blocked": "Превышен лимит трат"
+    },
+    "addTask": {
+      "title": "Новое задание",
+      "hint": "Ребёнок увидит задание в списке",
+      "template": "Что сделать",
+      "reward": "Награда",
+      "deadline": "Срок",
+      "create": "Добавить",
+      "cancel": "Отмена",
+      "duplicate": "Такое задание уже активно",
+      "allActive": "Все шаблоны уже в списке",
+      "other": "Другое",
+      "customTitle": "Название задания",
+      "customTitlePlaceholder": "Например: Полить цветы",
+      "customTitleRequired": "Введите название задания"
+    },
+    "editTask": {
+      "title": "Изменить задание",
+      "reward": "Награда",
+      "deadline": "Срок",
+      "save": "Сохранить",
+      "cancel": "Отмена"
     },
     "transactions": {
       "empty": "Пока нет операций"
@@ -178,7 +209,13 @@
         "title": "Погулять с собакой"
       },
       "tidyRoom": {
-        "title": "Убрать в комнате"
+        "title": "Убраться в комнате"
+      },
+      "hangLaundry": {
+        "title": "Развесь бельё после стирки"
+      },
+      "dishes": {
+        "title": "Помыть посуду"
       }
     },
     "goals": {

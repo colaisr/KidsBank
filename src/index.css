@@ -129,3 +129,44 @@ html[data-theme='evoca'] .parent-action-card span:last-child {
 html[data-theme='amio'] .parent-action-card-text {
   margin-top: 0.5rem;
 }
+
+@keyframes task-star-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.1);
+  }
+}
+
+@keyframes task-checkbox-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.task-burst-star {
+  animation: task-star-burst 700ms ease-out forwards;
+}
+
+.task-checkbox-pop {
+  animation: task-checkbox-pop 420ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-burst-star,
+  .task-checkbox-pop {
+    animation: none;
+  }
+}

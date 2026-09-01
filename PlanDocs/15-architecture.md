@@ -27,7 +27,8 @@
 ## 3. Где живут демо-данные
 
 ```text
-src/data/demoBaseline.ts   # стартовое состояние сценария v2 (балансы, задания, цели, ★, лимит, транзакции)
+src/data/demoBaseline.ts   # стартовое состояние сценария v3 (балансы, задания, цели, ★, taskStats, лимит, транзакции)
+src/data/taskTemplates.ts  # каталог шаблонов поручений + id «other»
 src/data/starEconomy.ts      # шаг распределения ★ (STAR_ALLOCATE_STEP)
 src/data/                  # id сущностей и типы; тексты — только в locales
 src/locales/hy.json
@@ -43,9 +44,9 @@ src/locales/en.json
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
 | `kidsbank.cardSkin` | скин карты ребёнка (`ocean` … `racing`) | «Сбросить сценарий» → `ocean` |
-| `kidsbank.demo` | живое демо v2: карта, копилка (`shareSlug`), ★, задания, цели, лимит карты, кошелёк родителя, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`) | «Сбросить сценарий» в настройках или «Оформлении» |
+| `kidsbank.demo` | живое демо v3: карта, копилка (`shareSlug`), ★, `taskStats`, задания (`templateId`, `dueTime`, `customTitle`), цели, лимит карты, кошелёк родителя, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`) | «Сбросить сценарий» в настройках или «Оформлении» |
 
-Компоненты читают сценарий через `DemoStateContext`; мутации — `demoActions.ts`. При отсутствии ключа — `DEMO_BASELINE`; v1 мигрирует в v2 при загрузке.
+Компоненты читают сценарий через `DemoStateContext`; мутации — `demoActions.ts`. При отсутствии ключа — `DEMO_BASELINE`; v1/v2 мигрируют в v3 при загрузке.
 
 Компоненты: `t('demo.tasks.homework')`, не `task.title`. Смена языка перерисовывает UI и фикстуры одним locale.
 
@@ -58,7 +59,8 @@ src/
   main.tsx, App.tsx, index.css
   components/     PhoneFrame, AppHeader, RoleToggle, AppearanceButton,
                   ChildHomeHeader, ChildPageTitle, ChildProfileCard,
-                  ChildTabBar, AccountsSection, CardSkinTile, GoalCard, TaskRow,
+                  ChildTabBar, AccountsSection, CardSkinTile, GoalCard, TaskCard, TaskStatsCards,
+                  TaskCompleteBurst, ParentTaskRow, AddTaskModal, EditTaskModal, TaskRow,
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
@@ -71,16 +73,16 @@ src/
   context/        PreferencesContext (bank, locale, role, cardSkin + persistence),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
-  data/           demoBaseline v2, cardSkins.ts, starEconomy.ts, children, tasks, goals
+  data/           demoBaseline v3, taskTemplates.ts, cardSkins.ts, starEconomy.ts, children, tasks, goals
   locales/        hy.json, ru.json, en.json
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
-  lib/            format.ts — Intl для валюты/дат/чисел; piggy.ts — demo share URL
+  lib/            format.ts, tasks.ts (сортировка/заголовки), piggy.ts — demo share URL
 ```
 
 Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
 
-Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v2).
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v3).
 
 Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 

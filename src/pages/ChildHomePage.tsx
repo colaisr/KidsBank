@@ -4,12 +4,13 @@ import { AccountsSection } from '../components/AccountsSection';
 import { ChildHomeHeader } from '../components/ChildHomeHeader';
 import { ChildProfileCard } from '../components/ChildProfileCard';
 import { GoalCard } from '../components/GoalCard';
-import { TaskRow } from '../components/TaskRow';
+import { TaskCard } from '../components/TaskCard';
 import { useDemoState } from '../context/DemoStateContext';
+import { getActiveTasks } from '../lib/tasks';
 
 export function ChildHomePage() {
   const { demo } = useDemoState();
-  const homeTasks = demo.tasks.slice(0, 2);
+  const homeTasks = getActiveTasks(demo.tasks).slice(0, 2);
   const homeGoals = demo.goals.slice(0, 1);
 
   return (
@@ -24,7 +25,7 @@ export function ChildHomePage() {
           <SectionHeading titleKey="ui.home.tasks" to="/child/tasks" />
           <div className="space-y-2">
             {homeTasks.map((task) => (
-              <TaskRow key={task.id} task={task} />
+              <TaskCard key={task.id} task={task} compact />
             ))}
           </div>
         </section>

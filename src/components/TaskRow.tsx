@@ -3,6 +3,7 @@ import type { DemoTaskState } from '../data/demoBaseline';
 import { acceptTask, completeTask } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
 import { formatNumber } from '../lib/format';
+import { getTaskTitle } from '../lib/tasks';
 import { usePreferences } from '../context/PreferencesContext';
 
 type TaskRowProps = {
@@ -55,7 +56,7 @@ export function TaskRow({ task, interactive = true }: TaskRowProps) {
         <h3
           className={`font-heading text-sm font-semibold text-text ${done ? 'line-through' : ''}`}
         >
-          {t(`demo.tasks.${task.id}.title`)}
+          {getTaskTitle(task, t)}
         </h3>
         {!done && (
           <p className="mt-0.5 text-xs text-text-muted">{statusLabel}</p>

@@ -43,8 +43,13 @@ export type DemoTransaction = {
   at: string;
 };
 
+export type TaskStats = {
+  starsEarned: number;
+  tasksCompleted: number;
+};
+
 export type DemoState = {
-  version: 2;
+  version: 3;
   parentWallet: number;
   card: {
     last4: string;
@@ -56,12 +61,13 @@ export type DemoState = {
   };
   cardLimit: number | null;
   starsBalance: number;
+  taskStats: TaskStats;
   tasks: DemoTaskState[];
   goals: DemoGoalState[];
   transactions: DemoTransaction[];
 };
 
-export const DEMO_STATE_VERSION = 2 as const;
+export const DEMO_STATE_VERSION = 3 as const;
 
 export const DEMO_BASELINE: DemoState = {
   version: DEMO_STATE_VERSION,
@@ -76,10 +82,46 @@ export const DEMO_BASELINE: DemoState = {
   },
   cardLimit: null,
   starsBalance: 860,
+  taskStats: {
+    starsEarned: 860,
+    tasksCompleted: 31,
+  },
   tasks: [
-    { id: 'homework', rewardStars: 25, statusId: 'open' },
-    { id: 'walkDog', rewardStars: 15, statusId: 'inProgress' },
-    { id: 'tidyRoom', rewardStars: 20, statusId: 'waitingParent' },
+    {
+      id: 'homework',
+      templateId: 'homework',
+      rewardStars: 25,
+      dueTime: '18:00',
+      statusId: 'open',
+    },
+    {
+      id: 'walkDog',
+      templateId: 'walkDog',
+      rewardStars: 15,
+      dueTime: '20:00',
+      statusId: 'open',
+    },
+    {
+      id: 'hangLaundry',
+      templateId: 'hangLaundry',
+      rewardStars: 10,
+      dueTime: '16:00',
+      statusId: 'open',
+    },
+    {
+      id: 'tidyRoom',
+      templateId: 'tidyRoom',
+      rewardStars: 15,
+      dueTime: '19:30',
+      statusId: 'open',
+    },
+    {
+      id: 'dishes',
+      templateId: 'dishes',
+      rewardStars: 10,
+      dueTime: '17:00',
+      statusId: 'done',
+    },
   ],
   goals: [
     {
@@ -161,6 +203,7 @@ export function cloneDemoBaseline(): DemoState {
     ...DEMO_BASELINE,
     card: { ...DEMO_BASELINE.card },
     piggy: { ...DEMO_BASELINE.piggy },
+    taskStats: { ...DEMO_BASELINE.taskStats },
     tasks: DEMO_BASELINE.tasks.map((task) => ({ ...task })),
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
     transactions: [

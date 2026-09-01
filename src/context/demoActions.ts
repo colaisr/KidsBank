@@ -1,4 +1,5 @@
 import type { DemoState, DemoTransaction, TransactionTypeId } from '../data/demoBaseline';
+import { isActiveTaskTemplate } from '../lib/tasks';
 
 function txId(): string {
   return `tx-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
@@ -52,9 +53,101 @@ export function confirmTask(state: DemoState, taskId: string): DemoState {
   return {
     ...state,
     starsBalance: state.starsBalance + task.rewardStars,
+    taskStats: {
+      starsEarned: state.taskStats.starsEarned + task.rewardStars,
+      tasksCompleted: state.taskStats.tasksCompleted + 1,
+    },
     tasks: state.tasks.map((t) =>
       t.id === taskId ? { ...t, statusId: 'done' } : t,
     ),
+  };
+}
+
+export function submitTaskForParent(state: DemoState, taskId: string): DemoState {
+  return {
+    ...state,
+    tasks: state.tasks.map((task) =>
+      task.id === taskId &&
+      (task.statusId === 'open' || task.statusId === 'inProgress')
+        ? { ...task, statusId: 'waitingParent' }
+        : task,
+    ),
+  };
+}
+
+export type AddTaskInput = {
+  templateId: string;
+  rewardStars: number;
+  dueTime: string;
+  customTitle?: string;
+};
+
+export function addTask(
+  state: DemoState,
+  input: AddTaskInput,
+): DemoState | 'duplicate' | 'emptyTitle' {
+  if (input.templateId === 'other') {
+    const customTitle = input.customTitle?.trim();
+    if (!customTitle) {
+      return 'emptyTitle';
+    }
+  } else if (isActiveTaskTemplate(state.tasks, input.templateId)) {
+    return 'duplicate';
+  }
+
+  const customTitle =
+    input.templateId === 'other' ? input.customTitle?.trim() : undefined;
+
+  const task = {
+    id:
+      input.templateId === 'other'
+        ? `custom-${Date.now()}`
+        : `${input.templateId}-${Date.now()}`,
+    templateId: input.templateId,
+    rewardStars: input.rewardStars,
+    dueTime: input.dueTime,
+    ...(customTitle ? { customTitle } : {}),
+    statusId: 'open' as const,
+  };
+
+  return {
+    ...state,
+    tasks: [task, ...state.tasks],
+  };
+}
+
+export type UpdateTaskInput = {
+  rewardStars: number;
+  dueTime: string;
+};
+
+export function updateTask(
+  state: DemoState,
+  taskId: string,
+  patch: UpdateTaskInput,
+): DemoState | 'notEditable' {
+  const task = state.tasks.find((t) => t.id === taskId);
+  if (!task || task.statusId === 'done') {
+    return 'notEditable';
+  }
+
+  return {
+    ...state,
+    tasks: state.tasks.map((t) =>
+      t.id === taskId ? { ...t, ...patch } : t,
+    ),
+  };
+}
+
+export function cancelTask(state: DemoState, taskId: string): DemoState {
+  const task = state.tasks.find((t) => t.id === taskId);
+  if (!task || task.statusId === 'done') {
+    return state;
+  }
+
+  return {
+    ...state,
+    tasks: state.tasks.filter((t) => t.id !== taskId),
   };
 }
 

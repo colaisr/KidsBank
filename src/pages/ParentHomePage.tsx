@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AddTaskModal } from '../components/AddTaskModal';
+import { EditTaskModal } from '../components/EditTaskModal';
 import { LimitModal } from '../components/LimitModal';
-import { TaskRow } from '../components/TaskRow';
+import { ParentTaskRow } from '../components/ParentTaskRow';
 import { TransactionRow } from '../components/TransactionRow';
 import { TransferModal } from '../components/TransferModal';
-import { confirmTask } from '../context/demoActions';
+import type { DemoTaskState } from '../data/demoBaseline';
+import { cancelTask, confirmTask } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
+import { getActiveTasksForParent } from '../lib/tasks';
 
 export function ParentHomePage() {
   const { t } = useTranslation();
@@ -15,12 +19,18 @@ export function ParentHomePage() {
   const { demo, setDemo } = useDemoState();
   const [transferOpen, setTransferOpen] = useState(false);
   const [limitOpen, setLimitOpen] = useState(false);
+  const [addTaskOpen, setAddTaskOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<DemoTaskState | null>(null);
 
-  const pendingTasks = demo.tasks.filter((task) => task.statusId === 'waitingParent');
+  const activeTasks = getActiveTasksForParent(demo.tasks);
   const recentTx = demo.transactions.slice(0, 5);
 
   function handleConfirm(taskId: string) {
     setDemo((s) => confirmTask(s, taskId));
+  }
+
+  function handleCancel(taskId: string) {
+    setDemo((s) => cancelTask(s, taskId));
   }
 
   return (
@@ -54,6 +64,16 @@ export function ParentHomePage() {
           </button>
           <button
             type="button"
+            onClick={() => setAddTaskOpen(true)}
+            className="parent-action-card"
+          >
+            <span className="text-lg" aria-hidden="true">
+              ✓
+            </span>
+            <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.addTask')}</span>
+          </button>
+          <button
+            type="button"
             onClick={() => setLimitOpen(true)}
             className={`parent-action-card ${
               demo.cardLimit !== null ? 'border-primary/40 bg-primary/5 ring-1 ring-primary/20' : ''
@@ -80,27 +100,32 @@ export function ParentHomePage() {
         </div>
       </section>
 
-      {pendingTasks.length > 0 ? (
-        <section className="mt-5">
-          <h2 className="mb-3 font-heading text-base font-semibold text-text">
-            {t('ui.parent.pendingTasks')}
-          </h2>
+      <section className="mt-5">
+        <h2 className="mb-3 font-heading text-base font-semibold text-text">
+          {t('ui.parent.childTasks')}
+        </h2>
+        {activeTasks.length > 0 ? (
           <div className="space-y-2">
-            {pendingTasks.map((task) => (
-              <div key={task.id} className="space-y-2">
-                <TaskRow task={task} interactive={false} />
-                <button
-                  type="button"
-                  onClick={() => handleConfirm(task.id)}
-                  className="w-full rounded-full bg-primary py-2.5 text-sm font-semibold text-white"
-                >
-                  {t('ui.parent.confirmTask')}
-                </button>
-              </div>
+            {activeTasks.map((task) => (
+              <ParentTaskRow
+                key={task.id}
+                task={task}
+                onConfirm={
+                  task.statusId === 'waitingParent'
+                    ? () => handleConfirm(task.id)
+                    : undefined
+                }
+                onEdit={() => setEditingTask(task)}
+                onCancel={() => handleCancel(task.id)}
+              />
             ))}
           </div>
-        </section>
-      ) : null}
+        ) : (
+          <div className="rounded-card border border-border bg-surface-muted p-5">
+            <p className="text-sm text-text-muted">{t('ui.parent.childTasksEmpty')}</p>
+          </div>
+        )}
+      </section>
 
       <section className="mt-5">
         <h2 className="mb-3 font-heading text-base font-semibold text-text">
@@ -121,6 +146,12 @@ export function ParentHomePage() {
 
       <TransferModal open={transferOpen} onClose={() => setTransferOpen(false)} />
       <LimitModal open={limitOpen} onClose={() => setLimitOpen(false)} />
+      <AddTaskModal open={addTaskOpen} onClose={() => setAddTaskOpen(false)} />
+      <EditTaskModal
+        task={editingTask}
+        open={editingTask !== null}
+        onClose={() => setEditingTask(null)}
+      />
     </main>
   );
 }

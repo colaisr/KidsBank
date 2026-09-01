@@ -4,7 +4,10 @@ import {
   cloneDemoBaseline,
   type DemoGoalState,
   type DemoState,
+  type DemoTaskState,
+  type TaskStats,
 } from '../data/demoBaseline';
+import { TASK_TEMPLATE_DEFAULT_DUE } from '../data/taskTemplates';
 
 export const DEMO_STORAGE_KEY = 'kidsbank.demo';
 
@@ -13,7 +16,13 @@ type LegacyDemoStateV1 = {
   card: DemoState['card'];
   piggy: DemoState['piggy'];
   starsBalance: number;
-  tasks: DemoState['tasks'];
+  tasks: Array<{
+    id: string;
+    rewardStars: number;
+    statusId: DemoTaskState['statusId'];
+    templateId?: string;
+    dueTime?: string;
+  }>;
   goals: Array<{
     id: string;
     iconId: DemoGoalState['iconId'];
@@ -22,21 +31,44 @@ type LegacyDemoStateV1 = {
   }>;
 };
 
+type LegacyDemoStateV2 = Omit<DemoState, 'version' | 'taskStats'> & {
+  version: 2;
+  taskStats?: TaskStats;
+};
+
+function normalizeTask(task: DemoTaskState): DemoTaskState {
+  const rawTemplateId = task.templateId ?? task.id;
+  const templateId = rawTemplateId === 'addGoal' ? 'dishes' : rawTemplateId;
+  const dueTime =
+    task.dueTime ??
+    TASK_TEMPLATE_DEFAULT_DUE[templateId as keyof typeof TASK_TEMPLATE_DEFAULT_DUE] ??
+    '18:00';
+
+  return {
+    ...task,
+    templateId,
+    dueTime,
+  };
+}
+
 function normalizeDemoState(state: DemoState): DemoState {
   const baseline = cloneDemoBaseline();
   return {
     ...state,
+    version: DEMO_STATE_VERSION,
     piggy: {
       balance: state.piggy.balance,
       shareSlug: state.piggy.shareSlug ?? baseline.piggy.shareSlug,
     },
+    taskStats: state.taskStats ?? { ...baseline.taskStats },
+    tasks: state.tasks.map((task) => normalizeTask(task)),
   };
 }
 
 function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
   const baseline = cloneDemoBaseline();
-  const migrated: DemoState = {
-    version: DEMO_STATE_VERSION,
+  const migrated: LegacyDemoStateV2 = {
+    version: 2,
     parentWallet: baseline.parentWallet,
     card: { ...v1.card },
     piggy: {
@@ -45,7 +77,14 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
     },
     cardLimit: null,
     starsBalance: v1.starsBalance,
-    tasks: v1.tasks.map((task) => ({ ...task })),
+    tasks: v1.tasks.map((task) => ({
+      ...task,
+      templateId: task.templateId ?? task.id,
+      dueTime:
+        task.dueTime ??
+        TASK_TEMPLATE_DEFAULT_DUE[task.id as keyof typeof TASK_TEMPLATE_DEFAULT_DUE] ??
+        '18:00',
+    })),
     goals: v1.goals.map((goal) => {
       const baseGoal = baseline.goals.find((g) => g.id === goal.id);
       return {
@@ -56,10 +95,19 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
     }),
     transactions: [...baseline.transactions],
   };
-  return normalizeDemoState(migrated);
+  return migrateV2ToV3(migrated);
 }
 
-function isDemoStateV2(value: unknown): value is DemoState {
+function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
+  return normalizeDemoState({
+    ...v2,
+    version: DEMO_STATE_VERSION,
+    taskStats: v2.taskStats ?? cloneDemoBaseline().taskStats,
+    tasks: v2.tasks.map((task) => normalizeTask(task)),
+  });
+}
+
+function isDemoStateV3(value: unknown): value is DemoState {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -71,6 +119,23 @@ function isDemoStateV2(value: unknown): value is DemoState {
     Array.isArray(candidate.tasks) &&
     Array.isArray(candidate.goals) &&
     Array.isArray(candidate.transactions) &&
+    typeof candidate.starsBalance === 'number' &&
+    candidate.taskStats !== undefined &&
+    typeof candidate.taskStats.starsEarned === 'number' &&
+    typeof candidate.taskStats.tasksCompleted === 'number'
+  );
+}
+
+function isDemoStateV2(value: unknown): value is LegacyDemoStateV2 {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as LegacyDemoStateV2;
+  return (
+    candidate.version === 2 &&
+    Array.isArray(candidate.tasks) &&
+    Array.isArray(candidate.goals) &&
     typeof candidate.starsBalance === 'number'
   );
 }
@@ -97,8 +162,11 @@ export function readDemoState(): DemoState {
     }
 
     const parsed: unknown = JSON.parse(raw);
-    if (isDemoStateV2(parsed)) {
+    if (isDemoStateV3(parsed)) {
       return normalizeDemoState(parsed);
+    }
+    if (isDemoStateV2(parsed)) {
+      return migrateV2ToV3(parsed);
     }
     if (isDemoStateV1(parsed)) {
       return migrateV1ToV2(parsed);
