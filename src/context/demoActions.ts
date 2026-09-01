@@ -13,16 +13,23 @@ function txId(): string {
   return `tx-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
+type TransactionMeta = Pick<
+  DemoTransaction,
+  'currency' | 'taskId' | 'taskTemplateId' | 'merchantKey'
+>;
+
 function appendTransaction(
   state: DemoState,
   typeId: TransactionTypeId,
   amount: number,
+  meta?: TransactionMeta,
 ): DemoState {
   const entry: DemoTransaction = {
     id: txId(),
     typeId,
     amount,
     at: new Date().toISOString(),
+    ...meta,
   };
   return {
     ...state,
@@ -58,7 +65,7 @@ export function confirmTask(state: DemoState, taskId: string): DemoState {
     return state;
   }
 
-  return {
+  const updated: DemoState = {
     ...state,
     starsBalance: state.starsBalance + task.rewardStars,
     taskStats: {
@@ -66,13 +73,18 @@ export function confirmTask(state: DemoState, taskId: string): DemoState {
       tasksCompleted: state.taskStats.tasksCompleted + 1,
     },
     tasks: state.tasks.map((t) =>
-      t.id === taskId ? { ...t, statusId: 'done' } : t,
+      t.id === taskId ? { ...t, statusId: 'done' as const } : t,
     ),
     pet: {
       ...state.pet,
       taskBuff: true,
     },
   };
+
+  return appendTransaction(updated, 'taskReward', task.rewardStars, {
+    currency: 'STARS',
+    taskId: task.id,
+  });
 }
 
 export function submitTaskForParent(state: DemoState, taskId: string): DemoState {
@@ -340,7 +352,7 @@ export function demoSpend(state: DemoState, amount: number): DemoState | 'limit'
     return 'limit';
   }
 
-  const next = appendTransaction(state, 'spend', amount);
+  const next = appendTransaction(state, 'spend', amount, { merchantKey: 'cafe' });
   return {
     ...next,
     card: { ...next.card, balance: next.card.balance - amount },

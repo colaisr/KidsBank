@@ -192,7 +192,17 @@
       "gift": "Նվեր"
     },
     "transactions": {
-      "empty": "Գործարքներ դեռ չկան"
+      "empty": "Գործարքներ դեռ չկան",
+      "emptyExpenses": "Այս շաբաթ ծախսներ դեռ չկան",
+      "demoSpendCta": "Դեմո-գնում մենյուից →",
+      "taskLabel": "Առաջադրանք: {{task}}",
+      "qrSpend": "QR վճարում • {{merchant}}",
+      "weekSummary": "Այս շաբաթ: +{{credit}}, −{{debit}}, +{{stars}} ★",
+      "filter": {
+        "all": "Բոլորը",
+        "income": "Լրացումներ",
+        "expenses": "Ծախսներ"
+      }
     },
     "piggy": {
       "totalSaved": "Ընդամենը կուտակված",
@@ -253,7 +263,14 @@
       },
       "dishes": {
         "title": "Լվանալ սպասքը"
+      },
+      "waterPlants": {
+        "title": "Ծաղիկները ջրել"
       }
+    },
+    "merchants": {
+      "sweetShop": "Sweet Shop",
+      "cafe": "Սրճարան"
     },
     "goals": {
       "ps5": {
@@ -276,7 +293,8 @@
       "piggyGiftMom": "Փոխանցում մայրիկից",
       "piggyGiftGrandma": "Փոխանցում տատիկից",
       "cardToPiggy": "Քարտից խնայարան",
-      "piggyToCard": "Խնայարանից քարտին"
+      "piggyToCard": "Խնայարանից քարտին",
+      "taskReward": "Առաջադրանքի պարգև"
     },
     "piggy": {
       "giftMom": {

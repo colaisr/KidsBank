@@ -52,9 +52,9 @@ export const PRESENTER_SHEET_CONFIG: Record<PresenterSheetId, PresenterSheetConf
     demoSteps: ['step1', 'step2'],
   },
   'child-transactions': {
-    childRows: ['awareness', 'history'],
-    bankRows: ['literacy', 'parentMirror'],
-    demoSteps: ['step1', 'step2'],
+    childRows: ['awareness', 'history', 'dualCurrency', 'earnedVsSpent'],
+    bankRows: ['literacy', 'parentMirror', 'unifiedFeed'],
+    demoSteps: ['step1', 'step2', 'step3', 'step4'],
   },
   'child-pet': {
     childRows: ['regularity', 'earnSpend', 'choice', 'responsibility'],

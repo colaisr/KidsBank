@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { PresenterBadgeWithSheet } from './PresenterBadgeWithSheet';
 import { usePreferences } from '../context/PreferencesContext';
+import { PresenterBadgeWithSheet } from './PresenterBadgeWithSheet';
 import { useDemoState } from '../context/DemoStateContext';
 import { formatCurrency, formatNumber } from '../lib/format';
 

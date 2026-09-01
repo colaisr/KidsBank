@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PresenterBadgeWithSheet } from '../components/PresenterBadgeWithSheet';
 import { AddGoalModal } from '../components/AddGoalModal';
 import { AddTaskModal } from '../components/AddTaskModal';
 import { EditTaskModal } from '../components/EditTaskModal';
@@ -42,10 +41,7 @@ export function ParentHomePage() {
   return (
     <main className="flex flex-1 flex-col px-4 py-6">
       <section className="rounded-card border border-border bg-surface p-5">
-        <div className="flex items-start justify-between gap-2">
-          <p className="text-xs font-medium text-text-muted">{t('ui.parent.childBalance')}</p>
-          <PresenterBadgeWithSheet presenterId="parent-home" variant="compact" />
-        </div>
+        <p className="text-xs font-medium text-text-muted">{t('ui.parent.childBalance')}</p>
         <p className="mt-1 font-heading text-2xl font-semibold text-text">
           {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
         </p>

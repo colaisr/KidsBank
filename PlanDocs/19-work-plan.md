@@ -80,3 +80,5 @@ HTTPS preview уже есть (`16`). Осталось: финальный см�
 | 2026-09-01 | Экран питомца `/child/pet`: тамагочи, уход за ★, taskBuff, presenter sheet (`child-pet-page`) |
 | 2026-09-01 | Presenter value sheets на всех P0-экранах + секции главной; общий компонент, copy в `presenter.*.json` (`presenter-value-sheets`) |
 | 2026-09-01 | Presenter copy: двухуровневая модель — `child-home` = North Star приложения, остальные = рычаги механик |
+| 2026-09-01 | Экран транзакций по макету: фильтры, сводка недели, AMD+★, группировка (`child-transactions-screen` archived) |
+| 2026-09-01 | ℹ️ presenter: экранный бейдж у чата (`HeaderPresenterActions`); секции главной — у заголовков блоков |

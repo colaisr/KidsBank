@@ -30,7 +30,18 @@
 - **Задания** (превью): карточка с наградой ★, дедлайном и чекбоксом; полный список — `/child/tasks` (статистика «Заработано» / «Выполнено», карточки по макету).
 - **Цели** (превью): иконка + прогресс + цель в ★; полный список — `/child/goals`.
 
-**Нижняя навигация (как на макете):** Главная · Цели · FAB-меню · Транзакции · Питомец. FAB → `/child/hub`: быстрые ссылки + **демо-действия** (покупка 600 AMD, перевод родителю 200 AMD) с балансом карты и плашками успеха/ошибки. Транзакции — история из `kidsbank.demo`. Питомец — экран `/child/pet` (change `child-pet-page`).
+**Нижняя навигация (как на макете):** Главная · Цели · FAB-меню · Транзакции · Питомец. FAB → `/child/hub`: быстрые ссылки + **демо-действия** (покупка 600 AMD, перевод родителю 200 AMD) с балансом карты и плашками успеха/ошибки. Питомец — экран `/child/pet` (change `child-pet-page`).
+
+## Транзакции ребёнка (change `child-transactions-screen`)
+
+Таб `/child/transactions` (нижняя навигация):
+
+- Градиентная шапка как на главной: звезда → цели, заголовок + ℹ️ presenter sheet, чат → настройки.
+- Фильтры **Все / Пополнения / Траты**; сводка **«На этой неделе»** (+AMD, −AMD, +★).
+- Список по дням (сегодня / вчера / ранее); карточки с иконками категории.
+- **Единая лента AMD + ★:** награды за задания (`taskReward`), QR-покупки с merchant, кэшбэк, переводы, копилка.
+- Confirm задания родителем и демо-покупка в Hub добавляют строки в историю.
+- Сброс сценария — сид-история по макету (сегодня/вчера).
 
 ## Копилка ребёнка (change `child-piggy-bank`)
 
@@ -157,19 +168,19 @@ Surf задаёт идею «задания vs своё дело»; **источ
 
 | Route / место | `presenterId` | Где ℹ️ |
 |---------------|---------------|--------|
-| `/child` | `child-home` | Шапка главной |
+| `/child` | `child-home` | Шапка главной (ℹ️ + чат справа) |
 | `/child` → «Счета» | `child-accounts` | Заголовок секции |
 | `/child` → «Задания» (превью) | `child-tasks` | Заголовок секции |
 | `/child` → «Цели» (превью) | `child-goals` | Заголовок секции |
-| `/child/tasks` | `child-tasks` | `ChildPageTitle` |
+| `/child/tasks` | `child-tasks` | `ChildPageTitle` (ℹ️ + чат) |
 | `/child/goals` | `child-goals` | `ChildPageTitle` |
 | `/child/piggy` | `child-piggy` | `ChildPageTitle` |
 | `/child/card-design` | `child-card-design` | `ChildPageTitle` |
-| `/child/transactions` | `child-transactions` | `ChildPageTitle` |
-| `/child/pet` | `child-pet` | У бейджа уровня |
+| `/child/transactions` | `child-transactions` | `ChildTransactionsHeader` (ℹ️ + чат справа) |
+| `/child/pet` | `child-pet` | `ChildPageTitle` |
 | `/child/hub` | `child-hub` | `ChildPageTitle` |
-| `/parent` | `parent-home` | Карточка баланса ребёнка |
-| `/appearance` | `appearance` | Шапка экрана |
+| `/parent` | `parent-home` | `AppHeader` (ℹ️ + оформление) |
+| `/appearance` | `appearance` | Шапка экрана (ℹ️ справа) |
 
 **Не делаем:** `/child/profile`, layout-shell'ы, модалки (Transfer, Limit, AddTask…) — достаточно sheet родительского/дочернего экрана.
 

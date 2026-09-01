@@ -192,7 +192,17 @@
       "gift": "Подарок"
     },
     "transactions": {
-      "empty": "Пока нет операций"
+      "empty": "Пока нет операций",
+      "emptyExpenses": "На этой неделе трат ещё не было",
+      "demoSpendCta": "Сделать демо-покупку в меню →",
+      "taskLabel": "Задание: {{task}}",
+      "qrSpend": "Оплата по QR • {{merchant}}",
+      "weekSummary": "На этой неделе: +{{credit}}, −{{debit}}, +{{stars}} ★",
+      "filter": {
+        "all": "Все",
+        "income": "Пополнения",
+        "expenses": "Траты"
+      }
     },
     "piggy": {
       "totalSaved": "Всего скоплено",
@@ -253,7 +263,14 @@
       },
       "dishes": {
         "title": "Помыть посуду"
+      },
+      "waterPlants": {
+        "title": "Полить цветы"
       }
+    },
+    "merchants": {
+      "sweetShop": "Sweet Shop",
+      "cafe": "Кафе"
     },
     "goals": {
       "ps5": {
@@ -276,7 +293,8 @@
       "piggyGiftMom": "Перевод от мамы",
       "piggyGiftGrandma": "Перевод от бабушки",
       "cardToPiggy": "С карты в копилку",
-      "piggyToCard": "С копилки на карту"
+      "piggyToCard": "С копилки на карту",
+      "taskReward": "Награда за задание"
     },
     "piggy": {
       "giftMom": {

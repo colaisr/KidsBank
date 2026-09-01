@@ -24,7 +24,10 @@ export type TransactionTypeId =
   | 'piggyGiftMom'
   | 'piggyGiftGrandma'
   | 'cardToPiggy'
-  | 'piggyToCard';
+  | 'piggyToCard'
+  | 'taskReward';
+
+export type TransactionCurrency = 'AMD' | 'STARS';
 
 export const PIGGY_DEPOSIT_TYPE_IDS: TransactionTypeId[] = [
   'parentToPiggy',
@@ -43,6 +46,10 @@ export type DemoTransaction = {
   typeId: TransactionTypeId;
   amount: number;
   at: string;
+  currency?: TransactionCurrency;
+  taskId?: string;
+  taskTemplateId?: string;
+  merchantKey?: string;
 };
 
 export type TaskStats = {
@@ -170,60 +177,69 @@ export const DEMO_BASELINE: DemoState = {
       redeemed: false,
     },
   ],
-  transactions: [
-    {
-      id: 'tx-seed-1',
-      typeId: 'spend',
-      amount: 450,
-      at: '2026-08-28T14:30:00.000Z',
-    },
-    {
-      id: 'tx-seed-2',
-      typeId: 'parentToCard',
-      amount: 1000,
-      at: '2026-08-25T10:00:00.000Z',
-    },
-  ],
+  transactions: [],
   pet: createBaselinePet(),
 };
 
-function createPiggySeedTransactions(): DemoTransaction[] {
+function createTransactionsSeed(): DemoTransaction[] {
   const now = new Date();
-  const todayLate = new Date(now);
-  todayLate.setHours(10, 24, 0, 0);
-  const todayEarly = new Date(now);
-  todayEarly.setHours(8, 15, 0, 0);
-  const yesterdayLate = new Date(now);
-  yesterdayLate.setDate(yesterdayLate.getDate() - 1);
-  yesterdayLate.setHours(15, 30, 0, 0);
-  const yesterdayEarly = new Date(now);
-  yesterdayEarly.setDate(yesterdayEarly.getDate() - 1);
-  yesterdayEarly.setHours(11, 0, 0, 0);
+  const todayHomework = new Date(now);
+  todayHomework.setHours(16, 45, 0, 0);
+  const todaySpend = new Date(now);
+  todaySpend.setHours(14, 20, 0, 0);
+  const todayCashback = new Date(now);
+  todayCashback.setHours(14, 21, 0, 0);
+  const yesterdayMom = new Date(now);
+  yesterdayMom.setDate(yesterdayMom.getDate() - 1);
+  yesterdayMom.setHours(18, 10, 0, 0);
+  const yesterdayPiggy = new Date(now);
+  yesterdayPiggy.setDate(yesterdayPiggy.getDate() - 1);
+  yesterdayPiggy.setHours(12, 30, 0, 0);
+  const yesterdayWater = new Date(now);
+  yesterdayWater.setDate(yesterdayWater.getDate() - 1);
+  yesterdayWater.setHours(10, 15, 0, 0);
 
   return [
     {
-      id: 'piggy-tx-cashback',
+      id: 'tx-homework',
+      typeId: 'taskReward',
+      amount: 25,
+      currency: 'STARS',
+      taskId: 'homework',
+      at: todayHomework.toISOString(),
+    },
+    {
+      id: 'tx-sweet-shop',
+      typeId: 'spend',
+      amount: 180,
+      merchantKey: 'sweetShop',
+      at: todaySpend.toISOString(),
+    },
+    {
+      id: 'tx-cashback',
       typeId: 'piggyCashback',
       amount: 8,
-      at: todayLate.toISOString(),
+      at: todayCashback.toISOString(),
     },
     {
-      id: 'piggy-tx-mom',
+      id: 'tx-mom',
       typeId: 'piggyGiftMom',
       amount: 500,
-      at: todayEarly.toISOString(),
+      at: yesterdayMom.toISOString(),
     },
     {
-      id: 'piggy-tx-grandma',
-      typeId: 'piggyGiftGrandma',
-      amount: 500,
-      at: yesterdayLate.toISOString(),
+      id: 'tx-to-piggy',
+      typeId: 'cardToPiggy',
+      amount: 200,
+      at: yesterdayPiggy.toISOString(),
     },
     {
-      id: 'piggy-tx-grandma-2',
-      typeId: 'piggyGiftGrandma',
-      amount: 500,
-      at: yesterdayEarly.toISOString(),
+      id: 'tx-water',
+      typeId: 'taskReward',
+      amount: 10,
+      currency: 'STARS',
+      taskTemplateId: 'waterPlants',
+      at: yesterdayWater.toISOString(),
     },
   ];
 }
@@ -237,9 +253,6 @@ export function cloneDemoBaseline(): DemoState {
     tasks: DEMO_BASELINE.tasks.map((task) => ({ ...task })),
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
     pet: createBaselinePet(),
-    transactions: [
-      ...createPiggySeedTransactions(),
-      ...DEMO_BASELINE.transactions.map((tx) => ({ ...tx })),
-    ],
+    transactions: createTransactionsSeed().map((tx) => ({ ...tx })),
   };
 }

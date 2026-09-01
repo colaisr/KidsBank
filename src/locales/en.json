@@ -192,7 +192,17 @@
       "gift": "Gift"
     },
     "transactions": {
-      "empty": "No transactions yet"
+      "empty": "No transactions yet",
+      "emptyExpenses": "No spending this week yet",
+      "demoSpendCta": "Try a demo purchase in Menu →",
+      "taskLabel": "Task: {{task}}",
+      "qrSpend": "QR payment • {{merchant}}",
+      "weekSummary": "This week: +{{credit}}, −{{debit}}, +{{stars}} ★",
+      "filter": {
+        "all": "All",
+        "income": "Income",
+        "expenses": "Spending"
+      }
     },
     "piggy": {
       "totalSaved": "Total saved",
@@ -253,7 +263,14 @@
       },
       "dishes": {
         "title": "Wash the dishes"
+      },
+      "waterPlants": {
+        "title": "Water the plants"
       }
+    },
+    "merchants": {
+      "sweetShop": "Sweet Shop",
+      "cafe": "Café"
     },
     "goals": {
       "ps5": {
@@ -276,7 +293,8 @@
       "piggyGiftMom": "Transfer from mom",
       "piggyGiftGrandma": "Transfer from grandma",
       "cardToPiggy": "Card to piggy bank",
-      "piggyToCard": "Piggy bank to card"
+      "piggyToCard": "Piggy bank to card",
+      "taskReward": "Task reward"
     },
     "piggy": {
       "giftMom": {

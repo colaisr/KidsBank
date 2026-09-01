@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import type { PresenterSheetId } from '../data/presenterSheets';
-import { DemoSettingsLink } from './DemoSettingsLink';
-import { PresenterBadgeWithSheet } from './PresenterBadgeWithSheet';
+import { HeaderPresenterActions } from './HeaderPresenterActions';
 
 type ChildPageTitleProps = {
   titleKey: string;
@@ -31,8 +30,10 @@ export function ChildPageTitle({
         </Link>
       ) : null}
       <h1 className="min-w-0 flex-1 font-heading text-xl font-semibold text-text">{t(titleKey)}</h1>
-      {presenterId ? <PresenterBadgeWithSheet presenterId={presenterId} /> : null}
-      {showSettingsLink ? <DemoSettingsLink /> : null}
+      <HeaderPresenterActions
+        presenterId={presenterId}
+        showSettingsLink={showSettingsLink}
+      />
     </header>
   );
 }

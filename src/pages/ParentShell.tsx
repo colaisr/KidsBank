@@ -7,7 +7,7 @@ export function ParentShell() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <AppHeader titleKey="ui.role.parentTitle" />
+      <AppHeader titleKey="ui.role.parentTitle" presenterId="parent-home" />
       <div
         className="px-4 pb-6 pt-8 text-white"
         style={{ background: 'var(--kb-header-gradient)' }}

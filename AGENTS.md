@@ -25,7 +25,7 @@ Vite + React + TypeScript + Tailwind. Темы: `data-theme=amio|evoca` (ток�
 
 Норматив: [`PlanDocs/15-architecture.md`](PlanDocs/15-architecture.md).
 
-**Текущее состояние (2026-09-01):** фазы 1–3 закрыты; копилка `/child/piggy`, дизайн карты `/child/card-design`, полный цикл **заданий** и **целей**, экран **питомца** `/child/pet`, **presenter value sheets** на всех P0-экранах (ℹ️ → child/bank/demo copy для показа). Следующая очередь: **фаза 4** (инструменты и маскот). Preview: https://62-113-106-19.sslip.io/
+**Текущее состояние (2026-09-01):** фазы 1–3 закрыты; копилка `/child/piggy`, дизайн карты `/child/card-design`, полный цикл **заданий** и **целей**, экран **питомца** `/child/pet`, **транзакции** `/child/transactions` (фильтры, AMD+★, сводка недели), **presenter value sheets** на P0-экранах (ℹ️ у чата на шапках + у секций главной). Следующая очередь: **фаза 4** (инструменты и маскот). Preview: https://62-113-106-19.sslip.io/
 
 ## 3. Команды
 

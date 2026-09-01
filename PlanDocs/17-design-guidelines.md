@@ -45,10 +45,11 @@
 
 **Размещение:**
 
-- `ChildPageTitle` — справа от `<h1>`, перед `DemoSettingsLink` (опциональный prop `presenterId`).
-- `ChildHomeHeader` — рядом с заголовком «Главная» (`variant="onGradient"`).
-- Секции на главной — компактный бейдж у `<h2>` (`HomeSectionHeading`).
-- Родитель — в углу карточки баланса.
+- **Экранный ℹ️** (глобальный sheet страницы) — в кластере `HeaderPresenterActions`: **сразу перед** иконкой чата/настроек (`DemoSettingsLink`), не у центрального заголовка.
+- `ChildHomeHeader`, `ChildTransactionsHeader` — заголовок по центру; ℹ️ + чат справа (`variant="onGradient"`).
+- `ChildPageTitle` — `<h1>` слева/центр; `HeaderPresenterActions` справа (ℹ️ перед чатом).
+- `AppHeader` (родитель) — ℹ️ перед переключателем роли и «Оформление».
+- **Секции на главной** — компактный бейдж у `<h2>` (`HomeSectionHeading`, `AccountsSection`); объясняют бизнес-ценность блока, не дублируют экранный sheet.
 
 **Стиль:** низкий контраст (`text-text-muted/50` или `text-white/40` на градиенте), **не** primary CTA, не конкурирует с навигацией.
 

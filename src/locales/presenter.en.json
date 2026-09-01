@@ -102,13 +102,21 @@
       "title": "Transactions — lever: awareness",
       "child": {
         "awareness": { "topic": "Where money went", "meaning": "See every spend — learn to plan" },
-        "history": { "topic": "Talk at home", "meaning": "History is a reason to discuss with parent" }
+        "history": { "topic": "Talk at home", "meaning": "History is a reason to discuss with parent" },
+        "dualCurrency": { "topic": "Money and stars", "meaning": "★ from tasks and AMD from purchases — one timeline" },
+        "earnedVsSpent": { "topic": "Earned vs spent", "meaning": "Weekly summary — no separate analytics screen" }
       },
       "bank": {
         "literacy": { "effect": "Financial literacy", "meaning": "Education through real operations, not slides" },
-        "parentMirror": { "effect": "Family transparency", "meaning": "Same spends on parent home → trust and control" }
+        "parentMirror": { "effect": "Family transparency", "meaning": "Same spends on parent home → trust and control" },
+        "unifiedFeed": { "effect": "Unified context", "meaning": "Tasks, QR, piggy, transfers — family hub, not a processing log" }
       },
-      "demo": { "step1": "Show list", "step2": "Hub purchase → new row" }
+      "demo": {
+        "step1": "All — AMD and ★ in one feed",
+        "step2": "Income / Spending filters + week summary",
+        "step3": "Hub demo purchase → new QR row",
+        "step4": "Parent confirms task → +★ in history"
+      }
     },
     "child-pet": {
       "title": "Pet — lever: daily return",

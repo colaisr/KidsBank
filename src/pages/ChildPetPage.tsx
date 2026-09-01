@@ -5,7 +5,6 @@ import { PetActionButtons } from '../components/pet/PetActionButtons';
 import { PetCharacter } from '../components/pet/PetCharacter';
 import { PetLevelBadge } from '../components/pet/PetLevelBadge';
 import { PetNeedBars } from '../components/pet/PetNeedBars';
-import { PresenterBadgeWithSheet } from '../components/PresenterBadgeWithSheet';
 import { PetSpeechBubble } from '../components/pet/PetSpeechBubble';
 import { applyPetAction } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
@@ -56,7 +55,7 @@ export function ChildPetPage() {
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.nav.pet" />
+      <ChildPageTitle titleKey="ui.nav.pet" presenterId="child-pet" />
 
       {levelUpLevel !== null ? (
         <div className="mx-4 mt-3 rounded-card bg-accent-kids px-4 py-2 text-center text-sm font-semibold text-white shadow-md">
@@ -65,9 +64,8 @@ export function ChildPetPage() {
       ) : null}
 
       <div className="space-y-4 px-4 py-4">
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center">
           <PetLevelBadge xp={demo.pet.xp} />
-          <PresenterBadgeWithSheet presenterId="child-pet" />
         </div>
 
         <PetSpeechBubble pet={demo.pet} starsBalance={demo.starsBalance} hint={hint} />

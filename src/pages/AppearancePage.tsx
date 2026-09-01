@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { PresenterBadgeWithSheet } from '../components/PresenterBadgeWithSheet';
+import { HeaderPresenterActions } from '../components/HeaderPresenterActions';
 import { DemoSettingsPanel } from '../components/DemoSettingsPanel';
 import { usePreferences } from '../context/PreferencesContext';
 
@@ -22,7 +22,7 @@ export function AppearancePage() {
         <h1 className="min-w-0 flex-1 font-heading text-lg font-semibold text-text">
           {t('ui.appearance.title')}
         </h1>
-        <PresenterBadgeWithSheet presenterId="appearance" />
+        <HeaderPresenterActions presenterId="appearance" showSettingsLink={false} />
       </header>
 
       <main className="flex flex-1 flex-col px-4 py-6">
