@@ -218,8 +218,47 @@
       "insufficient": "Insufficient funds"
     },
     "placeholder": {
-      "transactions": "Transaction history arrives in the next phase.",
-      "pet": "Pet arrives in the next phase."
+      "transactions": "Transaction history arrives in the next phase."
+    },
+    "pet": {
+      "level": "Level {{level}} • {{name}}",
+      "levelUp": "Level {{level}}! Keks grew up!",
+      "fullness": "Fullness",
+      "joy": "Joy",
+      "energy": "Energy",
+      "feed": "Feed",
+      "play": "Play",
+      "sleep": "Put to sleep",
+      "free": "Free",
+      "presenter": {
+        "open": "About pet",
+        "title": "Pet — product value",
+        "subtitle": "For investor / bank demo",
+        "close": "Got it",
+        "childTitle": "Value for the child",
+        "bankTitle": "Value for the bank",
+        "demoTitle": "Demo script (~90 s)",
+        "child": {
+          "regularity": { "topic": "Regularity", "meaning": "Visit daily — Keks has needs too" },
+          "earnSpend": { "topic": "Earn → spend", "meaning": "Stars from tasks pay for care" },
+          "choice": { "topic": "Choice", "meaning": "Pet care vs saving for a goal" },
+          "responsibility": { "topic": "Responsibility", "meaning": "Forgot — sad; returned — reward" }
+        },
+        "bank": {
+          "retention": { "effect": "Retention", "meaning": "DAU, brand habit from childhood" },
+          "ltv": { "effect": "Early LTV", "meaning": "Bank relationship from age 8–12" },
+          "differentiation": { "effect": "Differentiation", "meaning": "Not adult banking in kid UI" },
+          "family": { "effect": "Family", "meaning": "Parent sees child engagement" }
+        },
+        "demo": {
+          "step1": "Open Pet — “Feed me!”",
+          "step2": "Feed (−5 ★) → level-up",
+          "step3": "Home → Pet → bars dropped (revisit)",
+          "step4": "Parent confirms task → taskBuff",
+          "step5": "Free care — “tasks feed Keks”",
+          "step6": "Bubble → Goals (bicycle)"
+        }
+      }
     }
   },
   "demo": {
@@ -274,6 +313,18 @@
       },
       "giftGrandma": {
         "initial": "G"
+      }
+    },
+    "pet": {
+      "name": "Keks",
+      "hints": {
+        "feedMe": "Feed me!",
+        "sleepy": "I'm tired…",
+        "playWithMe": "Play with me!",
+        "happy": "Yay, I feel great!",
+        "earnStars": "Earn stars in tasks",
+        "thanksForTask": "Thanks for the task! Feed me for free",
+        "checkGoals": "Don't forget your goal — the bike is waiting!"
       }
     }
   }

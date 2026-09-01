@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDemoState } from '../context/DemoStateContext';
+import { petNeedsTabAttention } from '../lib/pet';
 
 const SIDE_TABS = [
   { to: '/child', end: true, key: 'home' as const, Icon: HomeIcon },
@@ -10,6 +12,8 @@ const SIDE_TABS = [
 
 export function ChildTabBar() {
   const { t } = useTranslation();
+  const { demo } = useDemoState();
+  const petNeedsAttention = petNeedsTabAttention(demo.pet, demo.starsBalance);
 
   return (
     <nav
@@ -33,7 +37,11 @@ export function ChildTabBar() {
           </NavLink>
         </div>
         <TabLink tab={SIDE_TABS[2]} label={t(`ui.nav.${SIDE_TABS[2].key}`)} />
-        <TabLink tab={SIDE_TABS[3]} label={t(`ui.nav.${SIDE_TABS[3].key}`)} />
+        <TabLink
+          tab={SIDE_TABS[3]}
+          label={t(`ui.nav.${SIDE_TABS[3].key}`)}
+          showBadge={petNeedsAttention}
+        />
       </div>
     </nav>
   );
@@ -42,9 +50,11 @@ export function ChildTabBar() {
 function TabLink({
   tab,
   label,
+  showBadge = false,
 }: {
   tab: (typeof SIDE_TABS)[number];
   label: string;
+  showBadge?: boolean;
 }) {
   const { Icon } = tab;
 
@@ -58,10 +68,22 @@ function TabLink({
         }`
       }
     >
-      <Icon />
-      <span className="w-full px-0.5 text-center text-[10px] leading-[1.15] font-medium break-words [overflow-wrap:anywhere]">
-        {label}
-      </span>
+      {({ isActive }) => (
+        <>
+          <span className="relative">
+            <Icon />
+            {showBadge && !isActive ? (
+              <span
+                className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-surface"
+                aria-hidden="true"
+              />
+            ) : null}
+          </span>
+          <span className="w-full px-0.5 text-center text-[10px] leading-[1.15] font-medium break-words [overflow-wrap:anywhere]">
+            {label}
+          </span>
+        </>
+      )}
     </NavLink>
   );
 }

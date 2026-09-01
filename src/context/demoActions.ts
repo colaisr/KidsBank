@@ -2,6 +2,11 @@ import type { DemoState, DemoTransaction, TransactionTypeId } from '../data/demo
 import type { ActivityIconId } from '../data/activityIcons';
 import { CUSTOM_GOAL_TEMPLATE_ID } from '../data/goalTemplates';
 import { isActiveGoalTemplate } from '../lib/goals';
+import {
+  PET_ACTION_COSTS,
+  applyPetNeedEffects,
+  type PetActionId,
+} from '../lib/pet';
 import { isActiveTaskTemplate } from '../lib/tasks';
 
 function txId(): string {
@@ -63,6 +68,10 @@ export function confirmTask(state: DemoState, taskId: string): DemoState {
     tasks: state.tasks.map((t) =>
       t.id === taskId ? { ...t, statusId: 'done' } : t,
     ),
+    pet: {
+      ...state.pet,
+      taskBuff: true,
+    },
   };
 }
 
@@ -335,5 +344,21 @@ export function demoSpend(state: DemoState, amount: number): DemoState | 'limit'
   return {
     ...next,
     card: { ...next.card, balance: next.card.balance - amount },
+  };
+}
+
+export function applyPetAction(
+  state: DemoState,
+  action: PetActionId,
+): DemoState | 'insufficient' {
+  const cost = state.pet.taskBuff ? 0 : PET_ACTION_COSTS[action];
+  if (!state.pet.taskBuff && state.starsBalance < cost) {
+    return 'insufficient';
+  }
+
+  return {
+    ...state,
+    starsBalance: state.starsBalance - cost,
+    pet: applyPetNeedEffects(state.pet, action),
   };
 }

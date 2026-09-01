@@ -5,6 +5,7 @@ import {
   type DemoGoalState,
   type DemoState,
   type DemoTaskState,
+  type PetState,
   type TaskStats,
 } from '../data/demoBaseline';
 import { normalizeActivityIconId } from '../data/activityIcons';
@@ -33,7 +34,7 @@ type LegacyDemoStateV1 = {
   }>;
 };
 
-type LegacyDemoStateV2 = Omit<DemoState, 'version' | 'taskStats'> & {
+type LegacyDemoStateV2 = Omit<DemoState, 'version' | 'taskStats' | 'pet'> & {
   version: 2;
   taskStats?: TaskStats;
 };
@@ -68,8 +69,27 @@ function normalizeGoal(goal: DemoGoalState): DemoGoalState {
   };
 }
 
-function normalizeDemoState(state: DemoState): DemoState {
+type LegacyDemoStateV3 = Omit<DemoState, 'version' | 'pet'> & {
+  version: 3;
+  pet?: PetState;
+};
+
+function normalizePet(pet: PetState, baseline: PetState): PetState {
+  return {
+    xp: pet.xp ?? baseline.xp,
+    fullness: pet.fullness ?? baseline.fullness,
+    joy: pet.joy ?? baseline.joy,
+    energy: pet.energy ?? baseline.energy,
+    careCount: pet.careCount ?? 0,
+    visitCount: pet.visitCount ?? 0,
+    taskBuff: pet.taskBuff ?? false,
+    lastTickAt: pet.lastTickAt ?? baseline.lastTickAt,
+  };
+}
+
+function normalizeDemoState(state: DemoState | LegacyDemoStateV3): DemoState {
   const baseline = cloneDemoBaseline();
+  const petSource = 'pet' in state && state.pet ? state.pet : baseline.pet;
   return {
     ...state,
     version: DEMO_STATE_VERSION,
@@ -80,6 +100,7 @@ function normalizeDemoState(state: DemoState): DemoState {
     taskStats: state.taskStats ?? { ...baseline.taskStats },
     tasks: state.tasks.map((task) => normalizeTask(task)),
     goals: state.goals.map((goal) => normalizeGoal(goal)),
+    pet: normalizePet(petSource, baseline.pet),
   };
 }
 
@@ -117,16 +138,25 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
   return migrateV2ToV3(migrated);
 }
 
-function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
+function migrateV3ToV4(v3: LegacyDemoStateV3): DemoState {
+  const baseline = cloneDemoBaseline();
   return normalizeDemoState({
-    ...v2,
+    ...v3,
     version: DEMO_STATE_VERSION,
+    pet: v3.pet ?? baseline.pet,
+  });
+}
+
+function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
+  return migrateV3ToV4({
+    ...v2,
+    version: 3,
     taskStats: v2.taskStats ?? cloneDemoBaseline().taskStats,
     tasks: v2.tasks.map((task) => normalizeTask(task)),
   });
 }
 
-function isDemoStateV3(value: unknown): value is DemoState {
+function isDemoStateV4(value: unknown): value is DemoState {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -141,7 +171,24 @@ function isDemoStateV3(value: unknown): value is DemoState {
     typeof candidate.starsBalance === 'number' &&
     candidate.taskStats !== undefined &&
     typeof candidate.taskStats.starsEarned === 'number' &&
-    typeof candidate.taskStats.tasksCompleted === 'number'
+    typeof candidate.taskStats.tasksCompleted === 'number' &&
+    candidate.pet !== undefined &&
+    typeof candidate.pet.xp === 'number'
+  );
+}
+
+function isDemoStateV3(value: unknown): value is LegacyDemoStateV3 {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as LegacyDemoStateV3;
+  return (
+    candidate.version === 3 &&
+    Array.isArray(candidate.tasks) &&
+    Array.isArray(candidate.goals) &&
+    typeof candidate.starsBalance === 'number' &&
+    candidate.taskStats !== undefined
   );
 }
 
@@ -181,8 +228,11 @@ export function readDemoState(): DemoState {
     }
 
     const parsed: unknown = JSON.parse(raw);
-    if (isDemoStateV3(parsed)) {
+    if (isDemoStateV4(parsed)) {
       return normalizeDemoState(parsed);
+    }
+    if (isDemoStateV3(parsed)) {
+      return migrateV3ToV4(parsed);
     }
     if (isDemoStateV2(parsed)) {
       return migrateV2ToV3(parsed);

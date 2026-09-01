@@ -11,6 +11,7 @@
 | R-amio-colors | Cerulean / orange / atoll | бренд | `17-theme-bank-1` | [Brandfetch](https://brandfetch.com/amiobank.am) |
 | R-amio-mobile | Взрослый UI | бренд / родитель | `17-theme-bank-1` | [`bank-1/amio-mobile-collage.png`](bank-1/amio-mobile-collage.png) |
 | R-amio-junior | Kids-скин (наш макет, не стор) | бренд / ребёнок | `17-theme-bank-1` | [`bank-1/amio-junior-home.png`](bank-1/amio-junior-home.png) |
+| R-amio-junior-pet | Экран питомца (тамагочи) | бренд / ребёнок | `01`, `17-theme-bank-1` | [`bank-1/amio-junior-pet.png`](bank-1/amio-junior-pet.png) |
 | R-evoca-site | Корпоратив Evoca | бренд | `17-theme-bank-2` | [evoca.am/ru](https://www.evoca.am/ru) |
 | R-evoca-brandbook | Violet, 80/20, Nomixa | бренд | `17-theme-bank-2` | [PDF](https://www.evoca.am/file_manager/other/Evoca%20Brandbook%20(1).pdf) |
 | R-evoca-touch | Взрослый feed UI | бренд / родитель | `17-theme-bank-2` | [EvocaTOUCH](https://www.evoca.am/en/digital-services-evocatouch-mobile-banking/) |

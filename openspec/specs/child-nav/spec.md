@@ -79,3 +79,17 @@ Navigating to `/child/profile` SHALL pass the current pathname in router state. 
 
 - **WHEN** the user views `/child/profile`
 - **THEN** role, bank, language, and «Сбросить сценарий» are visible without navigating to a second screen
+
+### Requirement: Pet tab is a live screen with attention badge
+
+The pet tab SHALL navigate to `/child/pet` (full pet care screen, not a placeholder). When the pet requires attention, the tab icon SHALL show a red dot unless the pet tab is active.
+
+#### Scenario: Pet tab navigates to care screen
+
+- **WHEN** the user taps the pet tab
+- **THEN** `/child/pet` opens with pet care UI
+
+#### Scenario: Attention badge on inactive pet tab
+
+- **WHEN** the pet needs attention and the user is on another child tab
+- **THEN** the pet tab shows a red notification dot

@@ -70,19 +70,21 @@ src/
                   ChildTransactionsPage,
                   ChildPetPage, ChildHubPage, ChildProfilePage,
                   ParentShell, ParentHomePage, AppearancePage
+  components/pet/ PetLevelBadge, PetSpeechBubble, PetCharacter, PetNeedBars,
+                  PetActionButtons, PetPresenterSheet, PresenterInfoBadge
   context/        PreferencesContext (bank, locale, role, cardSkin + persistence),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
-  data/           demoBaseline v3, taskTemplates.ts, cardSkins.ts, starEconomy.ts, children, tasks, goals
+  data/           demoBaseline v4, taskTemplates.ts, cardSkins.ts, starEconomy.ts, children, tasks, goals
   locales/        hy.json, ru.json, en.json
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
-  lib/            format.ts, tasks.ts (сортировка/заголовки), piggy.ts — demo share URL
+  lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge)
 ```
 
 Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
 
-Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v3).
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v4, включает `pet`).
 
 Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 

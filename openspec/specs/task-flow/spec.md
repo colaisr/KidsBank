@@ -27,7 +27,16 @@ When the parent confirms a `waitingParent` task, the system SHALL set status to 
 #### Scenario: Star payout on confirm
 
 - **WHEN** the parent confirms a `waitingParent` task with reward 25
-- **THEN** task status is `done`, `starsBalance` increases by 25, `taskStats.starsEarned` increases by 25, and `taskStats.tasksCompleted` increases by 1
+- **THEN** task status is `done`, `starsBalance` increases by 25, `taskStats.starsEarned` increases by 25, `taskStats.tasksCompleted` increases by 1, and `pet.taskBuff` is set to true
+
+### Requirement: Parent confirmation sets pet task buff
+
+When the parent confirms a child task (`waitingParent` → `done`), the system SHALL set `pet.taskBuff` to true in demo state in addition to awarding stars.
+
+#### Scenario: Confirm task enables free pet care
+
+- **WHEN** the parent confirms a task on `/parent`
+- **THEN** `pet.taskBuff` is true and the child can perform one free care action on `/child/pet`
 
 ### Requirement: Child can allocate stars to a goal
 

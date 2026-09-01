@@ -50,8 +50,19 @@ export type TaskStats = {
   tasksCompleted: number;
 };
 
+export type PetState = {
+  xp: number;
+  fullness: number;
+  joy: number;
+  energy: number;
+  careCount: number;
+  visitCount: number;
+  taskBuff: boolean;
+  lastTickAt: string;
+};
+
 export type DemoState = {
-  version: 3;
+  version: 4;
   parentWallet: number;
   card: {
     last4: string;
@@ -67,9 +78,23 @@ export type DemoState = {
   tasks: DemoTaskState[];
   goals: DemoGoalState[];
   transactions: DemoTransaction[];
+  pet: PetState;
 };
 
-export const DEMO_STATE_VERSION = 3 as const;
+export const DEMO_STATE_VERSION = 4 as const;
+
+function createBaselinePet(): PetState {
+  return {
+    xp: 25,
+    fullness: 80,
+    joy: 65,
+    energy: 40,
+    careCount: 0,
+    visitCount: 0,
+    taskBuff: false,
+    lastTickAt: new Date().toISOString(),
+  };
+}
 
 export const DEMO_BASELINE: DemoState = {
   version: DEMO_STATE_VERSION,
@@ -159,6 +184,7 @@ export const DEMO_BASELINE: DemoState = {
       at: '2026-08-25T10:00:00.000Z',
     },
   ],
+  pet: createBaselinePet(),
 };
 
 function createPiggySeedTransactions(): DemoTransaction[] {
@@ -210,6 +236,7 @@ export function cloneDemoBaseline(): DemoState {
     taskStats: { ...DEMO_BASELINE.taskStats },
     tasks: DEMO_BASELINE.tasks.map((task) => ({ ...task })),
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
+    pet: createBaselinePet(),
     transactions: [
       ...createPiggySeedTransactions(),
       ...DEMO_BASELINE.transactions.map((tx) => ({ ...tx })),
