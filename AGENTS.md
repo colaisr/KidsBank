@@ -21,9 +21,11 @@
 
 ## 2. Стек прототипа
 
-Vite + React + TypeScript + Tailwind. Темы: `data-theme=amio|evoca`. Локали: i18next, `hy|ru|en`. Демо-сущности по id в `src/data/`, строки в `src/locales/`. Состояние показа: `localStorage` + `?bank=&lang=`. Без сервера и БД. Деплой — статика.
+Vite + React + TypeScript + Tailwind. Темы: `data-theme=amio|evoca` (токены в CSS, Tailwind `@theme inline`). Локали: i18next, `hy|ru|en`, default `ru`. Демо-сущности по id в `src/data/`, строки в `src/locales/`. Состояние показа: `localStorage` + `?bank=&lang=`. Без сервера и БД. Деплой — статика на VPS.
 
 Норматив: [`PlanDocs/15-architecture.md`](PlanDocs/15-architecture.md).
+
+**Текущее состояние (2026-09-01):** фаза 1 закрыта (оболочка демо). Очередь — **фаза 2** (главная ребёнка). Preview: https://62-113-106-19.sslip.io/
 
 ## 3. Команды
 
@@ -31,8 +33,9 @@ Vite + React + TypeScript + Tailwind. Темы: `data-theme=amio|evoca`. Лок�
 npx openspec doctor          # спек-процесс
 npx openspec list
 # изменения: /opsx:propose | apply | explore | archive | sync
-# после появления приложения:
-npm run dev
+npm run dev                  # локально
+npm run build                # прод-сборка
+# push в main → GitHub Actions деплоит на preview VPS (см. 16)
 ```
 
 Роли Cursor: `/product` `/designer` `/developer` `/devops` и `/opsx:*`.
@@ -64,7 +67,7 @@ npm run dev
 3. `/opsx:propose` → proposal + design + tasks (в tasks — пункт обновить затронутые PlanDocs).
 4. Утверждение владельцем.
 5. `/opsx:apply` (**developer**) строго по tasks.
-6. **devops** — только если нужен публичный URL.
+6. **devops** — preview-хост и CI уже есть (`16`); менять инфраструктуру только по задаче.
 7. **Feedback loop (обязателен):** PlanDocs выровнять под то, что реально добавили (игра → `01`/`19`, новый референс → `02` + `references/README.md`). Затем `/opsx:archive` (влить delta specs). Архив **без** этой правки — нарушение процесса.
 
 Мелочь (опечатка, однострочный баг без продуктовой двусмысленности) — без полного change, с acceptance и инвариантами.

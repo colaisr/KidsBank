@@ -9,7 +9,7 @@ context: |
   Three locales from day one: hy, ru, en — UI and demo fixture copy both live in i18n catalogs and switch together.
   Appearance screen ("Оформление") switches bank + language and is always reachable. Role (child/parent) is a separate control.
   Stack: Vite + React + TypeScript + Tailwind. Demo entities by id in src/data/, strings in src/locales/.
-  localStorage + ?bank=&lang=. Static deploy later. Entry: AGENTS.md. Work plan: PlanDocs/19.
+  localStorage + ?bank=&lang=. Preview: https://62-113-106-19.sslip.io/ (push main → GitHub Actions deploy). Entry: AGENTS.md. Work plan: PlanDocs/19 (phase 2 next).
   Design: PlanDocs/17 + 17-theme-bank-1 (AMIO) + 17-theme-bank-2 (Evoca). Architecture: PlanDocs/15.
   Invariants: docs/INVARIANTS.md. Roles: docs/roles/{product,designer,developer,devops}.md.
   No QA/SEO/marketing agents. Never commit secrets.

@@ -7,7 +7,7 @@
 | Слой | Выбор |
 |------|--------|
 | Приложение | Vite + React + TypeScript |
-| Стили | Tailwind + CSS-переменные на `data-theme` |
+| Стили | Tailwind 4 + CSS-переменные `--kb-*` на `html[data-theme]`; в `index.css` — `@theme inline` (иначе темы не переключаются в рантайме) |
 | i18n | `i18next` + `react-i18next` |
 | Роутинг | React Router (`/child`, `/parent`, `/appearance`) |
 | Данные | нет сервера, нет БД |
@@ -55,6 +55,8 @@ src/
 ```
 
 Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`.
+
+Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 
 ## 5. Чего нет
 

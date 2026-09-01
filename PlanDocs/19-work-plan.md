@@ -22,7 +22,7 @@ PlanDocs, роли, OpenSpec CLI, гайды AMIO/Evoca, этот файл. Пр
 
 Vite + React + TS + Tailwind. `data-theme`, i18next hy/ru/en, `localStorage` + `?bank=&lang=`. Экран **«Оформление»** (банк + язык) с любого места. Переключатель **роли** ребёнок/родитель (два пустых шелла). Шрифты с армянским. Узкая колонка под телефон. Default locale: `ru`.
 
-OpenSpec: [`phase-1-demo-shell`](../openspec/changes/archive/2026-09-01-phase-1-demo-shell/). Запуск: `npm run dev`.
+OpenSpec: [`phase-1-demo-shell`](../openspec/changes/archive/2026-09-01-phase-1-demo-shell/). Локально: `npm run dev`. Preview: https://62-113-106-19.sslip.io/ (автодеплой при push в `main`, см. `16`).
 
 ## Фаза 2 — Главная ребёнка
 
@@ -44,7 +44,9 @@ OpenSpec: [`phase-1-demo-shell`](../openspec/changes/archive/2026-09-01-phase-1-
 
 ## Фаза 6 — Показ с телефона
 
-Публичный HTTPS (`16`, вопрос Q2). Смоук: оба банка × три языка × два кабинета на реальном устройстве.
+**Статус: preview-хост поднят досрочно (2026-09-01); формальный смоук-чеклист — в конце.**
+
+HTTPS preview уже есть (`16`). Осталось: финальный смоук на реальном устройстве — оба банка × три языка × два кабинета; при появлении собственного домена — перенос certbot.
 
 ## Вне скоупа плана
 
@@ -56,3 +58,5 @@ OpenSpec: [`phase-1-demo-shell`](../openspec/changes/archive/2026-09-01-phase-1-
 |------|-----|
 | 2026-09-01 | Фаза 0 закрыта: каркас репо |
 | 2026-09-01 | Фаза 1 закрыта: оболочка демо (`phase-1-demo-shell`) — `src/`, темы, i18n, «Оформление», шеллы |
+| 2026-09-01 | Preview VPS: nginx, Let's Encrypt, https://62-113-106-19.sslip.io/ |
+| 2026-09-01 | CI/CD: GitHub Actions deploy on push to `main` |

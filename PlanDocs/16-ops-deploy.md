@@ -37,5 +37,15 @@ rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@62.113.106.19:/va
 - [x] Viewport mobile, нет десктоп-лома
 - [x] `?bank=amio|evoca` и `?lang=hy|ru|en` сохраняются
 - [x] Нет секретов в репо
+- [x] CI/CD: push `main` → deploy
+
+Статус Actions: https://github.com/colaisr/KidsBank/actions
+
+## Для следующего агента
+
+- **Очередь работ:** фаза 2 в `19-work-plan.md` (главная ребёнка).
+- **Локально:** `npm run dev`. **На сервере:** только `dist/` через CI; nginx не трогать без задачи.
+- **Секреты:** `DEPLOY_SSH_KEY` в GitHub Settings → Secrets; локальный ключ `~/.ssh/kidsbank_vps`.
+- **Темы:** при смене банка цвета идут через `--kb-*` на `html[data-theme]`; в `index.css` — `@theme inline`.
 
 Не копировать VPS AgentPoint/Joompers. Не поднимать Compose.
