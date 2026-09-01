@@ -13,9 +13,9 @@ export function ParentGoalRow({ goal }: ParentGoalRowProps) {
   const { locale } = usePreferences();
 
   return (
-    <article className="rounded-card border border-border bg-surface p-4">
+    <article className="rounded-card border border-border bg-surface p-4 shadow-sm">
       <h3 className="font-heading text-sm font-semibold text-text">{getGoalTitle(goal, t)}</h3>
-      <p className="mt-1 text-xs text-text-muted">
+      <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
         {formatNumber(goal.currentStars, locale)} / {formatNumber(goal.targetStars, locale)} ★ ·{' '}
         {t('ui.parent.goalRedeemValue', {
           amount: formatCurrency(goal.amdValue, locale),

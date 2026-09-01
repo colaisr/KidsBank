@@ -16,6 +16,9 @@ import { formatCurrency } from '../lib/format';
 import { getActiveGoals } from '../lib/goals';
 import { getActiveTasksForParent } from '../lib/tasks';
 
+const actionCardClass =
+  'flex min-w-0 flex-col items-start rounded-card border border-border bg-surface p-4 text-left text-text transition-colors hover:border-primary/40';
+
 export function ParentHomePage() {
   const { t } = useTranslation();
   const { locale } = usePreferences();
@@ -39,142 +42,148 @@ export function ParentHomePage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col px-4 py-6">
-      <section className="rounded-card border border-border bg-surface p-5">
-        <p className="text-xs font-medium text-text-muted">{t('ui.parent.childBalance')}</p>
-        <p className="mt-1 font-heading text-2xl font-semibold text-text">
-          {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
-        </p>
-        <p className="mt-1 text-sm text-text-muted">
-          {t('ui.parent.piggyBalance', {
-            amount: formatCurrency(demo.piggy.balance, locale),
-          })}
-        </p>
-      </section>
+    <>
+      <div
+        className="px-4 pb-6 pt-8 text-white"
+        style={{ background: 'var(--kb-header-gradient)' }}
+      >
+        <p className="font-heading text-2xl font-semibold">{t('ui.shell.parentGreeting')}</p>
+        <p className="mt-1 text-sm text-white/80">{t('ui.parent.subtitle')}</p>
 
-      <section className="mt-5">
-        <h2 className="mb-3 font-heading text-base font-semibold text-text">
-          {t('ui.parent.quickActions')}
-        </h2>
-        <div className="parent-quick-actions">
-          <button
-            type="button"
-            onClick={() => setTransferOpen(true)}
-            className="parent-action-card"
-          >
-            <span className="text-lg" aria-hidden="true">
-              ↗
-            </span>
-            <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.transfer')}</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setAddTaskOpen(true)}
-            className="parent-action-card"
-          >
-            <span className="text-lg" aria-hidden="true">
-              ✓
-            </span>
-            <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.addTask')}</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setAddGoalOpen(true)}
-            className="parent-action-card"
-          >
-            <span className="text-lg" aria-hidden="true">
-              ★
-            </span>
-            <span className="mt-2 font-heading text-sm font-semibold">{t('ui.parent.addGoal')}</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setLimitOpen(true)}
-            className={`parent-action-card ${
-              demo.cardLimit !== null ? 'border-primary/40 bg-primary/5 ring-1 ring-primary/20' : ''
-            }`}
-          >
-            <span className="text-lg" aria-hidden="true">
-              ⏱
-            </span>
-            <div className="parent-action-card-text">
-              <span className="font-heading text-sm font-semibold">{t('ui.parent.limit')}</span>
-              <span
-                className={`mt-0.5 block text-xs font-medium ${
-                  demo.cardLimit !== null ? 'text-primary' : 'text-text-muted'
-                }`}
-              >
-                {demo.cardLimit !== null
-                  ? t('ui.parent.limitActive', {
-                      amount: formatCurrency(demo.cardLimit, locale),
-                    })
-                  : t('ui.parent.limitNotSet')}
-              </span>
-            </div>
-          </button>
+        <div className="mt-5 rounded-card border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+          <p className="text-xs font-medium text-white/70">{t('ui.parent.childBalance')}</p>
+          <p className="mt-1 font-heading text-3xl font-semibold">
+            {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
+          </p>
+          <p className="mt-1 text-sm text-white/80">
+            {t('ui.parent.piggyBalance', {
+              amount: formatCurrency(demo.piggy.balance, locale),
+            })}
+          </p>
         </div>
-      </section>
+      </div>
 
-      <section className="mt-5">
-        <h2 className="mb-3 font-heading text-base font-semibold text-text">
-          {t('ui.parent.childTasks')}
-        </h2>
-        {activeTasks.length > 0 ? (
-          <div className="space-y-2">
-            {activeTasks.map((task) => (
-              <ParentTaskRow
-                key={task.id}
-                task={task}
-                onConfirm={
-                  task.statusId === 'waitingParent'
-                    ? () => handleConfirm(task.id)
-                    : undefined
-                }
-                onEdit={() => setEditingTask(task)}
-                onCancel={() => handleCancel(task.id)}
-              />
-            ))}
+      <main className="space-y-6 bg-surface-muted px-4 pb-8 pt-5">
+        <section>
+          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+            {t('ui.parent.quickActions')}
+          </h2>
+          <div className="grid grid-cols-2 gap-3">
+            <button type="button" onClick={() => setTransferOpen(true)} className={actionCardClass}>
+              <span className="text-lg" aria-hidden="true">
+                ↗
+              </span>
+              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
+                {t('ui.parent.transfer')}
+              </span>
+            </button>
+            <button type="button" onClick={() => setAddTaskOpen(true)} className={actionCardClass}>
+              <span className="text-lg" aria-hidden="true">
+                ✓
+              </span>
+              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
+                {t('ui.parent.addTask')}
+              </span>
+            </button>
+            <button type="button" onClick={() => setAddGoalOpen(true)} className={actionCardClass}>
+              <span className="text-lg" aria-hidden="true">
+                ★
+              </span>
+              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
+                {t('ui.parent.addGoal')}
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setLimitOpen(true)}
+              className={`${actionCardClass} ${
+                demo.cardLimit !== null ? 'border-primary/40 bg-primary/5 ring-1 ring-primary/20' : ''
+              }`}
+            >
+              <span className="text-lg" aria-hidden="true">
+                ⏱
+              </span>
+              <div className="mt-2 min-w-0">
+                <span className="line-clamp-2 font-heading text-sm font-semibold">
+                  {t('ui.parent.limit')}
+                </span>
+                <span
+                  className={`mt-0.5 block line-clamp-2 text-xs font-medium ${
+                    demo.cardLimit !== null ? 'text-primary' : 'text-text-muted'
+                  }`}
+                >
+                  {demo.cardLimit !== null
+                    ? t('ui.parent.limitActive', {
+                        amount: formatCurrency(demo.cardLimit, locale),
+                      })
+                    : t('ui.parent.limitNotSet')}
+                </span>
+              </div>
+            </button>
           </div>
-        ) : (
-          <div className="rounded-card border border-border bg-surface-muted p-5">
-            <p className="text-sm text-text-muted">{t('ui.parent.childTasksEmpty')}</p>
-          </div>
-        )}
-      </section>
+        </section>
 
-      <section className="mt-5">
-        <h2 className="mb-3 font-heading text-base font-semibold text-text">
-          {t('ui.parent.childGoals')}
-        </h2>
-        {activeGoals.length > 0 ? (
-          <div className="space-y-2">
-            {activeGoals.map((goal) => (
-              <ParentGoalRow key={goal.id} goal={goal} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-card border border-border bg-surface-muted p-5">
-            <p className="text-sm text-text-muted">{t('ui.parent.childGoalsEmpty')}</p>
-          </div>
-        )}
-      </section>
+        <section>
+          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+            {t('ui.parent.childTasks')}
+          </h2>
+          {activeTasks.length > 0 ? (
+            <div className="space-y-2">
+              {activeTasks.map((task) => (
+                <ParentTaskRow
+                  key={task.id}
+                  task={task}
+                  onConfirm={
+                    task.statusId === 'waitingParent'
+                      ? () => handleConfirm(task.id)
+                      : undefined
+                  }
+                  onEdit={() => setEditingTask(task)}
+                  onCancel={() => handleCancel(task.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-card border border-border bg-surface p-5">
+              <p className="text-sm text-text-muted">{t('ui.parent.childTasksEmpty')}</p>
+            </div>
+          )}
+        </section>
 
-      <section className="mt-5">
-        <h2 className="mb-3 font-heading text-base font-semibold text-text">
-          {t('ui.parent.spending')}
-        </h2>
-        {recentTx.length > 0 ? (
-          <div className="space-y-2">
-            {recentTx.map((tx) => (
-              <TransactionRow key={tx.id} transaction={tx} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-card border border-border bg-surface-muted p-5">
-            <p className="text-sm text-text-muted">{t('ui.transactions.empty')}</p>
-          </div>
-        )}
-      </section>
+        <section>
+          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+            {t('ui.parent.childGoals')}
+          </h2>
+          {activeGoals.length > 0 ? (
+            <div className="space-y-2">
+              {activeGoals.map((goal) => (
+                <ParentGoalRow key={goal.id} goal={goal} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-card border border-border bg-surface p-5">
+              <p className="text-sm text-text-muted">{t('ui.parent.childGoalsEmpty')}</p>
+            </div>
+          )}
+        </section>
+
+        <section>
+          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+            {t('ui.parent.spending')}
+          </h2>
+          {recentTx.length > 0 ? (
+            <div className="space-y-2">
+              {recentTx.map((tx) => (
+                <TransactionRow key={tx.id} transaction={tx} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-card border border-border bg-surface p-5">
+              <p className="text-sm text-text-muted">{t('ui.transactions.empty')}</p>
+            </div>
+          )}
+        </section>
+      </main>
 
       <TransferModal open={transferOpen} onClose={() => setTransferOpen(false)} />
       <LimitModal open={limitOpen} onClose={() => setLimitOpen(false)} />
@@ -185,6 +194,6 @@ export function ParentHomePage() {
         open={editingTask !== null}
         onClose={() => setEditingTask(null)}
       />
-    </main>
+    </>
   );
 }
