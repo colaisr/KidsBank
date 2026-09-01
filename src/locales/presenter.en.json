@@ -190,6 +190,25 @@
         "reset": { "effect": "Scenario reset", "meaning": "Clean demo run in one tap" }
       },
       "demo": { "step1": "AMIO → Evoca", "step2": "ru → hy", "step3": "Reset scenario" }
+    },
+    "onboarding-age": {
+      "title": "Age — lever: personalization",
+      "child": {
+        "tasks": { "topic": "Clear tasks", "meaning": "Tasks and hints fit your age — not abstract «literacy»" },
+        "style": { "topic": "App style", "meaning": "Junior for younger, TEENZ for teens — one app that grows" },
+        "limits": { "topic": "Age-fit limits", "meaning": "Parent and child share the same frame of rules" }
+      },
+      "bank": {
+        "segmentation": { "effect": "Age segmentation", "meaning": "Segment from childhood → relevant product and comms" },
+        "retention": { "effect": "LTV from childhood", "meaning": "«Bank grows with me» — retention through teens" },
+        "oneProduct": { "effect": "One product", "meaning": "AMIO Junior / Evoca TEENZ — not two separate apps" }
+      },
+      "demo": {
+        "step1": "Profile → David → role pick",
+        "step2": "Child → age (not persisted yet)",
+        "step3": "ℹ️ — explain personalization",
+        "step4": "Continue → home"
+      }
     }
   }
 }

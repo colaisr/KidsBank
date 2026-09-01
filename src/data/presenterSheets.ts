@@ -10,6 +10,7 @@ export const PRESENTER_SHEET_IDS = [
   'child-hub',
   'parent-home',
   'appearance',
+  'onboarding-age',
 ] as const;
 
 export type PresenterSheetId = (typeof PRESENTER_SHEET_IDS)[number];
@@ -75,5 +76,10 @@ export const PRESENTER_SHEET_CONFIG: Record<PresenterSheetId, PresenterSheetConf
     childRows: ['meta'],
     bankRows: ['whiteLabel', 'locales', 'reset'],
     demoSteps: ['step1', 'step2', 'step3'],
+  },
+  'onboarding-age': {
+    childRows: ['tasks', 'style', 'limits'],
+    bankRows: ['segmentation', 'retention', 'oneProduct'],
+    demoSteps: ['step1', 'step2', 'step3', 'step4'],
   },
 };

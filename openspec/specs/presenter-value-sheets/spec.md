@@ -15,7 +15,7 @@ The system SHALL provide a reusable bottom sheet opened by a muted info badge. T
 
 ### Requirement: P0 screens expose presenter sheets
 
-The following routes SHALL include a presenter info badge and sheet: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/parent`, and `/appearance`.
+The following routes SHALL include a presenter info badge and sheet: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/onboarding/age`, `/parent`, and `/appearance`.
 
 #### Scenario: Child home presenter sheet
 
@@ -26,6 +26,11 @@ The following routes SHALL include a presenter info badge and sheet: `/child`, `
 
 - **WHEN** the user taps the info badge on `/parent`
 - **THEN** the sheet with `presenterId` `parent-home` opens
+
+#### Scenario: Onboarding age presenter sheet
+
+- **WHEN** the user taps the info badge on `/child/onboarding/age`
+- **THEN** the sheet with `presenterId` `onboarding-age` opens
 
 ### Requirement: Child home section-level sheets
 

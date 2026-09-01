@@ -100,6 +100,37 @@
       "appearance": "Appearance",
       "role": "Cabinet"
     },
+    "onboarding": {
+      "role": {
+        "title": "Choose your role",
+        "subtitleAmio": "So we can set up AMIO Kids just for you",
+        "subtitleEvoca": "So we can set up Evoca TEENZ just for you",
+        "logoSuffixAmio": "Kids",
+        "logoSuffixEvoca": "TEENZ",
+        "parent": {
+          "title": "Parent",
+          "description": "I top up the card and track goals"
+        },
+        "child": {
+          "title": "Child",
+          "description": "I save for goals and earn stars"
+        },
+        "footerAmio": "AMIO Kids — the bank that grows with you",
+        "footerEvoca": "Evoca TEENZ — the bank that grows with you"
+      },
+      "age": {
+        "title": "Child's age",
+        "subtitle": "We'll pick tasks, limits, and app style that fit your age",
+        "continue": "Continue →",
+        "ranges": {
+          "6-8": "6–8 years",
+          "8-10": "8–10 years",
+          "10-12": "10–12 years",
+          "12-14": "12–14 years",
+          "14-17": "14–17 years"
+        }
+      }
+    },
     "hub": {
       "profile": "Profile",
       "appearance": "Appearance",

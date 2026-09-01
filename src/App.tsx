@@ -12,6 +12,8 @@ import { ChildPiggyBankPage } from './pages/ChildPiggyBankPage';
 import { ChildCardDesignPage } from './pages/ChildCardDesignPage';
 import { ChildProfilePage } from './pages/ChildProfilePage';
 import { ChildShell } from './pages/ChildShell';
+import { OnboardingAgePage } from './pages/OnboardingAgePage';
+import { OnboardingRolePage } from './pages/OnboardingRolePage';
 import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
 import { ParentShell } from './pages/ParentShell';
@@ -39,6 +41,8 @@ export default function App() {
               <Route path="pet" element={<ChildPetPage />} />
               <Route path="hub" element={<ChildHubPage />} />
               <Route path="profile" element={<ChildProfilePage />} />
+              <Route path="onboarding/role" element={<OnboardingRolePage />} />
+              <Route path="onboarding/age" element={<OnboardingAgePage />} />
               <Route path="*" element={<Navigate to="/child" replace />} />
             </Route>
             <Route path="/parent" element={<ParentShell />} />
