@@ -13,7 +13,11 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
   const isCredit =
     transaction.typeId === 'parentToCard' ||
     transaction.typeId === 'parentToPiggy' ||
-    transaction.typeId === 'goalRedeem';
+    transaction.typeId === 'goalRedeem' ||
+    transaction.typeId === 'piggyCashback' ||
+    transaction.typeId === 'piggyGiftMom' ||
+    transaction.typeId === 'piggyGiftGrandma' ||
+    transaction.typeId === 'piggyToCard';
   const sign = isCredit ? '+' : '−';
 
   return (

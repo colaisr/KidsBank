@@ -36,7 +36,7 @@ The appearance screen and child profile settings SHALL include a control to rese
 
 ### Requirement: Demo state covers star economy display fields
 
-Demo state SHALL include at minimum: card balance, piggy balance, `starsBalance`, task list with `rewardStars` and `statusId`, goals with `currentStars` and `targetStars`, optional `cardLimit`, parent wallet balance, and a `transactions` array.
+Demo state SHALL include at minimum: card balance, piggy balance with `shareSlug`, `starsBalance`, task list with `rewardStars` and `statusId`, goals with `currentStars` and `targetStars`, optional `cardLimit`, parent wallet balance, and a `transactions` array that MAY include piggy deposit type ids (`piggyCashback`, `piggyGiftMom`, `piggyGiftGrandma`, `parentToPiggy`).
 
 #### Scenario: Star fields in state
 
@@ -47,3 +47,13 @@ Demo state SHALL include at minimum: card balance, piggy balance, `starsBalance`
 
 - **WHEN** the parent home reads demo state
 - **THEN** parent wallet, card limit, and transactions come from the same persisted object
+
+#### Scenario: Piggy share slug in state
+
+- **WHEN** the piggy screen reads demo state
+- **THEN** `piggy.shareSlug` is available for building the demo share URL
+
+#### Scenario: Reset includes piggy seed deposits
+
+- **WHEN** the user resets the demo scenario
+- **THEN** piggy balance, `shareSlug`, and seed piggy deposit transactions restore from `DEMO_BASELINE`

@@ -123,6 +123,29 @@
     "transactions": {
       "empty": "Пока нет операций"
     },
+    "piggy": {
+      "totalSaved": "Всего скоплено",
+      "linkTitle": "🔗 Ссылка на копилку",
+      "linkHint": "Отправь эту ссылку друзьям и близким — они смогут пополнить твою копилку прямо сейчас",
+      "copyLink": "Скопировать ссылку",
+      "shareLink": "Поделиться ссылкой",
+      "shareTitle": "Копилка KidsBank",
+      "shareText": "Пополни мою копилку по ссылке",
+      "copied": "Ссылка скопирована",
+      "shared": "Ссылка отправлена",
+      "deposits": "Пополнения",
+      "dayToday": "Сегодня",
+      "dayYesterday": "Вчера",
+      "dayEarlier": "Ранее",
+      "empty": "Пока нет пополнений",
+      "depositFromCard": "Положить с карты",
+      "withdrawToCard": "Вывести на карту",
+      "sourceCard": "Карта: {{amount}}",
+      "sourcePiggy": "Копилка: {{amount}}",
+      "depositDone": "Деньги переведены в копилку",
+      "withdrawDone": "Деньги переведены на карту",
+      "insufficient": "Недостаточно средств"
+    },
     "placeholder": {
       "transactions": "История операций появится на следующем этапе.",
       "pet": "Питомец появится на следующем этапе."
@@ -158,7 +181,20 @@
       "parentToPiggy": "Перевод в копилку",
       "childToParent": "Перевод родителю",
       "spend": "Покупка",
-      "goalRedeem": "Обмен цели"
+      "goalRedeem": "Обмен цели",
+      "piggyCashback": "Кэшбэк за покупку",
+      "piggyGiftMom": "Перевод от мамы",
+      "piggyGiftGrandma": "Перевод от бабушки",
+      "cardToPiggy": "С карты в копилку",
+      "piggyToCard": "С копилки на карту"
+    },
+    "piggy": {
+      "giftMom": {
+        "initial": "М"
+      },
+      "giftGrandma": {
+        "initial": "Б"
+      }
     }
   }
 }

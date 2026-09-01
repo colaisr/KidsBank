@@ -8,6 +8,7 @@ import { ChildGoalsPage } from './pages/ChildGoalsPage';
 import { ChildHomePage } from './pages/ChildHomePage';
 import { ChildHubPage } from './pages/ChildHubPage';
 import { ChildPetPage } from './pages/ChildPetPage';
+import { ChildPiggyBankPage } from './pages/ChildPiggyBankPage';
 import { ChildProfilePage } from './pages/ChildProfilePage';
 import { ChildShell } from './pages/ChildShell';
 import { ChildTasksPage } from './pages/ChildTasksPage';
@@ -31,6 +32,7 @@ export default function App() {
               <Route index element={<ChildHomePage />} />
               <Route path="tasks" element={<ChildTasksPage />} />
               <Route path="goals" element={<ChildGoalsPage />} />
+              <Route path="piggy" element={<ChildPiggyBankPage />} />
               <Route path="transactions" element={<ChildTransactionsPage />} />
               <Route path="pet" element={<ChildPetPage />} />
               <Route path="hub" element={<ChildHubPage />} />

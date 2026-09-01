@@ -123,6 +123,29 @@
     "transactions": {
       "empty": "No transactions yet"
     },
+    "piggy": {
+      "totalSaved": "Total saved",
+      "linkTitle": "🔗 Piggy bank link",
+      "linkHint": "Send this link to friends and family — they can top up your piggy bank right away",
+      "copyLink": "Copy link",
+      "shareLink": "Share link",
+      "shareTitle": "KidsBank piggy bank",
+      "shareText": "Top up my piggy bank via this link",
+      "copied": "Link copied",
+      "shared": "Link shared",
+      "deposits": "Deposits",
+      "dayToday": "Today",
+      "dayYesterday": "Yesterday",
+      "dayEarlier": "Earlier",
+      "empty": "No deposits yet",
+      "depositFromCard": "Add from card",
+      "withdrawToCard": "Withdraw to card",
+      "sourceCard": "Card: {{amount}}",
+      "sourcePiggy": "Piggy bank: {{amount}}",
+      "depositDone": "Money moved to piggy bank",
+      "withdrawDone": "Money moved to card",
+      "insufficient": "Insufficient funds"
+    },
     "placeholder": {
       "transactions": "Transaction history arrives in the next phase.",
       "pet": "Pet arrives in the next phase."
@@ -158,7 +181,20 @@
       "parentToPiggy": "Transfer to piggy bank",
       "childToParent": "Transfer to parent",
       "spend": "Purchase",
-      "goalRedeem": "Goal redeemed"
+      "goalRedeem": "Goal redeemed",
+      "piggyCashback": "Purchase cashback",
+      "piggyGiftMom": "Transfer from mom",
+      "piggyGiftGrandma": "Transfer from grandma",
+      "cardToPiggy": "Card to piggy bank",
+      "piggyToCard": "Piggy bank to card"
+    },
+    "piggy": {
+      "giftMom": {
+        "initial": "M"
+      },
+      "giftGrandma": {
+        "initial": "G"
+      }
     }
   }
 }

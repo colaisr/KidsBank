@@ -22,13 +22,27 @@ type LegacyDemoStateV1 = {
   }>;
 };
 
-function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
+function normalizeDemoState(state: DemoState): DemoState {
   const baseline = cloneDemoBaseline();
   return {
+    ...state,
+    piggy: {
+      balance: state.piggy.balance,
+      shareSlug: state.piggy.shareSlug ?? baseline.piggy.shareSlug,
+    },
+  };
+}
+
+function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
+  const baseline = cloneDemoBaseline();
+  const migrated: DemoState = {
     version: DEMO_STATE_VERSION,
     parentWallet: baseline.parentWallet,
     card: { ...v1.card },
-    piggy: { ...v1.piggy },
+    piggy: {
+      balance: v1.piggy.balance,
+      shareSlug: v1.piggy.shareSlug ?? baseline.piggy.shareSlug,
+    },
     cardLimit: null,
     starsBalance: v1.starsBalance,
     tasks: v1.tasks.map((task) => ({ ...task })),
@@ -42,6 +56,7 @@ function migrateV1ToV2(v1: LegacyDemoStateV1): DemoState {
     }),
     transactions: [...baseline.transactions],
   };
+  return normalizeDemoState(migrated);
 }
 
 function isDemoStateV2(value: unknown): value is DemoState {
@@ -83,7 +98,7 @@ export function readDemoState(): DemoState {
 
     const parsed: unknown = JSON.parse(raw);
     if (isDemoStateV2(parsed)) {
-      return parsed;
+      return normalizeDemoState(parsed);
     }
     if (isDemoStateV1(parsed)) {
       return migrateV1ToV2(parsed);

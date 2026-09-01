@@ -39,13 +39,16 @@ export function AccountsSection() {
       </article>
 
       <div className="mt-3 grid grid-cols-2 gap-3">
-        <article className="min-w-0 rounded-card border border-border bg-surface p-4">
+        <Link
+          to="/child/piggy"
+          className="min-w-0 rounded-card border border-border bg-surface p-4 transition-colors duration-200 hover:border-primary/40"
+        >
           <PiggyIcon />
           <p className="mt-2 text-xs font-medium text-text-muted">{t('ui.home.piggy')}</p>
           <p className="mt-1 truncate font-heading text-lg font-semibold text-text">
             {formatCurrency(demo.piggy.balance, locale)}
           </p>
-        </article>
+        </Link>
         <Link
           to="/child/goals"
           className="min-w-0 rounded-card border border-border bg-surface p-4 transition-colors duration-200 hover:border-primary/40"

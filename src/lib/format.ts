@@ -37,3 +37,51 @@ export function formatDate(date: Date, locale: Locale): string {
     year: 'numeric',
   }).format(date);
 }
+
+export type RelativeDayGroup = 'today' | 'yesterday' | 'earlier';
+
+export function getRelativeDayGroup(date: Date): RelativeDayGroup {
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startOfDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const diffDays = Math.round(
+    (startOfToday.getTime() - startOfDate.getTime()) / (24 * 60 * 60 * 1000),
+  );
+
+  if (diffDays === 0) {
+    return 'today';
+  }
+  if (diffDays === 1) {
+    return 'yesterday';
+  }
+  return 'earlier';
+}
+
+export function formatDateTime(date: Date, locale: Locale): string {
+  return new Intl.DateTimeFormat(getIntlLocale(locale), {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
+}
+
+export function formatPiggyDepositDate(date: Date, locale: Locale, labels: {
+  today: string;
+  yesterday: string;
+}): string {
+  const group = getRelativeDayGroup(date);
+  const time = new Intl.DateTimeFormat(getIntlLocale(locale), {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
+
+  if (group === 'today') {
+    return `${labels.today}, ${time}`;
+  }
+  if (group === 'yesterday') {
+    return `${labels.yesterday}, ${time}`;
+  }
+
+  return formatDateTime(date, locale);
+}

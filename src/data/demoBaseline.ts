@@ -17,7 +17,24 @@ export type TransactionTypeId =
   | 'parentToPiggy'
   | 'childToParent'
   | 'spend'
-  | 'goalRedeem';
+  | 'goalRedeem'
+  | 'piggyCashback'
+  | 'piggyGiftMom'
+  | 'piggyGiftGrandma'
+  | 'cardToPiggy'
+  | 'piggyToCard';
+
+export const PIGGY_DEPOSIT_TYPE_IDS: TransactionTypeId[] = [
+  'parentToPiggy',
+  'piggyCashback',
+  'piggyGiftMom',
+  'piggyGiftGrandma',
+  'cardToPiggy',
+];
+
+export function isPiggyDeposit(typeId: TransactionTypeId): boolean {
+  return PIGGY_DEPOSIT_TYPE_IDS.includes(typeId);
+}
 
 export type DemoTransaction = {
   id: string;
@@ -35,6 +52,7 @@ export type DemoState = {
   };
   piggy: {
     balance: number;
+    shareSlug: string;
   };
   cardLimit: number | null;
   starsBalance: number;
@@ -54,6 +72,7 @@ export const DEMO_BASELINE: DemoState = {
   },
   piggy: {
     balance: 6780,
+    shareSlug: 'david92',
   },
   cardLimit: null,
   starsBalance: 860,
@@ -96,6 +115,47 @@ export const DEMO_BASELINE: DemoState = {
   ],
 };
 
+function createPiggySeedTransactions(): DemoTransaction[] {
+  const now = new Date();
+  const todayLate = new Date(now);
+  todayLate.setHours(10, 24, 0, 0);
+  const todayEarly = new Date(now);
+  todayEarly.setHours(8, 15, 0, 0);
+  const yesterdayLate = new Date(now);
+  yesterdayLate.setDate(yesterdayLate.getDate() - 1);
+  yesterdayLate.setHours(15, 30, 0, 0);
+  const yesterdayEarly = new Date(now);
+  yesterdayEarly.setDate(yesterdayEarly.getDate() - 1);
+  yesterdayEarly.setHours(11, 0, 0, 0);
+
+  return [
+    {
+      id: 'piggy-tx-cashback',
+      typeId: 'piggyCashback',
+      amount: 8,
+      at: todayLate.toISOString(),
+    },
+    {
+      id: 'piggy-tx-mom',
+      typeId: 'piggyGiftMom',
+      amount: 500,
+      at: todayEarly.toISOString(),
+    },
+    {
+      id: 'piggy-tx-grandma',
+      typeId: 'piggyGiftGrandma',
+      amount: 500,
+      at: yesterdayLate.toISOString(),
+    },
+    {
+      id: 'piggy-tx-grandma-2',
+      typeId: 'piggyGiftGrandma',
+      amount: 500,
+      at: yesterdayEarly.toISOString(),
+    },
+  ];
+}
+
 export function cloneDemoBaseline(): DemoState {
   return {
     ...DEMO_BASELINE,
@@ -103,6 +163,9 @@ export function cloneDemoBaseline(): DemoState {
     piggy: { ...DEMO_BASELINE.piggy },
     tasks: DEMO_BASELINE.tasks.map((task) => ({ ...task })),
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
-    transactions: DEMO_BASELINE.transactions.map((tx) => ({ ...tx })),
+    transactions: [
+      ...createPiggySeedTransactions(),
+      ...DEMO_BASELINE.transactions.map((tx) => ({ ...tx })),
+    ],
   };
 }

@@ -123,6 +123,29 @@
     "transactions": {
       "empty": "Գործարքներ դեռ չկան"
     },
+    "piggy": {
+      "totalSaved": "Ընդամենը կուտակված",
+      "linkTitle": "🔗 Խնայարանի հղում",
+      "linkHint": "Ուղարկիր այս հղումը ընկերներին և ընտանիքին — նրանք կարող են հիմա լրացնել քո խնայարանը",
+      "copyLink": "Պատճենել հղումը",
+      "shareLink": "Կիսվել հղումով",
+      "shareTitle": "KidsBank խնայարան",
+      "shareText": "Լրացրու իմ խնայարանը այս հղումով",
+      "copied": "Հղումը պատճենված է",
+      "shared": "Հղումը ուղարկված է",
+      "deposits": "Լրացումներ",
+      "dayToday": "Այսօր",
+      "dayYesterday": "Երեկ",
+      "dayEarlier": "Ավելի վաղ",
+      "empty": "Լրացումներ դեռ չկան",
+      "depositFromCard": "Քարտից դնել",
+      "withdrawToCard": "Քարտին հանել",
+      "sourceCard": "Քարտ՝ {{amount}}",
+      "sourcePiggy": "Խնայարան՝ {{amount}}",
+      "depositDone": "Գումարը փոխանցվել է խնայարան",
+      "withdrawDone": "Գումարը փոխանցվել է քարտին",
+      "insufficient": "Բավարար միջոցներ չկան"
+    },
     "placeholder": {
       "transactions": "Գործարքների պատմությունը կհայտնվի հաջորդ փուլում։",
       "pet": "Կենդանին կհայտնվի հաջորդ փուլում։"
@@ -158,7 +181,20 @@
       "parentToPiggy": "Փոխանցում խնայարան",
       "childToParent": "Փոխանցում ծնողին",
       "spend": "Գնում",
-      "goalRedeem": "Նպատակի փոխանակում"
+      "goalRedeem": "Նպատակի փոխանակում",
+      "piggyCashback": "Գնման կեշբեք",
+      "piggyGiftMom": "Փոխանցում մայրիկից",
+      "piggyGiftGrandma": "Փոխանցում տատիկից",
+      "cardToPiggy": "Քարտից խնայարան",
+      "piggyToCard": "Խնայարանից քարտին"
+    },
+    "piggy": {
+      "giftMom": {
+        "initial": "Մ"
+      },
+      "giftGrandma": {
+        "initial": "Տ"
+      }
     }
   }
 }

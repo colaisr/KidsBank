@@ -128,7 +128,7 @@ export function transferParentToChild(
   return {
     ...next,
     parentWallet: next.parentWallet - amount,
-    piggy: { balance: next.piggy.balance + amount },
+    piggy: { ...next.piggy, balance: next.piggy.balance + amount },
   };
 }
 
@@ -142,6 +142,32 @@ export function transferChildToParent(state: DemoState, amount: number): DemoSta
     ...next,
     card: { ...next.card, balance: next.card.balance - amount },
     parentWallet: next.parentWallet + amount,
+  };
+}
+
+export function transferCardToPiggy(state: DemoState, amount: number): DemoState {
+  if (amount <= 0 || amount > state.card.balance) {
+    return state;
+  }
+
+  const next = appendTransaction(state, 'cardToPiggy', amount);
+  return {
+    ...next,
+    card: { ...next.card, balance: next.card.balance - amount },
+    piggy: { ...next.piggy, balance: next.piggy.balance + amount },
+  };
+}
+
+export function transferPiggyToCard(state: DemoState, amount: number): DemoState {
+  if (amount <= 0 || amount > state.piggy.balance) {
+    return state;
+  }
+
+  const next = appendTransaction(state, 'piggyToCard', amount);
+  return {
+    ...next,
+    piggy: { ...next.piggy, balance: next.piggy.balance - amount },
+    card: { ...next.card, balance: next.card.balance + amount },
   };
 }
 
