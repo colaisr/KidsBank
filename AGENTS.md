@@ -17,7 +17,7 @@
 - Пользовательские строки не хардкодить: только ключи i18n (`ui.*`, `demo.*`).
 - Секреты не коммитить.
 
-Детали: [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md). Конкуренты: [`PlanDocs/02-competitive-landscape.md`](PlanDocs/02-competitive-landscape.md). План работ: [`PlanDocs/19-work-plan.md`](PlanDocs/19-work-plan.md).
+Детали: [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md). Реализованные сценарии: [`PlanDocs/01-surf-baseline.md`](PlanDocs/01-surf-baseline.md). Конкуренты: [`PlanDocs/02-competitive-landscape.md`](PlanDocs/02-competitive-landscape.md).
 
 ## 2. Стек прототипа
 
@@ -25,7 +25,7 @@ Vite + React + TypeScript + Tailwind. Темы: `data-theme=amio|evoca` (ток�
 
 Норматив: [`PlanDocs/15-architecture.md`](PlanDocs/15-architecture.md).
 
-**Текущее состояние (2026-09-01):** фазы 1–3 закрыты; копилка, дизайн карты, задания/цели, питомец, транзакции (фильтры, AMD+★), цели `/child/goals` (витрина vs выбранные), **демо-онбординг** из профиля (роль + возраст, вход с Давида), **редизайн `/parent`** (scroll, единая 2×2 раскладка, hero с балансом), presenter sheets на P0-экранах. Следующая очередь: **фаза 4** (инструменты и маскот). Preview: https://62-113-106-19.sslip.io/
+**Статус (2026-09-02): демо сдано.** Прототип готов к показу; ждёт утверждения или следующих шагов. Реализовано: оболочка (темы, i18n, кабинеты), главная ребёнка, копилка, дизайн карты, задания/цели, транзакции (фильтры, AMD+★), питомец, кабинет родителя, демо-онбординг, presenter sheets. Preview: https://62-113-106-19.sslip.io/
 
 ## 3. Команды
 
@@ -46,7 +46,7 @@ npm run build                # прод-сборка
 |--------|-----|
 | Индекс PlanDocs | [`PlanDocs/README.md`](PlanDocs/README.md) |
 | Конституция, аудитория показа | [`PlanDocs/00-product-overview.md`](PlanDocs/00-product-overview.md) |
-| Блоки Surf / демо-сценарии | [`PlanDocs/01-surf-baseline.md`](PlanDocs/01-surf-baseline.md) |
+| Блоки Surf / что в демо | [`PlanDocs/01-surf-baseline.md`](PlanDocs/01-surf-baseline.md) |
 | Конкуренты, кто с kids-приложением | [`PlanDocs/02-competitive-landscape.md`](PlanDocs/02-competitive-landscape.md) |
 | Откуда какой референс | [`PlanDocs/references/README.md`](PlanDocs/references/README.md) |
 | Стек, i18n, демо-данные | [`PlanDocs/15-architecture.md`](PlanDocs/15-architecture.md) |
@@ -54,7 +54,6 @@ npm run build                # прод-сборка
 | UI-принципы, свитчер «Оформление» | [`PlanDocs/17-design-guidelines.md`](PlanDocs/17-design-guidelines.md) |
 | Тема AMIO | [`PlanDocs/17-theme-bank-1.md`](PlanDocs/17-theme-bank-1.md) |
 | Тема Evoca | [`PlanDocs/17-theme-bank-2.md`](PlanDocs/17-theme-bank-2.md) |
-| **План работ (фазы)** | [`PlanDocs/19-work-plan.md`](PlanDocs/19-work-plan.md) |
 | Что нельзя ломать | [`docs/INVARIANTS.md`](docs/INVARIANTS.md) |
 | Открытые вопросы | [`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) |
 | Роли | [`docs/roles/`](docs/roles/) |
@@ -68,8 +67,8 @@ npm run build                # прод-сборка
 4. Утверждение владельцем.
 5. `/opsx:apply` (**developer**) строго по tasks.
 6. **devops** — preview-хост и CI уже есть (`16`); менять инфраструктуру только по задаче.
-7. **Feedback loop (обязателен):** PlanDocs выровнять под то, что реально добавили (игра → `01`/`19`, новый референс → `02` + `references/README.md`). Затем `/opsx:archive` (влить delta specs). Архив **без** этой правки — нарушение процесса.
+7. **Feedback loop (обязателен):** PlanDocs выровнять под то, что реально добавили (новый сценарий → `01`, новый референс → `02` + `references/README.md`). Затем `/opsx:archive` (влить delta specs). Архив **без** этой правки — нарушение процесса.
 
 Мелочь (опечатка, однострочный баг без продуктовой двусмысленности) — без полного change, с acceptance и инвариантами.
 
-Класс задачи и очередь фаз — [`PlanDocs/19-work-plan.md`](PlanDocs/19-work-plan.md).
+Новые фичи — только по явному решению владельца. Демо-скоуп зафиксирован в [`01`](PlanDocs/01-surf-baseline.md).

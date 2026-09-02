@@ -8,7 +8,7 @@ PlanDocs = «зачем и что задумано». Как система ра
 
 | Файл | Статус | Что внутри | Здесь НЕ искать |
 | --- | --- | --- | --- |
-| [`00-product-overview.md`](00-product-overview.md) | Актуален | Цель прототипа, кабинеты, банки, языки, non-goals | Фазы работ → `19`. Экраны по блокам → `01` |
+| [`00-product-overview.md`](00-product-overview.md) | Актуален | Цель прототипа, кабинеты, банки, языки, non-goals, статус демо | Экраны по блокам → `01` |
 | [`01-surf-baseline.md`](01-surf-baseline.md) | Актуален | Карта блоков Surf → демо-сценарии. Новая игра/экран **дописывается сюда до archive** | Пиксели → `17` + theme |
 | [`02-competitive-landscape.md`](02-competitive-landscape.md) | Актуален | У кого есть kids-приложение, чем не мы, откуда референс | Файлы скринов → `references/` |
 
@@ -26,12 +26,6 @@ PlanDocs = «зачем и что задумано». Как система ра
 | [`17-design-guidelines.md`](17-design-guidelines.md) | Актуален | Телефон, motion, «Оформление», роль vs банк vs язык | Палитра банка → theme-файлы |
 | [`17-theme-bank-1.md`](17-theme-bank-1.md) | Актуален | AMIO | Evoca → `17-theme-bank-2` |
 | [`17-theme-bank-2.md`](17-theme-bank-2.md) | Актуален | Evoca | AMIO → `17-theme-bank-1` |
-
-## Работы
-
-| Файл | Статус | Что внутри |
-| --- | --- | --- |
-| [`19-work-plan.md`](19-work-plan.md) | Актуален | **План работ**: фазы 0–6, очередь, Definition of Done фазы |
 
 ## Референсы
 
