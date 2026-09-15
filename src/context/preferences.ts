@@ -3,7 +3,15 @@ import { readStoredChildExperience, type ChildExperience } from './childExperien
 export type Bank = 'amio' | 'evoca';
 export type Locale = 'hy' | 'ru' | 'en';
 export type Role = 'child' | 'parent';
-export type CardSkin = 'ocean' | 'space' | 'dinosaurs' | 'unicorns' | 'robots' | 'racing';
+export type CardSkin =
+  | 'ocean'
+  | 'space'
+  | 'dinosaurs'
+  | 'unicorns'
+  | 'robots'
+  | 'racing'
+  | 'leo'
+  | 'jungle';
 
 export type { ChildExperience };
 
@@ -25,6 +33,8 @@ const VALID_CARD_SKINS: CardSkin[] = [
   'unicorns',
   'robots',
   'racing',
+  'leo',
+  'jungle',
 ];
 
 export const DEFAULT_BANK: Bank = 'amio';

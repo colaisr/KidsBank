@@ -64,6 +64,16 @@
       "totem": {
         "title": "Totem",
         "placeholder": "Play and Talk will live here in the next demo step."
+      },
+      "cardDesign": {
+        "subtitle": "Choose how your card will look",
+        "done": "Done",
+        "skins": {
+          "ocean": "Ocean",
+          "space": "Space",
+          "leo": "Leo",
+          "jungle": "Jungle"
+        }
       }
     },
     "card": {

@@ -57,6 +57,28 @@ html[data-theme='amio'][data-card-skin='racing'] .kb-child-shell {
   --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.45);
 }
 
+html[data-theme='amio'][data-card-skin='leo'] .kb-child-shell {
+  --kb-primary: #f59e0b;
+  --kb-primary-dark: #c2410c;
+  --kb-accent-kids: #fde68a;
+  --kb-accent-secondary: #fde68a;
+  --kb-header-gradient: linear-gradient(135deg, #fbbf24 0%, #ea580c 100%);
+  --kb-fab: #ea580c;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.45);
+}
+
+html[data-theme='amio'][data-card-skin='jungle'] .kb-child-shell {
+  --kb-primary: #22c55e;
+  --kb-primary-dark: #15803d;
+  --kb-accent-kids: #bbf7d0;
+  --kb-accent-secondary: #bbf7d0;
+  --kb-header-gradient: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+  --kb-fab: #16a34a;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(34 197 94 / 0.45);
+}
+
 /* Evoca skins — violet anchor preserved */
 
 html[data-theme='evoca'][data-card-skin='space'] .kb-child-shell {
@@ -107,6 +129,27 @@ html[data-theme='evoca'][data-card-skin='racing'] .kb-child-shell {
   --kb-header-gradient: linear-gradient(135deg, #ea580c 0%, #6400dc 100%);
   --kb-fab: #ea580c;
   --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.4);
+}
+
+html[data-theme='evoca'][data-card-skin='leo'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #c2410c;
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
+  --kb-header-gradient: linear-gradient(135deg, #fbbf24 0%, #ea580c 55%, #6400dc 100%);
+  --kb-fab: #ea580c;
+  --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.4);
+}
+
+html[data-theme='evoca'][data-card-skin='jungle'] .kb-child-shell {
+  --kb-primary: #6400dc;
+  --kb-primary-dark: #15803d;
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
+  --kb-header-gradient: linear-gradient(135deg, #22c55e 0%, #6400dc 100%);
+  --kb-fab: #16a34a;
+  --kb-fab-fg: #ffffff;
+  --kb-fab-glow: 0 8px 24px rgb(34 197 94 / 0.4);
 }
 
 /* Pay-card ornaments per skin */
