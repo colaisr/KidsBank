@@ -457,6 +457,14 @@ export function demoPhoneTopUp(
   return demoSpend(state, amount, 'mobileTopUp');
 }
 
+export function demoQrPay(
+  state: DemoState,
+  amount: number,
+  merchantKey = 'sweetShop',
+): DemoState | 'limit' | 'insufficient' {
+  return demoSpend(state, amount, merchantKey);
+}
+
 export function applyPetAction(
   state: DemoState,
   action: PetActionId,

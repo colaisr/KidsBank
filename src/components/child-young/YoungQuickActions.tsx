@@ -7,7 +7,7 @@ const ACTIONS: {
   to?: string;
 }[] = [
   { key: 'topUpPhone', Icon: PhoneIcon, to: '/child/young/phone-topup' },
-  { key: 'payQr', Icon: QrIcon },
+  { key: 'payQr', Icon: QrIcon, to: '/child/young/qr-pay' },
   { key: 'transfer', Icon: TransferIcon },
 ];
 

@@ -15,6 +15,7 @@ import { ChildShell } from './pages/ChildShell';
 import { OnboardingAgePage } from './pages/OnboardingAgePage';
 import { OnboardingRolePage } from './pages/OnboardingRolePage';
 import { YoungPhoneTopUpRoute } from './pages/child-young/YoungPhoneTopUpRoute';
+import { YoungQrPayRoute } from './pages/child-young/YoungQrPayRoute';
 import { YoungTotemPlaceholderPage } from './pages/child-young/YoungTotemPlaceholderPage';
 import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
@@ -55,6 +56,7 @@ export default function App() {
               <Route path="onboarding/age" element={<OnboardingAgePage />} />
               <Route path="young/totem" element={<YoungTotemPlaceholderPage />} />
               <Route path="young/phone-topup" element={<YoungPhoneTopUpRoute />} />
+              <Route path="young/qr-pay" element={<YoungQrPayRoute />} />
               <Route path="*" element={<Navigate to="/child" replace />} />
             </Route>
             <Route path="/parent" element={<ParentShell />}>

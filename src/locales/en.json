@@ -65,6 +65,24 @@
         "title": "Totem",
         "placeholder": "Play and Talk will live here in the next demo step."
       },
+      "qrPay": {
+        "title": "Pay by QR",
+        "scanTitle": "Point the camera at the QR code",
+        "scanHint": "Payment will complete automatically",
+        "scanningA11y": "Scanning QR code",
+        "confirmTitle": "Confirm payment?",
+        "confirmHint": "Check the store and amount",
+        "merchantLabel": "Store",
+        "amountLabel": "Amount",
+        "confirm": "Pay",
+        "cancel": "Cancel",
+        "paying": "Paying…",
+        "cameraAria": "Scan again",
+        "errors": {
+          "limit": "Amount exceeds your card limit",
+          "insufficient": "Not enough money on the card"
+        }
+      },
       "phoneTopup": {
         "title": "Top up phone",
         "myNumber": "My number",
