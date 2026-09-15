@@ -7,7 +7,6 @@ import { LimitModal } from '../components/LimitModal';
 import { ParentGoalRow } from '../components/ParentGoalRow';
 import { ParentTaskRow } from '../components/ParentTaskRow';
 import { TransactionRow } from '../components/TransactionRow';
-import { TransferModal } from '../components/TransferModal';
 import type { DemoTaskState } from '../data/demoBaseline';
 import { cancelTask, confirmTask } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
@@ -19,13 +18,12 @@ import { ParentServiceRow } from '../components/ParentServiceRow';
 import { useParentLocation } from '../context/ParentLocationContext';
 
 const actionCardClass =
-  'flex min-w-0 flex-col items-start rounded-card border border-border bg-surface p-3.5 text-left text-text transition-colors hover:border-primary/40';
+  'flex min-w-0 flex-col items-start rounded-card border border-border bg-surface p-3.5 text-left text-text shadow-sm transition-[colors,box-shadow,transform] duration-200 hover:border-primary/40 hover:shadow-md active:scale-[0.99]';
 
 export function ParentHomePage() {
   const { t } = useTranslation();
   const { locale } = usePreferences();
   const { demo, setDemo } = useDemoState();
-  const [transferOpen, setTransferOpen] = useState(false);
   const [limitOpen, setLimitOpen] = useState(false);
   const [addTaskOpen, setAddTaskOpen] = useState(false);
   const [addGoalOpen, setAddGoalOpen] = useState(false);
@@ -76,14 +74,6 @@ export function ParentHomePage() {
             {t('ui.parent.quickActions')}
           </h2>
           <div className="grid grid-cols-2 gap-3">
-            <button type="button" onClick={() => setTransferOpen(true)} className={actionCardClass}>
-              <span className="text-lg" aria-hidden="true">
-                ↗
-              </span>
-              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
-                {t('ui.parent.transfer')}
-              </span>
-            </button>
             <button type="button" onClick={() => setAddTaskOpen(true)} className={actionCardClass}>
               <span className="text-lg" aria-hidden="true">
                 ✓
@@ -131,13 +121,24 @@ export function ParentHomePage() {
         </section>
 
         <section>
-          <ParentServiceRow
-            to="/parent/geolocation"
-            icon="📍"
-            title={t('ui.parent.geolocation.rowTitle')}
-            statusLabel={geolocationStatus}
-            showLiveDot={mode === 'live'}
-          />
+          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+            {t('ui.parent.services')}
+          </h2>
+          <div className="space-y-2">
+            <ParentServiceRow
+              to="/parent/geolocation"
+              icon="📍"
+              title={t('ui.parent.geolocation.rowTitle')}
+              statusLabel={geolocationStatus}
+              showLiveDot={mode === 'live'}
+            />
+            <ParentServiceRow
+              to="/parent/transfer"
+              icon="↗"
+              title={t('ui.parent.transfer')}
+              description={t('ui.parent.transferSubtitle')}
+            />
+          </div>
         </section>
 
         <section>
@@ -202,7 +203,6 @@ export function ParentHomePage() {
         </section>
       </main>
 
-      <TransferModal open={transferOpen} onClose={() => setTransferOpen(false)} />
       <LimitModal open={limitOpen} onClose={() => setLimitOpen(false)} />
       <AddTaskModal open={addTaskOpen} onClose={() => setAddTaskOpen(false)} />
       <AddGoalModal open={addGoalOpen} onClose={() => setAddGoalOpen(false)} />

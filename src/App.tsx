@@ -18,6 +18,7 @@ import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
 import { ParentGeolocationPage } from './pages/ParentGeolocationPage';
 import { ParentHomePage } from './pages/ParentHomePage';
+import { ParentTransferPage } from './pages/ParentTransferPage';
 import { ParentShell } from './pages/ParentShell';
 
 function RoleRedirect() {
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/parent" element={<ParentShell />}>
               <Route index element={<ParentHomePage />} />
               <Route path="geolocation" element={<ParentGeolocationPage />} />
+              <Route path="transfer" element={<ParentTransferPage />} />
               <Route path="*" element={<Navigate to="/parent" replace />} />
             </Route>
             <Route path="/appearance" element={<AppearancePage />} />

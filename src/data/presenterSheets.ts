@@ -10,6 +10,7 @@ export const PRESENTER_SHEET_IDS = [
   'child-hub',
   'parent-home',
   'parent-geolocation',
+  'parent-transfer',
   'appearance',
   'onboarding-age',
 ] as const;
@@ -76,6 +77,11 @@ export const PRESENTER_SHEET_CONFIG: Record<PresenterSheetId, PresenterSheetConf
   'parent-geolocation': {
     childRows: ['safety', 'context'],
     bankRows: ['retention', 'differentiation', 'spendMap'],
+    demoSteps: ['step1', 'step2', 'step3', 'step4'],
+  },
+  'parent-transfer': {
+    childRows: ['support', 'choice'],
+    bankRows: ['control', 'recurring', 'familyProduct'],
     demoSteps: ['step1', 'step2', 'step3', 'step4'],
   },
   appearance: {

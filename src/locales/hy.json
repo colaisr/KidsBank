@@ -152,7 +152,25 @@
       "limitActive": "Ծախսերի սահմանաչափ՝ {{amount}}",
       "limitNotSet": "Չի սահմանված",
       "quickActions": "Արագ գործողություններ",
+      "services": "Ծառայություններ",
       "transfer": "Փոխանցում",
+      "transferSubtitle": "Քարտին կամ խուրհի",
+      "transferScreen": {
+        "title": "Փոխանցում {{name}}",
+        "amountLabel": "Փոխանցման գումար",
+        "customAmount": "Իմ գումարը",
+        "regularTitle": "Կանոնավոր փոխանցում",
+        "regularHint": "Կրկնել ավտոմատ",
+        "periodicity": "Պարբերություն",
+        "period": {
+          "weeklyFri": "Շաբաթը մեկ, Ուրբ",
+          "weeklyMon": "Շաբաթը մեկ, Երկ",
+          "monthly": "Ամիսը մեկ"
+        },
+        "submit": "Փոխանցել {{amount}}",
+        "success": "Փոխանցումը կատարված է",
+        "insufficient": "Բավարար միջոցներ չկան"
+      },
       "limit": "Սահմանաչափ",
       "addTask": "Առաջադրանք",
       "addGoal": "Նպատակ",

@@ -152,7 +152,25 @@
       "limitActive": "Spending limit: {{amount}}",
       "limitNotSet": "Not set",
       "quickActions": "Quick actions",
+      "services": "Services",
       "transfer": "Transfer",
+      "transferSubtitle": "To card or piggy bank",
+      "transferScreen": {
+        "title": "Transfer to {{name}}",
+        "amountLabel": "Transfer amount",
+        "customAmount": "Custom",
+        "regularTitle": "Recurring transfer",
+        "regularHint": "Repeat automatically",
+        "periodicity": "Frequency",
+        "period": {
+          "weeklyFri": "Every week, Fri",
+          "weeklyMon": "Every week, Mon",
+          "monthly": "Once a month"
+        },
+        "submit": "Send {{amount}}",
+        "success": "Transfer completed",
+        "insufficient": "Not enough funds in parent wallet"
+      },
       "limit": "Limit",
       "addTask": "Task",
       "addGoal": "Goal",

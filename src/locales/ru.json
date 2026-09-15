@@ -152,7 +152,25 @@
       "limitActive": "Лимит трат: {{amount}}",
       "limitNotSet": "Не установлен",
       "quickActions": "Быстрые действия",
+      "services": "Сервисы",
       "transfer": "Перевод",
+      "transferSubtitle": "На карту или в копилку",
+      "transferScreen": {
+        "title": "Перевод {{name}}",
+        "amountLabel": "Сумма перевода",
+        "customAmount": "Своя",
+        "regularTitle": "Регулярный перевод",
+        "regularHint": "Повторять автоматически",
+        "periodicity": "Периодичность",
+        "period": {
+          "weeklyFri": "Каждую неделю, Пт",
+          "weeklyMon": "Каждую неделю, Пн",
+          "monthly": "Раз в месяц"
+        },
+        "submit": "Перевести {{amount}}",
+        "success": "Перевод выполнен",
+        "insufficient": "Недостаточно средств на кошельке родителя"
+      },
       "limit": "Лимит",
       "addTask": "Задание",
       "addGoal": "Цель",

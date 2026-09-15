@@ -6,13 +6,14 @@ import { useDemoState } from '../context/DemoStateContext';
 
 export function ParentShell() {
   const location = useLocation();
-  const isGeolocation = location.pathname === '/parent/geolocation';
+  const isParentSubScreen =
+    location.pathname === '/parent/geolocation' || location.pathname === '/parent/transfer';
   const { demo, setDemo } = useDemoState();
 
   return (
     <ParentLocationProvider>
       <div className="kb-parent-shell flex min-h-0 flex-1 flex-col bg-surface-muted">
-        {!isGeolocation ? (
+        {!isParentSubScreen ? (
           <>
             <AppHeader titleKey="ui.role.parentTitle" presenterId="parent-home" />
             <ParentChildHeader
@@ -25,7 +26,7 @@ export function ParentShell() {
           </>
         ) : null}
         <div
-          className={`flex min-h-0 flex-1 flex-col ${isGeolocation ? 'overflow-hidden' : 'overflow-y-auto'}`}
+          className={`flex min-h-0 flex-1 flex-col ${location.pathname === '/parent/geolocation' ? 'overflow-hidden' : 'overflow-y-auto'}`}
         >
           <Outlet />
         </div>

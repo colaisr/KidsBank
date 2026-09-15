@@ -174,12 +174,30 @@
         "trust": { "effect": "Trust in bank", "meaning": "Spend transparency without toxic monitoring" }
       },
       "demo": {
-        "step1": "Transfer to card / piggy",
+        "step1": "Services → Transfer → card or piggy",
         "step2": "Add task → confirm",
         "step3": "Set card limit",
         "step4": "Add goal",
         "step5": "Spend history below",
         "step6": "Location → map and spends in context"
+      }
+    },
+    "parent-transfer": {
+      "title": "Transfer — lever: support and recurring top-ups",
+      "child": {
+        "support": { "topic": "Money on time", "meaning": "Allowance lands on card or piggy without cash" },
+        "choice": { "topic": "Where it goes", "meaning": "Card for spending; piggy for saving toward a goal" }
+      },
+      "bank": {
+        "control": { "effect": "Parent in the app", "meaning": "Transfer from parent wallet — transparent family money flow" },
+        "recurring": { "effect": "Recurring", "meaning": "Scheduled top-up — stickiness without a separate product" },
+        "familyProduct": { "effect": "One family relationship", "meaning": "Child card and piggy in the same bank" }
+      },
+      "demo": {
+        "step1": "Home → Services → Transfer",
+        "step2": "Segment: card / piggy, amount and presets",
+        "step3": "Recurring transfer and frequency (demo)",
+        "step4": "Send → child balance updates"
       }
     },
     "parent-geolocation": {
