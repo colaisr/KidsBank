@@ -83,6 +83,7 @@
           "error": "Could not get a reply. Try again.",
           "dictationUnsupported": "Dictation works in Chrome on phone or desktop",
           "dictationError": "Could not hear you. Check the microphone.",
+          "dictationListening": "Speak… I’m listening",
           "quick": {
             "countDays": "Count days",
             "whatIsPiggy": "What is a piggy bank?"

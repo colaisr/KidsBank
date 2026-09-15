@@ -14,21 +14,52 @@ function getSpeechRecognition(): SpeechRecognitionCtor | null {
 
 const QUICK_REPLY_KEYS = ['countDays', 'whatIsPiggy'] as const;
 
+function appendDraft(prev: string, chunk: string): string {
+  const next = chunk.trim();
+  if (!next) {
+    return prev;
+  }
+  if (!prev.trim()) {
+    return next;
+  }
+  return `${prev.trimEnd()} ${next}`;
+}
+
 export function YoungLeoChat() {
   const { t } = useTranslation();
   const [messages, setMessages] = useState<LeoChatMessage[]>(() => [
     { role: 'assistant', content: t('ui.childYoung.totem.chat.greeting') },
   ]);
   const [draft, setDraft] = useState('');
+  const [dictationPreview, setDictationPreview] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const dictationPreviewRef = useRef('');
+
+  useEffect(() => {
+    dictationPreviewRef.current = dictationPreview;
+  }, [dictationPreview]);
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, loading]);
+
+  function flushDictationPreviewToDraft() {
+    const interim = dictationPreviewRef.current.trim();
+    if (interim) {
+      setDraft((prev) => appendDraft(prev, interim));
+    }
+    setDictationPreview('');
+    dictationPreviewRef.current = '';
+  }
+
+  function stopDictation() {
+    recognitionRef.current?.stop();
+    recognitionRef.current = null;
+  }
 
   async function submitText(text: string) {
     const trimmed = text.trim();
@@ -36,10 +67,16 @@ export function YoungLeoChat() {
       return;
     }
 
+    if (listening) {
+      stopDictation();
+      flushDictationPreviewToDraft();
+    }
+
     setError(null);
     const nextMessages: LeoChatMessage[] = [...messages, { role: 'user', content: trimmed }];
     setMessages(nextMessages);
     setDraft('');
+    setDictationPreview('');
     setLoading(true);
 
     try {
@@ -62,21 +99,19 @@ export function YoungLeoChat() {
     }
 
     if (listening && recognitionRef.current) {
-      recognitionRef.current.stop();
+      stopDictation();
       return;
     }
 
     const recognition = new Ctor();
     recognition.lang = 'ru-RU';
     recognition.interimResults = true;
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognitionRef.current = recognition;
-
-    let interim = '';
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       let finalText = '';
-      interim = '';
+      let interim = '';
       for (let i = event.resultIndex; i < event.results.length; i += 1) {
         const part = event.results[i][0]?.transcript ?? '';
         if (event.results[i].isFinal) {
@@ -86,28 +121,33 @@ export function YoungLeoChat() {
         }
       }
       if (finalText) {
-        setDraft((prev) => `${prev}${prev ? ' ' : ''}${finalText}`.trim());
-      } else if (interim) {
-        setDraft((prev) => {
-          const base = prev.replace(/\s+$/, '');
-          return `${base}${base ? ' ' : ''}${interim}`.trim();
-        });
+        setDraft((prev) => appendDraft(prev, finalText));
       }
+      setDictationPreview(interim);
+      dictationPreviewRef.current = interim;
     };
 
     recognition.onerror = () => {
+      flushDictationPreviewToDraft();
       setListening(false);
+      recognitionRef.current = null;
       setError(t('ui.childYoung.totem.chat.dictationError'));
     };
 
     recognition.onend = () => {
+      flushDictationPreviewToDraft();
       setListening(false);
+      recognitionRef.current = null;
     };
 
     setError(null);
+    setDictationPreview('');
+    dictationPreviewRef.current = '';
     setListening(true);
     recognition.start();
   }
+
+  const showDictationBubble = listening || dictationPreview.length > 0;
 
   return (
     <section className="flex min-h-0 flex-1 flex-col rounded-t-3xl border border-border bg-surface shadow-[0_-4px_24px_rgba(15,23,42,0.06)]">
@@ -163,40 +203,69 @@ export function YoungLeoChat() {
         <p className="px-3 pb-1 text-center text-xs font-medium text-red-600" role="alert">{error}</p>
       ) : null}
 
-      <div className="flex items-center gap-2 border-t border-border px-3 py-2.5">
-        <button
-          type="button"
-          onClick={startDictation}
-          aria-pressed={listening}
-          aria-label={t('ui.childYoung.totem.chat.dictation')}
-          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors ${
-            listening ? 'bg-orange-500 text-white' : 'bg-orange-100 text-orange-700'
-          }`}
-        >
-          <MicIcon active={listening} />
-        </button>
-        <input
-          type="text"
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              submitText(draft);
-            }
-          }}
-          placeholder={t('ui.childYoung.totem.chat.placeholder')}
-          className="min-w-0 flex-1 rounded-full border border-border bg-surface-muted px-4 py-2.5 text-sm text-text outline-none focus:border-primary/40"
-        />
-        <button
-          type="button"
-          disabled={loading || !draft.trim()}
-          onClick={() => submitText(draft)}
-          aria-label={t('ui.childYoung.totem.chat.send')}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white disabled:opacity-45"
-        >
-          <SendIcon />
-        </button>
+      <div className="shrink-0 border-t border-border">
+        {showDictationBubble ? (
+          <div className="px-3 pb-1 pt-2.5" aria-live="polite" aria-atomic="true">
+            <div className="relative ml-1 max-w-[92%]">
+              <div
+                className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm ring-1 ${
+                  listening
+                    ? 'bg-orange-50 text-text ring-orange-200/80'
+                    : 'bg-surface-muted text-text ring-border'
+                }`}
+              >
+                {dictationPreview ? (
+                  <span>{dictationPreview}</span>
+                ) : (
+                  <span className="text-text-muted">{t('ui.childYoung.totem.chat.dictationListening')}</span>
+                )}
+                {listening ? (
+                  <span className="ml-1 inline-block h-2 w-2 animate-pulse rounded-full bg-orange-500 align-middle" />
+                ) : null}
+              </div>
+              <span
+                className="absolute -bottom-1.5 left-5 h-3 w-3 rotate-45 bg-orange-50 ring-1 ring-orange-200/80"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="flex items-end gap-2 px-3 py-2.5">
+          <button
+            type="button"
+            onClick={startDictation}
+            aria-pressed={listening}
+            aria-label={t('ui.childYoung.totem.chat.dictation')}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors ${
+              listening ? 'bg-orange-500 text-white' : 'bg-orange-100 text-orange-700'
+            }`}
+          >
+            <MicIcon active={listening} />
+          </button>
+          <textarea
+            rows={2}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitText(draft);
+              }
+            }}
+            placeholder={t('ui.childYoung.totem.chat.placeholder')}
+            className="min-h-[2.75rem] max-h-24 min-w-0 flex-1 resize-none rounded-2xl border border-border bg-surface-muted px-3 py-2 text-sm leading-snug text-text outline-none focus:border-primary/40"
+          />
+          <button
+            type="button"
+            disabled={loading || !draft.trim()}
+            onClick={() => submitText(draft)}
+            aria-label={t('ui.childYoung.totem.chat.send')}
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white disabled:opacity-45"
+          >
+            <SendIcon />
+          </button>
+        </div>
       </div>
     </section>
   );

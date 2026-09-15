@@ -83,6 +83,7 @@
           "error": "Չհաջողվեց պատասխանել։ Փորձիր կրկին։",
           "dictationUnsupported": "Դիկտացիան աշխատում է Chrome-ում",
           "dictationError": "Չհաջողվեց լսել։ Ստուգիր միկրոֆոնը։",
+          "dictationListening": "Խոս… լսում եմ",
           "quick": {
             "countDays": "Հաշվել օրերը",
             "whatIsPiggy": "Ի՞նչ է խնայարանը։"
