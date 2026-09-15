@@ -11,7 +11,8 @@ export function ParentShell() {
     location.pathname === '/parent/transfer' ||
     location.pathname === '/parent/limits' ||
     location.pathname === '/parent/tasks' ||
-    location.pathname === '/parent/reports';
+    location.pathname === '/parent/reports' ||
+    location.pathname === '/parent/spending-history';
   const { demo, setDemo } = useDemoState();
 
   return (

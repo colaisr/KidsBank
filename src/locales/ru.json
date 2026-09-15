@@ -157,6 +157,11 @@
       "transferSubtitle": "На карту или в копилку",
       "reportsRowTitle": "Отчёты",
       "reportsSubtitle": "Траты ребёнка по периодам",
+      "spendingHistoryRowTitle": "История трат",
+      "spendingHistoryScreen": {
+        "title": "История трат",
+        "monthSpentLabel": "Потрачено в этом месяце"
+      },
       "reportsScreen": {
         "title": "Отчёты",
         "period": {
@@ -415,7 +420,8 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Кафе",
-      "supermarket": "Супермаркет",
+      "supermarket": "Продуктовый магазин",
+      "arcade": "Игровой автомат",
       "bookstore": "Книжный"
     },
     "places": {

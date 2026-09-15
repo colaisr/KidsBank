@@ -6,24 +6,33 @@ import {
   formatCurrency,
   formatNumber,
   formatPiggyDepositDate,
+  getIntlLocale,
 } from '../lib/format';
 import { isTransactionCredit, transactionCurrency } from '../lib/transactions';
 
 type TransactionRowProps = {
   transaction: DemoTransaction;
+  /** When `time`, subtitle is clock only (for grouped parent spending history). */
+  subtitleMode?: 'relative' | 'time';
 };
 
-export function TransactionRow({ transaction }: TransactionRowProps) {
+export function TransactionRow({ transaction, subtitleMode = 'relative' }: TransactionRowProps) {
   const { t } = useTranslation();
   const { locale } = usePreferences();
   const { demo } = useDemoState();
   const isCredit = isTransactionCredit(transaction);
   const currency = transactionCurrency(transaction);
   const title = getTransactionTitle(transaction, demo.tasks, t);
-  const subtitle = formatPiggyDepositDate(new Date(transaction.at), locale, {
-    today: t('ui.piggy.dayToday'),
-    yesterday: t('ui.piggy.dayYesterday'),
-  });
+  const subtitle =
+    subtitleMode === 'time'
+      ? new Intl.DateTimeFormat(getIntlLocale(locale), {
+          hour: '2-digit',
+          minute: '2-digit',
+        }).format(new Date(transaction.at))
+      : formatPiggyDepositDate(new Date(transaction.at), locale, {
+          today: t('ui.piggy.dayToday'),
+          yesterday: t('ui.piggy.dayYesterday'),
+        });
 
   return (
     <article className="flex items-center gap-3 rounded-card bg-surface px-4 py-3 shadow-sm">
@@ -68,9 +77,11 @@ function getTransactionTitle(
   }
 
   if (transaction.typeId === 'spend' && transaction.merchantKey) {
-    return t('ui.transactions.qrSpend', {
-      merchant: t(`demo.merchants.${transaction.merchantKey}`),
-    });
+    const merchant = t(`demo.merchants.${transaction.merchantKey}`);
+    if (transaction.merchantKey === 'sweetShop') {
+      return t('ui.transactions.qrSpend', { merchant });
+    }
+    return merchant;
   }
 
   return t(`demo.transactions.${transaction.typeId}`);
@@ -97,6 +108,39 @@ function TxIcon({ transaction }: { transaction: DemoTransaction }) {
   }
 
   if (typeId === 'spend') {
+    if (transaction.merchantKey === 'supermarket') {
+      return (
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100 text-teal-700">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+            />
+            <path
+              d="M6 7h12l-1 13H7L6 7Z"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      );
+    }
+
+    if (transaction.merchantKey === 'arcade') {
+      return (
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="4" y="8" width="16" height="8" rx="2" stroke="currentColor" strokeWidth="1.7" />
+            <path d="M8 12h.01M11 11v2M14 12h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M7 8V6M17 8V6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+    }
+
     return (
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">

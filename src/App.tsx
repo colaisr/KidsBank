@@ -20,6 +20,7 @@ import { ParentGeolocationPage } from './pages/ParentGeolocationPage';
 import { ParentHomePage } from './pages/ParentHomePage';
 import { ParentLimitsPage } from './pages/ParentLimitsPage';
 import { ParentReportsPage } from './pages/ParentReportsPage';
+import { ParentSpendingHistoryPage } from './pages/ParentSpendingHistoryPage';
 import { ParentTasksPage } from './pages/ParentTasksPage';
 import { ParentTransferPage } from './pages/ParentTransferPage';
 import { ParentShell } from './pages/ParentShell';
@@ -58,6 +59,7 @@ export default function App() {
               <Route path="limits" element={<ParentLimitsPage />} />
               <Route path="tasks" element={<ParentTasksPage />} />
               <Route path="reports" element={<ParentReportsPage />} />
+              <Route path="spending-history" element={<ParentSpendingHistoryPage />} />
               <Route path="*" element={<Navigate to="/parent" replace />} />
             </Route>
             <Route path="/appearance" element={<AppearancePage />} />

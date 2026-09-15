@@ -157,6 +157,11 @@
       "transferSubtitle": "To card or piggy bank",
       "reportsRowTitle": "Reports",
       "reportsSubtitle": "Child spending by period",
+      "spendingHistoryRowTitle": "Spending history",
+      "spendingHistoryScreen": {
+        "title": "Spending history",
+        "monthSpentLabel": "Spent this month"
+      },
       "reportsScreen": {
         "title": "Reports",
         "period": {
@@ -415,7 +420,8 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Café",
-      "supermarket": "Supermarket",
+      "supermarket": "Grocery store",
+      "arcade": "Arcade machine",
       "bookstore": "Bookstore"
     },
     "places": {

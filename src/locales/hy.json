@@ -157,6 +157,11 @@
       "transferSubtitle": "Քարտին կամ խուրհի",
       "reportsRowTitle": "Հաշվետվություններ",
       "reportsSubtitle": "Երեխայի ծախսերն ըստ ժամանակաշրջանի",
+      "spendingHistoryRowTitle": "Ծախսերի պատմություն",
+      "spendingHistoryScreen": {
+        "title": "Ծախսերի պատմություն",
+        "monthSpentLabel": "Այս ամիս ծախսված է"
+      },
       "reportsScreen": {
         "title": "Հաշվետվություններ",
         "period": {
@@ -415,7 +420,8 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Սրճարան",
-      "supermarket": "Սուպերմարկետ",
+      "supermarket": "Մթերքի խանութ",
+      "arcade": "Խաղային ավտոմատ",
       "bookstore": "Գրադարան"
     },
     "places": {

@@ -108,6 +108,11 @@ export function ParentHomePage() {
               title={t('ui.parent.reportsRowTitle')}
               description={t('ui.parent.reportsSubtitle')}
             />
+            <ParentServiceRow
+              to="/parent/spending-history"
+              icon="🧾"
+              title={t('ui.parent.spendingHistoryRowTitle')}
+            />
           </div>
         </section>
 

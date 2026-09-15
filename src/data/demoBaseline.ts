@@ -369,14 +369,19 @@ function createTransactionsSeed(): DemoTransaction[] {
   const todayHomework = new Date(now);
   todayHomework.setHours(16, 45, 0, 0);
   const todaySpend = new Date(now);
-  todaySpend.setHours(14, 20, 0, 0);
-  const todayCafe = new Date(now);
-  todayCafe.setHours(12, 5, 0, 0);
-  const todaySupermarket = new Date(now);
-  todaySupermarket.setHours(11, 15, 0, 0);
-  const yesterdayBookstore = new Date(now);
-  yesterdayBookstore.setDate(yesterdayBookstore.getDate() - 1);
-  yesterdayBookstore.setHours(17, 40, 0, 0);
+  todaySpend.setHours(13, 45, 0, 0);
+  const earlierCafe = new Date(now);
+  earlierCafe.setMonth(earlierCafe.getMonth() - 1);
+  earlierCafe.setHours(12, 5, 0, 0);
+  const yesterdaySupermarket = new Date(now);
+  yesterdaySupermarket.setDate(yesterdaySupermarket.getDate() - 1);
+  yesterdaySupermarket.setHours(19, 10, 0, 0);
+  const yesterdayArcade = new Date(now);
+  yesterdayArcade.setDate(yesterdayArcade.getDate() - 1);
+  yesterdayArcade.setHours(17, 32, 0, 0);
+  const earlierBookstore = new Date(now);
+  earlierBookstore.setDate(earlierBookstore.getDate() - 4);
+  earlierBookstore.setHours(15, 0, 0, 0);
   const todayCashback = new Date(now);
   todayCashback.setHours(14, 21, 0, 0);
   const yesterdayMom = new Date(now);
@@ -413,7 +418,7 @@ function createTransactionsSeed(): DemoTransaction[] {
       typeId: 'spend',
       amount: 320,
       merchantKey: 'cafe',
-      at: todayCafe.toISOString(),
+      at: earlierCafe.toISOString(),
       mapLat: 40.1788,
       mapLng: 44.5125,
       liveOffsetMeters: { east: 110, north: -90 },
@@ -421,19 +426,29 @@ function createTransactionsSeed(): DemoTransaction[] {
     {
       id: 'tx-supermarket',
       typeId: 'spend',
-      amount: 2450,
+      amount: 260,
       merchantKey: 'supermarket',
-      at: todaySupermarket.toISOString(),
+      at: yesterdaySupermarket.toISOString(),
       mapLat: 40.1796,
       mapLng: 44.5098,
       liveOffsetMeters: { east: -240, north: -130 },
     },
     {
+      id: 'tx-arcade',
+      typeId: 'spend',
+      amount: 100,
+      merchantKey: 'arcade',
+      at: yesterdayArcade.toISOString(),
+      mapLat: 40.181,
+      mapLng: 44.514,
+      liveOffsetMeters: { east: 80, north: 60 },
+    },
+    {
       id: 'tx-bookstore',
       typeId: 'spend',
-      amount: 890,
+      amount: 800,
       merchantKey: 'bookstore',
-      at: yesterdayBookstore.toISOString(),
+      at: earlierBookstore.toISOString(),
       mapLat: 40.1832,
       mapLng: 44.5168,
       liveOffsetMeters: { east: 200, north: 210 },
