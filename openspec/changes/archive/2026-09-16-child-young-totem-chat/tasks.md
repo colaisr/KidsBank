@@ -14,4 +14,4 @@
 
 - [x] `PlanDocs/01-surf-baseline.md` — young totem pet + chat
 - [x] `PlanDocs/16-ops-deploy.md` — leo-chat service + nginx order
-- [ ] Delta spec → archive `child-young-totem-chat`
+- [x] Delta spec → archive `child-young-totem-chat`

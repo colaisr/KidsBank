@@ -87,7 +87,8 @@ src/
   locales/        hy.json, ru.json, en.json, presenter.hy.json, presenter.ru.json, presenter.en.json
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
-  lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge)
+  lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge),
+                  leoChatApi.ts (young totem → `/api/kidsbank/leo/chat`)
 ```
 
 Роуты ребёнка: `/child` (teen или young home по `childExperience`), `/child/young/totem`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`, `/child/onboarding/role`, `/child/onboarding/age`.
@@ -98,4 +99,4 @@ Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` 
 
 ## 5. Чего нет
 
-Auth, API, Prisma, Docker runtime, микросервисы. Если задача требует сервер — это смена конституции, не «заодно».
+Auth, API, Prisma, Docker runtime, микросервисы. **Исключение для показа:** на preview VPS — лёгкий proxy `deploy/leo-chat` (Polza) только для чата young-тотема; см. `16`. Остальное демо — по-прежнему статика + `localStorage`.
