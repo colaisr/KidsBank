@@ -8,6 +8,9 @@ type ParentBottomSheetProps = {
   children: ReactNode;
 };
 
+/**
+ * Bottom sheet scoped to the phone frame (absolute), not the browser viewport (fixed).
+ */
 export function ParentBottomSheet({ open, onClose, title, children }: ParentBottomSheetProps) {
   const { t } = useTranslation();
 
@@ -16,7 +19,7 @@ export function ParentBottomSheet({ open, onClose, title, children }: ParentBott
   }
 
   return (
-    <div className="fixed inset-0 z-[2000] flex items-end justify-center bg-black/40 p-4">
+    <div className="absolute inset-0 z-[500] flex flex-col justify-end bg-black/40">
       <button
         type="button"
         className="absolute inset-0"
@@ -24,16 +27,19 @@ export function ParentBottomSheet({ open, onClose, title, children }: ParentBott
         onClick={onClose}
       />
       <div
-        className="relative z-10 w-full max-w-md rounded-t-card border border-border bg-surface px-4 pb-6 pt-3 shadow-lg"
+        className="relative z-10 mx-4 mb-4 flex max-h-[min(72%,28rem)] w-[calc(100%-2rem)] flex-col rounded-t-card border border-border bg-surface px-4 pb-5 pt-3 shadow-lg"
         role="dialog"
         aria-modal="true"
         aria-labelledby="parent-sheet-title"
       >
-        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-border" aria-hidden="true" />
-        <h2 id="parent-sheet-title" className="font-heading text-lg font-semibold text-text">
+        <div className="mx-auto mb-3 h-1 w-10 shrink-0 rounded-full bg-border" aria-hidden="true" />
+        <h2
+          id="parent-sheet-title"
+          className="shrink-0 font-heading text-lg font-semibold text-text"
+        >
           {title}
         </h2>
-        <div className="mt-4 max-h-[50vh] overflow-y-auto">{children}</div>
+        <div className="mt-4 min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
       </div>
     </div>
   );

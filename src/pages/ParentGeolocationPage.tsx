@@ -99,7 +99,7 @@ export function ParentGeolocationPage() {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="relative flex min-h-0 flex-1 flex-col">
       <ChildPageTitle
         titleKey="ui.parent.geolocation.title"
         titleValues={{ name: t(activeChild.nameKey) }}
