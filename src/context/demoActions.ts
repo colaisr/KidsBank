@@ -430,20 +430,31 @@ export function setCashWithdrawalDailyLimit(state: DemoState, dailyLimit: number
   };
 }
 
-export function demoSpend(state: DemoState, amount: number): DemoState | 'limit' {
+export function demoSpend(
+  state: DemoState,
+  amount: number,
+  merchantKey = 'cafe',
+): DemoState | 'limit' | 'insufficient' {
   if (amount <= 0 || amount > state.card.balance) {
-    return state;
+    return amount > state.card.balance ? 'insufficient' : state;
   }
 
   if (state.cardLimit !== null && amount > state.cardLimit) {
     return 'limit';
   }
 
-  const next = appendTransaction(state, 'spend', amount, { merchantKey: 'cafe' });
+  const next = appendTransaction(state, 'spend', amount, { merchantKey });
   return {
     ...next,
     card: { ...next.card, balance: next.card.balance - amount },
   };
+}
+
+export function demoPhoneTopUp(
+  state: DemoState,
+  amount: number,
+): DemoState | 'limit' | 'insufficient' {
+  return demoSpend(state, amount, 'mobileTopUp');
 }
 
 export function applyPetAction(

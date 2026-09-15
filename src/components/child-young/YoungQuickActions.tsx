@@ -1,30 +1,49 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const ACTIONS = [
-  { key: 'topUpPhone' as const, Icon: PhoneIcon },
-  { key: 'payQr' as const, Icon: QrIcon },
-  { key: 'transfer' as const, Icon: TransferIcon },
-] as const;
+const ACTIONS: {
+  key: 'topUpPhone' | 'payQr' | 'transfer';
+  Icon: typeof PhoneIcon;
+  to?: string;
+}[] = [
+  { key: 'topUpPhone', Icon: PhoneIcon, to: '/child/young/phone-topup' },
+  { key: 'payQr', Icon: QrIcon },
+  { key: 'transfer', Icon: TransferIcon },
+];
 
 export function YoungQuickActions() {
   const { t } = useTranslation();
 
   return (
     <div className="grid grid-cols-3 gap-2">
-      {ACTIONS.map(({ key, Icon }) => (
-        <button
-          key={key}
-          type="button"
-          className="flex flex-col items-center gap-1 rounded-card border border-border bg-surface px-1.5 py-2 text-center transition-colors hover:border-primary/25"
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-muted text-primary">
-            <Icon />
-          </span>
-          <span className="text-[10px] font-medium leading-tight text-text">
-            {t(`ui.childYoung.home.quickActions.${key}`)}
-          </span>
-        </button>
-      ))}
+      {ACTIONS.map(({ key, Icon, to }) => {
+        const className =
+          'flex flex-col items-center gap-1 rounded-card border border-border bg-surface px-1.5 py-2 text-center transition-colors hover:border-primary/25';
+        const content = (
+          <>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-muted text-primary">
+              <Icon />
+            </span>
+            <span className="text-[10px] font-medium leading-tight text-text">
+              {t(`ui.childYoung.home.quickActions.${key}`)}
+            </span>
+          </>
+        );
+
+        if (to) {
+          return (
+            <Link key={key} to={to} className={className}>
+              {content}
+            </Link>
+          );
+        }
+
+        return (
+          <button key={key} type="button" className={className}>
+            {content}
+          </button>
+        );
+      })}
     </div>
   );
 }

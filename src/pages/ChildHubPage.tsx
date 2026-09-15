@@ -45,6 +45,10 @@ export function ChildHubPage() {
       setFeedback('limit');
       return;
     }
+    if (result === 'insufficient') {
+      setFeedback('insufficient');
+      return;
+    }
 
     setDemo(result);
     setFeedback('spend');

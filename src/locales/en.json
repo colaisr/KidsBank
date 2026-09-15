@@ -65,6 +65,16 @@
         "title": "Totem",
         "placeholder": "Play and Talk will live here in the next demo step."
       },
+      "phoneTopup": {
+        "title": "Top up phone",
+        "myNumber": "My number",
+        "amountLabel": "Top-up amount",
+        "cta": "Top up",
+        "errors": {
+          "limit": "Amount exceeds your card limit",
+          "insufficient": "Not enough money on the card"
+        }
+      },
       "cardDesign": {
         "subtitle": "Choose how your card will look",
         "done": "Done",
@@ -421,7 +431,8 @@
   "demo": {
     "child": {
       "david": {
-        "name": "David"
+        "name": "David",
+        "phone": "+374 XX XXX XXX"
       }
     },
     "limits": {
@@ -456,7 +467,8 @@
       "cafe": "Café",
       "supermarket": "Grocery store",
       "arcade": "Arcade machine",
-      "bookstore": "Bookstore"
+      "bookstore": "Bookstore",
+      "mobileTopUp": "Mobile top-up"
     },
     "places": {
       "school27": "School #27",
