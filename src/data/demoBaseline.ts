@@ -5,6 +5,8 @@ export type TaskStatusId = 'open' | 'inProgress' | 'waitingParent' | 'done';
 
 export type DemoTaskState = DemoTask & {
   statusId: TaskStatusId;
+  /** Set when parent confirms `waitingParent` → `done` */
+  completedAt?: string;
 };
 
 export type DemoGoalState = DemoGoal & {
@@ -263,21 +265,22 @@ export const DEMO_BASELINE: DemoState = {
       templateId: 'walkDog',
       rewardStars: 15,
       dueTime: '20:00',
-      statusId: 'open',
+      statusId: 'waitingParent',
     },
     {
       id: 'hangLaundry',
       templateId: 'hangLaundry',
       rewardStars: 10,
       dueTime: '16:00',
-      statusId: 'open',
+      statusId: 'waitingParent',
     },
     {
       id: 'tidyRoom',
       templateId: 'tidyRoom',
       rewardStars: 15,
       dueTime: '19:30',
-      statusId: 'open',
+      statusId: 'done',
+      completedAt: '2026-01-01T12:00:00.000Z',
     },
     {
       id: 'dishes',
@@ -285,6 +288,7 @@ export const DEMO_BASELINE: DemoState = {
       rewardStars: 10,
       dueTime: '17:00',
       statusId: 'done',
+      completedAt: '2025-12-31T12:00:00.000Z',
     },
   ],
   goals: [
@@ -469,7 +473,21 @@ export function cloneDemoBaseline(): DemoState {
     card: { ...DEMO_BASELINE.card },
     piggy: { ...DEMO_BASELINE.piggy },
     taskStats: { ...DEMO_BASELINE.taskStats },
-    tasks: DEMO_BASELINE.tasks.map((task) => ({ ...task })),
+    tasks: DEMO_BASELINE.tasks.map((task) => {
+      const now = new Date();
+      const todayNoon = new Date(now);
+      todayNoon.setHours(12, 0, 0, 0);
+      const yesterdayNoon = new Date(todayNoon);
+      yesterdayNoon.setDate(yesterdayNoon.getDate() - 1);
+
+      if (task.id === 'tidyRoom' && task.statusId === 'done') {
+        return { ...task, completedAt: todayNoon.toISOString() };
+      }
+      if (task.id === 'dishes' && task.statusId === 'done') {
+        return { ...task, completedAt: yesterdayNoon.toISOString() };
+      }
+      return { ...task };
+    }),
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
     pet: createBaselinePet(),
     transactions: createTransactionsSeed().map((tx) => ({ ...tx })),

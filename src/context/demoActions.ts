@@ -73,7 +73,9 @@ export function confirmTask(state: DemoState, taskId: string): DemoState {
       tasksCompleted: state.taskStats.tasksCompleted + 1,
     },
     tasks: state.tasks.map((t) =>
-      t.id === taskId ? { ...t, statusId: 'done' as const } : t,
+      t.id === taskId
+        ? { ...t, statusId: 'done' as const, completedAt: new Date().toISOString() }
+        : t,
     ),
     pet: {
       ...state.pet,

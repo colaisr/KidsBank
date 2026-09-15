@@ -97,7 +97,7 @@ Parent-created goals and baseline vitrine entries SHALL default to `selected: fa
 
 ### Requirement: Demo state version and pet slice
 
-Demo state version SHALL be 6. The state object SHALL include a `pet` slice with `xp`, `fullness`, `joy`, `energy`, `careCount`, `visitCount`, `taskBuff`, and `lastTickAt`. Missing `pet` in stored state SHALL be backfilled from baseline during normalization. Stored v4 goals without `selected` SHALL migrate: goals with `currentStars > 0` become selected; vitrine baseline entries MAY be appended when missing.
+Demo state version SHALL be **7**. The state object SHALL include a `pet` slice with `xp`, `fullness`, `joy`, `energy`, `careCount`, `visitCount`, `taskBuff`, and `lastTickAt`. Missing `pet` in stored state SHALL be backfilled from baseline during normalization. Stored v4 goals without `selected` SHALL migrate: goals with `currentStars > 0` become selected; vitrine baseline entries MAY be appended when missing.
 
 #### Scenario: Migrate v4 to v5
 
@@ -132,3 +132,21 @@ Demo state SHALL include a `children` array (minimum one entry with `id`, `nameK
 
 - **WHEN** a `spend` transaction includes map coordinates in demo state
 - **THEN** the geolocation screen can render a marker linked to that transaction id
+
+### Requirement: Demo state version 7 includes parent limits fields
+
+Persisted demo state SHALL include `transferRecipients` (whitelist entries with optional daily limit and enabled flag) and `cashWithdrawal` (`enabled`, `dailyLimit`, `maxDaily`). Stored v6 state SHALL migrate by merging baseline defaults.
+
+#### Scenario: Upgrade from v6
+
+- **WHEN** localStorage holds v6 state
+- **THEN** load merges default recipients and cash withdrawal from baseline
+
+### Requirement: Tasks may store completion timestamp
+
+Task records SHALL support optional `completedAt` ISO string set when the parent confirms `waitingParent` → `done`.
+
+#### Scenario: Confirm sets timestamp
+
+- **WHEN** the parent confirms a waiting task
+- **THEN** the task has `statusId` `done` and `completedAt` set to the confirmation time

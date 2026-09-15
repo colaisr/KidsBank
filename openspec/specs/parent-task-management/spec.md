@@ -5,13 +5,13 @@ Lets the parent create new tasks for the child from a template catalog with star
 
 ## Requirements
 
-### Requirement: Parent can open add-task flow from home
+### Requirement: Parent can open add-task flow from tasks screen
 
-The parent home SHALL expose a «Задание» quick action that opens an add-task modal or sheet.
+The parent tasks screen (`/parent/tasks`) SHALL expose a primary CTA that opens the add-task modal or sheet.
 
 #### Scenario: Open add task modal
 
-- **WHEN** the parent taps «Задание» on `/parent`
+- **WHEN** the parent taps «Новое задание» on `/parent/tasks`
 - **THEN** an add-task form opens with template, reward, and deadline fields
 
 ### Requirement: Parent selects task from template catalog or custom text

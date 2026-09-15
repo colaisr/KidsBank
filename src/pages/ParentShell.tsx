@@ -9,7 +9,8 @@ export function ParentShell() {
   const isParentSubScreen =
     location.pathname === '/parent/geolocation' ||
     location.pathname === '/parent/transfer' ||
-    location.pathname === '/parent/limits';
+    location.pathname === '/parent/limits' ||
+    location.pathname === '/parent/tasks';
   const { demo, setDemo } = useDemoState();
 
   return (

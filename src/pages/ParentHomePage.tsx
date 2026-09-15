@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddGoalModal } from '../components/AddGoalModal';
-import { AddTaskModal } from '../components/AddTaskModal';
-import { EditTaskModal } from '../components/EditTaskModal';
 import { ParentGoalRow } from '../components/ParentGoalRow';
-import { ParentTaskRow } from '../components/ParentTaskRow';
 import { TransactionRow } from '../components/TransactionRow';
-import type { DemoTaskState } from '../data/demoBaseline';
-import { cancelTask, confirmTask } from '../context/demoActions';
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
 import { getActiveGoals } from '../lib/goals';
-import { getActiveTasksForParent } from '../lib/tasks';
+import { countTasksWaitingParent } from '../lib/tasks';
 import { ParentServiceRow } from '../components/ParentServiceRow';
 import { useParentLocation } from '../context/ParentLocationContext';
 
@@ -22,15 +17,13 @@ const actionCardClass =
 export function ParentHomePage() {
   const { t } = useTranslation();
   const { locale } = usePreferences();
-  const { demo, setDemo } = useDemoState();
-  const [addTaskOpen, setAddTaskOpen] = useState(false);
+  const { demo } = useDemoState();
   const [addGoalOpen, setAddGoalOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState<DemoTaskState | null>(null);
 
   const { mode } = useParentLocation();
-  const activeTasks = getActiveTasksForParent(demo.tasks);
   const activeGoals = getActiveGoals(demo.goals);
   const recentTx = demo.transactions.slice(0, 5);
+  const tasksAwaitingConfirm = countTasksWaitingParent(demo.tasks);
   const geolocationStatus =
     mode === 'live'
       ? t('ui.parent.geolocation.statusNeutral')
@@ -40,14 +33,6 @@ export function ParentHomePage() {
         amount: formatCurrency(demo.cashWithdrawal.dailyLimit, locale),
       })
     : t('ui.parent.limitNotSet');
-
-  function handleConfirm(taskId: string) {
-    setDemo((s) => confirmTask(s, taskId));
-  }
-
-  function handleCancel(taskId: string) {
-    setDemo((s) => cancelTask(s, taskId));
-  }
 
   return (
     <>
@@ -76,24 +61,14 @@ export function ParentHomePage() {
           <h2 className="mb-3 font-heading text-base font-semibold text-text">
             {t('ui.parent.quickActions')}
           </h2>
-          <div className="grid grid-cols-2 gap-3">
-            <button type="button" onClick={() => setAddTaskOpen(true)} className={actionCardClass}>
-              <span className="text-lg" aria-hidden="true">
-                ✓
-              </span>
-              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
-                {t('ui.parent.addTask')}
-              </span>
-            </button>
-            <button type="button" onClick={() => setAddGoalOpen(true)} className={actionCardClass}>
-              <span className="text-lg" aria-hidden="true">
-                ★
-              </span>
-              <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
-                {t('ui.parent.addGoal')}
-              </span>
-            </button>
-          </div>
+          <button type="button" onClick={() => setAddGoalOpen(true)} className={actionCardClass}>
+            <span className="text-lg" aria-hidden="true">
+              ★
+            </span>
+            <span className="mt-2 line-clamp-2 min-w-0 font-heading text-sm font-semibold">
+              {t('ui.parent.addGoal')}
+            </span>
+          </button>
         </section>
 
         <section>
@@ -121,34 +96,13 @@ export function ParentHomePage() {
               description={t('ui.parent.limitsSubtitle')}
               statusLabel={limitsStatus}
             />
+            <ParentServiceRow
+              to="/parent/tasks"
+              icon="📋"
+              title={t('ui.parent.tasksRowTitle')}
+              badgeCount={tasksAwaitingConfirm}
+            />
           </div>
-        </section>
-
-        <section>
-          <h2 className="mb-3 font-heading text-base font-semibold text-text">
-            {t('ui.parent.childTasks')}
-          </h2>
-          {activeTasks.length > 0 ? (
-            <div className="space-y-2">
-              {activeTasks.map((task) => (
-                <ParentTaskRow
-                  key={task.id}
-                  task={task}
-                  onConfirm={
-                    task.statusId === 'waitingParent'
-                      ? () => handleConfirm(task.id)
-                      : undefined
-                  }
-                  onEdit={() => setEditingTask(task)}
-                  onCancel={() => handleCancel(task.id)}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-card border border-border bg-surface p-5">
-              <p className="text-sm text-text-muted">{t('ui.parent.childTasksEmpty')}</p>
-            </div>
-          )}
         </section>
 
         <section>
@@ -186,13 +140,7 @@ export function ParentHomePage() {
         </section>
       </main>
 
-      <AddTaskModal open={addTaskOpen} onClose={() => setAddTaskOpen(false)} />
       <AddGoalModal open={addGoalOpen} onClose={() => setAddGoalOpen(false)} />
-      <EditTaskModal
-        task={editingTask}
-        open={editingTask !== null}
-        onClose={() => setEditingTask(null)}
-      />
     </>
   );
 }

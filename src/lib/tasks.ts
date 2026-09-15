@@ -38,3 +38,32 @@ export function getActiveTasksForParent(tasks: DemoTaskState[]): DemoTaskState[]
   const others = active.filter((task) => task.statusId !== 'waitingParent');
   return [...waiting, ...others];
 }
+
+export function countTasksWaitingParent(tasks: DemoTaskState[]): number {
+  return tasks.filter((task) => task.statusId === 'waitingParent').length;
+}
+
+export function getParentPendingTasks(tasks: DemoTaskState[]): DemoTaskState[] {
+  return getActiveTasksForParent(tasks);
+}
+
+function isSameLocalDay(iso: string, reference: Date): boolean {
+  const date = new Date(iso);
+  return (
+    date.getFullYear() === reference.getFullYear() &&
+    date.getMonth() === reference.getMonth() &&
+    date.getDate() === reference.getDate()
+  );
+}
+
+export function getTasksCompletedToday(
+  tasks: DemoTaskState[],
+  reference = new Date(),
+): DemoTaskState[] {
+  return tasks.filter(
+    (task) =>
+      task.statusId === 'done' &&
+      task.completedAt !== undefined &&
+      isSameLocalDay(task.completedAt, reference),
+  );
+}

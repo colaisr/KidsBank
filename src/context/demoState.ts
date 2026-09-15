@@ -61,6 +61,7 @@ function normalizeTask(task: DemoTaskState): DemoTaskState {
     ...task,
     templateId,
     dueTime,
+    completedAt: task.completedAt,
   };
 }
 

@@ -7,6 +7,8 @@ type ParentServiceRowProps = {
   description?: string;
   statusLabel?: string;
   showLiveDot?: boolean;
+  /** Orange count badge (e.g. tasks awaiting parent confirm) */
+  badgeCount?: number;
 };
 
 export function ParentServiceRow({
@@ -16,6 +18,7 @@ export function ParentServiceRow({
   description,
   statusLabel,
   showLiveDot = false,
+  badgeCount = 0,
 }: ParentServiceRowProps) {
   return (
     <Link
@@ -39,6 +42,14 @@ export function ParentServiceRow({
           <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
         ) : null}
         {statusLabel ? <span className="max-w-[8rem] truncate">{statusLabel}</span> : null}
+        {badgeCount > 0 ? (
+          <span
+            className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-secondary px-1 text-[11px] font-bold leading-none text-white"
+            aria-hidden="true"
+          >
+            {badgeCount > 9 ? '9+' : badgeCount}
+          </span>
+        ) : null}
         <span className="text-text-muted/70" aria-hidden="true">›</span>
       </span>
     </Link>

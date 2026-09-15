@@ -8,31 +8,31 @@ Provides the parent cabinet home with money control, spending visibility, and pe
 
 ### Requirement: Parent home shows control dashboard
 
-The parent home SHALL display: child summary (card balance, piggy balance), quick actions for **add task, add goal, and limit** (transfer is not a quick action), a **services** section with geolocation and transfer entries, an **active child tasks** section with edit/cancel (and confirm for `waitingParent`), an **active child goals** section, and spending history preview.
+The parent home SHALL display: child summary (card balance, piggy balance), quick action **add goal only**, a **services** section (geolocation, transfer, limits, tasks), an **active child goals** section, and spending history preview. It SHALL NOT list child tasks inline.
 
 #### Scenario: Parent home loads
 
 - **WHEN** the active role is `parent` and the user opens `/parent`
-- **THEN** a localized dashboard shows quick actions without a transfer tile, a services section including transfer, the active child tasks section, and the active child goals section
+- **THEN** a localized dashboard shows add-goal quick action, services including limits and tasks, and child goals — without a «Задания ребёнка» list block
 
 ### Requirement: Parent home uses bank-themed layout variants
 
-The parent home SHALL use one information architecture and **one layout** for both banks. Quick actions SHALL appear in a **grid** (task, goal, limit in the demo) on all themes. Switching `data-theme` SHALL change only color tokens (primary, gradients, surfaces, accents), not element order, size, or arrangement.
+The parent home SHALL use one information architecture and **one layout** for both banks. Quick actions SHALL expose **add goal** only in the demo. Switching `data-theme` SHALL change only color tokens (primary, gradients, surfaces, accents), not element order, size, or arrangement.
 
 #### Scenario: AMIO parent layout
 
 - **WHEN** theme is AMIO and role is parent
-- **THEN** quick actions appear in the task/goal/limit grid with adult-banking spacing per `17-theme-bank-1`, using AMIO color tokens only
+- **THEN** the add-goal quick action and services section use adult-banking spacing per `17-theme-bank-1`, using AMIO color tokens only
 
 #### Scenario: Evoca parent layout
 
 - **WHEN** theme is Evoca and role is parent
-- **THEN** the same quick-action grid appears with Evoca color tokens per `17-theme-bank-2`, not a separate feed layout or route set
+- **THEN** the same layout appears with Evoca color tokens per `17-theme-bank-2`, not a separate feed layout or route set
 
 #### Scenario: Theme switch preserves structure
 
 - **WHEN** the user switches bank theme on `/parent`
-- **THEN** section order, quick-action grid, services section, and component sizes remain identical; only colors and gradients update
+- **THEN** section order, quick action, services section, and component sizes remain identical; only colors and gradients update
 
 ### Requirement: Parent home scrolls within phone frame
 
@@ -55,44 +55,12 @@ The parent home SHALL present a cohesive adult-banking dashboard: gradient hero 
 #### Scenario: Dashboard sections
 
 - **WHEN** the parent views `/parent`
-- **THEN** sections appear in order: balance hero, quick actions, **services** (geolocation and transfer rows), child tasks, child goals, spending — with uniform vertical spacing between sections
+- **THEN** sections appear in order: balance hero, quick actions, **services** (geolocation, transfer, limits, tasks), child goals, spending — with uniform vertical spacing between sections
 
 #### Scenario: No kids styling on parent
 
 - **WHEN** theme or card skin changes
 - **THEN** the parent dashboard does not adopt child-only patterns (FAB, kids accent stars on actions, card-skin accents)
-
-### Requirement: Parent limit action shows active limit
-
-When a spending limit is set, the limit quick-action control SHALL display the active limit amount. When no limit is set, it SHALL show a not-set state. The top balance summary SHALL NOT duplicate limit status.
-
-#### Scenario: Limit visible on limit action
-
-- **WHEN** `cardLimit` is set and the parent views quick actions
-- **THEN** the limit action shows the active limit amount
-
-### Requirement: Parent can confirm pending tasks from home
-
-The parent home SHALL list tasks in `waitingParent` status with a confirm action that triggers star payout per `task-flow`.
-
-#### Scenario: Confirm task from parent home
-
-- **WHEN** a task is `waitingParent` and the parent taps confirm
-- **THEN** the task moves to `done` and the child's `starsBalance` increases by `rewardStars`
-
-### Requirement: Parent home lists active child tasks
-
-The parent home SHALL list all non-`done` tasks with localized title, reward, deadline, status, and actions to edit, cancel, and (for `waitingParent`) confirm per `task-flow`.
-
-#### Scenario: Active tasks visible
-
-- **WHEN** the parent opens `/parent` and the child has three active tasks
-- **THEN** all three appear in the child tasks section
-
-#### Scenario: Done tasks hidden
-
-- **WHEN** a task has status `done`
-- **THEN** it does not appear in the parent active tasks section
 
 ### Requirement: Parent home lists active child goals
 
@@ -124,7 +92,7 @@ The parent home SHALL include a full-width service row for geolocation in the **
 #### Scenario: Geolocation row visible
 
 - **WHEN** the parent opens `/parent`
-- **THEN** a geolocation row appears in the services section below quick actions and above child tasks
+- **THEN** a geolocation row appears in the services section below quick actions
 
 #### Scenario: Status matches geolocation mode
 
@@ -144,3 +112,21 @@ The parent home SHALL include a full-width service row for transfer in the servi
 
 - **WHEN** the parent taps the transfer row
 - **THEN** `/parent/transfer` opens
+
+### Requirement: Parent home links to limits in services
+
+The parent home SHALL include a limits service row navigating to `/parent/limits` with subtitle and optional status (e.g. cash daily limit when enabled).
+
+#### Scenario: Limits row navigates
+
+- **WHEN** the parent taps the limits row
+- **THEN** `/parent/limits` opens
+
+### Requirement: Parent home links to tasks with confirmation badge
+
+The services section SHALL include a tasks row navigating to `/parent/tasks`. When one or more tasks are `waitingParent`, the row SHALL show an orange numeric badge equal to that count.
+
+#### Scenario: Badge visible
+
+- **WHEN** two tasks are `waitingParent`
+- **THEN** the tasks service row shows badge «2»
