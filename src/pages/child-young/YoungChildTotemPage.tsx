@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { YoungLeoChat } from '../../components/child-young/YoungLeoChat';
 import { YoungLeoPetActions } from '../../components/child-young/YoungLeoPetActions';
-import { YoungLeoPetNeedBars } from '../../components/child-young/YoungLeoPetNeedBars';
+import { YoungLeoPetFlankMeters } from '../../components/child-young/YoungLeoPetNeedBars';
 import { YoungLionTotem } from '../../components/child-young/YoungLionTotem';
 import { useYoungLeoPet } from '../../hooks/useYoungLeoPet';
 import { petLevel } from '../../lib/pet';
@@ -36,47 +36,43 @@ export function YoungChildTotemPage() {
       </header>
 
       {levelUpLevel !== null ? (
-        <div className="mx-3 mt-1.5 shrink-0 rounded-card bg-accent-kids px-3 py-1.5 text-center text-xs font-semibold text-white">
+        <div className="mx-3 mt-1 shrink-0 rounded-card bg-accent-kids px-3 py-1.5 text-center text-xs font-semibold text-white">
           {t('ui.pet.levelUp', { level: levelUpLevel })}
         </div>
       ) : null}
 
-      <section
-        className="mx-3 mt-2 shrink-0 max-h-[38vh] overflow-hidden rounded-3xl bg-gradient-to-b from-primary/8 via-surface to-surface px-3 pb-3 pt-2 shadow-sm ring-1 ring-border"
-        aria-label={t('ui.childYoung.totem.leoName')}
-      >
-        <div className="flex flex-col items-center">
-          <p
-            className="relative z-10 -mb-2 max-w-[11rem] rounded-2xl bg-surface px-3 py-1.5 text-center text-[11px] font-semibold leading-snug text-text shadow-sm ring-1 ring-border"
-          >
-            {t('ui.childYoung.totem.playPrompt')}
-          </p>
-          <button
-            type="button"
-            onClick={bumpLion}
-            className="relative -mt-1 rounded-full p-1 transition active:scale-[0.98]"
-            aria-label={t('ui.childYoung.totem.tapLeo')}
-          >
-            <YoungLionTotem
-              className="h-[8.75rem] w-[8.75rem] sm:h-[9.25rem] sm:w-[9.25rem]"
-              animate
-              showGlow
-              reactToken={reactToken}
-            />
-          </button>
+      <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_minmax(0,2fr)]">
+        <section
+          className="mx-3 mt-1.5 flex min-h-0 flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-b from-primary/8 via-surface to-surface px-2.5 pb-2 pt-1.5 shadow-sm ring-1 ring-border"
+          aria-label={t('ui.childYoung.totem.leoName')}
+        >
+          <YoungLeoPetFlankMeters fullness={demo.pet.fullness} joy={demo.pet.joy}>
+            <button
+              type="button"
+              onClick={bumpLion}
+              className="rounded-full p-0.5 transition active:scale-[0.98]"
+              aria-label={t('ui.childYoung.totem.tapLeo')}
+            >
+              <YoungLionTotem
+                className="h-[7.5rem] w-[7.5rem]"
+                animate
+                showGlow
+                reactToken={reactToken}
+              />
+            </button>
+          </YoungLeoPetFlankMeters>
+
+          <YoungLeoPetActions
+            className="mt-1.5"
+            starsBalance={demo.starsBalance}
+            taskBuff={demo.pet.taskBuff}
+            onAction={handleAction}
+          />
+        </section>
+
+        <div className="flex min-h-0 flex-col px-2 pb-2 pt-1.5">
+          <YoungLeoChat />
         </div>
-
-        <YoungLeoPetActions
-          className="mt-1"
-          starsBalance={demo.starsBalance}
-          taskBuff={demo.pet.taskBuff}
-          onAction={handleAction}
-        />
-        <YoungLeoPetNeedBars className="mt-2" fullness={demo.pet.fullness} joy={demo.pet.joy} />
-      </section>
-
-      <div className="flex min-h-0 flex-[1.35] flex-col px-2 pb-2 pt-2">
-        <YoungLeoChat />
       </div>
     </div>
   );

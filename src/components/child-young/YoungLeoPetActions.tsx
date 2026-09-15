@@ -35,7 +35,7 @@ export function YoungLeoPetActions({
             type="button"
             disabled={!affordable}
             onClick={() => onAction(id)}
-            className="flex min-h-[4.25rem] flex-col items-center justify-center gap-0.5 rounded-2xl bg-surface-muted/80 px-1 py-2 ring-1 ring-border transition active:scale-[0.97] disabled:opacity-45"
+            className="flex min-h-[3.65rem] flex-col items-center justify-center gap-0.5 rounded-2xl bg-surface-muted/80 px-1 py-1.5 ring-1 ring-border transition active:scale-[0.97] disabled:opacity-45"
           >
             <span className="text-xl leading-none" aria-hidden="true">{icon}</span>
             <span className="text-center text-[10px] font-semibold leading-tight text-text">
