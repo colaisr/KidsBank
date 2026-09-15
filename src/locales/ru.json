@@ -83,6 +83,20 @@
           "insufficient": "Недостаточно средств на карте"
         }
       },
+      "transfer": {
+        "title": "Перевести деньги",
+        "recipientPrompt": "Кому хочешь перевести?",
+        "parentsNote": "Этот список настроили родители",
+        "amountFor": "Сумма для {{name}}",
+        "cta": "Перевести {{name}}",
+        "ctaDisabled": "Перевести",
+        "emptyRecipients": "Родители пока не разрешили переводы никому. Попроси их в настройках лимитов.",
+        "errors": {
+          "limit": "Сумма больше лимита на карте",
+          "insufficient": "Недостаточно средств на карте",
+          "recipientLimit": "Превышен дневной лимит для этого получателя"
+        }
+      },
       "phoneTopup": {
         "title": "Пополнить телефон",
         "myNumber": "Мой номер",
@@ -401,6 +415,7 @@
       "demoSpendCta": "Сделать демо-покупку в меню →",
       "taskLabel": "Задание: {{task}}",
       "qrSpend": "Оплата по QR • {{merchant}}",
+      "childTransfer": "Перевод • {{name}}",
       "weekSummary": "На этой неделе: +{{credit}}, −{{debit}}, +{{stars}} ★",
       "filter": {
         "all": "Все",
@@ -456,8 +471,14 @@
     "limits": {
       "recipient": {
         "mom": "Мама",
+        "momGenitive": "Мамы",
+        "momDative": "Маме",
         "grandma": "Бабушка",
-        "friend": "Тигран (друг)"
+        "grandmaGenitive": "Бабушки",
+        "grandmaDative": "Бабушке",
+        "friend": "Тигран (друг)",
+        "friendGenitive": "Тиграна",
+        "friendDative": "Тиграну"
       }
     },
     "tasks": {

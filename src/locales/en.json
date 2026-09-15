@@ -83,6 +83,20 @@
           "insufficient": "Not enough money on the card"
         }
       },
+      "transfer": {
+        "title": "Send money",
+        "recipientPrompt": "Who do you want to send to?",
+        "parentsNote": "Your parents set up this list",
+        "amountFor": "Amount for {{name}}",
+        "cta": "Send to {{name}}",
+        "ctaDisabled": "Send",
+        "emptyRecipients": "Your parents have not allowed transfers yet. Ask them in limits settings.",
+        "errors": {
+          "limit": "Amount exceeds your card limit",
+          "insufficient": "Not enough money on the card",
+          "recipientLimit": "Daily limit for this recipient is exceeded"
+        }
+      },
       "phoneTopup": {
         "title": "Top up phone",
         "myNumber": "My number",
@@ -401,6 +415,7 @@
       "demoSpendCta": "Try a demo purchase in Menu →",
       "taskLabel": "Task: {{task}}",
       "qrSpend": "QR payment • {{merchant}}",
+      "childTransfer": "Transfer • {{name}}",
       "weekSummary": "This week: +{{credit}}, −{{debit}}, +{{stars}} ★",
       "filter": {
         "all": "All",
@@ -456,8 +471,14 @@
     "limits": {
       "recipient": {
         "mom": "Mom",
+        "momGenitive": "Mom",
+        "momDative": "Mom",
         "grandma": "Grandmother",
-        "friend": "Tigran (friend)"
+        "grandmaGenitive": "Grandmother",
+        "grandmaDative": "Grandmother",
+        "friend": "Tigran (friend)",
+        "friendGenitive": "Tigran",
+        "friendDative": "Tigran"
       }
     },
     "tasks": {

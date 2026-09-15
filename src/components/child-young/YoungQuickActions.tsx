@@ -8,7 +8,7 @@ const ACTIONS: {
 }[] = [
   { key: 'topUpPhone', Icon: PhoneIcon, to: '/child/young/phone-topup' },
   { key: 'payQr', Icon: QrIcon, to: '/child/young/qr-pay' },
-  { key: 'transfer', Icon: TransferIcon },
+  { key: 'transfer', Icon: TransferIcon, to: '/child/young/transfer' },
 ];
 
 export function YoungQuickActions() {

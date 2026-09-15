@@ -7,7 +7,6 @@ import {
   CASH_WITHDRAWAL_MAX_DAILY,
   CASH_WITHDRAWAL_STEP,
   type DemoTransferRecipient,
-  type DemoTransferRecipientTone,
 } from '../data/demoBaseline';
 import {
   addTransferRecipient,
@@ -18,21 +17,12 @@ import {
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
-
-const AVATAR_TONE_CLASS: Record<DemoTransferRecipientTone, string> = {
-  primary: 'bg-primary/15 text-primary',
-  warm: 'bg-accent-secondary/15 text-accent-secondary',
-  sky: 'bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300',
-};
+import {
+  TRANSFER_AVATAR_TONE_CLASS,
+  transferRecipientDisplayName,
+} from '../lib/transferRecipients';
 
 const ADD_LIMIT_OPTIONS: Array<number | null> = [null, 500, 1000, 2000];
-
-function recipientDisplayName(recipient: DemoTransferRecipient, t: (key: string) => string) {
-  if (recipient.customName) {
-    return recipient.customName;
-  }
-  return recipient.nameKey ? t(recipient.nameKey) : '';
-}
 
 export function ParentLimitsPage() {
   const { t } = useTranslation();
@@ -100,14 +90,14 @@ export function ParentLimitsPage() {
                   className="flex items-center gap-3 px-4 py-3.5"
                 >
                   <span
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-sm font-semibold ${AVATAR_TONE_CLASS[recipient.avatarTone]}`}
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-sm font-semibold ${TRANSFER_AVATAR_TONE_CLASS[recipient.avatarTone]}`}
                     aria-hidden="true"
                   >
                     {recipient.initial}
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="font-heading text-sm font-semibold text-text">
-                      {recipientDisplayName(recipient, t)}
+                      {transferRecipientDisplayName(recipient, t)}
                     </p>
                     <p className="mt-0.5 text-xs text-text-muted">
                       {recipientSubtitle(recipient)}
@@ -118,7 +108,7 @@ export function ParentLimitsPage() {
                     onChange={(enabled) =>
                       setDemo((s) => setTransferRecipientEnabled(s, recipient.id, enabled))
                     }
-                    ariaLabel={recipientDisplayName(recipient, t)}
+                    ariaLabel={transferRecipientDisplayName(recipient, t)}
                   />
                 </li>
               ))}

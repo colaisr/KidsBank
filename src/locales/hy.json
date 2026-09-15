@@ -83,6 +83,20 @@
           "insufficient": "Քարտի վրա բավարար միջոցներ չկան"
         }
       },
+      "transfer": {
+        "title": "Փոխանցել գումար",
+        "recipientPrompt": "Ում ես ուզում փոխանցել?",
+        "parentsNote": "Այս ցանկը կարգավորել են ծնողները",
+        "amountFor": "Գումար {{name}}-ի համար",
+        "cta": "Փոխանցել {{name}}-ին",
+        "ctaDisabled": "Փոխանցել",
+        "emptyRecipients": "Ծնողները դեռ թույլատրություն չեն տվել։ Խնդրիր նրանց սահմանաչափերի կարգավորումներում։",
+        "errors": {
+          "limit": "Գումարը գերազանցում է քարտի սահմանաչափը",
+          "insufficient": "Քարտի վրա բավարար միջոցներ չկան",
+          "recipientLimit": "Այս ստացողի օրվա սահմանաչափը գերազանցված է"
+        }
+      },
       "phoneTopup": {
         "title": "Լիցքավորել հեռախոսը",
         "myNumber": "Իմ համարը",
@@ -401,6 +415,7 @@
       "demoSpendCta": "Դեմո-գնում մենյուից →",
       "taskLabel": "Առաջադրանք: {{task}}",
       "qrSpend": "QR վճարում • {{merchant}}",
+      "childTransfer": "Փոխանցում • {{name}}",
       "weekSummary": "Այս շաբաթ: +{{credit}}, −{{debit}}, +{{stars}} ★",
       "filter": {
         "all": "Բոլորը",
@@ -456,8 +471,14 @@
     "limits": {
       "recipient": {
         "mom": "Մայրիկ",
+        "momGenitive": "մայրիկի",
+        "momDative": "մայրիկին",
         "grandma": "Տատիկ",
-        "friend": "Տիգրան (ընկեր)"
+        "grandmaGenitive": "տատիկի",
+        "grandmaDative": "տատիկին",
+        "friend": "Տիգրան (ընկեր)",
+        "friendGenitive": "Տիգրանի",
+        "friendDative": "Տիգրանին"
       }
     },
     "tasks": {

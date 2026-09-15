@@ -59,6 +59,7 @@ export type DemoTransaction = {
   taskId?: string;
   taskTemplateId?: string;
   merchantKey?: string;
+  transferRecipientId?: string;
   mapLat?: number;
   mapLng?: number;
   liveOffsetMeters?: MapOffsetMeters;

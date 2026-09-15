@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { DemoTaskState, DemoTransaction } from '../data/demoBaseline';
+import type { DemoTaskState, DemoTransaction, DemoTransferRecipient } from '../data/demoBaseline';
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import {
@@ -8,6 +8,7 @@ import {
   formatPiggyDepositDate,
   getIntlLocale,
 } from '../lib/format';
+import { transferRecipientDisplayName } from '../lib/transferRecipients';
 import { isTransactionCredit, transactionCurrency } from '../lib/transactions';
 
 type TransactionRowProps = {
@@ -22,7 +23,7 @@ export function TransactionRow({ transaction, subtitleMode = 'relative' }: Trans
   const { demo } = useDemoState();
   const isCredit = isTransactionCredit(transaction);
   const currency = transactionCurrency(transaction);
-  const title = getTransactionTitle(transaction, demo.tasks, t);
+  const title = getTransactionTitle(transaction, demo.tasks, demo.transferRecipients, t);
   const subtitle =
     subtitleMode === 'time'
       ? new Intl.DateTimeFormat(getIntlLocale(locale), {
@@ -62,8 +63,19 @@ export function TransactionRow({ transaction, subtitleMode = 'relative' }: Trans
 function getTransactionTitle(
   transaction: DemoTransaction,
   tasks: DemoTaskState[],
+  transferRecipients: DemoTransferRecipient[],
   t: (key: string, options?: Record<string, string>) => string,
 ): string {
+  if (transaction.typeId === 'childToParent' && transaction.transferRecipientId) {
+    const recipient = transferRecipients.find(
+      (item) => item.id === transaction.transferRecipientId,
+    );
+    if (recipient) {
+      return t('ui.transactions.childTransfer', {
+        name: transferRecipientDisplayName(recipient, t),
+      });
+    }
+  }
   if (transaction.typeId === 'taskReward') {
     const task = transaction.taskId
       ? tasks.find((item) => item.id === transaction.taskId)

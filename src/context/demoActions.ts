@@ -15,7 +15,7 @@ function txId(): string {
 
 type TransactionMeta = Pick<
   DemoTransaction,
-  'currency' | 'taskId' | 'taskTemplateId' | 'merchantKey'
+  'currency' | 'taskId' | 'taskTemplateId' | 'merchantKey' | 'transferRecipientId'
 >;
 
 function appendTransaction(
@@ -323,12 +323,71 @@ export function transferParentToChild(
   };
 }
 
+function isSameLocalDay(isoA: string, isoB: Date): boolean {
+  const a = new Date(isoA);
+  return (
+    a.getFullYear() === isoB.getFullYear() &&
+    a.getMonth() === isoB.getMonth() &&
+    a.getDate() === isoB.getDate()
+  );
+}
+
+function transferAmountToRecipientToday(
+  state: DemoState,
+  recipientId: string,
+  now = new Date(),
+): number {
+  return state.transactions
+    .filter(
+      (tx) =>
+        tx.typeId === 'childToParent' &&
+        tx.transferRecipientId === recipientId &&
+        isSameLocalDay(tx.at, now),
+    )
+    .reduce((sum, tx) => sum + tx.amount, 0);
+}
+
 export function transferChildToParent(state: DemoState, amount: number): DemoState {
   if (amount <= 0 || amount > state.card.balance) {
     return state;
   }
 
   const next = appendTransaction(state, 'childToParent', amount);
+  return {
+    ...next,
+    card: { ...next.card, balance: next.card.balance - amount },
+    parentWallet: next.parentWallet + amount,
+  };
+}
+
+export function transferChildToRecipient(
+  state: DemoState,
+  recipientId: string,
+  amount: number,
+): DemoState | 'insufficient' | 'limit' | 'recipientLimit' | 'disabled' {
+  const recipient = state.transferRecipients.find((r) => r.id === recipientId);
+  if (!recipient || !recipient.enabled) {
+    return 'disabled';
+  }
+
+  if (amount <= 0 || amount > state.card.balance) {
+    return amount > state.card.balance ? 'insufficient' : state;
+  }
+
+  if (state.cardLimit !== null && amount > state.cardLimit) {
+    return 'limit';
+  }
+
+  if (recipient.dailyLimit !== null) {
+    const spentToday = transferAmountToRecipientToday(state, recipientId);
+    if (spentToday + amount > recipient.dailyLimit) {
+      return 'recipientLimit';
+    }
+  }
+
+  const next = appendTransaction(state, 'childToParent', amount, {
+    transferRecipientId: recipientId,
+  });
   return {
     ...next,
     card: { ...next.card, balance: next.card.balance - amount },
