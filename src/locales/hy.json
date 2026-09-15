@@ -155,6 +155,26 @@
       "services": "Ծառայություններ",
       "transfer": "Փոխանցում",
       "transferSubtitle": "Քարտին կամ խուրհի",
+      "reportsRowTitle": "Հաշվետվություններ",
+      "reportsSubtitle": "Երեխայի ծախսերն ըստ ժամանակաշրջանի",
+      "reportsScreen": {
+        "title": "Հաշվետվություններ",
+        "period": {
+          "week": "Շաբաթ",
+          "month": "Ամիս"
+        },
+        "dateRangeWeek": "1 – 7 սեպտեմբեր",
+        "dateRangeMonth": "Սեպտեմբեր 2026",
+        "totalLabel": "ընդամենը",
+        "categories": {
+          "food": "Սնունդ",
+          "transport": "Տրանսպորտ",
+          "piggy": "Խուրհի",
+          "other": "Այլ"
+        },
+        "downloadPdf": "Ներբեռնել հաշվետվությունը (PDF)",
+        "pdfDemo": "Դեմոյում PDF չի ստեղծվում — ցուցադրեք էկրանը"
+      },
       "tasksRowTitle": "Առաջադրանքներ",
       "tasksScreen": {
         "title": "Առաջադրանքներ",

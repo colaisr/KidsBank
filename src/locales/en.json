@@ -155,6 +155,26 @@
       "services": "Services",
       "transfer": "Transfer",
       "transferSubtitle": "To card or piggy bank",
+      "reportsRowTitle": "Reports",
+      "reportsSubtitle": "Child spending by period",
+      "reportsScreen": {
+        "title": "Reports",
+        "period": {
+          "week": "Week",
+          "month": "Month"
+        },
+        "dateRangeWeek": "Sep 1 – 7",
+        "dateRangeMonth": "September 2026",
+        "totalLabel": "total",
+        "categories": {
+          "food": "Food",
+          "transport": "Transport",
+          "piggy": "To piggy bank",
+          "other": "Other"
+        },
+        "downloadPdf": "Download report (PDF)",
+        "pdfDemo": "PDF is not generated in the demo — use the screen for the pitch"
+      },
       "tasksRowTitle": "Tasks",
       "tasksScreen": {
         "title": "Tasks",

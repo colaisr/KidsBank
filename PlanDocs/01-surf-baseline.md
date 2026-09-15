@@ -107,7 +107,9 @@
 
 **Лимиты** (`/parent/limits`, change `parent-limits-and-tasks`, **дельта**): **Переводы** — кому ребёнок может переводить (whitelist, toggle, «Добавить получателя»); **Наличные** — снятие в ATM (toggle, stepper, max/день). Demo state v7: `transferRecipients`, `cashWithdrawal`.
 
-**Задания родителя** (`/parent/tasks`, тот же change): CTA «+ Новое задание»; секции **Ожидают** / **Выполнено сегодня**; подтверждение `waitingParent` из sheet; `completedAt` при confirm.
+**Задания родителя** (`/parent/tasks`, change `parent-limits-and-tasks`): CTA «+ Новое задание»; секции **Ожидают** / **Выполнено сегодня**; подтверждение `waitingParent` из sheet; `completedAt` при confirm.
+
+**Отчёты** (`/parent/reports`, change `parent-reports`, **дельта**): траты ребёнка по категориям; переключатель **неделя / месяц**; donut + список (еда, транспорт, копилка, другое); демо **PDF** без файла. Вход: **Сервисы → Отчёты**.
 
 **Переводы (остальное):** ребёнок → родитель (демо из hub); card↔копилка у ребёнка.
 
@@ -203,6 +205,7 @@ Surf задаёт идею «задания vs своё дело»; **источ
 | `/parent/transfer` | `parent-transfer` | `ChildPageTitle` (back, ℹ️) |
 | `/parent/limits` | — | `ChildPageTitle` (back) |
 | `/parent/tasks` | — | `ChildPageTitle` (back) |
+| `/parent/reports` | — | `ChildPageTitle` (back) |
 | `/appearance` | `appearance` | Шапка экрана (ℹ️ справа) |
 
 **Не делаем:** `/child/profile`, layout-shell'ы, модалки (Transfer, Limit, AddTask…) — достаточно sheet родительского/дочернего экрана.

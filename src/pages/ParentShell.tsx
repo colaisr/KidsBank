@@ -10,7 +10,8 @@ export function ParentShell() {
     location.pathname === '/parent/geolocation' ||
     location.pathname === '/parent/transfer' ||
     location.pathname === '/parent/limits' ||
-    location.pathname === '/parent/tasks';
+    location.pathname === '/parent/tasks' ||
+    location.pathname === '/parent/reports';
   const { demo, setDemo } = useDemoState();
 
   return (

@@ -155,6 +155,26 @@
       "services": "Сервисы",
       "transfer": "Перевод",
       "transferSubtitle": "На карту или в копилку",
+      "reportsRowTitle": "Отчёты",
+      "reportsSubtitle": "Траты ребёнка по периодам",
+      "reportsScreen": {
+        "title": "Отчёты",
+        "period": {
+          "week": "Неделя",
+          "month": "Месяц"
+        },
+        "dateRangeWeek": "1 – 7 сентября",
+        "dateRangeMonth": "Сентябрь 2026",
+        "totalLabel": "всего",
+        "categories": {
+          "food": "Еда",
+          "transport": "Транспорт",
+          "piggy": "В копилку",
+          "other": "Другое"
+        },
+        "downloadPdf": "Скачать отчёт (PDF)",
+        "pdfDemo": "В демо PDF не формируется — покажите экран инвестору"
+      },
       "tasksRowTitle": "Задания",
       "tasksScreen": {
         "title": "Задания",

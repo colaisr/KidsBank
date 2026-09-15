@@ -130,3 +130,12 @@ The services section SHALL include a tasks row navigating to `/parent/tasks`. Wh
 
 - **WHEN** two tasks are `waitingParent`
 - **THEN** the tasks service row shows badge «2»
+
+### Requirement: Parent home links to spending reports
+
+The parent home services section SHALL include a reports row navigating to `/parent/reports` with subtitle describing child spending by period.
+
+#### Scenario: Reports row navigates
+
+- **WHEN** the parent taps the reports row
+- **THEN** `/parent/reports` opens

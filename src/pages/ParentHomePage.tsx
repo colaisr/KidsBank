@@ -102,6 +102,12 @@ export function ParentHomePage() {
               title={t('ui.parent.tasksRowTitle')}
               badgeCount={tasksAwaitingConfirm}
             />
+            <ParentServiceRow
+              to="/parent/reports"
+              icon="📊"
+              title={t('ui.parent.reportsRowTitle')}
+              description={t('ui.parent.reportsSubtitle')}
+            />
           </div>
         </section>
 
