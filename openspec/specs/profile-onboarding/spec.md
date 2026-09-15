@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Lets demo presenters walk through a future first-login flow (role then child age) from profile settings without replacing the existing role switcher or persisting age.
+Lets demo presenters walk through a future first-login flow (role then child age) from profile settings without replacing the existing role switcher. Age selection persists `childExperience` for young (6–10) vs teen (10–12+) home layouts.
 
 ## Requirements
 
@@ -80,20 +80,6 @@ The child age selection screen SHALL display a back control, localized title «C
 - **WHEN** the user taps back on the age selection screen
 - **THEN** the role selection screen is shown again
 
-### Requirement: Age choice does not affect demo state
-
-The system SHALL NOT persist the selected age range to `kidsbank.demo`, `localStorage` onboarding keys, or any field that changes tasks, limits, goals, or shell styling. Age selection MAY exist only as ephemeral UI state on the age screen for the current visit.
-
-#### Scenario: Continue after age selection
-
-- **WHEN** the user selects any age range and taps Continue
-- **THEN** the child home at `/child` is shown and demo balances, tasks, and limits are unchanged from before entering onboarding
-
-#### Scenario: Re-enter onboarding
-
-- **WHEN** the user opens onboarding again from profile settings after completing age selection
-- **THEN** the age screen shows no pre-selected range from the prior visit (default selection per implementation, not persisted global state)
-
 ### Requirement: Onboarding screens hide child tab bar
 
 The onboarding role and age screens SHALL be full-step views without the child bottom tab bar, consistent with other full-screen child flows (e.g. card design).
@@ -102,3 +88,27 @@ The onboarding role and age screens SHALL be full-step views without the child b
 
 - **WHEN** the user is on the role or age onboarding screen
 - **THEN** the child bottom navigation tab bar is not visible
+
+### Requirement: Age choice drives child experience
+
+The system SHALL map the selected onboarding age range to `childExperience` when the user taps Continue: `6-8` and `8-10` → `young`; `10-12`, `12-14`, and `14-17` → `teen`. The mapping SHALL be persisted to `kidsbank.childExperience` and the selected range to `kidsbank.childAgeRange`. Demo balances and tasks in `kidsbank.demo` SHALL remain unchanged by age selection alone.
+
+#### Scenario: Continue after young age selection
+
+- **WHEN** the user selects `8-10` and taps Continue
+- **THEN** the young child home is shown and `kidsbank.childExperience` is `young`
+
+#### Scenario: Continue after teen age selection
+
+- **WHEN** the user selects `10-12` and taps Continue
+- **THEN** the existing teen child home is shown with the tab bar
+
+#### Scenario: Demo data unchanged by age alone
+
+- **WHEN** the user selects any age range and taps Continue
+- **THEN** the child home is shown and demo balances, tasks, and limits are unchanged from before entering onboarding
+
+#### Scenario: Re-enter onboarding restores selection
+
+- **WHEN** the user opens the age screen again after a prior Continue
+- **THEN** the previously selected age range is pre-selected

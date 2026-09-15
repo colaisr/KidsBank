@@ -1,0 +1,65 @@
+import { useTranslation } from 'react-i18next';
+
+const ACTIONS = [
+  { key: 'topUpPhone' as const, Icon: PhoneIcon },
+  { key: 'payQr' as const, Icon: QrIcon },
+  { key: 'transfer' as const, Icon: TransferIcon },
+] as const;
+
+export function YoungQuickActions() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="grid grid-cols-3 gap-2">
+      {ACTIONS.map(({ key, Icon }) => (
+        <button
+          key={key}
+          type="button"
+          className="flex flex-col items-center gap-2 rounded-card border border-border bg-surface px-2 py-3 text-center transition-colors hover:border-primary/25"
+        >
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-muted text-primary">
+            <Icon />
+          </span>
+          <span className="text-[11px] font-medium leading-tight text-text">
+            {t(`ui.childYoung.home.quickActions.${key}`)}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="7" y="3" width="10" height="18" rx="2" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M10 6h4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M12 17v1" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function QrIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="4" y="4" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <rect x="13" y="4" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <rect x="4" y="13" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M13 13h3v3h-3zM16 16h4v4h-4zM13 19h3" stroke="currentColor" strokeWidth="1.75" />
+    </svg>
+  );
+}
+
+function TransferIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M8 12h11M15 8l4 4-4 4M16 6H7a2 2 0 00-2 2v10"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

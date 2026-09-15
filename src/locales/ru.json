@@ -51,6 +51,21 @@
       "seeAll": "Все",
       "chat": "Чат с наставником"
     },
+    "childYoung": {
+      "home": {
+        "starAccount": "Звёздный счёт",
+        "openTotem": "Открыть тотема",
+        "quickActions": {
+          "topUpPhone": "Пополнить телефон",
+          "payQr": "Оплатить по QR",
+          "transfer": "Перевести деньги"
+        }
+      },
+      "totem": {
+        "title": "Тотем",
+        "placeholder": "Здесь будут «Поиграть» и «Поговорить» — в следующем шаге демо."
+      }
+    },
     "card": {
       "masked": "•• {{last4}}",
       "limit": "Лимит: {{amount}}"

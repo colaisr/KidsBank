@@ -1,13 +1,18 @@
+import { readStoredChildExperience, type ChildExperience } from './childExperience';
+
 export type Bank = 'amio' | 'evoca';
 export type Locale = 'hy' | 'ru' | 'en';
 export type Role = 'child' | 'parent';
 export type CardSkin = 'ocean' | 'space' | 'dinosaurs' | 'unicorns' | 'robots' | 'racing';
+
+export type { ChildExperience };
 
 export const STORAGE_KEYS = {
   bank: 'kidsbank.bank',
   lang: 'kidsbank.lang',
   role: 'kidsbank.role',
   cardSkin: 'kidsbank.cardSkin',
+  childExperience: 'kidsbank.childExperience',
 } as const;
 
 const VALID_BANKS: Bank[] = ['amio', 'evoca'];
@@ -46,6 +51,7 @@ export function readInitialPreferences(): {
   locale: Locale;
   role: Role;
   cardSkin: CardSkin;
+  childExperience: ChildExperience;
 } {
   const params = new URLSearchParams(window.location.search);
 
@@ -83,6 +89,7 @@ export function readInitialPreferences(): {
     locale: locale && VALID_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE,
     role,
     cardSkin: readStoredCardSkin(),
+    childExperience: readStoredChildExperience(),
   };
 }
 

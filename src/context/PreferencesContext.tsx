@@ -18,17 +18,22 @@ import {
   type CardSkin,
   type Locale,
   type Role,
+  type ChildExperience,
 } from './preferences';
+import type { OnboardingAgeRangeId } from '../data/onboardingAgeRanges';
+import { persistChildAgeSelection } from './childExperience';
 
 type PreferencesContextValue = {
   bank: Bank;
   locale: Locale;
   role: Role;
   cardSkin: CardSkin;
+  childExperience: ChildExperience;
   setBank: (bank: Bank) => void;
   setLocale: (locale: Locale) => void;
   setRole: (role: Role) => void;
   setCardSkin: (cardSkin: CardSkin) => void;
+  setChildExperienceFromAgeRange: (ageRange: OnboardingAgeRangeId) => void;
 };
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
@@ -97,6 +102,11 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     [navigate],
   );
 
+  const setChildExperienceFromAgeRange = useCallback((ageRange: OnboardingAgeRangeId) => {
+    const childExperience = persistChildAgeSelection(ageRange);
+    setPrefs((current) => ({ ...current, childExperience }));
+  }, []);
+
   useEffect(() => {
     persistBankLocale(prefs.bank, prefs.locale, prefs.cardSkin);
   }, [persistBankLocale, prefs.bank, prefs.locale, prefs.cardSkin]);
@@ -107,12 +117,25 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       locale: prefs.locale,
       role: prefs.role,
       cardSkin: prefs.cardSkin,
+      childExperience: prefs.childExperience,
       setBank,
       setLocale,
       setRole,
       setCardSkin,
+      setChildExperienceFromAgeRange,
     }),
-    [prefs.bank, prefs.locale, prefs.role, prefs.cardSkin, setBank, setLocale, setRole, setCardSkin],
+    [
+      prefs.bank,
+      prefs.locale,
+      prefs.role,
+      prefs.cardSkin,
+      prefs.childExperience,
+      setBank,
+      setLocale,
+      setRole,
+      setCardSkin,
+      setChildExperienceFromAgeRange,
+    ],
   );
 
   return <PreferencesContext.Provider value={value}>{children}</PreferencesContext.Provider>;

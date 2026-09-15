@@ -51,6 +51,21 @@
       "seeAll": "All",
       "chat": "Mentor chat"
     },
+    "childYoung": {
+      "home": {
+        "starAccount": "Star account",
+        "openTotem": "Open totem",
+        "quickActions": {
+          "topUpPhone": "Top up phone",
+          "payQr": "Pay with QR",
+          "transfer": "Send money"
+        }
+      },
+      "totem": {
+        "title": "Totem",
+        "placeholder": "Play and Talk will live here in the next demo step."
+      }
+    },
     "card": {
       "masked": "•• {{last4}}",
       "limit": "Limit: {{amount}}"

@@ -43,6 +43,7 @@ src/locales/en.json
 | Ключ | Что хранит | Сброс |
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
+| `kidsbank.childExperience`, `kidsbank.childAgeRange` | young (6–10) vs teen (10–12+) UI ребёнка | не сбрасывается кнопкой «Сбросить сценарий» |
 | `kidsbank.cardSkin` | скин карты ребёнка (`ocean` … `racing`) | «Сбросить сценарий» → `ocean` |
 | `kidsbank.demo` | живое демо v5: карта, копилка (`shareSlug`), ★, `taskStats`, задания (`templateId`, `dueTime`, `customTitle`), цели (`selected`, `redeemed`), лимит карты, кошелёк родителя, `pet`, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`, `taskReward`) | «Сбросить сценарий» в настройках или «Оформлении» |
 
@@ -66,15 +67,19 @@ src/
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
-  pages/          ChildShell (layout + Outlet), ChildHomePage,
+  pages/          ChildShell (layout + Outlet), ChildHomePage, TeenChildHomePage,
+                  child-young/YoungChildHomePage, YoungTotemPlaceholderPage,
                   ChildTasksPage, ChildGoalsPage, ChildPiggyBankPage,
                   ChildCardDesignPage,
                   ChildTransactionsPage,
                   ChildPetPage, ChildHubPage, ChildProfilePage,
+  components/child-young/  YoungChildHomeHeader, YoungQuickActions, YoungAccountRows,
+                  YoungTotemDock, YoungLionTotem
                   ParentShell, ParentHomePage, AppearancePage
   components/pet/ PetLevelBadge, PetSpeechBubble, PetCharacter, PetNeedBars,
                   PetActionButtons
-  context/        PreferencesContext (bank, locale, role, cardSkin + persistence),
+  context/        PreferencesContext (bank, locale, role, cardSkin, childExperience + persistence),
+                  childExperience.ts (age range → young|teen),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
   data/           demoBaseline v5, goalCatalog.ts, taskTemplates.ts, cardSkins.ts, starEconomy.ts,
@@ -85,9 +90,9 @@ src/
   lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge)
 ```
 
-Роуты ребёнка: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`.
+Роуты ребёнка: `/child` (teen или young home по `childExperience`), `/child/young/totem`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`, `/child/onboarding/role`, `/child/onboarding/age`.
 
-Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.demo` (v5, включает `pet` и `goals[].selected`).
+Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.childExperience`, `kidsbank.childAgeRange`, `kidsbank.demo` (v5, включает `pet` и `goals[].selected`).
 
 Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
 

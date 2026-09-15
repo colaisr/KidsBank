@@ -51,6 +51,21 @@
       "seeAll": "Բոլորը",
       "chat": "Խորհրդատուի չատ"
     },
+    "childYoung": {
+      "home": {
+        "starAccount": "Աստղային հաշիվ",
+        "openTotem": "Բացել տոտեմը",
+        "quickActions": {
+          "topUpPhone": "Լիցքավորել հեռախոսը",
+          "payQr": "Վճարել QR-ով",
+          "transfer": "Փոխանցել գումար"
+        }
+      },
+      "totem": {
+        "title": "Տոտեմ",
+        "placeholder": "«Խաղալ» և «Խոսել» հաջորդ դեմո քայլում կլինեն այստեղ։"
+      }
+    },
     "card": {
       "masked": "•• {{last4}}",
       "limit": "Սահմանաչափ՝ {{amount}}"

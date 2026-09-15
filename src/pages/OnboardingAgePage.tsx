@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ChildPageTitle } from '../components/ChildPageTitle';
 import {
+  defaultAgeRangeForExperience,
+  readStoredChildAgeRange,
+} from '../context/childExperience';
+import { usePreferences } from '../context/PreferencesContext';
+import {
   ONBOARDING_AGE_RANGE_EMOJI,
   ONBOARDING_AGE_RANGE_IDS,
   type OnboardingAgeRangeId,
@@ -11,7 +16,10 @@ import {
 export function OnboardingAgePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [selectedAge, setSelectedAge] = useState<OnboardingAgeRangeId>('10-12');
+  const { childExperience, setChildExperienceFromAgeRange } = usePreferences();
+  const [selectedAge, setSelectedAge] = useState<OnboardingAgeRangeId>(() =>
+    readStoredChildAgeRange() ?? defaultAgeRangeForExperience(childExperience),
+  );
 
   return (
     <div className="flex min-h-full flex-col bg-surface-muted">
@@ -71,7 +79,10 @@ export function OnboardingAgePage() {
       <div className="sticky bottom-0 border-t border-border bg-surface px-4 py-4">
         <button
           type="button"
-          onClick={() => navigate('/child')}
+          onClick={() => {
+            setChildExperienceFromAgeRange(selectedAge);
+            navigate('/child');
+          }}
           className="w-full rounded-card bg-primary py-3.5 font-heading text-base font-semibold text-white transition-opacity hover:opacity-95"
         >
           {t('ui.onboarding.age.continue')}
