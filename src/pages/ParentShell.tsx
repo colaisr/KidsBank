@@ -14,6 +14,7 @@ export function ParentShell() {
     location.pathname === '/parent/reports' ||
     location.pathname === '/parent/spending-history' ||
     location.pathname === '/parent/goals';
+  const isParentHome = location.pathname === '/parent';
   const { demo, setDemo } = useDemoState();
 
   return (
@@ -21,14 +22,20 @@ export function ParentShell() {
       <div className="kb-parent-shell flex min-h-0 flex-1 flex-col bg-surface-muted">
         {!isParentSubScreen ? (
           <>
-            <AppHeader titleKey="ui.role.parentTitle" presenterId="parent-home" />
-            <ParentChildHeader
-              children={demo.children}
-              activeChildId={demo.activeChildId}
-              onSelectChild={(childId) =>
-                setDemo((s) => ({ ...s, activeChildId: childId }))
-              }
+            <AppHeader
+              titleKey="ui.role.parentTitle"
+              presenterId="parent-home"
+              compact={isParentHome}
             />
+            {!isParentHome ? (
+              <ParentChildHeader
+                children={demo.children}
+                activeChildId={demo.activeChildId}
+                onSelectChild={(childId) =>
+                  setDemo((s) => ({ ...s, activeChildId: childId }))
+                }
+              />
+            ) : null}
           </>
         ) : null}
         <div

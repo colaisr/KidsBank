@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next';
+import { ParentChildHeader } from '../components/ParentChildHeader';
+import { ParentServiceRow } from '../components/ParentServiceRow';
 import { useDemoState } from '../context/DemoStateContext';
+import { useParentLocation } from '../context/ParentLocationContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
 import { countTasksWaitingParent } from '../lib/tasks';
-import { ParentServiceRow } from '../components/ParentServiceRow';
-import { useParentLocation } from '../context/ParentLocationContext';
 
 export function ParentHomePage() {
   const { t } = useTranslation();
   const { locale } = usePreferences();
-  const { demo } = useDemoState();
+  const { demo, setDemo } = useDemoState();
 
   const { mode } = useParentLocation();
   const tasksAwaitingConfirm = countTasksWaitingParent(demo.tasks);
@@ -25,29 +26,38 @@ export function ParentHomePage() {
 
   return (
     <>
-      <div
-        className="px-4 pb-6 pt-8 text-white"
-        style={{ background: 'var(--kb-header-gradient)' }}
-      >
-        <p className="font-heading text-2xl font-semibold">{t('ui.shell.parentGreeting')}</p>
-        <p className="mt-1 text-sm text-white/80">{t('ui.parent.subtitle')}</p>
+      <div className="text-white" style={{ background: 'var(--kb-header-gradient)' }}>
+        <ParentChildHeader
+          variant="hero"
+          children={demo.children}
+          activeChildId={demo.activeChildId}
+          onSelectChild={(childId) => setDemo((s) => ({ ...s, activeChildId: childId }))}
+        />
 
-        <div className="mt-5 rounded-card border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
-          <p className="text-xs font-medium text-white/70">{t('ui.parent.childBalance')}</p>
-          <p className="mt-1 font-heading text-3xl font-semibold">
-            {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
-          </p>
-          <p className="mt-1 text-sm text-white/80">
-            {t('ui.parent.piggyBalance', {
-              amount: formatCurrency(demo.piggy.balance, locale),
-            })}
-          </p>
+        <div className="px-4 pb-3.5 pt-1">
+          <div className="rounded-card border border-white/20 bg-white/10 px-3.5 py-3 backdrop-blur-sm">
+            <div className="flex items-end justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[11px] font-medium leading-tight text-white/70">
+                  {t('ui.parent.childBalance')}
+                </p>
+                <p className="mt-0.5 font-heading text-xl font-semibold leading-tight tracking-tight">
+                  {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
+                </p>
+              </div>
+              <p className="shrink-0 text-right text-[11px] font-medium leading-snug text-white/80">
+                {t('ui.parent.piggyBalance', {
+                  amount: formatCurrency(demo.piggy.balance, locale),
+                })}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <main className="bg-surface-muted px-4 pb-8 pt-5">
+      <main className="bg-surface-muted px-4 pb-4 pt-3">
         <section>
-          <h2 className="mb-3 font-heading text-base font-semibold text-text">
+          <h2 className="mb-2 font-heading text-sm font-semibold text-text">
             {t('ui.parent.services')}
           </h2>
           <div className="space-y-2">
