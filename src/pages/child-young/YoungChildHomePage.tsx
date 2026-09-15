@@ -17,29 +17,29 @@ export function YoungChildHomePage() {
   const { locale, bank } = usePreferences();
   const productName =
     bank === 'amio' ? t('ui.home.productAmio') : t('ui.home.productEvoca');
-  const homeTasks = getActiveTasks(demo.tasks).slice(0, 2);
+  const homeTask = getActiveTasks(demo.tasks)[0];
 
   return (
-    <div className="flex min-h-full flex-col bg-surface-muted">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-surface-muted">
       <YoungChildHomeHeader />
 
-      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 pb-4 pt-4">
+      <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden px-4 pb-1 pt-2.5">
         <Link
           to="/child/card-design"
-          className="kb-pay-card block rounded-card px-5 py-5 shadow-lg transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]"
+          className="kb-pay-card block shrink-0 rounded-card px-4 py-3.5 shadow-lg transition-transform duration-200 active:scale-[0.99]"
           aria-label={t('ui.cardDesign.title')}
         >
           <div className="relative z-10 flex items-start justify-between">
             <CardChipIcon />
-            <span className="text-lg text-accent-kids" aria-hidden="true">★</span>
+            <span className="text-base text-accent-kids" aria-hidden="true">★</span>
           </div>
-          <p className="relative z-10 mt-4 font-heading text-sm font-semibold tracking-wide text-white/90">
+          <p className="relative z-10 mt-2 font-heading text-xs font-semibold tracking-wide text-white/90">
             {productName}
           </p>
-          <p className="relative z-10 mt-1 font-medium tracking-[0.12em] text-white/80">
+          <p className="relative z-10 mt-0.5 font-medium tracking-[0.12em] text-xs text-white/80">
             {t('ui.card.masked', { last4: demo.card.last4 })}
           </p>
-          <p className="relative z-10 mt-4 font-heading text-3xl font-semibold tracking-tight">
+          <p className="relative z-10 mt-2 font-heading text-2xl font-semibold tracking-tight">
             {formatCurrency(demo.card.balance, locale, 'AMD', 2)}
           </p>
           <span className="kb-card-mark" aria-hidden="true" />
@@ -48,18 +48,17 @@ export function YoungChildHomePage() {
         <YoungQuickActions />
         <YoungAccountRows />
 
-        <section>
-          <HomeSectionHeading
-            titleKey="ui.home.tasks"
-            to="/child/tasks"
-            presenterId="child-tasks"
-          />
-          <div className="space-y-2">
-            {homeTasks.map((task) => (
-              <TaskCard key={task.id} task={task} compact />
-            ))}
-          </div>
-        </section>
+        {homeTask ? (
+          <section className="min-h-0 shrink pt-0.5">
+            <HomeSectionHeading
+              titleKey="ui.home.tasks"
+              to="/child/tasks"
+              presenterId="child-tasks"
+              dense
+            />
+            <TaskCard task={homeTask} compact />
+          </section>
+        ) : null}
       </div>
 
       <YoungTotemDock />

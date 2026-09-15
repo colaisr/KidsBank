@@ -7,9 +7,9 @@ export function YoungTotemDock() {
 
   return (
     <div
-      className="shrink-0 border-t border-border bg-surface px-4 pt-3"
+      className="shrink-0 border-t border-border bg-surface px-4 pt-1.5"
       style={{
-        paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+        paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))',
         borderTopLeftRadius: '1.75rem',
         borderTopRightRadius: '1.75rem',
         boxShadow: '0 -8px 24px rgba(15, 23, 42, 0.08)',
@@ -17,10 +17,10 @@ export function YoungTotemDock() {
     >
       <Link
         to="/child/young/totem"
-        className="mx-auto flex max-w-xs flex-col items-center gap-1 rounded-2xl py-1 transition-transform active:scale-[0.98]"
+        className="mx-auto flex max-w-xs flex-col items-center rounded-2xl py-0.5 transition-transform active:scale-[0.98]"
         aria-label={t('ui.childYoung.home.openTotem')}
       >
-        <YoungLionTotem className="h-[5.5rem] w-[5.5rem]" />
+        <YoungLionTotem className="h-[4.25rem] w-[4.25rem]" />
       </Link>
     </div>
   );

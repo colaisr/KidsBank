@@ -14,7 +14,7 @@ export function YoungChildHomeHeader() {
 
   return (
     <header
-      className="px-4 pb-5 pt-3 text-white"
+      className="shrink-0 px-4 pb-3 pt-2.5 text-white"
       style={{ background: 'var(--kb-header-gradient)' }}
     >
       <div className="flex items-center justify-between gap-3">
@@ -23,10 +23,10 @@ export function YoungChildHomeHeader() {
           state={{ from: location.pathname }}
           className="flex min-w-0 items-center gap-2.5 rounded-2xl py-1 pr-2 transition-opacity hover:opacity-95"
         >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/20 font-heading text-lg font-semibold">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 font-heading text-base font-semibold">
             {demoChild.avatarLetter}
           </span>
-          <span className="truncate font-heading text-lg font-semibold">{childName}</span>
+          <span className="truncate font-heading text-base font-semibold">{childName}</span>
         </Link>
         <div
           className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 font-heading text-sm font-semibold text-text shadow-sm"

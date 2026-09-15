@@ -10,32 +10,32 @@ export function YoungAccountRows() {
   const { demo } = useDemoState();
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       <Link
         to="/child/piggy"
-        className="flex items-center gap-3 rounded-card border border-border bg-surface px-4 py-3.5 transition-colors hover:border-primary/30"
+        className="flex items-center gap-2.5 rounded-card border border-border bg-surface px-3 py-2.5 transition-colors hover:border-primary/30"
       >
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <PiggyIcon />
         </span>
-        <span className="min-w-0 flex-1 font-heading text-base font-semibold text-text">
+        <span className="min-w-0 flex-1 font-heading text-sm font-semibold text-text">
           {t('ui.home.piggy')}
         </span>
-        <span className="shrink-0 font-heading text-base font-semibold text-text">
+        <span className="shrink-0 font-heading text-sm font-semibold text-text">
           {formatCurrency(demo.piggy.balance, locale)}
         </span>
       </Link>
       <Link
         to="/child/goals"
-        className="flex items-center gap-3 rounded-card border border-border bg-surface px-4 py-3.5 transition-colors hover:border-primary/30"
+        className="flex items-center gap-2.5 rounded-card border border-border bg-surface px-3 py-2.5 transition-colors hover:border-primary/30"
       >
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-kids/15 text-lg text-accent-kids">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-kids/15 text-base text-accent-kids">
           ★
         </span>
-        <span className="min-w-0 flex-1 font-heading text-base font-semibold text-text">
+        <span className="min-w-0 flex-1 font-heading text-sm font-semibold text-text">
           {t('ui.childYoung.home.starAccount')}
         </span>
-        <span className="shrink-0 font-heading text-base font-semibold text-text">
+        <span className="shrink-0 font-heading text-sm font-semibold text-text">
           {formatNumber(demo.starsBalance, locale)}
         </span>
       </Link>

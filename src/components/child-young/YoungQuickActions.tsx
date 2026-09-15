@@ -15,12 +15,12 @@ export function YoungQuickActions() {
         <button
           key={key}
           type="button"
-          className="flex flex-col items-center gap-2 rounded-card border border-border bg-surface px-2 py-3 text-center transition-colors hover:border-primary/25"
+          className="flex flex-col items-center gap-1 rounded-card border border-border bg-surface px-1.5 py-2 text-center transition-colors hover:border-primary/25"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-muted text-primary">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-muted text-primary">
             <Icon />
           </span>
-          <span className="text-[11px] font-medium leading-tight text-text">
+          <span className="text-[10px] font-medium leading-tight text-text">
             {t(`ui.childYoung.home.quickActions.${key}`)}
           </span>
         </button>
