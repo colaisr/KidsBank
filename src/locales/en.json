@@ -70,7 +70,24 @@
         "play": "Play",
         "talk": "Talk",
         "playBubble": "Yay! Leo bounced — a real mini-game is coming soon ★",
-        "talkBubble": "Hi! I'm Leo. Great job saving stars!"
+        "talkBubble": "Hi! I'm Leo. Great job saving stars!",
+        "level": "Level {{level}}",
+        "playPrompt": "Wanna play? 🎉",
+        "chat": {
+          "online": "online",
+          "greeting": "Hi! 👋 What do you want to talk about?",
+          "placeholder": "Ask Leo…",
+          "send": "Send",
+          "dictation": "Dictation",
+          "typing": "Leo is thinking…",
+          "error": "Could not get a reply. Try again.",
+          "dictationUnsupported": "Dictation works in Chrome on phone or desktop",
+          "dictationError": "Could not hear you. Check the microphone.",
+          "quick": {
+            "countDays": "Count days",
+            "whatIsPiggy": "What is a piggy bank?"
+          }
+        }
       },
       "qrPay": {
         "title": "Pay by QR",

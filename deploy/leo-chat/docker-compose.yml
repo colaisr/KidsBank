@@ -1,0 +1,12 @@
+services:
+  leo-chat:
+    image: node:22-alpine
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./:/app:ro
+    env_file:
+      - .env
+    command: ['node', 'server.mjs']
+    ports:
+      - '127.0.0.1:8091:8091'

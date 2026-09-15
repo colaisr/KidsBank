@@ -7,8 +7,10 @@ export function ChildShell() {
   const location = useLocation();
   const hideTabBar =
     location.pathname.startsWith('/child/onboarding') || childExperience === 'young';
+  const path = location.pathname.replace(/\/$/, '');
   const lockYoungHomeViewport =
-    childExperience === 'young' && location.pathname.replace(/\/$/, '') === '/child';
+    childExperience === 'young' &&
+    (path === '/child' || path === '/child/young/totem');
 
   return (
     <div className="kb-child-shell flex min-h-0 flex-1 flex-col bg-surface-muted" data-card-skin={cardSkin}>

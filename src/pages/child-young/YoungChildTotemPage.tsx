@@ -1,30 +1,20 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { YoungLeoChat } from '../../components/child-young/YoungLeoChat';
+import { YoungLeoPetActions } from '../../components/child-young/YoungLeoPetActions';
+import { YoungLeoPetNeedBars } from '../../components/child-young/YoungLeoPetNeedBars';
 import { YoungLionTotem } from '../../components/child-young/YoungLionTotem';
+import { useYoungLeoPet } from '../../hooks/useYoungLeoPet';
+import { petLevel } from '../../lib/pet';
 
 export function YoungChildTotemPage() {
   const { t } = useTranslation();
-  const [reactToken, setReactToken] = useState(0);
-  const [bubble, setBubble] = useState<'none' | 'play' | 'talk'>('none');
-
-  function bumpLion() {
-    setReactToken((n) => n + 1);
-  }
-
-  function handlePlay() {
-    bumpLion();
-    setBubble('play');
-  }
-
-  function handleTalk() {
-    bumpLion();
-    setBubble('talk');
-  }
+  const { demo, levelUpLevel, reactToken, handleAction } = useYoungLeoPet();
+  const level = petLevel(demo.pet.xp);
 
   return (
-    <div className="flex min-h-full flex-col bg-surface-muted">
-      <header className="border-b border-border bg-surface px-4 pb-4 pt-3">
+    <div className="flex h-full min-h-0 flex-col bg-surface-muted">
+      <header className="shrink-0 border-b border-border bg-surface px-4 pb-3 pt-3">
         <div className="flex items-center gap-3">
           <Link
             to="/child"
@@ -33,59 +23,48 @@ export function YoungChildTotemPage() {
           >
             <span aria-hidden="true">←</span>
           </Link>
-          <h1 className="min-w-0 flex-1 text-center font-heading text-lg font-semibold text-text pr-9">
-            {t('ui.childYoung.totem.title')}
-          </h1>
+          <div className="min-w-0 flex-1 text-center pr-9">
+            <h1 className="font-heading text-lg font-semibold text-text">
+              {t('ui.childYoung.totem.leoName')}
+            </h1>
+            <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-accent-kids/20 px-2.5 py-0.5 text-xs font-semibold text-accent-kids-ink">
+              <span aria-hidden="true">★</span>
+              {t('ui.childYoung.totem.level', { level })}
+            </div>
+          </div>
         </div>
       </header>
 
-      <div className="flex flex-1 flex-col items-center px-6 pb-10 pt-8">
-        <p className="font-heading text-lg font-semibold text-text">{t('ui.childYoung.totem.leoName')}</p>
-        <p className="mt-1 text-sm text-text-muted">{t('ui.childYoung.totem.subtitle')}</p>
-
-        <button
-          type="button"
-          onClick={bumpLion}
-          className="mt-8 rounded-3xl p-4 transition-transform active:scale-[0.98]"
-          aria-label={t('ui.childYoung.totem.tapLeo')}
-        >
-          <YoungLionTotem
-            className="h-40 w-40"
-            animate
-            showGlow
-            reactToken={reactToken}
-          />
-        </button>
-
-        {bubble !== 'none' ? (
-          <p
-            className="mt-4 max-w-xs rounded-2xl border border-border bg-surface px-4 py-3 text-center text-sm font-medium text-text shadow-sm"
-            role="status"
-          >
-            {bubble === 'play'
-              ? t('ui.childYoung.totem.playBubble')
-              : t('ui.childYoung.totem.talkBubble')}
-          </p>
-        ) : (
-          <p className="mt-4 text-sm text-text-muted">{t('ui.childYoung.totem.tapHint')}</p>
-        )}
-
-        <div className="mt-auto flex w-full max-w-sm gap-3 pt-10">
-          <button
-            type="button"
-            onClick={handlePlay}
-            className="flex-1 rounded-full bg-primary py-3.5 font-heading text-sm font-semibold text-white shadow-md"
-          >
-            {t('ui.childYoung.totem.play')}
-          </button>
-          <button
-            type="button"
-            onClick={handleTalk}
-            className="flex-1 rounded-full border border-primary bg-surface py-3.5 font-heading text-sm font-semibold text-primary"
-          >
-            {t('ui.childYoung.totem.talk')}
-          </button>
+      {levelUpLevel !== null ? (
+        <div className="mx-4 mt-2 shrink-0 rounded-card bg-accent-kids px-3 py-2 text-center text-xs font-semibold text-white">
+          {t('ui.pet.levelUp', { level: levelUpLevel })}
         </div>
+      ) : null}
+
+      <div className="shrink-0 px-3 py-3">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+          <YoungLeoPetActions
+            starsBalance={demo.starsBalance}
+            taskBuff={demo.pet.taskBuff}
+            onAction={handleAction}
+          />
+          <div className="flex flex-col items-center">
+            <p className="mb-1 max-w-[9rem] rounded-2xl bg-surface px-2.5 py-1.5 text-center text-[10px] font-medium leading-snug text-text shadow-sm ring-1 ring-border">
+              {t('ui.childYoung.totem.playPrompt')}
+            </p>
+            <YoungLionTotem
+              className="h-[5.5rem] w-[5.5rem]"
+              animate
+              showGlow
+              reactToken={reactToken}
+            />
+          </div>
+          <YoungLeoPetNeedBars fullness={demo.pet.fullness} joy={demo.pet.joy} />
+        </div>
+      </div>
+
+      <div className="flex min-h-0 flex-1 flex-col px-2 pb-2">
+        <YoungLeoChat />
       </div>
     </div>
   );

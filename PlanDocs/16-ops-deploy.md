@@ -59,7 +59,8 @@ rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@62.113.106.19:/va
 | `/` | KidsBank (этот репо, без изменений в deploy) |
 | `/aitutor/` | AI-tutor UI |
 | `/api/` | AI-tutor API |
+| `/api/kidsbank/` | KidsBank Leo chat proxy → `127.0.0.1:8091` (Docker `deploy/leo-chat`, ключ `POLZA_API_KEY` только в `/opt/kidsbank/leo-chat/.env`) |
 
-**KidsBank CI/CD не меняется** — rsync в `/var/www/kidsbank/`. Nginx на сервере расширяется из репозитория AItutor (`deploy/nginx/shared-host.conf`); перед применением делается backup `kidsbank.bak.*`.
+**KidsBank CI/CD не меняется** — rsync в `/var/www/kidsbank/`. Nginx: блок `/api/kidsbank/` **выше** `/api/` (AI-tutor). Сниппет — `deploy/leo-chat/nginx-snippet.conf`. Leo-chat на VPS: `rsync deploy/leo-chat/` → `/opt/kidsbank/leo-chat/`, `docker compose up -d`. Nginx на сервере также расширяется из репозитория AItutor (`deploy/nginx/shared-host.conf`); перед применением делается backup `kidsbank.bak.*`.
 
 Если после обновления nginx KidsBank перестал открываться — восстановить backup из `/etc/nginx/sites-available/kidsbank.bak.*`.
