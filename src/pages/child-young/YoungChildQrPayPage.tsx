@@ -9,6 +9,7 @@ import {
   YOUNG_QR_PAY_MERCHANT_KEY,
   YOUNG_QR_SCAN_MS,
 } from '../../data/youngQrPay';
+import { DemoMerchantQrGraphic } from '../../components/child-young/DemoMerchantQrGraphic';
 import { formatCurrency } from '../../lib/format';
 
 type QrPhase = 'scanning' | 'confirm';
@@ -164,16 +165,23 @@ export function YoungChildQrPayPage() {
 
 function QrViewfinder({ active }: { active: boolean }) {
   const corner =
-    'absolute h-10 w-10 border-[#f97316] border-solid';
+    'absolute z-10 h-10 w-10 border-[#f97316] border-solid';
   return (
     <div className="relative h-full w-full max-h-[280px] max-w-[280px]">
+      <div
+        className="absolute inset-[11%] overflow-hidden rounded-lg bg-white shadow-[inset_0_0_24px_rgba(0,0,0,0.35)]"
+        aria-hidden="true"
+      >
+        <DemoMerchantQrGraphic className="scale-[1.02]" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0c1018]/20 via-transparent to-[#0c1018]/30" />
+      </div>
       <span className={`${corner} left-0 top-0 border-l-[3px] border-t-[3px] rounded-tl-md`} />
       <span className={`${corner} right-0 top-0 border-r-[3px] border-t-[3px] rounded-tr-md`} />
       <span className={`${corner} bottom-0 left-0 border-b-[3px] border-l-[3px] rounded-bl-md`} />
       <span className={`${corner} bottom-0 right-0 border-b-[3px] border-r-[3px] rounded-br-md`} />
       {active ? (
         <span
-          className="pointer-events-none absolute left-[12%] right-[12%] top-[18%] h-0.5 rounded-full bg-[#f97316] shadow-[0_0_12px_rgba(249,115,22,0.8)] young-qr-scan-line"
+          className="pointer-events-none absolute z-20 left-[12%] right-[12%] top-[18%] h-0.5 rounded-full bg-[#f97316] shadow-[0_0_12px_rgba(249,115,22,0.8)] young-qr-scan-line"
           aria-hidden="true"
         />
       ) : null}
