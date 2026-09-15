@@ -158,6 +158,13 @@
       "reportsRowTitle": "Reports",
       "reportsSubtitle": "Child spending by period",
       "spendingHistoryRowTitle": "Spending history",
+      "goalsRowTitle": "Goals",
+      "goalsSubtitle": "Create and track",
+      "goalsScreen": {
+        "title": "Goals",
+        "newGoal": "New goal",
+        "sectionActive": "Active goals"
+      },
       "spendingHistoryScreen": {
         "title": "Spending history",
         "monthSpentLabel": "Spent this month"

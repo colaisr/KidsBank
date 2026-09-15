@@ -53,7 +53,7 @@ The system SHALL support client-side navigation between the role shell home, the
 
 ### Requirement: Parent routes support nested screens
 
-The system SHALL nest parent feature routes under `/parent` using a parent shell with an outlet. Index route `/parent` SHALL render the parent home dashboard; `/parent/geolocation`, `/parent/transfer`, `/parent/limits`, `/parent/tasks`, `/parent/reports`, and `/parent/spending-history` SHALL render their screens — without full page reload.
+The system SHALL nest parent feature routes under `/parent` using a parent shell with an outlet. Index route `/parent` SHALL render the parent home dashboard; `/parent/geolocation`, `/parent/transfer`, `/parent/limits`, `/parent/tasks`, `/parent/reports`, `/parent/spending-history`, and `/parent/goals` SHALL render their screens — without full page reload.
 
 #### Scenario: Parent geolocation route
 
@@ -84,6 +84,11 @@ The system SHALL nest parent feature routes under `/parent` using a parent shell
 
 - **WHEN** the user navigates to `/parent/spending-history`
 - **THEN** the spending history page renders in the outlet with sub-screen chrome
+
+#### Scenario: Parent goals route
+
+- **WHEN** the user navigates to `/parent/goals`
+- **THEN** the goals page renders in the outlet with sub-screen chrome
 
 #### Scenario: Unknown parent path
 

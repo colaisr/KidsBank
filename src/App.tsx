@@ -17,6 +17,7 @@ import { OnboardingRolePage } from './pages/OnboardingRolePage';
 import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
 import { ParentGeolocationPage } from './pages/ParentGeolocationPage';
+import { ParentGoalsPage } from './pages/ParentGoalsPage';
 import { ParentHomePage } from './pages/ParentHomePage';
 import { ParentLimitsPage } from './pages/ParentLimitsPage';
 import { ParentReportsPage } from './pages/ParentReportsPage';
@@ -60,6 +61,7 @@ export default function App() {
               <Route path="tasks" element={<ParentTasksPage />} />
               <Route path="reports" element={<ParentReportsPage />} />
               <Route path="spending-history" element={<ParentSpendingHistoryPage />} />
+              <Route path="goals" element={<ParentGoalsPage />} />
               <Route path="*" element={<Navigate to="/parent" replace />} />
             </Route>
             <Route path="/appearance" element={<AppearancePage />} />

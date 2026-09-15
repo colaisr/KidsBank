@@ -158,6 +158,13 @@
       "reportsRowTitle": "Հաշվետվություններ",
       "reportsSubtitle": "Երեխայի ծախսերն ըստ ժամանակաշրջանի",
       "spendingHistoryRowTitle": "Ծախսերի պատմություն",
+      "goalsRowTitle": "Նպատակներ",
+      "goalsSubtitle": "Ստեղծել և հետևել",
+      "goalsScreen": {
+        "title": "Նպատակներ",
+        "newGoal": "Նոր նպատակ",
+        "sectionActive": "Ակտիվ նպատակներ"
+      },
       "spendingHistoryScreen": {
         "title": "Ծախսերի պատմություն",
         "monthSpentLabel": "Այս ամիս ծախսված է"

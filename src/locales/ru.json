@@ -158,6 +158,13 @@
       "reportsRowTitle": "Отчёты",
       "reportsSubtitle": "Траты ребёнка по периодам",
       "spendingHistoryRowTitle": "История трат",
+      "goalsRowTitle": "Цели",
+      "goalsSubtitle": "Создать и отслеживать",
+      "goalsScreen": {
+        "title": "Цели",
+        "newGoal": "Новая цель",
+        "sectionActive": "Активные цели"
+      },
       "spendingHistoryScreen": {
         "title": "История трат",
         "monthSpentLabel": "Потрачено в этом месяце"
