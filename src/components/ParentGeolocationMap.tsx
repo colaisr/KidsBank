@@ -16,17 +16,18 @@ type ParentGeolocationMapProps = {
   savedPlaces: DemoSavedPlace[];
   spendMarkers: Array<{ tx: DemoTransaction; position: LatLng }>;
   focusPosition: LatLng | null;
+  focusTick: number;
   onSpendClick: (tx: DemoTransaction) => void;
 };
 
-function FlyTo({ position }: { position: LatLng | null }) {
+function FlyTo({ position, focusTick }: { position: LatLng | null; focusTick: number }) {
   const map = useMap();
   useEffect(() => {
-    if (!position) {
+    if (!position || focusTick === 0) {
       return;
     }
-    map.flyTo([position.lat, position.lng], Math.max(map.getZoom(), 16), { duration: 0.6 });
-  }, [map, position?.lat, position?.lng, position]);
+    map.flyTo([position.lat, position.lng], Math.max(map.getZoom(), 17), { duration: 0.55 });
+  }, [map, position, focusTick]);
   return null;
 }
 
@@ -42,8 +43,13 @@ function childMarkerIcon(initial: string, tagLabel: string) {
   });
 }
 
-function spendMarkerIcon(kind: 'shop' | 'cafe') {
-  const inner = kind === 'cafe' ? '🛒' : '▦';
+function spendMarkerIcon(merchantKey?: string) {
+  const inner =
+    merchantKey === 'cafe' || merchantKey === 'supermarket'
+      ? '🛒'
+      : merchantKey === 'bookstore'
+        ? '📚'
+        : '▦';
   return L.divIcon({
     className: 'kb-map-marker-root',
     html: `<div class="kb-map-spend-marker">${inner}</div>`,
@@ -70,6 +76,7 @@ export function ParentGeolocationMap({
   savedPlaces,
   spendMarkers,
   focusPosition,
+  focusTick,
   onSpendClick,
 }: ParentGeolocationMapProps) {
   const placePositions = useMemo(
@@ -90,10 +97,10 @@ export function ParentGeolocationMap({
       attributionControl
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <FlyTo position={focusPosition} />
+      <FlyTo position={focusPosition} focusTick={focusTick} />
       <Marker
         position={[childPosition.lat, childPosition.lng]}
         icon={childMarkerIcon(childInitial, mapTagLabel)}
@@ -111,7 +118,8 @@ export function ParentGeolocationMap({
         <Marker
           key={tx.id}
           position={[position.lat, position.lng]}
-          icon={spendMarkerIcon(tx.merchantKey === 'cafe' ? 'cafe' : 'shop')}
+          icon={spendMarkerIcon(tx.merchantKey)}
+          zIndexOffset={500}
           eventHandlers={{
             click: () => onSpendClick(tx),
           }}

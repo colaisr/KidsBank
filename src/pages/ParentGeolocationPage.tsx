@@ -30,6 +30,7 @@ export function ParentGeolocationPage() {
   const [sheet, setSheet] = useState<SheetKind>(null);
   const [selectedSpend, setSelectedSpend] = useState<DemoTransaction | null>(null);
   const [focusPosition, setFocusPosition] = useState<{ lat: number; lng: number } | null>(null);
+  const [focusTick, setFocusTick] = useState(0);
 
   const activeChild =
     demo.children.find((c) => c.id === demo.activeChildId) ?? demo.children[0];
@@ -70,7 +71,22 @@ export function ParentGeolocationPage() {
           time: relativeTime,
         });
 
+  function focusSpendOnMap(tx: DemoTransaction) {
+    const row = spendMarkers.find((marker) => marker.tx.id === tx.id);
+    if (row) {
+      setFocusPosition({ lat: row.position.lat, lng: row.position.lng });
+      setFocusTick((tick) => tick + 1);
+    }
+  }
+
   function openSpendDetail(tx: DemoTransaction) {
+    focusSpendOnMap(tx);
+    setSelectedSpend(tx);
+    setSheet('spend-detail');
+  }
+
+  function selectSpendFromList(tx: DemoTransaction) {
+    focusSpendOnMap(tx);
     setSelectedSpend(tx);
     setSheet('spend-detail');
   }
@@ -78,6 +94,7 @@ export function ParentGeolocationPage() {
   function focusSavedPlace(place: DemoSavedPlace) {
     const position = resolvePlacePosition(place, mode, anchor);
     setFocusPosition(position);
+    setFocusTick((tick) => tick + 1);
     setSheet(null);
   }
 
@@ -101,6 +118,7 @@ export function ParentGeolocationPage() {
             savedPlaces={demo.savedPlaces}
             spendMarkers={spendMarkers}
             focusPosition={focusPosition}
+            focusTick={focusTick}
             onSpendClick={openSpendDetail}
           />
         </div>
@@ -178,7 +196,7 @@ export function ParentGeolocationPage() {
             <li key={tx.id}>
               <button
                 type="button"
-                onClick={() => openSpendDetail(tx)}
+                onClick={() => selectSpendFromList(tx)}
                 className="flex w-full items-center justify-between gap-3 rounded-card border border-border bg-surface-muted px-4 py-3 text-left hover:border-primary/30"
               >
                 <span className="min-w-0">

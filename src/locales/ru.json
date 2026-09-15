@@ -329,7 +329,9 @@
     },
     "merchants": {
       "sweetShop": "Sweet Shop",
-      "cafe": "Кафе"
+      "cafe": "Кафе",
+      "supermarket": "Супермаркет",
+      "bookstore": "Книжный"
     },
     "places": {
       "school27": "Школа №27",

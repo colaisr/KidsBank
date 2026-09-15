@@ -329,7 +329,9 @@
     },
     "merchants": {
       "sweetShop": "Sweet Shop",
-      "cafe": "Սրճարան"
+      "cafe": "Սրճարան",
+      "supermarket": "Սուպերմարկետ",
+      "bookstore": "Գրադարան"
     },
     "places": {
       "school27": "Դպրոց №27",

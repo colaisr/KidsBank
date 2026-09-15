@@ -306,6 +306,11 @@ function createTransactionsSeed(): DemoTransaction[] {
   todaySpend.setHours(14, 20, 0, 0);
   const todayCafe = new Date(now);
   todayCafe.setHours(12, 5, 0, 0);
+  const todaySupermarket = new Date(now);
+  todaySupermarket.setHours(11, 15, 0, 0);
+  const yesterdayBookstore = new Date(now);
+  yesterdayBookstore.setDate(yesterdayBookstore.getDate() - 1);
+  yesterdayBookstore.setHours(17, 40, 0, 0);
   const todayCashback = new Date(now);
   todayCashback.setHours(14, 21, 0, 0);
   const yesterdayMom = new Date(now);
@@ -346,6 +351,26 @@ function createTransactionsSeed(): DemoTransaction[] {
       mapLat: 40.1788,
       mapLng: 44.5125,
       liveOffsetMeters: { east: 110, north: -90 },
+    },
+    {
+      id: 'tx-supermarket',
+      typeId: 'spend',
+      amount: 2450,
+      merchantKey: 'supermarket',
+      at: todaySupermarket.toISOString(),
+      mapLat: 40.1796,
+      mapLng: 44.5098,
+      liveOffsetMeters: { east: -240, north: -130 },
+    },
+    {
+      id: 'tx-bookstore',
+      typeId: 'spend',
+      amount: 890,
+      merchantKey: 'bookstore',
+      at: yesterdayBookstore.toISOString(),
+      mapLat: 40.1832,
+      mapLng: 44.5168,
+      liveOffsetMeters: { east: 200, north: 210 },
     },
     {
       id: 'tx-cashback',

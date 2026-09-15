@@ -329,7 +329,9 @@
     },
     "merchants": {
       "sweetShop": "Sweet Shop",
-      "cafe": "Café"
+      "cafe": "Café",
+      "supermarket": "Supermarket",
+      "bookstore": "Bookstore"
     },
     "places": {
       "school27": "School #27",
