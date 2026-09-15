@@ -63,7 +63,14 @@
       },
       "totem": {
         "title": "Totem",
-        "placeholder": "Play and Talk will live here in the next demo step."
+        "leoName": "Leo",
+        "subtitle": "Your lion cub buddy",
+        "tapLeo": "Pet Leo",
+        "tapHint": "Tap Leo — he loves it!",
+        "play": "Play",
+        "talk": "Talk",
+        "playBubble": "Yay! Leo bounced — a real mini-game is coming soon ★",
+        "talkBubble": "Hi! I'm Leo. Great job saving stars!"
       },
       "qrPay": {
         "title": "Pay by QR",

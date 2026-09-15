@@ -20,7 +20,7 @@ export function YoungTotemDock() {
         className="mx-auto flex max-w-xs flex-col items-center rounded-2xl py-0.5 transition-transform active:scale-[0.98]"
         aria-label={t('ui.childYoung.home.openTotem')}
       >
-        <YoungLionTotem className="h-[4.25rem] w-[4.25rem]" />
+        <YoungLionTotem className="h-[4.25rem] w-[4.25rem]" animate showGlow />
       </Link>
     </div>
   );

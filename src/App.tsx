@@ -18,7 +18,7 @@ import { YoungPhoneTopUpRoute } from './pages/child-young/YoungPhoneTopUpRoute';
 import { YoungQrPayRoute } from './pages/child-young/YoungQrPayRoute';
 import { YoungStarAccountRoute } from './pages/child-young/YoungStarAccountRoute';
 import { YoungTransferRoute } from './pages/child-young/YoungTransferRoute';
-import { YoungTotemPlaceholderPage } from './pages/child-young/YoungTotemPlaceholderPage';
+import { YoungTotemRoute } from './pages/child-young/YoungTotemRoute';
 import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
 import { ParentGeolocationPage } from './pages/ParentGeolocationPage';
@@ -56,7 +56,7 @@ export default function App() {
               <Route path="profile" element={<ChildProfilePage />} />
               <Route path="onboarding/role" element={<OnboardingRolePage />} />
               <Route path="onboarding/age" element={<OnboardingAgePage />} />
-              <Route path="young/totem" element={<YoungTotemPlaceholderPage />} />
+              <Route path="young/totem" element={<YoungTotemRoute />} />
               <Route path="young/phone-topup" element={<YoungPhoneTopUpRoute />} />
               <Route path="young/qr-pay" element={<YoungQrPayRoute />} />
               <Route path="young/transfer" element={<YoungTransferRoute />} />
