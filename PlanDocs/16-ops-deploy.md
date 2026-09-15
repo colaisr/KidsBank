@@ -49,3 +49,17 @@ rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@62.113.106.19:/va
 - **Темы:** при смене банка цвета идут через `--kb-*` на `html[data-theme]`; в `index.css` — `@theme inline`.
 
 Не копировать VPS AgentPoint/Joompers. Не поднимать Compose.
+
+## Co-hosted: AI-tutor (2026-09-09)
+
+На **том же VPS** (`62.113.106.19`) планируется AI-tutor:
+
+| Путь | Проект |
+| --- | --- |
+| `/` | KidsBank (этот репо, без изменений в deploy) |
+| `/aitutor/` | AI-tutor UI |
+| `/api/` | AI-tutor API |
+
+**KidsBank CI/CD не меняется** — rsync в `/var/www/kidsbank/`. Nginx на сервере расширяется из репозитория AItutor (`deploy/nginx/shared-host.conf`); перед применением делается backup `kidsbank.bak.*`.
+
+Если после обновления nginx KidsBank перестал открываться — восстановить backup из `/etc/nginx/sites-available/kidsbank.bak.*`.

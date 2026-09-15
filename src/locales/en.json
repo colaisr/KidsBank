@@ -166,7 +166,27 @@
       "cancelTask": "Cancel",
       "pendingTasks": "Awaiting confirmation",
       "confirmTask": "Confirm task",
-      "spending": "Spending history"
+      "spending": "Spending history",
+      "childProfileSubtitle": "{{age}} years · child profile",
+      "childProfileAge": "{{age}} years",
+      "childPickerTitle": "Children",
+      "childSelected": "Selected",
+      "geolocation": {
+        "title": "Where is {{name}}",
+        "rowTitle": "Location",
+        "statusNeutral": "Current location",
+        "statusFallback": "At school",
+        "statusSheetNeutral": "{{name}} is here now",
+        "statusSheetFallback": "{{name}} is at school now",
+        "placeDetailNeutral": "Updated {{time}}",
+        "placeDetailFallback": "{{place}} • updated {{time}}",
+        "mapTagNeutral": "Here",
+        "mapTagFallback": "School #27",
+        "savedPlaces": "Saved places",
+        "paymentPlaces": "Payment places",
+        "spendDetailTitle": "Payment",
+        "online": "Online"
+      }
     },
     "transfer": {
       "title": "Transfer to child",
@@ -310,6 +330,11 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Café"
+    },
+    "places": {
+      "school27": "School #27",
+      "home": "Home",
+      "grandma": "Grandma's"
     },
     "goals": {
       "ps5": {

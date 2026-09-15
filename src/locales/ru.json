@@ -166,7 +166,27 @@
       "cancelTask": "Отменить",
       "pendingTasks": "Ждут подтверждения",
       "confirmTask": "Подтвердить задание",
-      "spending": "История трат"
+      "spending": "История трат",
+      "childProfileSubtitle": "{{age}} лет · профиль ребёнка",
+      "childProfileAge": "{{age}} лет",
+      "childPickerTitle": "Дети",
+      "childSelected": "Выбран",
+      "geolocation": {
+        "title": "Где {{name}}",
+        "rowTitle": "Геолокация",
+        "statusNeutral": "Текущее местоположение",
+        "statusFallback": "В школе",
+        "statusSheetNeutral": "{{name}} сейчас здесь",
+        "statusSheetFallback": "{{name}} сейчас в школе",
+        "placeDetailNeutral": "Обновлено {{time}}",
+        "placeDetailFallback": "{{place}} • обновлено {{time}}",
+        "mapTagNeutral": "Здесь",
+        "mapTagFallback": "Школа №27",
+        "savedPlaces": "Сохранённые места",
+        "paymentPlaces": "Места оплат",
+        "spendDetailTitle": "Оплата",
+        "online": "На связи"
+      }
     },
     "transfer": {
       "title": "Перевод ребёнку",
@@ -310,6 +330,11 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Кафе"
+    },
+    "places": {
+      "school27": "Школа №27",
+      "home": "Дом",
+      "grandma": "Бабушка"
     },
     "goals": {
       "ps5": {

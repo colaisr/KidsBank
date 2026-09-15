@@ -178,7 +178,26 @@
         "step2": "Add task → confirm",
         "step3": "Set card limit",
         "step4": "Add goal",
-        "step5": "Spend history below"
+        "step5": "Spend history below",
+        "step6": "Location → map and spends in context"
+      }
+    },
+    "parent-geolocation": {
+      "title": "Location — lever: peace of mind + spend context",
+      "child": {
+        "safety": { "topic": "Parent nearby", "meaning": "Child knows family can help if something goes wrong" },
+        "context": { "topic": "Money in place", "meaning": "Card spends show where the child was" }
+      },
+      "bank": {
+        "retention": { "effect": "Family stickiness", "meaning": "Parent opens the app for more than transfers" },
+        "differentiation": { "effect": "Kids+", "meaning": "Safety and child card in one product" },
+        "spendMap": { "effect": "Aware spending", "meaning": "Geo + merchant for parent-child conversations" }
+      },
+      "demo": {
+        "step1": "Location row on parent home",
+        "step2": "Map: child position (presenter GPS on HTTPS)",
+        "step3": "Spend pins → amount and merchant",
+        "step4": "Saved places and payment list"
       }
     },
     "appearance": {

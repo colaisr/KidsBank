@@ -5,6 +5,7 @@ import { HeaderPresenterActions } from './HeaderPresenterActions';
 
 type ChildPageTitleProps = {
   titleKey: string;
+  titleValues?: Record<string, string>;
   showSettingsLink?: boolean;
   backTo?: string;
   presenterId?: PresenterSheetId;
@@ -12,6 +13,7 @@ type ChildPageTitleProps = {
 
 export function ChildPageTitle({
   titleKey,
+  titleValues,
   showSettingsLink = true,
   backTo,
   presenterId,
@@ -29,7 +31,9 @@ export function ChildPageTitle({
           <span aria-hidden="true">←</span>
         </Link>
       ) : null}
-      <h1 className="min-w-0 flex-1 font-heading text-xl font-semibold text-text">{t(titleKey)}</h1>
+      <h1 className="min-w-0 flex-1 font-heading text-xl font-semibold text-text">
+        {t(titleKey, titleValues)}
+      </h1>
       <HeaderPresenterActions
         presenterId={presenterId}
         showSettingsLink={showSettingsLink}

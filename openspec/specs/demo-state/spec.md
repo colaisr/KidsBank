@@ -97,7 +97,7 @@ Parent-created goals and baseline vitrine entries SHALL default to `selected: fa
 
 ### Requirement: Demo state version and pet slice
 
-Demo state version SHALL be 5. The state object SHALL include a `pet` slice with `xp`, `fullness`, `joy`, `energy`, `careCount`, `visitCount`, `taskBuff`, and `lastTickAt`. Missing `pet` in stored state SHALL be backfilled from baseline during normalization. Stored v4 goals without `selected` SHALL migrate: goals with `currentStars > 0` become selected; vitrine baseline entries MAY be appended when missing.
+Demo state version SHALL be 6. The state object SHALL include a `pet` slice with `xp`, `fullness`, `joy`, `energy`, `careCount`, `visitCount`, `taskBuff`, and `lastTickAt`. Missing `pet` in stored state SHALL be backfilled from baseline during normalization. Stored v4 goals without `selected` SHALL migrate: goals with `currentStars > 0` become selected; vitrine baseline entries MAY be appended when missing.
 
 #### Scenario: Migrate v4 to v5
 
@@ -113,3 +113,22 @@ Demo state version SHALL be 5. The state object SHALL include a `pet` slice with
 
 - **WHEN** the user resets the demo scenario
 - **THEN** `pet` returns to baseline including `taskBuff: false`
+
+### Requirement: Demo state includes children and location slice
+
+Demo state SHALL include a `children` array (minimum one entry with `id`, `nameKey`, and `age`) and an `activeChildId`. It SHALL include location fields: `locationUpdatedAt` (ISO string), fallback coordinates for the child marker, saved places with `id`, `labelKey`, and coordinates or offset-from-anchor metadata, and optional `mapLat` / `mapLng` (or equivalent) on `spend` transactions. Schema version SHALL bump when these fields are introduced; reset SHALL restore baseline children and location seed.
+
+#### Scenario: Parent reads active child
+
+- **WHEN** the parent home loads
+- **THEN** the profile control shows the child matching `activeChildId`
+
+#### Scenario: Reset restores location seed
+
+- **WHEN** the user resets the demo scenario
+- **THEN** children, active child, saved places, spend map coordinates, and `locationUpdatedAt` return to baseline
+
+#### Scenario: Spend with map position
+
+- **WHEN** a `spend` transaction includes map coordinates in demo state
+- **THEN** the geolocation screen can render a marker linked to that transaction id

@@ -124,3 +124,83 @@ html[data-theme='evoca'] .kb-card-mark::after {
     animation: none;
   }
 }
+
+.kb-map-marker-root {
+  background: transparent !important;
+  border: none !important;
+}
+
+.kb-map-child-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-sans);
+}
+
+.kb-map-child-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--kb-text);
+  white-space: nowrap;
+}
+
+.kb-map-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.kb-map-child-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(145deg, #f97316, #ea580c);
+  box-shadow: 0 4px 12px rgb(234 88 12 / 0.45);
+}
+
+.kb-map-child-pin span {
+  display: block;
+  transform: rotate(45deg);
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.kb-map-spend-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--kb-primary);
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+}
+
+.kb-map-place-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--kb-primary);
+  background: #fff;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  z-index: 0;
+}

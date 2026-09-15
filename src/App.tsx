@@ -16,6 +16,8 @@ import { OnboardingAgePage } from './pages/OnboardingAgePage';
 import { OnboardingRolePage } from './pages/OnboardingRolePage';
 import { ChildTasksPage } from './pages/ChildTasksPage';
 import { ChildTransactionsPage } from './pages/ChildTransactionsPage';
+import { ParentGeolocationPage } from './pages/ParentGeolocationPage';
+import { ParentHomePage } from './pages/ParentHomePage';
 import { ParentShell } from './pages/ParentShell';
 
 function RoleRedirect() {
@@ -45,7 +47,11 @@ export default function App() {
               <Route path="onboarding/age" element={<OnboardingAgePage />} />
               <Route path="*" element={<Navigate to="/child" replace />} />
             </Route>
-            <Route path="/parent" element={<ParentShell />} />
+            <Route path="/parent" element={<ParentShell />}>
+              <Route index element={<ParentHomePage />} />
+              <Route path="geolocation" element={<ParentGeolocationPage />} />
+              <Route path="*" element={<Navigate to="/parent" replace />} />
+            </Route>
             <Route path="/appearance" element={<AppearancePage />} />
             <Route path="*" element={<RoleRedirect />} />
           </Routes>

@@ -43,6 +43,11 @@ export function isPiggyDeposit(typeId: TransactionTypeId): boolean {
   return PIGGY_DEPOSIT_TYPE_IDS.includes(typeId);
 }
 
+export type MapOffsetMeters = {
+  east: number;
+  north: number;
+};
+
 export type DemoTransaction = {
   id: string;
   typeId: TransactionTypeId;
@@ -52,6 +57,24 @@ export type DemoTransaction = {
   taskId?: string;
   taskTemplateId?: string;
   merchantKey?: string;
+  mapLat?: number;
+  mapLng?: number;
+  liveOffsetMeters?: MapOffsetMeters;
+};
+
+export type DemoChildProfile = {
+  id: string;
+  nameKey: string;
+  age: number;
+  initial: string;
+};
+
+export type DemoSavedPlace = {
+  id: string;
+  labelKey: string;
+  lat: number;
+  lng: number;
+  liveOffsetMeters: MapOffsetMeters;
 };
 
 export type TaskStats = {
@@ -71,7 +94,7 @@ export type PetState = {
 };
 
 export type DemoState = {
-  version: 5;
+  version: 6;
   parentWallet: number;
   card: {
     last4: string;
@@ -88,9 +111,54 @@ export type DemoState = {
   goals: DemoGoalState[];
   transactions: DemoTransaction[];
   pet: PetState;
+  children: DemoChildProfile[];
+  activeChildId: string;
+  locationUpdatedAt: string;
+  fallbackChild: { lat: number; lng: number };
+  savedPlaces: DemoSavedPlace[];
 };
 
-export const DEMO_STATE_VERSION = 5 as const;
+export const DEMO_STATE_VERSION = 6 as const;
+
+/** Yerevan demo cluster — fallback when geolocation is unavailable */
+const FALLBACK_CHILD = { lat: 40.1812, lng: 44.5146 };
+
+function createBaselineSavedPlaces(): DemoSavedPlace[] {
+  return [
+    {
+      id: 'school27',
+      labelKey: 'demo.places.school27',
+      lat: FALLBACK_CHILD.lat,
+      lng: FALLBACK_CHILD.lng,
+      liveOffsetMeters: { east: 0, north: 0 },
+    },
+    {
+      id: 'home',
+      labelKey: 'demo.places.home',
+      lat: 40.1754,
+      lng: 44.5082,
+      liveOffsetMeters: { east: -180, north: -220 },
+    },
+    {
+      id: 'grandma',
+      labelKey: 'demo.places.grandma',
+      lat: 40.1858,
+      lng: 44.4965,
+      liveOffsetMeters: { east: 260, north: 310 },
+    },
+  ];
+}
+
+function createBaselineChildren(): DemoChildProfile[] {
+  return [
+    {
+      id: 'david',
+      nameKey: 'demo.child.david.name',
+      age: 7,
+      initial: 'Д',
+    },
+  ];
+}
 
 function createBaselinePet(): PetState {
   return {
@@ -223,6 +291,11 @@ export const DEMO_BASELINE: DemoState = {
   ],
   transactions: [],
   pet: createBaselinePet(),
+  children: createBaselineChildren(),
+  activeChildId: 'david',
+  locationUpdatedAt: new Date().toISOString(),
+  fallbackChild: { ...FALLBACK_CHILD },
+  savedPlaces: createBaselineSavedPlaces(),
 };
 
 function createTransactionsSeed(): DemoTransaction[] {
@@ -231,6 +304,8 @@ function createTransactionsSeed(): DemoTransaction[] {
   todayHomework.setHours(16, 45, 0, 0);
   const todaySpend = new Date(now);
   todaySpend.setHours(14, 20, 0, 0);
+  const todayCafe = new Date(now);
+  todayCafe.setHours(12, 5, 0, 0);
   const todayCashback = new Date(now);
   todayCashback.setHours(14, 21, 0, 0);
   const yesterdayMom = new Date(now);
@@ -258,6 +333,19 @@ function createTransactionsSeed(): DemoTransaction[] {
       amount: 180,
       merchantKey: 'sweetShop',
       at: todaySpend.toISOString(),
+      mapLat: 40.1824,
+      mapLng: 44.5112,
+      liveOffsetMeters: { east: -160, north: 140 },
+    },
+    {
+      id: 'tx-cafe',
+      typeId: 'spend',
+      amount: 320,
+      merchantKey: 'cafe',
+      at: todayCafe.toISOString(),
+      mapLat: 40.1788,
+      mapLng: 44.5125,
+      liveOffsetMeters: { east: 110, north: -90 },
     },
     {
       id: 'tx-cashback',
@@ -298,5 +386,13 @@ export function cloneDemoBaseline(): DemoState {
     goals: DEMO_BASELINE.goals.map((goal) => ({ ...goal })),
     pet: createBaselinePet(),
     transactions: createTransactionsSeed().map((tx) => ({ ...tx })),
+    children: DEMO_BASELINE.children.map((child) => ({ ...child })),
+    activeChildId: DEMO_BASELINE.activeChildId,
+    locationUpdatedAt: new Date().toISOString(),
+    fallbackChild: { ...DEMO_BASELINE.fallbackChild },
+    savedPlaces: DEMO_BASELINE.savedPlaces.map((place) => ({
+      ...place,
+      liveOffsetMeters: { ...place.liveOffsetMeters },
+    })),
   };
 }

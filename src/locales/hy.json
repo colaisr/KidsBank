@@ -166,7 +166,27 @@
       "cancelTask": "Չեղարկել",
       "pendingTasks": "Սպասում են հաստատման",
       "confirmTask": "Հաստատել առաջադրանքը",
-      "spending": "Ծախսերի պատմություն"
+      "spending": "Ծախսերի պատմություն",
+      "childProfileSubtitle": "{{age}} տարեկան · երեխայի պրոֆիլ",
+      "childProfileAge": "{{age}} տարեկան",
+      "childPickerTitle": "Երեխաներ",
+      "childSelected": "Ընտրված",
+      "geolocation": {
+        "title": "Որտեղ է {{name}}",
+        "rowTitle": "Գեոլոկացիա",
+        "statusNeutral": "Ընթացիկ տեղադրություն",
+        "statusFallback": "Դպրոցում",
+        "statusSheetNeutral": "{{name}}‑ն հիմա այստեղ է",
+        "statusSheetFallback": "{{name}}‑ն հիմա դպրոցում է",
+        "placeDetailNeutral": "Թարմացվել է {{time}}",
+        "placeDetailFallback": "{{place}} • թարմացվել է {{time}}",
+        "mapTagNeutral": "Այստեղ",
+        "mapTagFallback": "Դպրոց №27",
+        "savedPlaces": "Պահված վայրեր",
+        "paymentPlaces": "Վճարումների վայրեր",
+        "spendDetailTitle": "Վճարում",
+        "online": "Առցանց"
+      }
     },
     "transfer": {
       "title": "Փոխանցում երեխային",
@@ -310,6 +330,11 @@
     "merchants": {
       "sweetShop": "Sweet Shop",
       "cafe": "Սրճարան"
+    },
+    "places": {
+      "school27": "Դպրոց №27",
+      "home": "Տուն",
+      "grandma": "Տատիկ"
     },
     "goals": {
       "ps5": {

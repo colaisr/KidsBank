@@ -15,9 +15,11 @@ import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
 import { getActiveGoals } from '../lib/goals';
 import { getActiveTasksForParent } from '../lib/tasks';
+import { ParentServiceRow } from '../components/ParentServiceRow';
+import { useParentLocation } from '../context/ParentLocationContext';
 
 const actionCardClass =
-  'flex min-w-0 flex-col items-start rounded-card border border-border bg-surface p-4 text-left text-text transition-colors hover:border-primary/40';
+  'flex min-w-0 flex-col items-start rounded-card border border-border bg-surface p-3.5 text-left text-text transition-colors hover:border-primary/40';
 
 export function ParentHomePage() {
   const { t } = useTranslation();
@@ -29,9 +31,14 @@ export function ParentHomePage() {
   const [addGoalOpen, setAddGoalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<DemoTaskState | null>(null);
 
+  const { mode } = useParentLocation();
   const activeTasks = getActiveTasksForParent(demo.tasks);
   const activeGoals = getActiveGoals(demo.goals);
   const recentTx = demo.transactions.slice(0, 5);
+  const geolocationStatus =
+    mode === 'live'
+      ? t('ui.parent.geolocation.statusNeutral')
+      : t('ui.parent.geolocation.statusFallback');
 
   function handleConfirm(taskId: string) {
     setDemo((s) => confirmTask(s, taskId));
@@ -121,6 +128,16 @@ export function ParentHomePage() {
               </div>
             </button>
           </div>
+        </section>
+
+        <section>
+          <ParentServiceRow
+            to="/parent/geolocation"
+            icon="📍"
+            title={t('ui.parent.geolocation.rowTitle')}
+            statusLabel={geolocationStatus}
+            showLiveDot={mode === 'live'}
+          />
         </section>
 
         <section>
