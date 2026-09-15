@@ -17,7 +17,7 @@ export function YoungChildHomePage() {
   const { locale, bank } = usePreferences();
   const productName =
     bank === 'amio' ? t('ui.home.productAmio') : t('ui.home.productEvoca');
-  const homeTask = getActiveTasks(demo.tasks)[0];
+  const homeTasks = getActiveTasks(demo.tasks).slice(0, 2);
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden bg-surface-muted">
@@ -48,15 +48,19 @@ export function YoungChildHomePage() {
         <YoungQuickActions />
         <YoungAccountRows />
 
-        {homeTask ? (
-          <section className="min-h-0 shrink pt-0.5">
+        {homeTasks.length > 0 ? (
+          <section className="mt-auto flex min-h-0 flex-col justify-end pt-0.5">
             <HomeSectionHeading
               titleKey="ui.home.tasks"
               to="/child/tasks"
               presenterId="child-tasks"
               dense
             />
-            <TaskCard task={homeTask} compact />
+            <div className="space-y-1.5">
+              {homeTasks.map((task) => (
+                <TaskCard key={task.id} task={task} compact />
+              ))}
+            </div>
           </section>
         ) : null}
       </div>
