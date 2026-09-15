@@ -16,6 +16,7 @@ import { OnboardingAgePage } from './pages/OnboardingAgePage';
 import { OnboardingRolePage } from './pages/OnboardingRolePage';
 import { YoungPhoneTopUpRoute } from './pages/child-young/YoungPhoneTopUpRoute';
 import { YoungQrPayRoute } from './pages/child-young/YoungQrPayRoute';
+import { YoungStarAccountRoute } from './pages/child-young/YoungStarAccountRoute';
 import { YoungTransferRoute } from './pages/child-young/YoungTransferRoute';
 import { YoungTotemPlaceholderPage } from './pages/child-young/YoungTotemPlaceholderPage';
 import { ChildTasksPage } from './pages/ChildTasksPage';
@@ -59,6 +60,7 @@ export default function App() {
               <Route path="young/phone-topup" element={<YoungPhoneTopUpRoute />} />
               <Route path="young/qr-pay" element={<YoungQrPayRoute />} />
               <Route path="young/transfer" element={<YoungTransferRoute />} />
+              <Route path="young/stars" element={<YoungStarAccountRoute />} />
               <Route path="*" element={<Navigate to="/child" replace />} />
             </Route>
             <Route path="/parent" element={<ParentShell />}>

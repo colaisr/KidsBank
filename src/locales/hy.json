@@ -83,6 +83,14 @@
           "insufficient": "Քարտի վրա բավարար միջոցներ չկան"
         }
       },
+      "stars": {
+        "title": "Աստղային հաշիվ",
+        "totalEarned": "ընդամենը վաստակած",
+        "sourcesTitle": "Աստղերը որտեղից են",
+        "taskLabel": "Առաջադրանք՝ {{task}}",
+        "empty": "Դեռ աստղեր չկան — կատարիր առաջադրանք կամ խաղիր տոտեմի հետ",
+        "daysAgo": "{{count}} օր առաջ"
+      },
       "piggy": {
         "alreadySaved": "արդեն կուտակված է",
         "depositFromCard": "Քարտից",
@@ -484,6 +492,10 @@
         "name": "Դավիթ",
         "phone": "+374 XX XXX XXX"
       }
+    },
+    "youngStars": {
+      "petLeo": "Խաղացել է Լեոյի հետ",
+      "lessonPiggyGoals": "Դաս՝ խնայարան և նպատակներ"
     },
     "limits": {
       "recipient": {

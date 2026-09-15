@@ -83,6 +83,14 @@
           "insufficient": "Not enough money on the card"
         }
       },
+      "stars": {
+        "title": "Star account",
+        "totalEarned": "earned in total",
+        "sourcesTitle": "Where stars came from",
+        "taskLabel": "Task: {{task}}",
+        "empty": "No stars yet — complete a task or play with your totem",
+        "daysAgo": "{{count}} days ago"
+      },
       "piggy": {
         "alreadySaved": "saved so far",
         "depositFromCard": "From card",
@@ -484,6 +492,10 @@
         "name": "David",
         "phone": "+374 XX XXX XXX"
       }
+    },
+    "youngStars": {
+      "petLeo": "Played with Leo",
+      "lessonPiggyGoals": "Lesson: Piggy bank and goals"
     },
     "limits": {
       "recipient": {

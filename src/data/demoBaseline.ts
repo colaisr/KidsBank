@@ -369,6 +369,8 @@ function createTransactionsSeed(): DemoTransaction[] {
   const now = new Date();
   const todayHomework = new Date(now);
   todayHomework.setHours(16, 45, 0, 0);
+  const todayTidyRoom = new Date(now);
+  todayTidyRoom.setHours(11, 30, 0, 0);
   const todaySpend = new Date(now);
   todaySpend.setHours(13, 45, 0, 0);
   const earlierCafe = new Date(now);
@@ -403,6 +405,14 @@ function createTransactionsSeed(): DemoTransaction[] {
       currency: 'STARS',
       taskId: 'homework',
       at: todayHomework.toISOString(),
+    },
+    {
+      id: 'tx-tidy-room',
+      typeId: 'taskReward',
+      amount: 15,
+      currency: 'STARS',
+      taskId: 'tidyRoom',
+      at: todayTidyRoom.toISOString(),
     },
     {
       id: 'tx-sweet-shop',

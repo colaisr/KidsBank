@@ -83,6 +83,14 @@
           "insufficient": "Недостаточно средств на карте"
         }
       },
+      "stars": {
+        "title": "Звёздный счёт",
+        "totalEarned": "заработано всего",
+        "sourcesTitle": "Откуда звёзды",
+        "taskLabel": "Задание: {{task}}",
+        "empty": "Пока нет звёзд — выполни задание или поиграй с тотемом",
+        "daysAgo": "{{count}} дн. назад"
+      },
       "piggy": {
         "alreadySaved": "уже накоплено",
         "depositFromCard": "С карты",
@@ -484,6 +492,10 @@
         "name": "Давид",
         "phone": "+374 XX XXX XXX"
       }
+    },
+    "youngStars": {
+      "petLeo": "Поиграл с Лео",
+      "lessonPiggyGoals": "Урок: Копилка и цели"
     },
     "limits": {
       "recipient": {

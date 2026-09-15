@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { usePreferences } from '../context/PreferencesContext';
 import { ChildGoalsHeader } from '../components/ChildGoalsHeader';
 import { GoalActionSheet } from '../components/GoalActionSheet';
 import { GoalCatalogCard } from '../components/GoalCatalogCard';
@@ -22,6 +24,7 @@ function sortGoalsByCatalogOrder(goals: DemoGoalState[]): DemoGoalState[] {
 
 export function ChildGoalsPage() {
   const { t } = useTranslation();
+  const { childExperience } = usePreferences();
   const { demo, setDemo } = useDemoState();
   const [selectedGoal, setSelectedGoal] = useState<DemoGoalState | null>(null);
 
@@ -33,6 +36,10 @@ export function ChildGoalsPage() {
     () => sortGoalsByCatalogOrder(getVitrineGoals(demo.goals)),
     [demo.goals],
   );
+
+  if (childExperience === 'young') {
+    return <Navigate to="/child/young/stars" replace />;
+  }
 
   function handleSelect(goalId: string) {
     setDemo((state) => selectGoal(state, goalId));
