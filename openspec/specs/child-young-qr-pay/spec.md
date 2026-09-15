@@ -7,7 +7,7 @@ TBD - created by archiving change child-young-qr-pay. Update Purpose after archi
 
 ### Requirement: Young QR payment flow
 
-When `childExperience` is `young`, the system SHALL provide `/child/young/qr-pay` with a simulated QR scan (~5–6 seconds), a confirmation step showing merchant and amount, and a demo spend on confirm.
+When `childExperience` is `young`, the system SHALL provide `/child/young/qr-pay` with a simulated QR scan (~2.5 seconds), a confirmation step showing merchant and amount, and a demo spend on confirm.
 
 #### Scenario: Open from young home
 

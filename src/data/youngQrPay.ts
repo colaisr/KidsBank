@@ -1,5 +1,5 @@
-/** Simulated scan duration before «QR found». */
-export const YOUNG_QR_SCAN_MS = 5500;
+/** Simulated scan duration before «QR found» (2.5 s). */
+export const YOUNG_QR_SCAN_MS = 2500;
 
 /** Fixed demo QR payment (AMD), within ~300–400 range. */
 export const YOUNG_QR_PAY_AMOUNT = 350;
