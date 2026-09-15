@@ -24,7 +24,8 @@
       "child": "Child",
       "parent": "Parent",
       "childTitle": "Child account",
-      "parentTitle": "Parent account"
+      "parentTitle": "Parent account",
+      "parentTitleShort": "Parent"
     },
     "shell": {
       "greeting": "Hi, {{name}}!",
@@ -158,6 +159,7 @@
       "reportsRowTitle": "Reports",
       "reportsSubtitle": "Child spending by period",
       "spendingHistoryRowTitle": "Spending history",
+      "spendingHistorySubtitle": "All child purchases",
       "goalsRowTitle": "Goals",
       "goalsSubtitle": "Create and track",
       "goalsScreen": {

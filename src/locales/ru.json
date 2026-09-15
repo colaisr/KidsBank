@@ -24,7 +24,8 @@
       "child": "Ребёнок",
       "parent": "Родитель",
       "childTitle": "Кабинет ребёнка",
-      "parentTitle": "Кабинет родителя"
+      "parentTitle": "Кабинет родителя",
+      "parentTitleShort": "Родитель"
     },
     "shell": {
       "greeting": "Привет, {{name}}!",
@@ -158,6 +159,7 @@
       "reportsRowTitle": "Отчёты",
       "reportsSubtitle": "Траты ребёнка по периодам",
       "spendingHistoryRowTitle": "История трат",
+      "spendingHistorySubtitle": "Все покупки ребёнка",
       "goalsRowTitle": "Цели",
       "goalsSubtitle": "Создать и отслеживать",
       "goalsScreen": {

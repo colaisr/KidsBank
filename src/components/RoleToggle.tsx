@@ -4,9 +4,10 @@ import type { Role } from '../context/preferences';
 
 type RoleToggleProps = {
   onGradient?: boolean;
+  compact?: boolean;
 };
 
-export function RoleToggle({ onGradient = false }: RoleToggleProps) {
+export function RoleToggle({ onGradient = false, compact = false }: RoleToggleProps) {
   const { t } = useTranslation();
   const { role, setRole } = usePreferences();
 
@@ -23,7 +24,9 @@ export function RoleToggle({ onGradient = false }: RoleToggleProps) {
             key={item}
             type="button"
             onClick={() => setRole(item)}
-            className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors duration-200 ${
+            className={`rounded-full font-medium transition-colors duration-200 ${
+              compact ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'
+            } ${
               active
                 ? onGradient
                   ? 'bg-white text-primary-dark'

@@ -31,11 +31,11 @@ export function AppHeader({
           compact ? 'text-base' : 'text-lg'
         }`}
       >
-        {t(titleKey)}
+        {t(compact && titleKey === 'ui.role.parentTitle' ? 'ui.role.parentTitleShort' : titleKey)}
       </h1>
       <div className="flex shrink-0 items-center gap-0.5">
         {presenterId ? <PresenterBadgeWithSheet presenterId={presenterId} /> : null}
-        {showRoleToggle ? <RoleToggle /> : null}
+        {showRoleToggle ? <RoleToggle compact={compact} /> : null}
         <AppearanceButton />
       </div>
     </header>

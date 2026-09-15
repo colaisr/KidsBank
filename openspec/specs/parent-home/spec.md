@@ -50,12 +50,12 @@ The parent cabinet shell SHALL allow vertical scrolling of all dashboard content
 
 ### Requirement: Parent home uses adult dashboard visual rhythm
 
-The parent home SHALL present a cohesive adult-banking dashboard: gradient hero with greeting and child balance summary, `bg-surface-muted` content area, consistent section headings, and card-based lists — styled only with theme tokens (`--kb-*` / Tailwind theme aliases).
+The parent home SHALL present a cohesive adult-banking dashboard: compact app bar title, gradient band with **child profile** and **compact balance** (card + piggy stacked), `bg-surface-muted` services list — styled only with theme tokens (`--kb-*` / Tailwind theme aliases). Service rows SHALL show status copy (geolocation, limits) in the main text column without truncating for the chevron.
 
 #### Scenario: Dashboard sections
 
 - **WHEN** the parent views `/parent`
-- **THEN** sections appear in order: balance hero, **services** (geolocation through goals) — with uniform vertical spacing between sections
+- **THEN** sections appear in order: gradient profile + balance, **services** (geolocation through goals) — with uniform vertical spacing; the demo targets **one screen without scroll** on a standard phone frame
 
 #### Scenario: No kids styling on parent
 

@@ -24,7 +24,8 @@
       "child": "Երեխա",
       "parent": "Ծնող",
       "childTitle": "Երեխայի հաշիվ",
-      "parentTitle": "Ծնողի հաշիվ"
+      "parentTitle": "Ծնողի հաշիվ",
+      "parentTitleShort": "Ծնող"
     },
     "shell": {
       "greeting": "Բարև, {{name}}!",
@@ -158,6 +159,7 @@
       "reportsRowTitle": "Հաշվետվություններ",
       "reportsSubtitle": "Երեխայի ծախսերն ըստ ժամանակաշրջանի",
       "spendingHistoryRowTitle": "Ծախսերի պատմություն",
+      "spendingHistorySubtitle": "Երեխայի բոլոր գնումները",
       "goalsRowTitle": "Նպատակներ",
       "goalsSubtitle": "Ստեղծել և հետևել",
       "goalsScreen": {

@@ -34,14 +34,23 @@ export function ParentServiceRow({
       <span className="min-w-0 flex-1">
         <span className="block font-heading text-sm font-semibold text-text">{title}</span>
         {description ? (
-          <span className="mt-0.5 block text-xs font-medium text-text-muted">{description}</span>
+          <span className="mt-0.5 block text-xs font-medium leading-snug text-text-muted">
+            {description}
+          </span>
+        ) : null}
+        {statusLabel ? (
+          <span className="mt-0.5 flex items-start gap-1.5 text-xs font-medium leading-snug text-text-muted">
+            {showLiveDot ? (
+              <span
+                className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-500"
+                aria-hidden="true"
+              />
+            ) : null}
+            <span className="min-w-0">{statusLabel}</span>
+          </span>
         ) : null}
       </span>
-      <span className="flex shrink-0 items-center gap-1.5 text-xs font-medium text-text-muted">
-        {showLiveDot ? (
-          <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-        ) : null}
-        {statusLabel ? <span className="max-w-[8rem] truncate">{statusLabel}</span> : null}
+      <span className="flex shrink-0 items-center gap-1.5 self-center">
         {badgeCount > 0 ? (
           <span
             className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-secondary px-1 text-[11px] font-bold leading-none text-white"
