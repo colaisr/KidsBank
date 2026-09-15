@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { TransactionRow } from '../components/TransactionRow';
 import { useDemoState } from '../context/DemoStateContext';
 import { usePreferences } from '../context/PreferencesContext';
 import { formatCurrency } from '../lib/format';
@@ -13,7 +12,6 @@ export function ParentHomePage() {
   const { demo } = useDemoState();
 
   const { mode } = useParentLocation();
-  const recentTx = demo.transactions.slice(0, 5);
   const tasksAwaitingConfirm = countTasksWaitingParent(demo.tasks);
   const geolocationStatus =
     mode === 'live'
@@ -47,7 +45,7 @@ export function ParentHomePage() {
         </div>
       </div>
 
-      <main className="space-y-6 bg-surface-muted px-4 pb-8 pt-5">
+      <main className="bg-surface-muted px-4 pb-8 pt-5">
         <section>
           <h2 className="mb-3 font-heading text-base font-semibold text-text">
             {t('ui.parent.services')}
@@ -97,23 +95,6 @@ export function ParentHomePage() {
               description={t('ui.parent.goalsSubtitle')}
             />
           </div>
-        </section>
-
-        <section>
-          <h2 className="mb-3 font-heading text-base font-semibold text-text">
-            {t('ui.parent.spending')}
-          </h2>
-          {recentTx.length > 0 ? (
-            <div className="space-y-2">
-              {recentTx.map((tx) => (
-                <TransactionRow key={tx.id} transaction={tx} />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-card border border-border bg-surface p-5">
-              <p className="text-sm text-text-muted">{t('ui.transactions.empty')}</p>
-            </div>
-          )}
         </section>
       </main>
     </>

@@ -8,12 +8,12 @@ Provides the parent cabinet home with money control, spending visibility, and pe
 
 ### Requirement: Parent home shows control dashboard
 
-The parent home SHALL display: child summary (card balance, piggy balance), a **services** section (geolocation, transfer, limits, tasks, reports, spending history, **goals**), and spending history preview. It SHALL NOT show quick actions, inline child tasks, or an inline child goals section.
+The parent home SHALL display: child summary (card balance, piggy balance) and a **services** section (geolocation, transfer, limits, tasks, reports, spending history, **goals**). It SHALL NOT show quick actions, inline child tasks, inline child goals, or a spending transaction preview (history is on `/parent/spending-history`).
 
 #### Scenario: Parent home loads
 
 - **WHEN** the active role is `parent` and the user opens `/parent`
-- **THEN** a localized dashboard shows services only (goals as the last row) and spending preview — without quick actions or goals list blocks
+- **THEN** a localized dashboard shows balance hero and services only (goals as the last row) — without quick actions, goals list blocks, or transaction feed
 
 ### Requirement: Parent home uses bank-themed layout variants
 
@@ -40,8 +40,8 @@ The parent cabinet shell SHALL allow vertical scrolling of all dashboard content
 
 #### Scenario: Long dashboard scrolls
 
-- **WHEN** the parent opens `/parent` and content (balance, services, spending) exceeds the phone viewport
-- **THEN** the user can scroll to the bottom spending section without content being clipped
+- **WHEN** the parent opens `/parent` and content (balance and services) exceeds the phone viewport
+- **THEN** the user can scroll to the last service row without content being clipped
 
 #### Scenario: Header remains reachable
 
@@ -55,7 +55,7 @@ The parent home SHALL present a cohesive adult-banking dashboard: gradient hero 
 #### Scenario: Dashboard sections
 
 - **WHEN** the parent views `/parent`
-- **THEN** sections appear in order: balance hero, **services** (geolocation through goals), spending preview — with uniform vertical spacing between sections
+- **THEN** sections appear in order: balance hero, **services** (geolocation through goals) — with uniform vertical spacing between sections
 
 #### Scenario: No kids styling on parent
 
