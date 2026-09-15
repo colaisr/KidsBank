@@ -18,6 +18,7 @@ Mobile-first, плавность, красота. Один UI, две банко
 - [ ] «Оформление»: банк + язык, доступно с экрана; роль отдельно
 - [ ] AMIO: cerulean/atoll/casablanca, улыбка-«a»; родитель ≈ Mobile, ребёнок ≈ Junior
 - [ ] Evoca: violet обязателен, 80/20, один secondary; родитель ≈ feed TOUCH, ребёнок ≈ TEENZ-энергия
+- [ ] Evoca награды на **белом** (задания, ★, статусы): только `accent-kids-ink` + полупрозрачный `accent-kids` — **не** `#C4FF00` / неоновый `text-accent-kids` (см. `17-theme-bank-2.md` § «Награды ★ и задания»)
 - [ ] Состояния empty / loading там, где демо может быть пустым
 - [ ] Primary action один на экран где уместно
 

@@ -1,7 +1,7 @@
 html[data-theme='evoca'] {
   --kb-primary: #6400dc;
   --kb-primary-dark: #8448ff;
-  /* Soft lime fills (brand E4FF90 family); ink = readable reward glyph on white */
+  /* Rewards: do NOT use brand #c4ff00 on white cards — see PlanDocs/17-theme-bank-2.md */
   --kb-accent-kids: #d2ee96;
   --kb-accent-kids-ink: #6a8f2e;
   --kb-accent-secondary: #ff2d61;
