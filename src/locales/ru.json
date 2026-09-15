@@ -83,6 +83,23 @@
           "insufficient": "Недостаточно средств на карте"
         }
       },
+      "piggy": {
+        "alreadySaved": "уже накоплено",
+        "depositFromCard": "С карты",
+        "withdrawToCard": "На карту",
+        "inviteFriends": "Пригласи друзей скинуться",
+        "shareLink": "Поделиться ссылкой",
+        "recentDeposits": "Последние пополнения",
+        "empty": "Пока пусто — попроси скинуться по ссылке",
+        "depositDone": "Готово! Деньги в копилке",
+        "withdrawDone": "Готово! Деньги на карте",
+        "insufficient": "Не хватает денег",
+        "txFromMom": "От мамы",
+        "txFromGrandma": "От бабушки",
+        "txCashback": "Кэшбэк за покупку",
+        "txFromCard": "С карты",
+        "txFromParent": "От родителей"
+      },
       "transfer": {
         "title": "Перевести деньги",
         "recipientPrompt": "Кому хочешь перевести?",

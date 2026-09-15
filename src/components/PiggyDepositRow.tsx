@@ -5,25 +5,37 @@ import { usePreferences } from '../context/PreferencesContext';
 
 type PiggyDepositRowProps = {
   transaction: DemoTransaction;
+  variant?: 'default' | 'young';
 };
 
-export function PiggyDepositRow({ transaction }: PiggyDepositRowProps) {
+const YOUNG_PIGGY_TITLE_KEYS: Partial<Record<DemoTransaction['typeId'], string>> = {
+  piggyGiftMom: 'ui.childYoung.piggy.txFromMom',
+  piggyGiftGrandma: 'ui.childYoung.piggy.txFromGrandma',
+  piggyCashback: 'ui.childYoung.piggy.txCashback',
+  cardToPiggy: 'ui.childYoung.piggy.txFromCard',
+  parentToPiggy: 'ui.childYoung.piggy.txFromParent',
+};
+
+export function PiggyDepositRow({ transaction, variant = 'default' }: PiggyDepositRowProps) {
   const { t } = useTranslation();
   const { locale } = usePreferences();
+
+  const titleKey = variant === 'young' ? YOUNG_PIGGY_TITLE_KEYS[transaction.typeId] : undefined;
+  const title = titleKey ? t(titleKey) : t(`demo.transactions.${transaction.typeId}`);
 
   return (
     <article className="flex items-center gap-3 rounded-card border border-border bg-surface px-4 py-3">
       <DepositIcon typeId={transaction.typeId} />
       <div className="min-w-0 flex-1">
-        <p className="font-heading text-sm font-semibold text-text">
-          {t(`demo.transactions.${transaction.typeId}`)}
-        </p>
-        <p className="text-xs text-text-muted">
-          {formatPiggyDepositDate(new Date(transaction.at), locale, {
-            today: t('ui.piggy.dayToday'),
-            yesterday: t('ui.piggy.dayYesterday'),
-          })}
-        </p>
+        <p className="font-heading text-sm font-semibold text-text">{title}</p>
+        {variant === 'default' ? (
+          <p className="text-xs text-text-muted">
+            {formatPiggyDepositDate(new Date(transaction.at), locale, {
+              today: t('ui.piggy.dayToday'),
+              yesterday: t('ui.piggy.dayYesterday'),
+            })}
+          </p>
+        ) : null}
       </div>
       <p className="shrink-0 font-heading text-sm font-semibold text-primary">
         +{formatCurrency(transaction.amount, locale)}

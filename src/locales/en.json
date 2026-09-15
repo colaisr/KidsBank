@@ -83,6 +83,23 @@
           "insufficient": "Not enough money on the card"
         }
       },
+      "piggy": {
+        "alreadySaved": "saved so far",
+        "depositFromCard": "From card",
+        "withdrawToCard": "To card",
+        "inviteFriends": "Ask friends to chip in",
+        "shareLink": "Share link",
+        "recentDeposits": "Recent top-ups",
+        "empty": "Nothing yet — share your link",
+        "depositDone": "Done! Money is in the piggy bank",
+        "withdrawDone": "Done! Money is on your card",
+        "insufficient": "Not enough money",
+        "txFromMom": "From mom",
+        "txFromGrandma": "From grandma",
+        "txCashback": "Purchase cashback",
+        "txFromCard": "From card",
+        "txFromParent": "From parents"
+      },
       "transfer": {
         "title": "Send money",
         "recipientPrompt": "Who do you want to send to?",

@@ -83,6 +83,23 @@
           "insufficient": "Քարտի վրա բավարար միջոցներ չկան"
         }
       },
+      "piggy": {
+        "alreadySaved": "արդեն կուտակված է",
+        "depositFromCard": "Քարտից",
+        "withdrawToCard": "Քարտին",
+        "inviteFriends": "Հրավիրիր ընկերներին նվիրել",
+        "shareLink": "Կիսվել հղումով",
+        "recentDeposits": "Վերջին լրացումներ",
+        "empty": "Դեռ դատարկ է — կիսվիր հղումով",
+        "depositDone": "Պատրաստ է! Գումարը խնայարանում է",
+        "withdrawDone": "Պատրաստ է! Գումարը քարտի վրա է",
+        "insufficient": "Բավարար գումար չկա",
+        "txFromMom": "Մայրիկից",
+        "txFromGrandma": "Տատիկից",
+        "txCashback": "Գնման կեշբեք",
+        "txFromCard": "Քարտից",
+        "txFromParent": "Ծնողներից"
+      },
       "transfer": {
         "title": "Փոխանցել գումար",
         "recipientPrompt": "Ում ես ուզում փոխանցել?",
