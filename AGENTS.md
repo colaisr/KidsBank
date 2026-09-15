@@ -57,6 +57,7 @@ npm run build                # прод-сборка
 | Что нельзя ломать | [`docs/INVARIANTS.md`](docs/INVARIANTS.md) |
 | Открытые вопросы | [`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) |
 | Роли | [`docs/roles/`](docs/roles/) |
+| Archive feedback loop (чеклист) | [`docs/ARCHIVE-FEEDBACK-LOOP.md`](docs/ARCHIVE-FEEDBACK-LOOP.md) |
 | Живые спеки / changes | `openspec/` |
 
 ## 5. Процесс
@@ -67,7 +68,7 @@ npm run build                # прод-сборка
 4. Утверждение владельцем.
 5. `/opsx:apply` (**developer**) строго по tasks.
 6. **devops** — preview-хост и CI уже есть (`16`); менять инфраструктуру только по задаче.
-7. **Feedback loop (обязателен):** PlanDocs выровнять под то, что реально добавили (новый сценарий → `01`, новый референс → `02` + `references/README.md`). Затем `/opsx:archive` (влить delta specs). Архив **без** этой правки — нарушение процесса.
+7. **Archive feedback loop (обязателен, каждый change):** перед `/opsx:archive` и в том же коммите, что архив — выровнять документацию по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](docs/ARCHIVE-FEEDBACK-LOOP.md): PlanDocs (`01`, `15`, `17`, …), при необходимости `docs/roles/` (designer, developer, product). В `tasks.md` change — секция «Archive feedback loop» с чекбоксами. Затем `openspec archive` (delta specs). Архив **без** feedback loop — нарушение процесса. Агент **не ждёт** отдельной просьбы владельца «обнови доки».
 
 Мелочь (опечатка, однострочный баг без продуктовой двусмысленности) — без полного change, с acceptance и инвариантами.
 

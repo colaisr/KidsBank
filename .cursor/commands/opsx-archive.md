@@ -7,9 +7,9 @@ description: Archive a completed change in the experimental workflow
 
 Archive a completed change in the experimental workflow.
 
-**KidsBank — до шага 1 OpenSpec (жёсткий гейт):**
+**KidsBank — Archive feedback loop (жёсткий гейт, шаг 0):**
 
-Не архивировать, пока PlanDocs не описывают то, что добавили в этом change. Пример: новая игра → строка в `PlanDocs/01-surf-baseline.md` (+ `19`, при новом референсе/`02`). Прочитай `docs/roles/product.md` секцию «до archive». Если правки PlanDocs нет в diff change — **остановись**, допиши документы, затем продолжай шаги ниже. Синк `openspec/specs/` не заменяет выравнивание PlanDocs.
+Перед archive выполни [`docs/ARCHIVE-FEEDBACK-LOOP.md`](../../docs/ARCHIVE-FEEDBACK-LOOP.md): PlanDocs, `docs/roles/*`, секция в `tasks.md`. Не спрашивать владельца отдельно — делать по чеклисту. Синк `openspec/specs/` не заменяет PlanDocs и роли. После archive — коммит docs + архива в одной сессии.
 
 **Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
 
@@ -68,7 +68,9 @@ Archive a completed change in the experimental workflow.
 
    If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
-5. **Perform the archive**
+5. **Archive feedback loop** — см. `docs/ARCHIVE-FEEDBACK-LOOP.md`; обновить файлы и отметить `tasks.md`.
+
+6. **Perform the archive**
 
    Create an `archive` directory under `planningHome.changesDir` if it doesn't exist:
    ```bash
@@ -85,7 +87,9 @@ Archive a completed change in the experimental workflow.
    mv "<changeRoot>" "<planningHome.changesDir>/archive/YYYY-MM-DD-<name>"
    ```
 
-6. **Display summary**
+7. **Commit** PlanDocs, roles, `openspec/` archive + specs.
+
+8. **Display summary** (включая список обновлённых PlanDocs/roles)
 
    Show archive completion summary including:
    - Change name

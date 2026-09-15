@@ -33,7 +33,7 @@
 - [ ] Tasks и acceptance выполнены
 - [ ] hy + ru + en для новых ключей
 - [ ] Обе темы не разъехались
-- [ ] Затронутые PlanDocs обновлены в этом же change (не оставлять на «после archive»)
+- [ ] Archive feedback loop: PlanDocs + roles по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](../ARCHIVE-FEEDBACK-LOOP.md) **до** `openspec archive`, в том же коммите что архив
 - [ ] Нет секретов в коммите
 - [ ] После merge в `main` — проверить, что Actions-деплой прошёл (или preview обновился)
 

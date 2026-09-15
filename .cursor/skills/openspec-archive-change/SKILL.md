@@ -12,9 +12,9 @@ metadata:
 
 Archive a completed change in the experimental workflow.
 
-**KidsBank — до шага 1 OpenSpec (жёсткий гейт):**
+**KidsBank — Archive feedback loop (жёсткий гейт, шаг 0):**
 
-Не архивировать, пока PlanDocs не описывают то, что добавили в этом change (см. `AGENTS.md` §5, `docs/roles/product.md`). Если в diff нет правок `PlanDocs/` под новое поведение — остановись и допиши, потом продолжай.
+Перед `openspec archive` выполни [`docs/ARCHIVE-FEEDBACK-LOOP.md`](../../../docs/ARCHIVE-FEEDBACK-LOOP.md): PlanDocs, `docs/roles/*` (designer/developer/product по необходимости), чекбоксы в `tasks.md` § «Archive feedback loop». Владельцу **не** спрашивать «обновить доки?» — делать по чеклисту. Если change затрагивает сценарий, а `PlanDocs/` не обновлены — **остановись**, допиши, потом archive.
 
 **Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
 
@@ -73,7 +73,13 @@ Archive a completed change in the experimental workflow.
 
    If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
-5. **Perform the archive**
+5. **Archive feedback loop (KidsBank — обязательно перед archive)**
+
+   - Read `docs/ARCHIVE-FEEDBACK-LOOP.md` and the change `proposal.md` / implementation diff.
+   - Update all applicable PlanDocs and role files; mark `tasks.md` § «Archive feedback loop» items `[x]`.
+   - Summarize planned doc updates in chat before running the CLI archive.
+
+6. **Perform the archive**
 
    Create an `archive` directory under `planningHome.changesDir` if it doesn't exist:
    ```bash
@@ -90,13 +96,19 @@ Archive a completed change in the experimental workflow.
    mv "<changeRoot>" "<planningHome.changesDir>/archive/YYYY-MM-DD-<name>"
    ```
 
-6. **Display summary**
+7. **Commit documentation + archive**
+
+   - Stage `openspec/changes/archive/`, `openspec/specs/`, PlanDocs, `docs/`, `AGENTS.md` as needed.
+   - One commit message: archive + feedback loop (per user workflow: commit/push when archiving unless told otherwise).
+
+8. **Display summary**
 
    Show archive completion summary including:
    - Change name
    - Schema that was used
    - Archive location
    - Whether specs were synced (if applicable)
+   - **PlanDocs and roles files updated** (list or «N/A»)
    - Note about any warnings (incomplete artifacts/tasks)
 
 **Output On Success**

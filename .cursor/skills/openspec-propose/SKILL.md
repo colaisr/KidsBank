@@ -106,6 +106,16 @@ After completing all artifacts, summarize:
   - Do NOT copy `<context>`, `<rules>`, `<project_context>` blocks into the artifact
   - These guide what you write, but should never appear in the output
 
+**KidsBank — `tasks.md` must end with:**
+
+```markdown
+## Archive feedback loop
+
+- [ ] PlanDocs (см. docs/ARCHIVE-FEEDBACK-LOOP.md)
+- [ ] docs/roles/ — designer / developer / product при необходимости
+- [ ] openspec archive + коммит
+```
+
 **Guardrails**
 - Create ALL artifacts needed for implementation (as defined by schema's `apply.requires`)
 - Always read dependency artifacts before creating a new one
