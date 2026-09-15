@@ -69,7 +69,7 @@ export function TaskCard({ task, interactive = true, compact = false }: TaskCard
 
         <p
           className={`mt-1 flex items-center gap-1 text-xs font-medium ${
-            done ? 'text-text-muted' : waiting ? 'text-accent-kids' : 'text-accent-kids'
+            done ? 'text-text-muted' : 'text-accent-kids-ink'
           }`}
         >
           <span aria-hidden="true">🕐</span>
@@ -88,7 +88,7 @@ export function TaskCard({ task, interactive = true, compact = false }: TaskCard
             done
               ? 'border-emerald-500 bg-emerald-500 text-white'
               : waiting
-                ? 'border-accent-kids/50 bg-accent-kids/10'
+                ? 'border-accent-kids-ink/35 bg-accent-kids/15'
                 : actionable
                   ? 'border-border bg-surface hover:border-primary active:scale-95'
                   : 'border-border bg-surface-muted'
@@ -99,7 +99,7 @@ export function TaskCard({ task, interactive = true, compact = false }: TaskCard
               ✓
             </span>
           ) : waiting ? (
-            <span className="h-3 w-3 rounded-sm bg-accent-kids/60" aria-hidden="true" />
+            <span className="h-3 w-3 rounded-sm bg-accent-kids-ink/45" aria-hidden="true" />
           ) : null}
         </button>
       </div>

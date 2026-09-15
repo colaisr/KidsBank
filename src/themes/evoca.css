@@ -1,7 +1,9 @@
 html[data-theme='evoca'] {
   --kb-primary: #6400dc;
   --kb-primary-dark: #8448ff;
-  --kb-accent-kids: #c4ff00;
+  /* Soft lime fills (brand E4FF90 family); ink = readable reward glyph on white */
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
   --kb-accent-secondary: #ff2d61;
   --kb-surface: #ffffff;
   --kb-surface-muted: #f4eaf6;

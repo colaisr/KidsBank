@@ -61,7 +61,7 @@ export function AccountsSection() {
           to="/child/goals"
           className="min-w-0 rounded-card border border-border bg-surface p-4 transition-colors duration-200 hover:border-primary/40"
         >
-          <span className="text-lg text-accent-kids" aria-hidden="true">
+          <span className="text-lg text-accent-kids-ink" aria-hidden="true">
             ★
           </span>
           <p className="mt-2 text-xs font-medium text-text-muted">{t('ui.home.stars')}</p>

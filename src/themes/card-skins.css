@@ -71,7 +71,8 @@ html[data-theme='evoca'][data-card-skin='space'] .kb-child-shell {
 html[data-theme='evoca'][data-card-skin='dinosaurs'] .kb-child-shell {
   --kb-primary: #6400dc;
   --kb-primary-dark: #14532d;
-  --kb-accent-kids: #c4ff00;
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
   --kb-header-gradient: linear-gradient(135deg, #166534 0%, #6400dc 100%);
   --kb-fab: #16a34a;
   --kb-fab-fg: #ffffff;
@@ -90,7 +91,8 @@ html[data-theme='evoca'][data-card-skin='unicorns'] .kb-child-shell {
 html[data-theme='evoca'][data-card-skin='robots'] .kb-child-shell {
   --kb-primary: #6400dc;
   --kb-primary-dark: #1f2937;
-  --kb-accent-kids: #c4ff00;
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
   --kb-header-gradient: linear-gradient(135deg, #374151 0%, #6400dc 100%);
   --kb-fab: #4b5563;
   --kb-fab-fg: #ffffff;
@@ -100,7 +102,8 @@ html[data-theme='evoca'][data-card-skin='robots'] .kb-child-shell {
 html[data-theme='evoca'][data-card-skin='racing'] .kb-child-shell {
   --kb-primary: #6400dc;
   --kb-primary-dark: #c2410c;
-  --kb-accent-kids: #c4ff00;
+  --kb-accent-kids: #d2ee96;
+  --kb-accent-kids-ink: #6a8f2e;
   --kb-header-gradient: linear-gradient(135deg, #ea580c 0%, #6400dc 100%);
   --kb-fab: #ea580c;
   --kb-fab-glow: 0 8px 24px rgb(234 88 12 / 0.4);

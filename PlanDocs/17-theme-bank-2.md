@@ -27,7 +27,7 @@ Brandfetch `#E79738` Fire Bush **не** использовать как primary 
 | Tints | `#8448FF` `#BD83FF` `#C3B2FF` |
 | Gray | `#7F7F7F` |
 | Neutral lilac | `#F4EAF6` — фон детского кабинета |
-| Lime | `#C4FF00` (`#E4FF90`) — один акцент наград |
+| Lime | `#C4FF00` / `#E4FF90` — награды; в UI на белом фоне `--kb-accent-kids-ink` (оливковый `#6A8F2E`), заливки `--kb-accent-kids` (`#D2EE96`) |
 | Coral | `#FF2D61` / `#FE7944` — один акцент CTA |
 | Turquoise | `#32BBC5` — инфографика, не primary |
 

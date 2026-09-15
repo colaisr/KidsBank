@@ -32,7 +32,7 @@ export function YoungChildHomeHeader() {
           className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 font-heading text-sm font-semibold text-text shadow-sm"
           aria-label={t('ui.home.stars')}
         >
-          <span className="text-accent-kids" aria-hidden="true">★</span>
+          <span className="text-accent-kids-ink" aria-hidden="true">★</span>
           <span>{formatNumber(demo.starsBalance, locale)}</span>
         </div>
       </div>

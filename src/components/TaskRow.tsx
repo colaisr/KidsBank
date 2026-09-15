@@ -48,7 +48,11 @@ export function TaskRow({ task, interactive = true }: TaskRowProps) {
     >
       <span
         className={`h-5 w-5 shrink-0 rounded-full border-2 ${
-          done ? 'border-primary bg-primary' : waiting ? 'border-accent-kids bg-accent-kids/20' : 'border-border'
+          done
+            ? 'border-primary bg-primary'
+            : waiting
+              ? 'border-accent-kids-ink/35 bg-accent-kids/15'
+              : 'border-border'
         }`}
         aria-hidden="true"
       />

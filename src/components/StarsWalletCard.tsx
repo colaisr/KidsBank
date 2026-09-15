@@ -22,7 +22,7 @@ export function StarsWalletCard() {
       </p>
       <p className="relative mt-1 flex items-baseline gap-1.5 font-heading text-4xl font-semibold tracking-tight text-text">
         {formatNumber(demo.starsBalance, locale)}
-        <span className="text-2xl text-accent-kids" aria-hidden="true">
+        <span className="text-2xl text-accent-kids-ink" aria-hidden="true">
           ★
         </span>
       </p>
