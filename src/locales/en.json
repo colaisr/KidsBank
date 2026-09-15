@@ -166,7 +166,12 @@
         "pendingEmpty": "No active tasks",
         "completedEmpty": "Nothing confirmed today yet",
         "confirmSheetTitle": "Confirm task",
-        "confirmSheetHint": "Your child marked this done — award stars?"
+        "confirmSheetHint": "Your child marked this done — award stars?",
+        "subsectionWaiting": "Awaiting confirmation · {{count}}",
+        "subsectionActive": "Active",
+        "waitingReward": "· {{stars}} ★",
+        "rowWaitingAria": "{{title}} — awaiting confirmation",
+        "confirmChip": "Confirm"
       },
       "limitsRowTitle": "Limits",
       "limitsSubtitle": "Daily card spending limit",

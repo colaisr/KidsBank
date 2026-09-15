@@ -166,7 +166,12 @@
         "pendingEmpty": "Ակտիվ առաջադրանքներ չկան",
         "completedEmpty": "Այսօր դեռ հաստատված չէ",
         "confirmSheetTitle": "Հաստատել առաջադրանքը",
-        "confirmSheetHint": "Երեխան նշել է, որ արել է — շնորհել աստղեր?"
+        "confirmSheetHint": "Երեխան նշել է, որ արել է — շնորհել աստղեր?",
+        "subsectionWaiting": "Սպասում է հաստատման · {{count}}",
+        "subsectionActive": "Ակտիվ",
+        "waitingReward": "· {{stars}} ★",
+        "rowWaitingAria": "{{title}} — սպասում է հաստատման",
+        "confirmChip": "Հաստատել"
       },
       "limitsRowTitle": "Լիմիտներ",
       "limitsSubtitle": "Քարտի օրական ծախսի լիմիտ",

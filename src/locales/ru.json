@@ -166,7 +166,12 @@
         "pendingEmpty": "Нет активных заданий",
         "completedEmpty": "Сегодня ещё ничего не подтверждено",
         "confirmSheetTitle": "Подтвердить задание",
-        "confirmSheetHint": "Ребёнок отметил задание выполненным — начислить звёзды?"
+        "confirmSheetHint": "Ребёнок отметил задание выполненным — начислить звёзды?",
+        "subsectionWaiting": "Ждут подтверждения · {{count}}",
+        "subsectionActive": "Активные",
+        "waitingReward": "· {{stars}} ★",
+        "rowWaitingAria": "{{title}} — ждёт подтверждения",
+        "confirmChip": "Подтвердить"
       },
       "limitsRowTitle": "Лимиты",
       "limitsSubtitle": "Дневной лимит на карту",

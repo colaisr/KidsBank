@@ -15,30 +15,29 @@ export function ParentTaskListRow({ task, variant, onPress }: ParentTaskListRowP
   const { locale } = usePreferences();
   const title = getTaskTitle(task, t);
 
+  const isWaitingParent = variant === 'pending' && task.statusId === 'waitingParent';
+
   const iconClass =
     variant === 'completed'
       ? 'bg-emerald-500/15 text-emerald-600'
-      : task.statusId === 'waitingParent'
-        ? 'bg-accent-secondary/15 text-accent-secondary'
-        : 'bg-accent-secondary/10 text-accent-secondary';
+      : isWaitingParent
+        ? 'bg-accent-secondary/20 text-accent-secondary ring-2 ring-accent-secondary/25'
+        : 'bg-primary/10 text-primary';
 
-  const iconSymbol = variant === 'completed' ? '✓' : '⏱';
-
-  const meta =
-    variant === 'completed'
-      ? t('ui.parent.tasksScreen.completedMeta', {
-          stars: formatNumber(task.rewardStars, locale),
-        })
-      : t('ui.parent.tasksScreen.pendingMeta', {
-          time: task.dueTime,
-          stars: formatNumber(task.rewardStars, locale),
-        });
+  const iconSymbol = variant === 'completed' ? '✓' : isWaitingParent ? '✓' : '⏱';
 
   return (
     <button
       type="button"
       onClick={onPress}
-      className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface-muted/60"
+      aria-label={
+        isWaitingParent
+          ? t('ui.parent.tasksScreen.rowWaitingAria', { title })
+          : title
+      }
+      className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface-muted/60 ${
+        isWaitingParent ? 'bg-accent-secondary/[0.06]' : ''
+      }`}
     >
       <span
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-card text-lg ${iconClass}`}
@@ -54,9 +53,42 @@ export function ParentTaskListRow({ task, variant, onPress }: ParentTaskListRowP
         >
           {title}
         </span>
-        <span className="mt-0.5 block text-xs text-text-muted">{meta}</span>
+        {variant === 'completed' ? (
+          <span className="mt-0.5 block text-xs text-text-muted">
+            {t('ui.parent.tasksScreen.completedMeta', {
+              stars: formatNumber(task.rewardStars, locale),
+            })}
+          </span>
+        ) : isWaitingParent ? (
+          <span className="mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs">
+            <span className="font-semibold text-accent-secondary">
+              {t('ui.tasks.waitingParent')}
+            </span>
+            <span className="text-text-muted">
+              {t('ui.parent.tasksScreen.waitingReward', {
+                stars: formatNumber(task.rewardStars, locale),
+              })}
+            </span>
+          </span>
+        ) : (
+          <span className="mt-0.5 block text-xs text-text-muted">
+            {t('ui.parent.tasksScreen.pendingMeta', {
+              time: task.dueTime,
+              stars: formatNumber(task.rewardStars, locale),
+            })}
+          </span>
+        )}
       </span>
-      <span className="shrink-0 text-text-muted/70" aria-hidden="true">›</span>
+      <span className="flex shrink-0 items-center gap-1.5">
+        {isWaitingParent ? (
+          <span
+            className="rounded-full bg-accent-secondary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+          >
+            {t('ui.parent.tasksScreen.confirmChip')}
+          </span>
+        ) : null}
+        <span className="text-text-muted/70" aria-hidden="true">›</span>
+      </span>
     </button>
   );
 }

@@ -21,6 +21,8 @@ export function ParentTasksPage() {
   const [sheetTask, setSheetTask] = useState<DemoTaskState | null>(null);
 
   const pendingTasks = getParentPendingTasks(demo.tasks);
+  const waitingTasks = pendingTasks.filter((task) => task.statusId === 'waitingParent');
+  const activeTasks = pendingTasks.filter((task) => task.statusId !== 'waitingParent');
   const completedToday = getTasksCompletedToday(demo.tasks);
 
   function openTask(task: DemoTaskState) {
@@ -67,17 +69,48 @@ export function ParentTasksPage() {
           </h2>
           <div className="mt-3 overflow-hidden rounded-card border border-border bg-surface shadow-sm">
             {pendingTasks.length > 0 ? (
-              <ul className="divide-y divide-border">
-                {pendingTasks.map((task) => (
-                  <li key={task.id}>
-                    <ParentTaskListRow
-                      task={task}
-                      variant="pending"
-                      onPress={() => openTask(task)}
-                    />
-                  </li>
-                ))}
-              </ul>
+              <div>
+                {waitingTasks.length > 0 ? (
+                  <div>
+                    <p className="border-b border-border bg-surface-muted/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-primary">
+                      {t('ui.parent.tasksScreen.subsectionWaiting', {
+                        count: waitingTasks.length,
+                      })}
+                    </p>
+                    <ul className="divide-y divide-border">
+                      {waitingTasks.map((task) => (
+                        <li key={task.id}>
+                          <ParentTaskListRow
+                            task={task}
+                            variant="pending"
+                            onPress={() => openTask(task)}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                {activeTasks.length > 0 ? (
+                  <div>
+                    {waitingTasks.length > 0 ? (
+                      <p className="border-b border-t border-border bg-surface-muted/50 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-text-muted">
+                        {t('ui.parent.tasksScreen.subsectionActive')}
+                      </p>
+                    ) : null}
+                    <ul className="divide-y divide-border">
+                      {activeTasks.map((task) => (
+                        <li key={task.id}>
+                          <ParentTaskListRow
+                            task={task}
+                            variant="pending"
+                            onPress={() => openTask(task)}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
             ) : (
               <p className="px-4 py-6 text-center text-sm text-text-muted">
                 {t('ui.parent.tasksScreen.pendingEmpty')}
