@@ -16,6 +16,6 @@
 | R-evoca-brandbook | Violet, 80/20, Nomixa | бренд | `17-theme-bank-2` | [PDF](https://www.evoca.am/file_manager/other/Evoca%20Brandbook%20(1).pdf) |
 | R-evoca-touch | Взрослый feed UI | бренд / родитель | `17-theme-bank-2` | [EvocaTOUCH](https://www.evoca.am/en/digital-services-evocatouch-mobile-banking/) |
 | R-evoca-teenz | Их детское приложение | рынок + энергия kids | `02`, `17-theme-bank-2` | [Play](https://play.google.com/store/apps/details?id=am.evoca.mobile) |
-| R-parent-roadmap | Расширения кабинета родителя (геолокация и др.) | внутренний roadmap / stakeholder | `01`, `02` | Макеты и ТЗ от вдохновителя проекта (коммуникация с банками); первый экран — `parent-geolocation` |
+| R-parent-roadmap | Расширения кабинета родителя (геолокация, перевод и др.) | внутренний roadmap / stakeholder | `01`, `02` | Макеты и ТЗ от вдохновителя проекта (коммуникация с банками); реализовано: `parent-geolocation`, `parent-transfer` |
 
 Не класть в git чужие стор-скриншоты пачками без нужды. Ссылка + одна нормативная выжимка в theme/`02` достаточны.

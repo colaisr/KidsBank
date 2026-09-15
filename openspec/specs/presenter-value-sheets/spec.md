@@ -15,7 +15,7 @@ The system SHALL provide a reusable bottom sheet opened by a muted info badge. T
 
 ### Requirement: P0 screens expose presenter sheets
 
-The following routes SHALL include a presenter info badge and sheet: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/onboarding/age`, `/parent`, `/parent/geolocation`, and `/appearance`.
+The following routes SHALL include a presenter info badge and sheet: `/child`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/onboarding/age`, `/parent`, `/parent/geolocation`, `/parent/transfer`, and `/appearance`.
 
 #### Scenario: Child home presenter sheet
 
@@ -31,6 +31,11 @@ The following routes SHALL include a presenter info badge and sheet: `/child`, `
 
 - **WHEN** the user taps the info badge on `/parent/geolocation`
 - **THEN** the sheet with `presenterId` `parent-geolocation` opens
+
+#### Scenario: Parent transfer presenter sheet
+
+- **WHEN** the user taps the info badge on `/parent/transfer`
+- **THEN** the sheet with `presenterId` `parent-transfer` opens
 
 #### Scenario: Onboarding age presenter sheet
 
@@ -87,9 +92,14 @@ New screens or major product mechanics introduced via OpenSpec change SHALL incl
 - **WHEN** a change proposes a new demo screen without a presenter sheet
 - **THEN** the proposal documents the skip reason and references PlanDocs/01 and PlanDocs/17 §6
 
-### Requirement: Parent home demo steps include geolocation
+### Requirement: Parent home demo steps include services
 
-The `parent-home` presenter sheet demo steps SHALL include at least one step directing the presenter to open geolocation and show spend markers on the map.
+The `parent-home` presenter sheet demo steps SHALL include at least one step directing the presenter to open **transfer** from the services section and at least one step for **geolocation** and spend markers on the map.
+
+#### Scenario: Parent home script mentions transfer
+
+- **WHEN** the user opens the presenter sheet on `/parent` in Russian
+- **THEN** demo steps reference Services → Transfer (card or piggy)
 
 #### Scenario: Parent home script mentions map
 

@@ -8,31 +8,31 @@ Provides the parent cabinet home with money control, spending visibility, and pe
 
 ### Requirement: Parent home shows control dashboard
 
-The parent home SHALL display: child summary (card balance, piggy balance), quick actions for transfer, add task, add goal, and limit, an **active child tasks** section with edit/cancel (and confirm for `waitingParent`), an **active child goals** section, and spending history preview.
+The parent home SHALL display: child summary (card balance, piggy balance), quick actions for **add task, add goal, and limit** (transfer is not a quick action), a **services** section with geolocation and transfer entries, an **active child tasks** section with edit/cancel (and confirm for `waitingParent`), an **active child goals** section, and spending history preview.
 
 #### Scenario: Parent home loads
 
 - **WHEN** the active role is `parent` and the user opens `/parent`
-- **THEN** a localized dashboard shows quick actions including «Цель», the active child tasks section, and the active child goals section
+- **THEN** a localized dashboard shows quick actions without a transfer tile, a services section including transfer, the active child tasks section, and the active child goals section
 
 ### Requirement: Parent home uses bank-themed layout variants
 
-The parent home SHALL use one information architecture and **one layout** for both banks. Quick actions SHALL appear in a **2×2 grid** on all themes. Switching `data-theme` SHALL change only color tokens (primary, gradients, surfaces, accents), not element order, size, or arrangement.
+The parent home SHALL use one information architecture and **one layout** for both banks. Quick actions SHALL appear in a **grid** (task, goal, limit in the demo) on all themes. Switching `data-theme` SHALL change only color tokens (primary, gradients, surfaces, accents), not element order, size, or arrangement.
 
 #### Scenario: AMIO parent layout
 
 - **WHEN** theme is AMIO and role is parent
-- **THEN** quick actions appear in a 2×2 grid with adult-banking spacing per `17-theme-bank-1`, using AMIO color tokens only
+- **THEN** quick actions appear in the task/goal/limit grid with adult-banking spacing per `17-theme-bank-1`, using AMIO color tokens only
 
 #### Scenario: Evoca parent layout
 
 - **WHEN** theme is Evoca and role is parent
-- **THEN** the same 2×2 quick-action grid appears with Evoca color tokens per `17-theme-bank-2`, not a separate feed layout or route set
+- **THEN** the same quick-action grid appears with Evoca color tokens per `17-theme-bank-2`, not a separate feed layout or route set
 
 #### Scenario: Theme switch preserves structure
 
 - **WHEN** the user switches bank theme on `/parent`
-- **THEN** section order, quick-action grid, and component sizes remain identical; only colors and gradients update
+- **THEN** section order, quick-action grid, services section, and component sizes remain identical; only colors and gradients update
 
 ### Requirement: Parent home scrolls within phone frame
 
@@ -55,7 +55,7 @@ The parent home SHALL present a cohesive adult-banking dashboard: gradient hero 
 #### Scenario: Dashboard sections
 
 - **WHEN** the parent views `/parent`
-- **THEN** sections appear in order: balance hero, quick actions, geolocation service entry, child tasks, child goals, spending — with uniform vertical spacing between sections
+- **THEN** sections appear in order: balance hero, quick actions, **services** (geolocation and transfer rows), child tasks, child goals, spending — with uniform vertical spacing between sections
 
 #### Scenario: No kids styling on parent
 
@@ -119,14 +119,28 @@ The parent cabinet SHALL show a child profile control (avatar initial, localized
 
 ### Requirement: Parent home links to geolocation with status
 
-The parent home SHALL include a full-width service row for geolocation immediately after the quick-actions section. The row SHALL navigate to `/parent/geolocation` and SHALL display a short status aligned with the geolocation screen (neutral when live GPS is active, fallback labels otherwise).
+The parent home SHALL include a full-width service row for geolocation in the **services** section after quick actions. The row SHALL navigate to `/parent/geolocation` and SHALL display a short status aligned with the geolocation screen (neutral when live GPS is active, fallback labels otherwise).
 
 #### Scenario: Geolocation row visible
 
 - **WHEN** the parent opens `/parent`
-- **THEN** a geolocation row appears below the 2×2 quick actions and above child tasks
+- **THEN** a geolocation row appears in the services section below quick actions and above child tasks
 
 #### Scenario: Status matches geolocation mode
 
 - **WHEN** the parent home renders after visiting geolocation with GPS allowed
 - **THEN** the row status uses neutral location copy consistent with the map screen
+
+### Requirement: Parent home links to transfer in services
+
+The parent home SHALL include a full-width service row for transfer in the services section. The row SHALL navigate to `/parent/transfer` and SHALL show a short subtitle indicating card or piggy as targets.
+
+#### Scenario: Transfer row visible
+
+- **WHEN** the parent opens `/parent`
+- **THEN** a transfer row appears in the services section below geolocation
+
+#### Scenario: Transfer row navigates
+
+- **WHEN** the parent taps the transfer row
+- **THEN** `/parent/transfer` opens
