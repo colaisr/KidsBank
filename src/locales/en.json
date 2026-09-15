@@ -155,6 +155,28 @@
       "services": "Services",
       "transfer": "Transfer",
       "transferSubtitle": "To card or piggy bank",
+      "limitsRowTitle": "Limits",
+      "limitsSubtitle": "Daily card spending limit",
+      "limitsStatusAtm": "Cash: {{amount}}/day",
+      "limitsScreen": {
+        "title": "Limits",
+        "transfersTitle": "Transfers",
+        "transfersHint": "Who {{name}} can send money to",
+        "noDailyLimit": "no limit",
+        "dailyUpTo": "up to {{amount}} per day",
+        "addRecipient": "Add recipient",
+        "addRecipientTitle": "New recipient",
+        "recipientName": "Name",
+        "recipientNamePlaceholder": "e.g. Uncle Ara",
+        "recipientLimit": "Daily limit",
+        "addRecipientConfirm": "Add",
+        "cashTitle": "Cash",
+        "cashHint": "How much can be withdrawn at an ATM per day",
+        "allowCash": "Allow cash withdrawal",
+        "cashMax": "maximum {{amount}}/day",
+        "decreaseCash": "Decrease limit",
+        "increaseCash": "Increase limit"
+      },
       "transferScreen": {
         "title": "Transfer to {{name}}",
         "amountLabel": "Transfer amount",
@@ -323,6 +345,13 @@
     "child": {
       "david": {
         "name": "David"
+      }
+    },
+    "limits": {
+      "recipient": {
+        "mom": "Mom",
+        "grandma": "Grandmother",
+        "friend": "Tigran (friend)"
       }
     },
     "tasks": {

@@ -371,6 +371,63 @@ export function clearCardLimit(state: DemoState): DemoState {
   return { ...state, cardLimit: null };
 }
 
+export function setTransferRecipientEnabled(
+  state: DemoState,
+  recipientId: string,
+  enabled: boolean,
+): DemoState {
+  return {
+    ...state,
+    transferRecipients: state.transferRecipients.map((recipient) =>
+      recipient.id === recipientId ? { ...recipient, enabled } : recipient,
+    ),
+  };
+}
+
+export function addTransferRecipient(
+  state: DemoState,
+  params: { customName: string; dailyLimit: number | null },
+): DemoState {
+  const trimmed = params.customName.trim();
+  if (!trimmed) {
+    return state;
+  }
+
+  const initial = trimmed.charAt(0).toUpperCase();
+  const id = `custom-${Date.now()}`;
+
+  return {
+    ...state,
+    transferRecipients: [
+      ...state.transferRecipients,
+      {
+        id,
+        customName: trimmed,
+        initial,
+        avatarTone: 'sky',
+        dailyLimit: params.dailyLimit,
+        enabled: true,
+      },
+    ],
+  };
+}
+
+export function setCashWithdrawalEnabled(state: DemoState, enabled: boolean): DemoState {
+  return {
+    ...state,
+    cashWithdrawal: { ...state.cashWithdrawal, enabled },
+  };
+}
+
+export function setCashWithdrawalDailyLimit(state: DemoState, dailyLimit: number): DemoState {
+  const max = state.cashWithdrawal.maxDaily;
+  const clamped = Math.min(max, Math.max(0, dailyLimit));
+  return {
+    ...state,
+    cashWithdrawal: { ...state.cashWithdrawal, dailyLimit: clamped },
+  };
+}
+
 export function demoSpend(state: DemoState, amount: number): DemoState | 'limit' {
   if (amount <= 0 || amount > state.card.balance) {
     return state;

@@ -155,6 +155,28 @@
       "services": "Ծառայություններ",
       "transfer": "Փոխանցում",
       "transferSubtitle": "Քարտին կամ խուրհի",
+      "limitsRowTitle": "Լիմիտներ",
+      "limitsSubtitle": "Քարտի օրական ծախսի լիմիտ",
+      "limitsStatusAtm": "Կանխիկ՝ {{amount}}/օր",
+      "limitsScreen": {
+        "title": "Լիմիտներ",
+        "transfersTitle": "Փոխանցումներ",
+        "transfersHint": "Ում կարող է {{name}} փոխանցել գումար",
+        "noDailyLimit": "առանց լիմիտի",
+        "dailyUpTo": "մինչև {{amount}} օրական",
+        "addRecipient": "Ավելացնել ստացող",
+        "addRecipientTitle": "Նոր ստացող",
+        "recipientName": "Անուն",
+        "recipientNamePlaceholder": "Օրինակ՝ քեռի Արա",
+        "recipientLimit": "Օրական լիմիտ",
+        "addRecipientConfirm": "Ավելացնել",
+        "cashTitle": "Կանխիկ",
+        "cashHint": "Քանիք կարելի է բանկոմատից քաշել օրական",
+        "allowCash": "Թույլատրել կանխիկի քաշում",
+        "cashMax": "առավելագույնը {{amount}}/օր",
+        "decreaseCash": "Նվազեցնել լիմիտը",
+        "increaseCash": "Ավելացնել լիմիտը"
+      },
       "transferScreen": {
         "title": "Փոխանցում {{name}}",
         "amountLabel": "Փոխանցման գումար",
@@ -323,6 +345,13 @@
     "child": {
       "david": {
         "name": "Դավիթ"
+      }
+    },
+    "limits": {
+      "recipient": {
+        "mom": "Մայրիկ",
+        "grandma": "Տատիկ",
+        "friend": "Տիգրան (ընկեր)"
       }
     },
     "tasks": {

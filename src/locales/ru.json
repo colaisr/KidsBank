@@ -155,6 +155,28 @@
       "services": "Сервисы",
       "transfer": "Перевод",
       "transferSubtitle": "На карту или в копилку",
+      "limitsRowTitle": "Лимиты",
+      "limitsSubtitle": "Дневной лимит на карту",
+      "limitsStatusAtm": "Наличные: {{amount}}/день",
+      "limitsScreen": {
+        "title": "Лимиты",
+        "transfersTitle": "Переводы",
+        "transfersHint": "Кому {{name}} может переводить деньги",
+        "noDailyLimit": "без лимита",
+        "dailyUpTo": "до {{amount}} в день",
+        "addRecipient": "Добавить получателя",
+        "addRecipientTitle": "Новый получатель",
+        "recipientName": "Имя",
+        "recipientNamePlaceholder": "Например, дядя Ара",
+        "recipientLimit": "Лимит в день",
+        "addRecipientConfirm": "Добавить",
+        "cashTitle": "Наличные",
+        "cashHint": "Сколько можно снять в банкомате за день",
+        "allowCash": "Разрешить снятие наличных",
+        "cashMax": "максимум {{amount}}/день",
+        "decreaseCash": "Уменьшить лимит",
+        "increaseCash": "Увеличить лимит"
+      },
       "transferScreen": {
         "title": "Перевод {{name}}",
         "amountLabel": "Сумма перевода",
@@ -323,6 +345,13 @@
     "child": {
       "david": {
         "name": "Давид"
+      }
+    },
+    "limits": {
+      "recipient": {
+        "mom": "Мама",
+        "grandma": "Бабушка",
+        "friend": "Тигран (друг)"
       }
     },
     "tasks": {

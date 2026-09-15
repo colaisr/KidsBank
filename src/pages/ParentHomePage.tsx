@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { AddGoalModal } from '../components/AddGoalModal';
 import { AddTaskModal } from '../components/AddTaskModal';
 import { EditTaskModal } from '../components/EditTaskModal';
-import { LimitModal } from '../components/LimitModal';
 import { ParentGoalRow } from '../components/ParentGoalRow';
 import { ParentTaskRow } from '../components/ParentTaskRow';
 import { TransactionRow } from '../components/TransactionRow';
@@ -24,7 +23,6 @@ export function ParentHomePage() {
   const { t } = useTranslation();
   const { locale } = usePreferences();
   const { demo, setDemo } = useDemoState();
-  const [limitOpen, setLimitOpen] = useState(false);
   const [addTaskOpen, setAddTaskOpen] = useState(false);
   const [addGoalOpen, setAddGoalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<DemoTaskState | null>(null);
@@ -37,6 +35,11 @@ export function ParentHomePage() {
     mode === 'live'
       ? t('ui.parent.geolocation.statusNeutral')
       : t('ui.parent.geolocation.statusFallback');
+  const limitsStatus = demo.cashWithdrawal.enabled
+    ? t('ui.parent.limitsStatusAtm', {
+        amount: formatCurrency(demo.cashWithdrawal.dailyLimit, locale),
+      })
+    : t('ui.parent.limitNotSet');
 
   function handleConfirm(taskId: string) {
     setDemo((s) => confirmTask(s, taskId));
@@ -90,33 +93,6 @@ export function ParentHomePage() {
                 {t('ui.parent.addGoal')}
               </span>
             </button>
-            <button
-              type="button"
-              onClick={() => setLimitOpen(true)}
-              className={`${actionCardClass} ${
-                demo.cardLimit !== null ? 'border-primary/40 bg-primary/5 ring-1 ring-primary/20' : ''
-              }`}
-            >
-              <span className="text-lg" aria-hidden="true">
-                ⏱
-              </span>
-              <div className="mt-2 min-w-0">
-                <span className="line-clamp-2 font-heading text-sm font-semibold">
-                  {t('ui.parent.limit')}
-                </span>
-                <span
-                  className={`mt-0.5 block line-clamp-2 text-xs font-medium ${
-                    demo.cardLimit !== null ? 'text-primary' : 'text-text-muted'
-                  }`}
-                >
-                  {demo.cardLimit !== null
-                    ? t('ui.parent.limitActive', {
-                        amount: formatCurrency(demo.cardLimit, locale),
-                      })
-                    : t('ui.parent.limitNotSet')}
-                </span>
-              </div>
-            </button>
           </div>
         </section>
 
@@ -137,6 +113,13 @@ export function ParentHomePage() {
               icon="↗"
               title={t('ui.parent.transfer')}
               description={t('ui.parent.transferSubtitle')}
+            />
+            <ParentServiceRow
+              to="/parent/limits"
+              icon="✦"
+              title={t('ui.parent.limitsRowTitle')}
+              description={t('ui.parent.limitsSubtitle')}
+              statusLabel={limitsStatus}
             />
           </div>
         </section>
@@ -203,7 +186,6 @@ export function ParentHomePage() {
         </section>
       </main>
 
-      <LimitModal open={limitOpen} onClose={() => setLimitOpen(false)} />
       <AddTaskModal open={addTaskOpen} onClose={() => setAddTaskOpen(false)} />
       <AddGoalModal open={addGoalOpen} onClose={() => setAddGoalOpen(false)} />
       <EditTaskModal

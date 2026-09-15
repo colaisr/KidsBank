@@ -93,8 +93,26 @@ export type PetState = {
   lastTickAt: string;
 };
 
+export type DemoTransferRecipientTone = 'primary' | 'warm' | 'sky';
+
+export type DemoTransferRecipient = {
+  id: string;
+  nameKey?: string;
+  customName?: string;
+  initial: string;
+  avatarTone: DemoTransferRecipientTone;
+  dailyLimit: number | null;
+  enabled: boolean;
+};
+
+export type DemoCashWithdrawal = {
+  enabled: boolean;
+  dailyLimit: number;
+  maxDaily: number;
+};
+
 export type DemoState = {
-  version: 6;
+  version: 7;
   parentWallet: number;
   card: {
     last4: string;
@@ -116,9 +134,14 @@ export type DemoState = {
   locationUpdatedAt: string;
   fallbackChild: { lat: number; lng: number };
   savedPlaces: DemoSavedPlace[];
+  transferRecipients: DemoTransferRecipient[];
+  cashWithdrawal: DemoCashWithdrawal;
 };
 
-export const DEMO_STATE_VERSION = 6 as const;
+export const DEMO_STATE_VERSION = 7 as const;
+
+export const CASH_WITHDRAWAL_MAX_DAILY = 3000;
+export const CASH_WITHDRAWAL_STEP = 500;
 
 /** Yerevan demo cluster — fallback when geolocation is unavailable */
 const FALLBACK_CHILD = { lat: 40.1812, lng: 44.5146 };
@@ -158,6 +181,43 @@ function createBaselineChildren(): DemoChildProfile[] {
       initial: 'Д',
     },
   ];
+}
+
+function createBaselineTransferRecipients(): DemoTransferRecipient[] {
+  return [
+    {
+      id: 'mom',
+      nameKey: 'demo.limits.recipient.mom',
+      initial: 'М',
+      avatarTone: 'primary',
+      dailyLimit: null,
+      enabled: true,
+    },
+    {
+      id: 'grandma',
+      nameKey: 'demo.limits.recipient.grandma',
+      initial: 'Б',
+      avatarTone: 'warm',
+      dailyLimit: 1000,
+      enabled: true,
+    },
+    {
+      id: 'friend',
+      nameKey: 'demo.limits.recipient.friend',
+      initial: 'Т',
+      avatarTone: 'sky',
+      dailyLimit: 500,
+      enabled: true,
+    },
+  ];
+}
+
+function createBaselineCashWithdrawal(): DemoCashWithdrawal {
+  return {
+    enabled: true,
+    dailyLimit: 1000,
+    maxDaily: CASH_WITHDRAWAL_MAX_DAILY,
+  };
 }
 
 function createBaselinePet(): PetState {
@@ -296,6 +356,8 @@ export const DEMO_BASELINE: DemoState = {
   locationUpdatedAt: new Date().toISOString(),
   fallbackChild: { ...FALLBACK_CHILD },
   savedPlaces: createBaselineSavedPlaces(),
+  transferRecipients: createBaselineTransferRecipients(),
+  cashWithdrawal: createBaselineCashWithdrawal(),
 };
 
 function createTransactionsSeed(): DemoTransaction[] {
@@ -419,5 +481,7 @@ export function cloneDemoBaseline(): DemoState {
       ...place,
       liveOffsetMeters: { ...place.liveOffsetMeters },
     })),
+    transferRecipients: DEMO_BASELINE.transferRecipients.map((recipient) => ({ ...recipient })),
+    cashWithdrawal: { ...DEMO_BASELINE.cashWithdrawal },
   };
 }

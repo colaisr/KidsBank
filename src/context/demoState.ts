@@ -39,7 +39,12 @@ type DemoLocationFields = Pick<
   'children' | 'activeChildId' | 'locationUpdatedAt' | 'fallbackChild' | 'savedPlaces'
 >;
 
-type LegacyDemoStateV2 = Omit<DemoState, 'version' | 'taskStats' | 'pet' | keyof DemoLocationFields> & {
+type DemoLimitsFields = Pick<DemoState, 'transferRecipients' | 'cashWithdrawal'>;
+
+type LegacyDemoStateV2 = Omit<
+  DemoState,
+  'version' | 'taskStats' | 'pet' | keyof DemoLocationFields | keyof DemoLimitsFields
+> & {
   version: 2;
   taskStats?: TaskStats;
 };
@@ -75,7 +80,10 @@ function normalizeGoal(goal: DemoGoalState): DemoGoalState {
   };
 }
 
-type LegacyDemoStateV3 = Omit<DemoState, 'version' | 'pet' | keyof DemoLocationFields> & {
+type LegacyDemoStateV3 = Omit<
+  DemoState,
+  'version' | 'pet' | keyof DemoLocationFields | keyof DemoLimitsFields
+> & {
   version: 3;
   pet?: PetState;
 };
@@ -93,12 +101,15 @@ function normalizePet(pet: PetState, baseline: PetState): PetState {
   };
 }
 
-type LegacyDemoStateV4 = Omit<DemoState, 'version' | 'goals' | keyof DemoLocationFields> & {
+type LegacyDemoStateV4 = Omit<
+  DemoState,
+  'version' | 'goals' | keyof DemoLocationFields | keyof DemoLimitsFields
+> & {
   version: 4;
   goals: Array<Omit<DemoGoalState, 'selected'> & { selected?: boolean }>;
 } & Partial<DemoLocationFields>;
 
-type LegacyDemoStateV5 = Omit<DemoState, 'version' | keyof DemoLocationFields> & {
+type LegacyDemoStateV5 = Omit<DemoState, 'version' | keyof DemoLocationFields | keyof DemoLimitsFields> & {
   version: 5;
 } & Partial<DemoLocationFields>;
 
@@ -114,7 +125,24 @@ type DemoStateNormalizeInput = {
   goals: Array<DemoGoalState | (Omit<DemoGoalState, 'selected'> & { selected?: boolean })>;
   transactions: DemoState['transactions'];
   pet?: PetState;
-} & Partial<DemoLocationFields>;
+} & Partial<DemoLocationFields> &
+  Partial<DemoLimitsFields>;
+
+function mergeLimitsFields(
+  state: DemoStateNormalizeInput,
+  baseline: DemoState,
+): Pick<DemoState, 'transferRecipients' | 'cashWithdrawal'> {
+  const withLimits = state as Partial<DemoState>;
+  return {
+    transferRecipients: withLimits.transferRecipients?.length
+      ? withLimits.transferRecipients.map((recipient) => ({ ...recipient }))
+      : baseline.transferRecipients.map((recipient) => ({ ...recipient })),
+    cashWithdrawal: {
+      ...baseline.cashWithdrawal,
+      ...withLimits.cashWithdrawal,
+    },
+  };
+}
 
 function mergeLocationFields(
   state: DemoStateNormalizeInput,
@@ -168,6 +196,7 @@ function normalizeDemoState(state: DemoStateNormalizeInput): DemoState {
   const baseline = cloneDemoBaseline();
   const petSource = 'pet' in state && state.pet ? state.pet : baseline.pet;
   const location = mergeLocationFields(state, baseline);
+  const limits = mergeLimitsFields(state, baseline);
   return {
     ...state,
     version: DEMO_STATE_VERSION,
@@ -181,6 +210,7 @@ function normalizeDemoState(state: DemoStateNormalizeInput): DemoState {
     pet: normalizePet(petSource, baseline.pet),
     transactions: mergeTransactionMapFields(state.transactions, baseline),
     ...location,
+    ...limits,
   };
 }
 
@@ -262,10 +292,18 @@ function migrateV2ToV3(v2: LegacyDemoStateV2): DemoState {
 }
 
 function migrateV5ToV6(v5: LegacyDemoStateV5): DemoState {
-  return normalizeDemoState({ ...v5, version: DEMO_STATE_VERSION });
+  return migrateV6ToV7(normalizeDemoState({ ...v5, version: 6 }));
 }
 
-function isDemoStateV6(value: unknown): value is DemoState {
+type LegacyDemoStateV6 = Omit<DemoState, 'version' | keyof DemoLimitsFields> & {
+  version: 6;
+};
+
+function migrateV6ToV7(v6: LegacyDemoStateV6 | DemoState): DemoState {
+  return normalizeDemoState({ ...v6, version: DEMO_STATE_VERSION });
+}
+
+function isDemoStateV7(value: unknown): value is DemoState {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -273,6 +311,8 @@ function isDemoStateV6(value: unknown): value is DemoState {
   const candidate = value as DemoState;
   return (
     candidate.version === DEMO_STATE_VERSION &&
+    Array.isArray(candidate.transferRecipients) &&
+    candidate.cashWithdrawal !== undefined &&
     Array.isArray(candidate.children) &&
     Array.isArray(candidate.savedPlaces) &&
     typeof candidate.activeChildId === 'string' &&
@@ -288,6 +328,19 @@ function isDemoStateV6(value: unknown): value is DemoState {
     typeof candidate.taskStats.tasksCompleted === 'number' &&
     candidate.pet !== undefined &&
     typeof candidate.pet.xp === 'number'
+  );
+}
+
+function isDemoStateV6(value: unknown): value is LegacyDemoStateV6 {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as LegacyDemoStateV6;
+  return (
+    candidate.version === 6 &&
+    Array.isArray(candidate.children) &&
+    typeof candidate.parentWallet === 'number'
   );
 }
 
@@ -379,8 +432,11 @@ export function readDemoState(): DemoState {
     }
 
     const parsed: unknown = JSON.parse(raw);
-    if (isDemoStateV6(parsed)) {
+    if (isDemoStateV7(parsed)) {
       return normalizeDemoState(parsed);
+    }
+    if (isDemoStateV6(parsed)) {
+      return migrateV6ToV7(parsed);
     }
     if (isDemoStateV5(parsed)) {
       return migrateV5ToV6(parsed);

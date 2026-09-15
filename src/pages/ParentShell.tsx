@@ -7,7 +7,9 @@ import { useDemoState } from '../context/DemoStateContext';
 export function ParentShell() {
   const location = useLocation();
   const isParentSubScreen =
-    location.pathname === '/parent/geolocation' || location.pathname === '/parent/transfer';
+    location.pathname === '/parent/geolocation' ||
+    location.pathname === '/parent/transfer' ||
+    location.pathname === '/parent/limits';
   const { demo, setDemo } = useDemoState();
 
   return (
