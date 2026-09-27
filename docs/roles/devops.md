@@ -12,9 +12,9 @@
 | VPS | `62.113.106.19`, Ubuntu, nginx |
 | Путь статики | `/var/www/kidsbank/` |
 | TLS | Let's Encrypt (certbot, автообновление) |
-| CI/CD | `.github/workflows/deploy.yml` — push в `main` → build → rsync |
+| Деплой | `npm run deploy:preview` / `scripts/deploy-preview.sh` (локальный build → rsync) |
 | SSH (локально) | `ssh -i ~/.ssh/kidsbank_vps root@62.113.106.19` |
-| GitHub Secret | `DEPLOY_SSH_KEY` (приватный ключ, **не в репо**) |
+| GitHub Actions | **нет** автодеплоя при push (только git remote) |
 
 Домена нет — hostname через [sslip.io](https://sslip.io). Собственный домен позже = новый certbot `-d`.
 
@@ -35,7 +35,7 @@
 
 - [x] URL открывается с телефона (HTTPS)
 - [x] `?bank=` и `?lang=` работают
-- [x] Автодеплой при push в `main`
+- [x] Ручной деплой документирован (`16`, `scripts/deploy-preview.sh`)
 - [x] В diff нет секретов
 
 ## Не делает

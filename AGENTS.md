@@ -35,7 +35,7 @@ npx openspec list
 # изменения: /opsx:propose | apply | explore | archive | sync
 npm run dev                  # локально
 npm run build                # прод-сборка
-# push в main → GitHub Actions деплоит на preview VPS (см. 16)
+# деплой preview вручную: npm run deploy:preview (см. 16); push в main не деплоит
 ```
 
 Роли Cursor: `/product` `/designer` `/developer` `/devops` и `/opsx:*`.

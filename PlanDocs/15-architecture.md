@@ -99,7 +99,7 @@ src/
 
 Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.childExperience`, `kidsbank.childAgeRange`, `kidsbank.demo` (v5, включает `pet` и `goals[].selected`).
 
-Preview: https://62-113-106-19.sslip.io/ — деплой при push в `main` (см. `16`).
+Preview: https://62-113-106-19.sslip.io/ — ручной деплой `npm run deploy:preview` (см. `16`).
 
 ## 5. Чего нет
 

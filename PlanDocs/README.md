@@ -19,7 +19,7 @@ PlanDocs = «зачем и что задумано». Как система ра
 | Файл | Статус | Что внутри | Здесь НЕ искать |
 | --- | --- | --- | --- |
 | [`15-architecture.md`](15-architecture.md) | Актуален, тонкий | Vite/React, темы, i18n, где демо-данные | Прод-банк, БД, API — не здесь |
-| [`16-ops-deploy.md`](16-ops-deploy.md) | Актуален | Preview HTTPS, VPS, CI/CD (push → deploy) | Секреты |
+| [`16-ops-deploy.md`](16-ops-deploy.md) | Актуален | Preview HTTPS, VPS, ручной deploy | SSH-ключ локально |
 
 ## Дизайн
 

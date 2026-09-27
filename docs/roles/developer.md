@@ -9,7 +9,7 @@
 - **Демо сдано** — прототип готов к показу, ждёт утверждения или следующих шагов.
 - Реализованный скоуп — [`PlanDocs/01-surf-baseline.md`](../../PlanDocs/01-surf-baseline.md).
 - Живые спеки: `openspec/specs/`. История changes: `openspec/changes/archive/`.
-- **Деплой:** `push` в `main` → GitHub Actions → https://62-113-106-19.sslip.io/ (~30 с).
+- **Деплой:** по запросу `npm run deploy:preview` (не при push); preview https://62-113-106-19.sslip.io/
 
 ## Обязательное чтение
 
@@ -46,7 +46,7 @@
 - [ ] Обе темы не разъехались
 - [ ] Archive feedback loop: PlanDocs + roles по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](../ARCHIVE-FEEDBACK-LOOP.md) **до** `openspec archive`, в том же коммите что архив
 - [ ] Нет секретов в коммите
-- [ ] После merge в `main` — проверить, что Actions-деплой прошёл (или preview обновился)
+- [ ] После merge в `main` — по запросу владельца задеплоить preview (`npm run deploy:preview`)
 
 ## Не делает
 
