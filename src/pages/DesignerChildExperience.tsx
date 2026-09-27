@@ -15,10 +15,15 @@ import '../designer-child/pet-screen.css';
 import '../designer-child/header-blur.css';
 import '../designer-child/progressive-blur.css';
 import SmoothSurfaces from '../designer-child/SmoothSurfaces';
+import { useDemoState } from '../context/DemoStateContext';
 
 export function DesignerChildExperience() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { demo } = useDemoState();
+  const activeChild =
+    demo.children.find((child) => child.id === demo.activeChildId) ?? demo.children[0];
+  const childDisplayName = t(activeChild.nameKey);
 
   return (
     <DemoProvider>
@@ -26,6 +31,7 @@ export function DesignerChildExperience() {
         <IconContext.Provider value={{ weight: 'duotone' }}>
           <div className="kb-designer-child flex min-h-0 flex-1 flex-col overflow-hidden">
             <HomeApp
+              childDisplayName={childDisplayName}
               identityAriaLabel={t('ui.profile.settings')}
               onIdentityClick={() =>
                 navigate('/child/profile', { state: { from: '/child' } })

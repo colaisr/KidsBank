@@ -33,25 +33,29 @@ import { FeedbackProvider, Pressable } from "./Feedback";
 import ParentApp from "./ParentApp";
 import AmbientBackground from "./AmbientBackground";
 import ChildAvatar from "./ChildAvatar";
+import { useDesignerChildT } from "./useDesignerChildT";
 
 function Header({
   onStars,
   onIdentity,
   identityLabel,
+  childDisplayName,
 }: {
   onStars(): void;
   onIdentity(): void;
   identityLabel: string;
+  childDisplayName: string;
 }) {
   const {state}=useDemo();
+  const { t } = useDesignerChildT();
   const reduce = useReducedMotion();
   return (
     <div className="header-chrome"><motion.header className="header" initial={reduce ? false : { opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
       <Pressable className="identity" label={identityLabel} onClick={onIdentity}>
         <ChildAvatar/>
-        <span>{home.name}</span>
+        <span>{childDisplayName}</span>
       </Pressable>
-      <Pressable onClick={onStars} className="stars-counter" label={`${state.stars} звёзд`}>
+      <Pressable onClick={onStars} className="stars-counter" label={t('common.starsCount', { count: state.stars })}>
         <AnimatedNumber value={state.stars} />
         <img
           className="counter-star"
@@ -64,47 +68,48 @@ function Header({
     </motion.header></div>
   );
 }
-const actions = [
-  {
-    path: "/young/qr-pay",
-    label: "Оплатить по QR",
-    icon: QrCode,
-    lines: (
-      <>
-        Оплатить
-        <br />
-        по QR
-      </>
-    ),
-  },
-  {
-    path: "/young/phone-topup",
-    label: "Пополнить телефон",
-    icon: DeviceMobile,
-    lines: (
-      <>
-        Пополнить
-        <br />
-        телефон
-      </>
-    ),
-  },
-  {
-    path: "/young/transfer",
-    label: "Перевести деньги",
-    icon: PaperPlaneTilt,
-    lines: (
-      <>
-        Перевести
-        <br />
-        деньги
-      </>
-    ),
-  },
-];
 function QuickActions({onOpen}:{onOpen(kind:string):void}) {
+  const { t } = useDesignerChildT();
+  const actions = [
+    {
+      path: "/young/qr-pay",
+      label: t('actions.qrPay'),
+      icon: QrCode,
+      lines: (
+        <>
+          {t('actions.qrPay').split(' ').slice(0, 1).join(' ')}
+          <br />
+          {t('actions.qrPay').split(' ').slice(1).join(' ')}
+        </>
+      ),
+    },
+    {
+      path: "/young/phone-topup",
+      label: t('actions.phoneTopUp'),
+      icon: DeviceMobile,
+      lines: (
+        <>
+          {t('actions.phoneTopUp').split(' ').slice(0, 1).join(' ')}
+          <br />
+          {t('actions.phoneTopUp').split(' ').slice(1).join(' ')}
+        </>
+      ),
+    },
+    {
+      path: "/young/transfer",
+      label: t('actions.transferMoney'),
+      icon: PaperPlaneTilt,
+      lines: (
+        <>
+          {t('actions.transferMoney').split(' ').slice(0, 1).join(' ')}
+          <br />
+          {t('actions.transferMoney').split(' ').slice(1).join(' ')}
+        </>
+      ),
+    },
+  ];
   return (
-    <nav className="quick-actions" aria-label="Действия с деньгами">
+    <nav className="quick-actions" aria-label={t('nav.quickActions')}>
       {actions.map(({ path, label, icon: Icon, lines }) => (
         <ActionTile key={path} onClick={()=>onOpen(path.includes("phone")?"phone":path.includes("qr")?"qr":"transfer")} label={label} icon={<Icon size={28} weight="duotone"/>}>{lines}</ActionTile>
       ))}
@@ -113,13 +118,14 @@ function QuickActions({onOpen}:{onOpen(kind:string):void}) {
 }
 function Tasks({onOpen}:{onOpen():void}) {
   const {state}=useDemo();
+  const { t } = useDesignerChildT();
   return (
     <section className="tasks" aria-labelledby="tasks-title">
       <div className="section-heading">
         <h2 id="tasks-title" tabIndex={-1}>
-          Задания <span className="count">{state.tasks.length}</span>
+          {t('home.tasksTitle')} <span className="count">{state.tasks.length}</span>
         </h2>
-        <Pressable className="all-tasks" onClick={onOpen}>Все<CaretRight size={15} weight="bold" aria-hidden="true" /></Pressable>
+        <Pressable className="all-tasks" onClick={onOpen}>{t('common.all')}<CaretRight size={15} weight="bold" aria-hidden="true" /></Pressable>
       </div>
       <div className="task-list">
         {state.tasks.map((task) => (
@@ -130,17 +136,18 @@ function Tasks({onOpen}:{onOpen():void}) {
   );
 }
 function BottomNavigation({ onSavings, onStars, onPet }: { onSavings(): void;onStars():void;onPet():void }) {
+  const { t } = useDesignerChildT();
   return (
     <footer className="bottom-chrome">
-      <nav className="bottom-nav" aria-label="Основная навигация">
+      <nav className="bottom-nav" aria-label={t('nav.main')}>
         <Pressable className="nav-item" onClick={onSavings}>
           <span className="nav-art-shadow"><img className="nav-illustration" src="/assets/nav-piggy-shadow.png" width="48" height="48" alt="" /></span>
-          <span>Копилка</span>
+          <span>{t('nav.piggy')}</span>
         </Pressable>
-        <div className="nav-pet"><button className="nav-pet-open" aria-label="Открыть Лео" onClick={onPet}/></div>
+        <div className="nav-pet"><button className="nav-pet-open" aria-label={t('nav.openLeo')} onClick={onPet}/></div>
         <Pressable className="nav-item" onClick={onStars}>
           <span className="nav-art-shadow"><img className="nav-illustration nav-star-art" src="/assets/nav-star-shadow.png" width="48" height="48" alt="" /></span>
-          <span>Звёзды</span>
+          <span>{t('nav.stars')}</span>
         </Pressable>
       </nav>
     </footer>
@@ -149,12 +156,16 @@ function BottomNavigation({ onSavings, onStars, onPet }: { onSavings(): void;onS
 type HomeAppProps = {
   onIdentityClick?: () => void;
   identityAriaLabel?: string;
+  childDisplayName?: string;
 };
 
 export function HomeApp({
   onIdentityClick,
-  identityAriaLabel = "Открыть кабинет родителя",
+  identityAriaLabel,
+  childDisplayName = home.name,
 }: HomeAppProps = {}) {
+  const { t } = useDesignerChildT();
+  const resolvedIdentityLabel = identityAriaLabel ?? t('home.openParent');
   const {state,pay}=useDemo();
   const [petChatExpanded,setPetChatExpanded]=useState(false);
   const [petEmotion,setPetEmotion]=useState<LionEmotion>("wink"),[petTaps,setPetTaps]=useState(0),[petReaction,setPetReaction]=useState(0);
@@ -242,11 +253,12 @@ export function HomeApp({
   return <div ref={shell} className="kb-designer-child phone-shell" data-flying={flight?.design}>
       <AmbientBackground active paused={editing || (!!flow && flow !== "pet")} />
       <motion.div initial={false} animate={{opacity:flow?0:1}} transition={{...childTransition,duration:reduce?0:.28}} onUpdate={v=>homeOpacity.set(Number(v.opacity))} className={`home-layer ${editing ? "is-editing" : ""}`} inert={editing || !!flight || !!flow} aria-hidden={editing || !!flow || undefined}>
-        <a className="skip-link" href="#tasks-title">К заданиям</a>
+        <a className="skip-link" href="#tasks-title">{t('common.skipToTasks')}</a>
         <Header
           onStars={() => openFlow("stars")}
           onIdentity={onIdentityClick ?? (() => location.assign("/parent"))}
-          identityLabel={identityAriaLabel}
+          identityLabel={resolvedIdentityLabel}
+          childDisplayName={childDisplayName}
         />
         <motion.main ref={main} layoutScroll className="home" initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}>
           <HeroCarousel design={design} editing={editing} slide={slide} onSlide={setSlide} onEdit={openDesign} onSavings={()=>openFlow("savings")} />

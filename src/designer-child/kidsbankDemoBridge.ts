@@ -1,10 +1,122 @@
 import i18n from '../i18n';
-import type { DemoState, DemoTaskState } from '../data/demoBaseline';
+import type { DemoState, DemoTaskState, DemoTransaction } from '../data/demoBaseline';
 import { readDemoState, writeDemoState } from '../context/demoState';
 import type { Entry, Recipient, RewardGoal } from './DemoState';
 import { home } from './data';
 
 export const KIDS_BANK_DEMO_EVENT = 'kidsbank-demo-updated';
+
+const HANDOFF_STORAGE_KEY = 'evoca-demo-v2';
+const HANDOFF_CARD_DESIGN_KEY = 'evoca-card-design';
+const DESIGNER_TX_PREFIX = 'designer:';
+
+const syncedDesignerEntryIds = new Set<string>();
+
+export function clearDesignerHandoffStorage(): void {
+  syncedDesignerEntryIds.clear();
+  try {
+    localStorage.removeItem(HANDOFF_STORAGE_KEY);
+    localStorage.removeItem(HANDOFF_CARD_DESIGN_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+function designerTransactionId(entryId: string): string {
+  return `${DESIGNER_TX_PREFIX}${entryId}`;
+}
+
+function mapDesignerEntryToTransaction(entry: Entry): DemoTransaction | null {
+  const at = entry.createdAt ?? new Date().toISOString();
+  const id = designerTransactionId(entry.id);
+
+  if (entry.currency === '★') {
+    if (entry.kind === 'reward' || entry.amount > 0) {
+      return {
+        id,
+        typeId: 'taskReward',
+        amount: Math.abs(entry.amount),
+        at,
+        currency: 'STARS',
+      };
+    }
+    return null;
+  }
+
+  const amount = Math.abs(entry.amount);
+  switch (entry.kind) {
+    case 'internal':
+      if (entry.amount > 0) {
+        return { id, typeId: 'cardToPiggy', amount, at };
+      }
+      if (entry.amount < 0) {
+        return { id, typeId: 'piggyToCard', amount, at };
+      }
+      return null;
+    case 'income':
+      return {
+        id,
+        typeId: /копил|piggy|խնայ/i.test(entry.label) ? 'parentToPiggy' : 'parentToCard',
+        amount,
+        at,
+      };
+    case 'expense':
+    case undefined:
+      if (entry.recipientId) {
+        const transferRecipientId =
+          RECIPIENT_ID_FROM_HANDOFF[entry.recipientId] ?? entry.recipientId;
+        return { id, typeId: 'spend', amount, at, transferRecipientId };
+      }
+      if (/\+374|номер|phone|հեռախոս/i.test(entry.label)) {
+        return { id, typeId: 'spend', amount, at, merchantKey: 'mobileTopUp' };
+      }
+      return {
+        id,
+        typeId: 'spend',
+        amount,
+        at,
+        merchantKey: /qr/i.test(entry.label) ? 'sweetShop' : undefined,
+      };
+    default:
+      return null;
+  }
+}
+
+function syncDesignerEntriesIntoState(demo: DemoState, entries: Entry[]): DemoState {
+  const existingIds = new Set(demo.transactions.map((tx) => tx.id));
+  const additions: DemoTransaction[] = [];
+
+  for (const entry of entries) {
+    if (syncedDesignerEntryIds.has(entry.id)) {
+      continue;
+    }
+    syncedDesignerEntryIds.add(entry.id);
+    const mapped = mapDesignerEntryToTransaction(entry);
+    if (!mapped || existingIds.has(mapped.id)) {
+      continue;
+    }
+    existingIds.add(mapped.id);
+    additions.push(mapped);
+  }
+
+  if (additions.length === 0) {
+    return demo;
+  }
+
+  return {
+    ...demo,
+    transactions: [...additions, ...demo.transactions],
+  };
+}
+
+export function syncDesignerEntriesToKidsBank(entries: Entry[]): void {
+  const demo = readDemoState();
+  const next = syncDesignerEntriesIntoState(demo, entries);
+  if (next === demo) {
+    return;
+  }
+  writeDemoState(next);
+}
 
 type HandoffTask = {
   id: string;
@@ -206,13 +318,17 @@ export function applyDesignerPatchToKidsBank(patch: {
     };
   }
 
+  if (patch.entries?.length) {
+    next = syncDesignerEntriesIntoState(next, patch.entries);
+  }
+
   writeDemoState(next);
 }
 
 export function mergeKidsBankIntoHandoffStorage(): void {
   const snapshot = kidsBankSnapshotForDesigner();
   try {
-    const current = JSON.parse(localStorage.getItem('evoca-demo-v2') || 'null');
+    const current = JSON.parse(localStorage.getItem(HANDOFF_STORAGE_KEY) || 'null');
     const base = current && typeof current === 'object' ? current : {};
     const merged = {
       ...base,
@@ -226,7 +342,7 @@ export function mergeKidsBankIntoHandoffStorage(): void {
       cashEnabled: snapshot.cashEnabled ?? base.cashEnabled ?? true,
       cashLimit: snapshot.cashLimit ?? base.cashLimit ?? 1000,
     };
-    localStorage.setItem('evoca-demo-v2', JSON.stringify(merged));
+    localStorage.setItem(HANDOFF_STORAGE_KEY, JSON.stringify(merged));
   } catch {
     // ignore
   }

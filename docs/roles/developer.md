@@ -24,6 +24,9 @@
 - Vendor-код handoff в `src/designer-child/`, статика в `public/assets/`.
 - Точка входа: `DesignerChildExperience` (lazy), обёртка `HomeApp`; CSS scoped `.kb-designer-child`.
 - Демо: `kidsbankDemoBridge.ts` + событие `kidsbank-demo-updated` при записи `kidsbank.demo`.
+- Сброс сценария: `resetDemoState()` вызывает `clearDesignerHandoffStorage()` (`evoca-demo-v2`, `evoca-card-design`, трекер `syncedDesignerEntryIds`), затем `mergeKidsBankIntoHandoffStorage()`.
+- Новые операции handoff (`entries[]`) дублируются в `kidsbank.demo.transactions` идемпотентно (`designer:<entryId>`); смена языка — `i18n` `languageChanged` → re-merge задач/имён в handoff.
+- Строки child UI: `useDesignerChildT()` / `ui.designerChild.*`; QR-демо как у young — `data/youngQrPay.ts` + `DemoMerchantQrGraphic`, без `getUserMedia`.
 - Не тянуть глобальные `button` reset handoff на KidsBank chrome — `kb-role-toggle`.
 
 ## Правила

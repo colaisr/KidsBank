@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import i18n from '../i18n';
 import { applyDesignerPatchToKidsBank, mergeKidsBankIntoHandoffStorage } from './kidsbankDemoBridge';
 import { home, type Task } from './data';
 export type Goal = { id:string; title:string; target:number; saved:number };
@@ -33,9 +34,10 @@ function useModel(){
  const [state,setState]=useState(read);const ref=useRef(state);
  useEffect(()=>{const sync=(e:StorageEvent)=>{if(e.key!=='evoca-demo-v2')return;const next=read();ref.current=next;setState(next)};window.addEventListener('storage',sync);return()=>window.removeEventListener('storage',sync)},[]);
  useEffect(()=>{const onKidsBank=()=>{if(syncingFromDesigner)return;const next=read();ref.current=next;setState(next)};window.addEventListener('kidsbank-demo-updated',onKidsBank);return()=>window.removeEventListener('kidsbank-demo-updated',onKidsBank)},[]);
+ useEffect(()=>{const onLang=()=>{mergeKidsBankIntoHandoffStorage();const next=read();ref.current=next;setState(next)};i18n.on('languageChanged',onLang);return()=>{i18n.off('languageChanged',onLang)}},[]);
  function update(fn:(s:State)=>State){const next=fn(ref.current);ref.current=next;setState(next);try{localStorage.setItem('evoca-demo-v2',JSON.stringify(next));}catch{}
  syncingFromDesigner=true;
- applyDesignerPatchToKidsBank({balance:next.balance,savings:next.savings,stars:next.stars,parentWallet:next.parentWallet,tasks:next.tasks,recipients:next.recipients,rewardGoals:next.rewardGoals,cashEnabled:next.cashEnabled,cashLimit:next.cashLimit});
+ applyDesignerPatchToKidsBank({balance:next.balance,savings:next.savings,stars:next.stars,parentWallet:next.parentWallet,tasks:next.tasks,entries:next.entries,recipients:next.recipients,rewardGoals:next.rewardGoals,cashEnabled:next.cashEnabled,cashLimit:next.cashLimit});
  syncingFromDesigner=false;}
  function pay(amount:number,label:string){if(!validAmount(amount)||amount>ref.current.balance)return false;update(s=>({...s,balance:round(s.balance-amount),entries:[entry(label,-amount,'AMD','expense'),...s.entries]}));return true;}
  function recipientRemaining(id:string){const s=ref.current,r=s.recipients.find(r=>r.id===id);if(!r?.enabled)return 0;if(r.limit===null)return Infinity;const today=new Date().toDateString();return Math.max(0,r.limit-s.entries.filter(e=>e.recipientId===id&&e.createdAt&&new Date(e.createdAt).toDateString()===today).reduce((sum,e)=>sum+Math.abs(e.amount),0));}

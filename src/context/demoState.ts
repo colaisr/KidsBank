@@ -11,6 +11,10 @@ import {
 import { normalizeActivityIconId } from '../data/activityIcons';
 import { TASK_TEMPLATE_DEFAULT_DUE } from '../data/taskTemplates';
 import { GOAL_TEMPLATE_DEFAULT_ICONS, CUSTOM_GOAL_DEFAULT_ICON, CUSTOM_GOAL_TEMPLATE_ID } from '../data/goalTemplates';
+import {
+  clearDesignerHandoffStorage,
+  mergeKidsBankIntoHandoffStorage,
+} from '../designer-child/kidsbankDemoBridge';
 
 export const DEMO_STORAGE_KEY = 'kidsbank.demo';
 
@@ -480,7 +484,11 @@ export function clearDemoStateStorage(): void {
 
 export function resetDemoState(): DemoState {
   clearDemoStateStorage();
-  return cloneDemoBaseline();
+  clearDesignerHandoffStorage();
+  const baseline = cloneDemoBaseline();
+  writeDemoState(baseline);
+  mergeKidsBankIntoHandoffStorage();
+  return baseline;
 }
 
 export { DEMO_BASELINE };

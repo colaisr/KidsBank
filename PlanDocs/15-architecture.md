@@ -44,7 +44,7 @@ src/locales/en.json
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
 | `kidsbank.childExperience`, `kidsbank.childAgeRange` | три child UI: `young` (6–8), `youngDesigner` (8–10), `teen` (10–12+) | не сбрасывается кнопкой «Сбросить сценарий» |
-| `evoca-demo-v2` (только слой 8–10) | локальное состояние handoff child; синхронизируется с `kidsbank.demo` через мост | отдельно от «Сбросить сценарий» (см. bridge) |
+| `evoca-demo-v2`, `evoca-card-design` (только слой 8–10) | локальное состояние handoff child + дизайн карты; синхронизируется с `kidsbank.demo` через `kidsbankDemoBridge` | **«Сбросить сценарий»** → `clearDesignerHandoffStorage()` + merge из baseline |
 | `kidsbank.cardSkin` | скин карты ребёнка (`ocean` … `racing`) | «Сбросить сценарий» → `ocean` |
 | `kidsbank.demo` | живое демо v5: карта, копилка (`shareSlug`), ★, `taskStats`, задания (`templateId`, `dueTime`, `customTitle`), цели (`selected`, `redeemed`), лимит карты, кошелёк родителя, `pet`, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`, `taskReward`) | «Сбросить сценарий» в настройках или «Оформлении» |
 
@@ -82,7 +82,8 @@ src/
                   PetActionButtons
   context/        PreferencesContext (bank, locale, role, cardSkin, childExperience + persistence),
                   childExperience.ts (age → young|youngDesigner|teen),
-                  designer-child/kidsbankDemoBridge.ts (demo sync + `kidsbank-demo-updated`),
+                  designer-child/kidsbankDemoBridge.ts (sync балансов/задач/получателей, `entries` → `transactions[]` по id, `clearDesignerHandoffStorage`, `kidsbank-demo-updated`),
+                  designer-child/useDesignerChildT.ts (`ui.designerChild.*`),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
   data/           demoBaseline v5, goalCatalog.ts, taskTemplates.ts, cardSkins.ts, starEconomy.ts,

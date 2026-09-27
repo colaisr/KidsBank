@@ -8,11 +8,15 @@ import {PaperPlaneTilt,Heart,GameController,Moon,Microphone} from '@phosphor-ico
 import {useDemo} from './DemoState';
 import {money} from './data';
 import './pet-screen.css';
+import { useDesignerChildT } from './useDesignerChildT';
+import i18n from '../i18n';
 type VoiceRecognition = {lang:string;continuous:boolean;interimResults:boolean;onresult:((event:{resultIndex:number;results:ArrayLike<ArrayLike<{transcript:string}>>})=>void)|null;onerror:((event:{error:string})=>void)|null;onend:(()=>void)|null;start():void;stop():void};
 type SpeechWindow=Window&{SpeechRecognition?:new()=>VoiceRecognition;webkitSpeechRecognition?:new()=>VoiceRecognition};
 export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{onEmotion(value:LionEmotion):void;taps:number;onChatExpanded(value:boolean):void;keyboardOpen:boolean}){
+ const { t } = useDesignerChildT();
  const {state,petAction}=useDemo();const [fullness,setFullness]=useState(80),[joy,setJoy]=useState(65),[draft,setDraft]=useState(''),[typing,setTyping]=useState(false);
- const [messages,setMessages]=useState([{role:'leo',text:'Привет! 👋 О чём поговорим?'}]);
+ const [messages,setMessages]=useState([{role:'leo',text:''}]);
+ useEffect(()=>{setMessages([{role:'leo',text:t('pet.greeting')}])},[t]);
  const timer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const recognition=useRef<VoiceRecognition|null>(null);
  const [listening,setListening]=useState(false),[voiceMessage,setVoiceMessage]=useState('');
@@ -53,29 +57,29 @@ export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{
  function toggleVoice(){
   if(listening){recognition.current?.stop();setListening(false);return}
   const Speech=(window as SpeechWindow).SpeechRecognition||(window as SpeechWindow).webkitSpeechRecognition;
-  if(!Speech){setVoiceMessage('Голосовой ввод недоступен в этом браузере.');return}
-  setVoiceMessage('');const current=new Speech();recognition.current=current;current.lang='ru-RU';current.continuous=false;current.interimResults=true;
+  if(!Speech){setVoiceMessage(t('pet.voiceUnavailable'));return}
+  setVoiceMessage('');const current=new Speech();recognition.current=current;current.lang=i18n.language==='hy'?'hy-AM':i18n.language==='en'?'en-US':'ru-RU';current.continuous=false;current.interimResults=true;
   current.onresult=event=>{let transcript='';for(let i=event.resultIndex;i<event.results.length;i++)transcript+=event.results[i][0]?.transcript||'';if(transcript)setDraft(transcript.trim())};
-  current.onerror=event=>{setListening(false);setVoiceMessage(event.error==='not-allowed'?'Разреши доступ к микрофону в настройках браузера.':'Не получилось распознать речь. Попробуй ещё раз.')};
+  current.onerror=event=>{setListening(false);setVoiceMessage(event.error==='not-allowed'?t('pet.micDenied'):t('pet.voiceFailed'))};
   current.onend=()=>setListening(false);
-  try{current.start();setListening(true)}catch{setListening(false);setVoiceMessage('Не удалось включить микрофон. Попробуй ещё раз.')}
+  try{current.start();setListening(true)}catch{setListening(false);setVoiceMessage(t('pet.micError'))}
  }
  useEffect(()=>{if(taps)onEmotion(lionEmotions[(taps-1)%lionEmotions.length])},[taps]);
- function action(kind:string){if(!petAction(kind==='feed'?5:kind==='play'?8:3))return;onEmotion(kind==='sleep'?'rest':kind==='play'?'play':'feed');if(kind==='feed')setFullness(n=>Math.min(100,n+35));if(kind==='play')setJoy(n=>Math.min(100,n+35));setMessages(m=>[...m,{role:'leo',text:kind==='feed'?'Спасибо, очень вкусно! 🍊':kind==='play'?'Ура, поиграли! Дай пять!': 'Немного отдохну и снова будем играть 🌙'}])}
- function send(text=draft){if(!text.trim()||typing)return;const q=text.trim();setDraft('');setMessages(m=>[...m,{role:'you',text:q}]);setTyping(true);onEmotion('think');timer.current=setTimeout(()=>{let answer='Могу помочь с копилкой, заданиями и звёздами. Что хочешь узнать?';if(/копил|мечт|накоп/i.test(q))answer=`В копилке у тебя ${money.format(state.savings)} AMD. Выбери мечту, узнай её стоимость и откладывай понемногу — каждый шаг приближает тебя к цели!`;else if(/дн|день|сколько/i.test(q))answer='Чтобы посчитать срок, раздели сумму, которой не хватает до мечты, на то, сколько можешь откладывать за день. Например, 500 AMD по 100 в день — это 5 дней.';else if(/зв[её]зд|задан/i.test(q))answer=`У тебя ${state.stars} звёзд! Выполняй задания, а после подтверждения родителя получишь награду.`;else if(/баланс|карт|денег/i.test(q))answer=`На карте ${money.format(state.balance)} AMD. Часть можно отложить в копилку, а часть оставить на маленькие радости.`;else if(/привет|как дел/i.test(q))answer='Привет! Рад тебя видеть 🦁 Готов играть и помогать тебе!';setMessages(m=>[...m,{role:'leo',text:answer}]);setTyping(false);onEmotion(/привет|как дел/i.test(q)?'laugh':'wink')},550)}
+ function action(kind:string){if(!petAction(kind==='feed'?5:kind==='play'?8:3))return;onEmotion(kind==='sleep'?'rest':kind==='play'?'play':'feed');if(kind==='feed')setFullness(n=>Math.min(100,n+35));if(kind==='play')setJoy(n=>Math.min(100,n+35));setMessages(m=>[...m,{role:'leo',text:kind==='feed'?t('pet.replyFeed'):kind==='play'?t('pet.replyPlay'):t('pet.replySleep')}])}
+ function send(text=draft){if(!text.trim()||typing)return;const q=text.trim();setDraft('');setMessages(m=>[...m,{role:'you',text:q}]);setTyping(true);onEmotion('think');timer.current=setTimeout(()=>{let answer=t('pet.replyDefault');if(/копил|мечт|накоп|piggy|dream|savings|խնայ/i.test(q))answer=t('pet.replyPiggy',{savings:money.format(state.savings)});else if(/дн|день|сколько|day|count|օր/i.test(q))answer=t('pet.replyDays');else if(/зв[её]зд|задан|star|task|աստղ/i.test(q))answer=t('pet.replyStars',{stars:state.stars});else if(/баланс|карт|денег|balance|card|քարտ/i.test(q))answer=t('pet.replyBalance',{balance:money.format(state.balance)});else if(/привет|как дел|hello|hi|բարև/i.test(q))answer=t('pet.replyHello');setMessages(m=>[...m,{role:'leo',text:answer}]);setTyping(false);onEmotion(/привет|как дел|hello|hi|բարև/i.test(q)?'laugh':'wink')},550)}
  return <div ref={root} className="leo-screen" data-chat-expanded={expanded} data-keyboard-open={keyboardOpen}>
   <section ref={scene} className="leo-scene" inert={expanded}>
-   <div className="leo-level">Уровень {1+Math.floor(state.xp/100)}</div>
-   <div className="leo-stage"><div className="leo-stat"><Heart size={28}/><strong>{fullness}%</strong><small>Сытость</small></div><div className="pet-mascot-target"/><div className="leo-stat"><GameController size={28}/><strong>{joy}%</strong><small>Радость</small></div></div>
-   <div className="leo-actions"><ActionTile label="Покормить" disabled={state.stars<5} onClick={()=>action('feed')} icon={<Heart size={28} weight="duotone"/>} detail={<StarAmount value={5}/>}>Покормить</ActionTile><ActionTile label="Поиграть" disabled={state.stars<8} onClick={()=>action('play')} icon={<GameController size={28} weight="duotone"/>} detail={<StarAmount value={8}/>}>Поиграть</ActionTile><ActionTile label="Отдохнуть" disabled={state.stars<3} onClick={()=>action('sleep')} icon={<Moon size={28} weight="duotone"/>} detail={<StarAmount value={3}/>}>Отдохнуть</ActionTile></div>
+   <div className="leo-level">{t('pet.level',{level:1+Math.floor(state.xp/100)})}</div>
+   <div className="leo-stage"><div className="leo-stat"><Heart size={28}/><strong>{fullness}%</strong><small>{t('pet.fullness')}</small></div><div className="pet-mascot-target"/><div className="leo-stat"><GameController size={28}/><strong>{joy}%</strong><small>{t('pet.joy')}</small></div></div>
+   <div className="leo-actions"><ActionTile label={t('pet.feed')} disabled={state.stars<5} onClick={()=>action('feed')} icon={<Heart size={28} weight="duotone"/>} detail={<StarAmount value={5}/>}>{t('pet.feed')}</ActionTile><ActionTile label={t('pet.play')} disabled={state.stars<8} onClick={()=>action('play')} icon={<GameController size={28} weight="duotone"/>} detail={<StarAmount value={8}/>}>{t('pet.play')}</ActionTile><ActionTile label={t('pet.rest')} disabled={state.stars<3} onClick={()=>action('sleep')} icon={<Moon size={28} weight="duotone"/>} detail={<StarAmount value={3}/>}>{t('pet.rest')}</ActionTile></div>
   </section>
-  <motion.section className="leo-chat" aria-label="Чат с Лео" style={{top:chatTop}}>
-   <button type="button" className="leo-chat-grab" aria-label={expanded?"Свернуть чат":"Развернуть чат"} aria-expanded={expanded} onClick={toggleChat} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={e=>endDrag(e)} onPointerCancel={e=>endDrag(e,true)}><span/></button>
-   <div className="leo-chat-header"><b>Лео</b><span>на связи</span></div>
-   <div ref={log} className="leo-messages" role="log" aria-live="polite">{messages.map((m,i)=><div key={i} className={`leo-bubble ${m.role}`}>{m.text}</div>)}{typing&&<div className="leo-bubble leo">Лео думает…</div>}{messages.length===1&&<div className="leo-suggestions"><button onClick={()=>send('Как посчитать, сколько дней копить?')}>Посчитать дни</button><button onClick={()=>send('Что такое копилка?')}>Что такое копилка?</button></div>}</div>
+  <motion.section className="leo-chat" aria-label={t('pet.chatLabel')} style={{top:chatTop}}>
+   <button type="button" className="leo-chat-grab" aria-label={expanded?t('pet.collapseChat'):t('pet.expandChat')} aria-expanded={expanded} onClick={toggleChat} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={e=>endDrag(e)} onPointerCancel={e=>endDrag(e,true)}><span/></button>
+   <div className="leo-chat-header"><b>{t('pet.leoName')}</b><span>{t('pet.online')}</span></div>
+   <div ref={log} className="leo-messages" role="log" aria-live="polite">{messages.map((m,i)=><div key={i} className={`leo-bubble ${m.role}`}>{m.text}</div>)}{typing&&<div className="leo-bubble leo">{t('pet.thinking')}</div>}{messages.length===1&&<div className="leo-suggestions"><button onClick={()=>send(t('pet.suggestDaysQuestion'))}>{t('pet.suggestDays')}</button><button onClick={()=>send(t('pet.suggestPiggyQuestion'))}>{t('pet.suggestPiggy')}</button></div>}</div>
    {voiceMessage&&<p className="leo-voice-status" role="status">{voiceMessage}</p>}
-   <form className="leo-composer" onSubmit={e=>{e.preventDefault();send()}}><textarea ref={input} onFocus={()=>setExpanded(true)} aria-label="Сообщение Лео" rows={1} placeholder="Спроси Лео…" value={draft} maxLength={500} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}}/>
-    {draft.trim()?<button type="submit" onPointerDown={e=>e.preventDefault()} aria-label="Отправить сообщение" disabled={typing}><PaperPlaneTilt size={22} weight="fill"/></button>:<button type="button" onClick={toggleVoice} onPointerDown={e=>e.preventDefault()} className={listening?'is-listening':''} aria-label={listening?'Остановить голосовой ввод':'Голосовой ввод'} aria-pressed={listening}><Microphone size={22} weight="fill"/></button>}
+   <form className="leo-composer" onSubmit={e=>{e.preventDefault();send()}}><textarea ref={input} onFocus={()=>setExpanded(true)} aria-label={t('pet.messageLabel')} rows={1} placeholder={t('pet.messagePlaceholder')} value={draft} maxLength={500} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}}/>
+    {draft.trim()?<button type="submit" onPointerDown={e=>e.preventDefault()} aria-label={t('pet.send')} disabled={typing}><PaperPlaneTilt size={22} weight="fill"/></button>:<button type="button" onClick={toggleVoice} onPointerDown={e=>e.preventDefault()} className={listening?'is-listening':''} aria-label={listening?t('pet.voiceStop'):t('pet.voiceStart')} aria-pressed={listening}><Microphone size={22} weight="fill"/></button>}
    </form>
   </motion.section>
  </div>

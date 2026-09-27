@@ -21,7 +21,7 @@
 | Возраст | UI |
 |--------|-----|
 | 6–8 | KidsBank young (AMIO/Evoca темы) |
-| 8–10 | Handoff Evoca Kids (`designer-child`); визуал Evoca до отдельного AMIO-прохода; copy handoff пока RU |
+| 8–10 | Handoff Evoca Kids (`designer-child`); визуал Evoca до отдельного AMIO-прохода; UI copy — `ui.designerChild.*` (hy/ru/en), имя ребёнка из `demo.child.*` |
 | 10–12+ | Teen / Junior |
 
 Родительский кабинет один (KidsBank), не handoff parent.

@@ -8,8 +8,10 @@ import { useTapFeedback } from "./Feedback";
 import { useDemo } from "./DemoState";
 import type { Task } from "./data";
 import {brandPalette} from "./leoConfig";
+import { useDesignerChildT } from "./useDesignerChildT";
 
 export default function TaskCard({ task }: { task: Task }) {
+  const { t } = useDesignerChildT();
   const smoothRef = useSmoothCorners<HTMLLabelElement>();
   const { toggleTask } = useDemo();
   const checked = task.status === "waitingParent";
@@ -55,12 +57,12 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <label ref={smoothRef} className={`task-card task-actionable ${checked ? "waiting" : ""}`}>
       <span className="task-icon task-reward-art">
-        {[10,15,25].includes(task.reward) ? <img src={`/assets/reward-${task.reward}.png`} width="54" height="54" alt={`Награда: ${task.reward} звёзд`} /> : <span className="task-reward-custom" role="img" aria-label={`Награда: ${task.reward} звёзд`}><img src="/assets/star.png" width="54" height="54" alt=""/><b aria-hidden="true">{task.reward}</b></span>}
+        {[10,15,25].includes(task.reward) ? <img src={`/assets/reward-${task.reward}.png`} width="54" height="54" alt={t('common.rewardStars', { count: task.reward })} /> : <span className="task-reward-custom" role="img" aria-label={t('common.rewardStars', { count: task.reward })}><img src="/assets/star.png" width="54" height="54" alt=""/><b aria-hidden="true">{task.reward}</b></span>}
       </span>
       <span className="task-copy">
         <span className="task-status" aria-live="polite">
           <Clock size={14} aria-hidden="true" />
-          {checked ? "Ждёт подтверждения" : `До ${task.deadline}`}
+          {checked ? t('taskCard.waitingParent') : t('taskCard.dueBy', { time: task.deadline })}
         </span>
         <span className="task-title">{task.title}</span>
       </span>
@@ -70,7 +72,7 @@ export default function TaskCard({ task }: { task: Task }) {
             type="checkbox"
             checked={checked}
             onChange={complete}
-            aria-label={`${task.title} — выполнено`}
+            aria-label={t('common.taskDone', { title: task.title })}
           />
           <span className="task-checkbox" aria-hidden="true">
             <img className="marker-check" src="/assets/marker-check.png" width="30" height="30" alt="" />

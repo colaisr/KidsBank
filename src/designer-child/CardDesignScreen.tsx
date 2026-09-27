@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useIsPresent } from "motion/react";
 import { CaretLeft, Check } from "@phosphor-icons/react";
 import CardVisual, { cardDesigns, type CardDesign } from "./CardVisual";
 import { useTapFeedback } from "./Feedback";
+import { useDesignerChildT } from "./useDesignerChildT";
 
 export default function CardDesignScreen({ selected, busy, onClose }: {
   selected: CardDesign; busy: boolean; onClose(design?: CardDesign): void;
@@ -13,6 +14,7 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
   const reduce = useReducedMotion();
   const tap = useTapFeedback();
   const present = useIsPresent();
+  const { t } = useDesignerChildT();
   const contentMotion = {
     initial: { opacity: 0, y: reduce ? 0 : 12 },
     animate: { opacity: 1, y: 0 },
@@ -35,13 +37,13 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
     }}>
     <div className="design-backdrop" />
     <motion.header className="design-header" {...contentMotion}><HeaderBlur/>
-      <button type="button" className="design-back pressable" aria-label="Назад без сохранения" onClick={() => { tap(); onClose(); }}><CaretLeft size={21} weight="bold" /></button>
-      <h1 id="design-heading" tabIndex={-1} ref={heading}>Дизайн карты</h1>
-      <p>Выбери, как будет выглядеть<br />твоя карта</p>
+      <button type="button" className="design-back pressable" aria-label={t('cardDesign.backUnsaved')} onClick={() => { tap(); onClose(); }}><CaretLeft size={21} weight="bold" /></button>
+      <h1 id="design-heading" tabIndex={-1} ref={heading}>{t('cardDesign.title')}</h1>
+      <p>{t('cardDesign.subtitle')}</p>
     </motion.header>
     <motion.div className="design-scroll" layoutScroll {...contentMotion}>
-      <div className="design-grid" role="radiogroup" aria-label="Дизайн карты">
-        {cardDesigns.map((design, i) => <button key={design.id} data-design={design.id} type="button" className={`design-option ${draft === design.id ? "is-selected" : ""}`} role="radio" aria-checked={draft === design.id} aria-label={design.name} tabIndex={draft === design.id ? 0 : -1}
+      <div className="design-grid" role="radiogroup" aria-label={t('cardDesign.group')}>
+        {cardDesigns.map((design, i) => <button key={design.id} data-design={design.id} type="button" className={`design-option ${draft === design.id ? "is-selected" : ""}`} role="radio" aria-checked={draft === design.id} aria-label={t(`cardDesign.${design.id}`)} tabIndex={draft === design.id ? 0 : -1}
           onClick={() => { tap(); setDraft(design.id); }}
           onKeyDown={e => {
             if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
@@ -55,12 +57,12 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
             <CardVisual design={design.id} />
             <motion.span initial={false} className="design-check" animate={{ opacity: present && draft === design.id ? 1 : 0, scale: present && draft === design.id ? 1 : 0.85 }} transition={{ duration: reduce ? 0 : 0.16 }}><Check size={16} weight="bold" /></motion.span>
           </div>
-          <span className="design-name">{design.name}</span>
+          <span className="design-name">{t(`cardDesign.${design.id}`)}</span>
         </button>)}
       </div>
     </motion.div>
     <motion.footer className="design-footer" {...contentMotion}>
-      <button type="button" className="design-done pressable" onClick={() => { tap(); onClose(draft); }}>Готово</button>
+      <button type="button" className="design-done pressable" onClick={() => { tap(); onClose(draft); }}>{t('cardDesign.done')}</button>
     </motion.footer>
   </motion.section>;
 }

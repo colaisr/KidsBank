@@ -5,13 +5,16 @@ import CardVisual, { type CardDesign } from "./CardVisual";
 import { useTapFeedback } from "./Feedback";
 import { useDemo } from "./DemoState";
 import { money } from "./data";
+import { useDesignerChildT } from "./useDesignerChildT";
 
 export default function HeroCarousel({ design, editing, slide, onSlide, onEdit, onSavings }: {
   design: CardDesign; editing: boolean; slide: number;
   onSlide(index: number): void; onEdit(): void; onSavings(): void;
 }) {
   const { state } = useDemo();
+  const { t } = useDesignerChildT();
   const viewport = useRef<HTMLDivElement>(null);
+  const accountLabels = [t('hero.childCard'), t('hero.piggy')];
   const [width, setWidth] = useState(0);
   const x = useMotionValue(0);
   const reduce = useReducedMotion();
@@ -48,7 +51,7 @@ export default function HeroCarousel({ design, editing, slide, onSlide, onEdit, 
     if (index !== slide) tap();
     onSlide(index);
   }
-  return <section className="hero hero-carousel" aria-label="Счета" aria-roledescription="карусель"
+  return <section className="hero hero-carousel" aria-label={t('hero.accounts')} aria-roledescription={t('hero.carousel')}
     onKeyDown={e => {
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         e.preventDefault();
@@ -77,27 +80,27 @@ export default function HeroCarousel({ design, editing, slide, onSlide, onEdit, 
         animate(x, -slide * width, reduce ? { duration: 0 } : { type: "spring", stiffness: 320, damping: 34 });
       }}>
       <motion.div className="hero-track" style={{ x }}>
-        <div className="hero-slide" aria-label="1 из 2: Детская карта" aria-hidden={slide !== 0} inert={slide !== 0}>
+        <div className="hero-slide" aria-label={t('hero.slideCard')} aria-hidden={slide !== 0} inert={slide !== 0}>
           <div className="hero-art">
-            <button className="card-trigger" type="button" aria-label="Изменить дизайн карты"
+            <button className="card-trigger" type="button" aria-label={t('hero.editCardDesign')}
               onClick={() => { if (!dragged.current) { tap(); onEdit(); } }}>
               <CardVisual design={design} />
             </button>
           </div>
 
         </div>
-        <div className="hero-slide" aria-label="2 из 2: Копилка" aria-hidden={slide !== 1} inert={slide !== 1}>
-          <div className="hero-art"><button type="button" className="savings-trigger" aria-label="Открыть копилку" onClick={()=>{if(!dragged.current){tap();onSavings()}}}><img className="savings-art" src="/assets/savings-piggy.png" width="168" height="168" alt="Свинка-копилка с золотой монеткой" draggable="false" /></button></div>
+        <div className="hero-slide" aria-label={t('hero.slidePiggy')} aria-hidden={slide !== 1} inert={slide !== 1}>
+          <div className="hero-art"><button type="button" className="savings-trigger" aria-label={t('hero.openPiggy')} onClick={()=>{if(!dragged.current){tap();onSavings()}}}><img className="savings-art" src="/assets/savings-piggy.png" width="168" height="168" alt={t('hero.piggyAlt')} draggable="false" /></button></div>
 
         </div>
       </motion.div>
     </motion.div>
     <div className="account-summary">
     <h1 className="balance" aria-label={`${money.format(slide === 0 ? state.balance : state.savings)} AMD`}><BalanceAmount value={slide === 0 ? state.balance : state.savings}/></h1>
-    <p className="account-label" aria-live="polite">{slide === 0 ? "Детская карта" : "Копилка"}</p>
-    {slide===1&&<button className="savings-summary-trigger" type="button" aria-label="Открыть счёт копилки" onClick={()=>{tap();onSavings()}}/>}</div>
-    <div className="pagination" aria-label="Выбор счёта">
-      {["Детская карта", "Копилка"].map((name, i) => <button key={name} type="button" className="dot-link" aria-label={name} aria-current={slide === i ? "true" : undefined} onClick={() => select(i)}><span className={`dot ${slide === i ? "selected" : ""}`} /></button>)}
+    <p className="account-label" aria-live="polite">{accountLabels[slide]}</p>
+    {slide===1&&<button className="savings-summary-trigger" type="button" aria-label={t('hero.openPiggyAccount')} onClick={()=>{tap();onSavings()}}/>}</div>
+    <div className="pagination" aria-label={t('hero.pickAccount')}>
+      {accountLabels.map((name, i) => <button key={name} type="button" className="dot-link" aria-label={name} aria-current={slide === i ? "true" : undefined} onClick={() => select(i)}><span className={`dot ${slide === i ? "selected" : ""}`} /></button>)}
     </div>
   </section>;
 }
