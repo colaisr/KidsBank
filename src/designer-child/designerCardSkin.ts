@@ -1,3 +1,4 @@
+import type { CardSkin } from '../context/preferences';
 import { STORAGE_KEYS } from '../context/preferences';
 import { normalizeYoungCardTheme } from '../data/youngCardThemes';
 import type { CardDesign } from './CardVisual';
@@ -31,4 +32,17 @@ export function writeDesignerCardDesign(design: CardDesign): void {
   } catch {
     // ignore
   }
+}
+
+/** Card on designer home follows Preferences `cardSkin` when it is a young 4-pack id. */
+export function designerHomeCardDesign(cardSkin: CardSkin): CardDesign {
+  if (DESIGNER_CARD_IDS.has(cardSkin)) {
+    return cardSkin as CardDesign;
+  }
+  return readDesignerCardDesign();
+}
+
+export function commitDesignerCardDesign(design: CardDesign): CardSkin {
+  writeDesignerCardDesign(design);
+  return normalizeYoungCardTheme(design) as CardSkin;
 }

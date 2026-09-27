@@ -4,7 +4,6 @@ import type {LionEmotion} from './lionEmotions';
 import ActionTile from "./ActionTile";
 import {
   useEffect,
-  useCallback,
   useLayoutEffect,
   useState,
   useRef,
@@ -20,14 +19,12 @@ import { DemoProvider, useDemo } from "./DemoState";
 import FeatureScreen, { type Feature } from "./FeatureScreen";
 import PaymentFlow from "./PaymentFlow";
 import AnimatedNumber from "./AnimatedNumber";
-import CardFlight, { measureCard, type CardFlightState } from "./CardFlight";
+import CardFlight from "./CardFlight";
 import HeroCarousel from "./HeroCarousel";
 import CardDesignScreen from "./CardDesignScreen";
-import { readCardDesign, type CardDesign } from "./CardVisual";
-import { writeDesignerCardDesign } from "./designerCardSkin";
+import { designerHomeCardDesign } from "./designerCardSkin";
+import { useDesignerCardDesignSession } from "./useDesignerCardDesignSession";
 import { usePreferences } from "../context/PreferencesContext";
-import { normalizeYoungCardTheme } from "../data/youngCardThemes";
-import type { CardSkin } from "../context/preferences";
 import "./accounts.css";
 import { home } from "./data";
 import SharedLion from "./SharedLion";
@@ -183,80 +180,24 @@ export function HomeApp({
   function openFlow(kind:string){history.pushState({evocaFlow:true},'',`#${kind}`);setFlow(kind)}
   function closeFlow(){if(flow==='pet'&&document.activeElement instanceof HTMLTextAreaElement)document.activeElement.blur();if(history.state?.evocaFlow)history.back();else{history.replaceState(null,'',location.pathname);setFlow(null)}}
   const reduce = useReducedMotion();
-  const [design, setDesign] = useState<CardDesign>(readCardDesign);
-  useEffect(() => {
-    setDesign(readCardDesign());
-  }, [cardSkin, bank]);
-  const [editing, setEditing] = useState(() => location.hash === "#card-design");
+  const design = designerHomeCardDesign(cardSkin);
   const [slide, setSlide] = useState(0);
   const main = useRef<HTMLElement>(null);
   const shell = useRef<HTMLDivElement>(null);
   const petKeyboardOpen=useLeoViewport(shell);
-  const designRef = useRef(design);
-  designRef.current = design;
-  const [flight, setFlight] = useState<CardFlightState | null>(null);
-  const flightId = useRef(0);
-  const beginFlight = useCallback((card: CardDesign, destination: "home" | "editor") => {
-    if (reduce) return;
-    const inFlight = shell.current?.dataset.flying === card
-      ? measureCard(shell.current, ".card-flight .bank-card") : undefined;
-    const from = inFlight ?? measureCard(shell.current, destination === "editor"
-      ? ".card-trigger .bank-card"
-      : `.design-option[data-design="${card}"] .bank-card`);
-    if (from) setFlight({ id: ++flightId.current, design: card, checked: shell.current?.querySelector(`.design-option[data-design="${card}"]`)?.getAttribute("aria-checked") === "true", from, destination });
-  }, [reduce]);
-  useLayoutEffect(() => {
-    if (!flight || flight.to) return;
-    const to = measureCard(shell.current, flight.destination === "home"
-      ? ".card-trigger .bank-card"
-      : `.design-option[data-design="${flight.design}"] .bank-card`, true);
-    if (to) setFlight(current => current ? { ...current, to } : null);
-    else setFlight(null);
-  }, [flight, editing]);
-  const openRef = useRef(editing);
-  const closingRef = useRef(false);
-  const returnFocus = useRef(false);
-  const finishEditing = useCallback((committed?: CardDesign) => {
-    beginFlight(committed ?? designRef.current, "home");
-    if (committed) {
-      const skin = normalizeYoungCardTheme(committed) as CardSkin;
-      setDesign(committed);
-      writeDesignerCardDesign(committed);
-      setCardSkin(skin);
-    }
-    closingRef.current = false;
-    openRef.current = false;
-    returnFocus.current = true;
-    setEditing(false);
-  }, [beginFlight, setCardSkin]);
-  useEffect(() => {
-    const back = () => {
-      if (location.hash === "#card-design") {
-        beginFlight(designRef.current, "editor");
-        openRef.current = true;
-        closingRef.current = false;
-        setEditing(true);
-      } else if (openRef.current) finishEditing(undefined);
-    };
-    window.addEventListener("popstate", back);
-    return () => window.removeEventListener("popstate", back);
-  }, [finishEditing, beginFlight]);
-  function openDesign() {
-    if (openRef.current || flight) return;
-    beginFlight(design, "editor");
-    openRef.current = true;
-    history.pushState({ evocaCardDesign: true }, "", "#card-design");
-    setEditing(true);
-  }
-  function closeDesign(next?: CardDesign) {
-    if (!openRef.current || closingRef.current) return;
-    closingRef.current = true;
-    if (location.hash === "#card-design") {
-      history.replaceState(null, "", location.pathname + location.search);
-    }
-    finishEditing(next);
-  }
-  return <div ref={shell} className="kb-designer-child phone-shell" data-flying={flight?.design}>
+  const {
+    editing,
+    flight,
+    pickerEpoch,
+    pickerBaseline,
+    open: openDesign,
+    close: closeDesign,
+    noteDraft,
+    completeFlight,
+    returnFocusRef,
+    flyingDesign,
+  } = useDesignerCardDesignSession(shell, design, setCardSkin, !!reduce);
+  return <div ref={shell} className="kb-designer-child phone-shell" data-flying={flyingDesign ?? undefined}>
       <AmbientBackground key={bank} bank={bank} active paused={editing || (!!flow && flow !== "pet")} />
       <motion.div initial={false} animate={{opacity:flow?0:1}} transition={{...childTransition,duration:reduce?0:.28}} onUpdate={v=>homeOpacity.set(Number(v.opacity))} className={`home-layer ${editing ? "is-editing" : ""}`} inert={editing || !!flight || !!flow} aria-hidden={editing || !!flow || undefined}>
         <a className="skip-link" href="#tasks-title">{t('common.skipToTasks')}</a>
@@ -276,12 +217,19 @@ export function HomeApp({
         <BottomNavigation onSavings={()=>openFlow('savings')} onStars={()=>openFlow('stars')} onPet={()=>openFlow('pet')} />
       </motion.div>
       <AnimatePresence onExitComplete={() => {
-        if (returnFocus.current && !flight) {
-          returnFocus.current = false;
+        if (returnFocusRef.current && !flight) {
+          returnFocusRef.current = false;
           main.current?.querySelector<HTMLButtonElement>(".card-trigger")?.focus({ preventScroll: true });
         }
       }}>
-        {editing && <CardDesignScreen key="design" selected={design} busy={!!flight} onClose={closeDesign} />}
+        {editing && (
+          <CardDesignScreen
+            key={`card-design-${pickerEpoch}`}
+            selected={pickerBaseline}
+            onClose={closeDesign}
+            onDraftChange={noteDraft}
+          />
+        )}
       </AnimatePresence>
       <motion.div className="child-flow-backdrop" aria-hidden="true" initial={false} animate={{opacity:flow&&flow!=='pet'?1:0}} transition={{...childTransition,duration:reduce?0:.28}}/>
       <AnimatePresence mode="wait">
@@ -291,9 +239,9 @@ export function HomeApp({
       </AnimatePresence>
       {!editing&&<SharedLion homeOpacity={homeOpacity} petOpacity={petOpacity} flow={flow} covered={flow==='pet'&&petChatExpanded} emotion={petEmotion} reaction={petReaction} onInteract={()=>flow==='pet'?setPetTaps(n=>n+1):openFlow('pet')}/>}
       {flight && <CardFlight key={flight.id} flight={flight} onComplete={() => {
-        setFlight(null);
-        if (!openRef.current) {
-          returnFocus.current = false;
+        completeFlight();
+        if (!editing) {
+          returnFocusRef.current = false;
           requestAnimationFrame(() => main.current?.querySelector<HTMLButtonElement>(".card-trigger")?.focus({ preventScroll: true }));
         }
       }} />}

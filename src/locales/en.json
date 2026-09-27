@@ -583,6 +583,7 @@
         "title": "Card design",
         "subtitle": "Pick how your card will look",
         "backUnsaved": "Back without saving",
+        "backApply": "Back and apply selected design",
         "group": "Card design",
         "done": "Done",
         "productLabel": {

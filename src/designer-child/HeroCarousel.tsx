@@ -84,7 +84,7 @@ export default function HeroCarousel({ design, editing, slide, onSlide, onEdit, 
           <div className="hero-art">
             <button className="card-trigger" type="button" aria-label={t('hero.editCardDesign')}
               onClick={() => { if (!dragged.current) { tap(); onEdit(); } }}>
-              <CardVisual design={design} />
+              <CardVisual key={design} design={design} />
             </button>
           </div>
 

@@ -8,11 +8,12 @@ import { useDesignerChildT } from "./useDesignerChildT";
 import { usePreferences } from "../context/PreferencesContext";
 import { designerCardSkinLabelKey } from "./CardVisual";
 
-export default function CardDesignScreen({ selected, busy, onClose }: {
-  selected: CardDesign; busy: boolean; onClose(design?: CardDesign): void;
+export default function CardDesignScreen({ selected, onClose, onDraftChange }: {
+  selected: CardDesign;
+  onClose(design?: CardDesign): void;
+  onDraftChange(design: CardDesign): void;
 }) {
   const [draft, setDraft] = useState(selected);
-  useEffect(() => setDraft(selected), [selected]);
   const heading = useRef<HTMLHeadingElement>(null);
   const reduce = useReducedMotion();
   const tap = useTapFeedback();
@@ -20,19 +21,29 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
   const { t } = useDesignerChildT();
   const { bank } = usePreferences();
   const skinLabel = (designId: CardDesign) => t(designerCardSkinLabelKey(bank, designId));
+  const pick = (designId: CardDesign) => {
+    setDraft(designId);
+    onDraftChange(designId);
+  };
+  const applyAndClose = () => {
+    tap();
+    onClose(draft);
+  };
   const contentMotion = {
     initial: { opacity: 0, y: reduce ? 0 : 12 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: reduce ? 0 : 10 },
     transition: { duration: reduce ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] as const },
   };
-  useEffect(() => { if (!busy) heading.current?.focus({ preventScroll: true }); }, [busy]);
+  useEffect(() => {
+    onDraftChange(selected);
+    heading.current?.focus({ preventScroll: true });
+  }, [selected, onDraftChange]);
   return <motion.section className="design-screen" role="dialog" aria-modal="true" aria-labelledby="design-heading" layoutRoot
-    inert={busy}
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
     transition={{ duration: reduce ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}
     onKeyDown={e => {
-      if (e.key === "Escape") { e.preventDefault(); onClose(); }
+      if (e.key === "Escape") { e.preventDefault(); applyAndClose(); }
       if (e.key === "Tab") {
         const controls = [...e.currentTarget.querySelectorAll<HTMLElement>('button:not([tabindex="-1"])')];
         const first = controls[0], last = controls[controls.length - 1];
@@ -42,20 +53,20 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
     }}>
     <div className="design-backdrop" />
     <motion.header className="design-header" {...contentMotion}><HeaderBlur/>
-      <button type="button" className="design-back pressable" aria-label={t('cardDesign.backUnsaved')} onClick={() => { tap(); onClose(); }}><CaretLeft size={21} weight="bold" /></button>
+      <button type="button" className="design-back pressable" aria-label={t('cardDesign.backApply')} onClick={applyAndClose}><CaretLeft size={21} weight="bold" /></button>
       <h1 id="design-heading" tabIndex={-1} ref={heading}>{t('cardDesign.title')}</h1>
       <p>{t('cardDesign.subtitle')}</p>
     </motion.header>
     <motion.div className="design-scroll" layoutScroll {...contentMotion}>
       <div className="design-grid" role="radiogroup" aria-label={t('cardDesign.group')}>
         {cardDesigns.map((design, i) => <button key={design.id} data-design={design.id} type="button" className={`design-option ${draft === design.id ? "is-selected" : ""}`} role="radio" aria-checked={draft === design.id} aria-label={skinLabel(design.id)} tabIndex={draft === design.id ? 0 : -1}
-          onClick={() => { tap(); setDraft(design.id); }}
+          onClick={() => { tap(); pick(design.id); }}
           onKeyDown={e => {
             if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
             e.preventDefault();
             const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : e.key === "ArrowDown" ? 2 : -2;
             const next = e.key === "Home" ? 0 : e.key === "End" ? 3 : (i + step + 4) % 4;
-            setDraft(cardDesigns[next].id); tap();
+            pick(cardDesigns[next].id); tap();
             (e.currentTarget.parentElement?.children[next] as HTMLButtonElement)?.focus();
           }}>
           <div className="design-card-wrap">
@@ -66,8 +77,5 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
         </button>)}
       </div>
     </motion.div>
-    <motion.footer className="design-footer" {...contentMotion}>
-      <button type="button" className="design-done pressable" onClick={() => { tap(); onClose(draft); }}>{t('cardDesign.done')}</button>
-    </motion.footer>
   </motion.section>;
 }

@@ -108,7 +108,10 @@ export function syncUrlParams(bank: Bank, locale: Locale): void {
   params.set('bank', bank);
   params.set('lang', locale);
   const query = params.toString();
-  const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+  const hash = window.location.hash;
+  const nextUrl = query
+    ? `${window.location.pathname}?${query}${hash}`
+    : `${window.location.pathname}${hash}`;
   window.history.replaceState(null, '', nextUrl);
 }
 
