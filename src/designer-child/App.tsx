@@ -26,6 +26,8 @@ import CardDesignScreen from "./CardDesignScreen";
 import { readCardDesign, type CardDesign } from "./CardVisual";
 import { writeDesignerCardDesign } from "./designerCardSkin";
 import { usePreferences } from "../context/PreferencesContext";
+import { normalizeYoungCardTheme } from "../data/youngCardThemes";
+import type { CardSkin } from "../context/preferences";
 import "./accounts.css";
 import { home } from "./data";
 import SharedLion from "./SharedLion";
@@ -167,7 +169,7 @@ export function HomeApp({
   childDisplayName = home.name,
 }: HomeAppProps = {}) {
   const { t } = useDesignerChildT();
-  const { bank, cardSkin } = usePreferences();
+  const { bank, cardSkin, setCardSkin } = usePreferences();
   const resolvedIdentityLabel = identityAriaLabel ?? t('home.openParent');
   const {state,pay}=useDemo();
   const [petChatExpanded,setPetChatExpanded]=useState(false);
@@ -214,19 +216,19 @@ export function HomeApp({
   const openRef = useRef(editing);
   const closingRef = useRef(false);
   const returnFocus = useRef(false);
-  const pendingDesign = useRef<CardDesign | undefined>(undefined);
   const finishEditing = useCallback((committed?: CardDesign) => {
     beginFlight(committed ?? designRef.current, "home");
     if (committed) {
+      const skin = normalizeYoungCardTheme(committed) as CardSkin;
       setDesign(committed);
       writeDesignerCardDesign(committed);
+      setCardSkin(skin);
     }
-    pendingDesign.current = undefined;
     closingRef.current = false;
     openRef.current = false;
     returnFocus.current = true;
     setEditing(false);
-  }, [beginFlight]);
+  }, [beginFlight, setCardSkin]);
   useEffect(() => {
     const back = () => {
       if (location.hash === "#card-design") {
@@ -234,7 +236,7 @@ export function HomeApp({
         openRef.current = true;
         closingRef.current = false;
         setEditing(true);
-      } else if (openRef.current) finishEditing(pendingDesign.current);
+      } else if (openRef.current) finishEditing(undefined);
     };
     window.addEventListener("popstate", back);
     return () => window.removeEventListener("popstate", back);
@@ -249,12 +251,10 @@ export function HomeApp({
   function closeDesign(next?: CardDesign) {
     if (!openRef.current || closingRef.current) return;
     closingRef.current = true;
-    pendingDesign.current = next;
-    if (history.state?.evocaCardDesign) history.back();
-    else {
+    if (location.hash === "#card-design") {
       history.replaceState(null, "", location.pathname + location.search);
-      finishEditing(next);
     }
+    finishEditing(next);
   }
   return <div ref={shell} className="kb-designer-child phone-shell" data-flying={flight?.design}>
       <AmbientBackground key={bank} bank={bank} active paused={editing || (!!flow && flow !== "pet")} />

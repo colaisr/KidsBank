@@ -12,6 +12,7 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
   selected: CardDesign; busy: boolean; onClose(design?: CardDesign): void;
 }) {
   const [draft, setDraft] = useState(selected);
+  useEffect(() => setDraft(selected), [selected]);
   const heading = useRef<HTMLHeadingElement>(null);
   const reduce = useReducedMotion();
   const tap = useTapFeedback();
