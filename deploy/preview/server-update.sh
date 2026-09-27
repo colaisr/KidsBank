@@ -19,8 +19,8 @@ git checkout "$BRANCH"
 git pull --ff-only origin "$BRANCH"
 
 # DevDependencies (typescript, vite) are required for `npm run build`.
-# Do not set NODE_ENV=production before npm ci — npm would omit dev deps.
-npm ci --include=optional
+unset NODE_ENV
+NPM_CONFIG_PRODUCTION=false npm ci --include=optional
 NODE_ENV=production npm run build
 
 rsync -av --delete dist/ "$WEB_ROOT/"
