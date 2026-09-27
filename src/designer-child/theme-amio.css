@@ -1,0 +1,98 @@
+/* AMIO bank theme for integrated designer child (8–10). Evoca defaults live in style.css */
+
+html[data-theme='amio'] .kb-designer-child {
+  color: #1a1a1a;
+  --brand: #05a9c7;
+  --brand-light: #3fc0d9;
+  --brand-mid: #2a9eb5;
+  --brand-deep: #086f83;
+  --brand-ink: #086f83;
+  --brand-outline: #b8e6ef;
+  --brand-soft: #e8f7fa;
+  --brand-pale: #f3fafb;
+  --brand-wash: #f7f9fa;
+  --ink: #1a1a1a;
+  --ink-secondary: #6b7280;
+}
+
+html[data-theme='amio'] .kb-designer-child ::selection {
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+}
+
+html[data-theme='amio'] .kb-designer-child a:focus-visible,
+html[data-theme='amio'] .kb-designer-child .card-trigger:focus-visible {
+  outline-color: #f6ad55;
+}
+
+/* Card skins — align with young AMIO / card-skins.css */
+html[data-theme='amio'] .kb-designer-child .bank-card.card-design-ocean {
+  background:
+    radial-gradient(ellipse at 85% 100%, #7ee8e0 0 26%, transparent 27%),
+    radial-gradient(ellipse at 50% 110%, #1bd0cf 0 50%, transparent 51%),
+    linear-gradient(130deg, #034d65, #05a9c7);
+}
+
+html[data-theme='amio'] .kb-designer-child .bank-card.card-design-space {
+  background: linear-gradient(160deg, #1e3a5f 0%, #0f172a 100%);
+}
+
+html[data-theme='amio'] .kb-designer-child .bank-card.card-design-leo {
+  background: linear-gradient(145deg, #fbbf24 0%, #f59e0b 45%, #ea580c 100%);
+}
+
+html[data-theme='amio'] .kb-designer-child .bank-card.card-design-jungle {
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 55%, #15803d 100%);
+}
+
+/* Evoca-authored PNG art (stars, piggy, avatar shirt, lion poster) → AMIO cerulean */
+html[data-theme='amio'] .kb-designer-child {
+  --designer-brand-art-filter: hue-rotate(-88deg) saturate(1.14) brightness(1.04);
+}
+
+html[data-theme='amio'] .kb-designer-child .avatar-crop img {
+  filter: none;
+}
+
+html[data-theme='amio'] .kb-designer-child .brand-raster-art,
+html[data-theme='amio'] .kb-designer-child .bottom-nav .nav-art-shadow img,
+html[data-theme='amio'] .kb-designer-child .feature-hero img[src*='star'],
+html[data-theme='amio'] .kb-designer-child .feature-hero img[src*='piggy'],
+html[data-theme='amio'] .kb-designer-child .dreams-empty img[src*='piggy'],
+html[data-theme='amio'] .kb-designer-child .savings-art,
+html[data-theme='amio'] .kb-designer-child .task-stat-value img[src*='star'],
+html[data-theme='amio'] .kb-designer-child .feature-empty img[src*='nav-star'],
+html[data-theme='amio'] .kb-designer-child .star-history-amount img[src*='star'],
+html[data-theme='amio'] .kb-designer-child .history-reward img[src*='star'] {
+  filter: var(--designer-brand-art-filter);
+}
+
+html[data-theme='amio'] .kb-designer-child .stars-counter,
+html[data-theme='amio'] .kb-designer-child .count {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 12%),
+    0 4px 14px rgb(8 111 131 / 20%);
+}
+
+html[data-theme='amio'] .kb-designer-child .task-card .reward {
+  color: var(--brand-ink);
+}
+
+html[data-theme='amio'] .kb-designer-child .task-checkbox {
+  border-color: color-mix(in srgb, var(--brand-mid) 50%, white);
+}
+
+html[data-theme='amio'] .kb-designer-child .task-reward-custom b {
+  text-shadow: 0 1px 3px color-mix(in srgb, var(--brand-deep) 75%, transparent);
+}
+
+html[data-theme='amio'] .kb-designer-child .quick-action {
+  box-shadow:
+    inset 0 1px 1px #fff,
+    inset 0 -1px 2px #c9c3d640,
+    0 5px 10px color-mix(in srgb, var(--brand-deep) 10%, transparent);
+}
+
+html[data-theme='amio'] .kb-designer-child .bottom-nav .nav-item {
+  color: color-mix(in srgb, var(--brand-deep) 72%, #302839);
+}

@@ -5,7 +5,7 @@ import RecipientAvatar from "./RecipientAvatar";
 import SectionHeading from "./SectionHeading";
 import SpendingChart, {spendingColors} from "./SpendingChart";
 import ParentServiceArtwork from "./ParentServiceArtwork";
-import CardVisual, {readCardDesign, cardDesigns} from "./CardVisual";
+import CardVisual, {readCardDesign} from "./CardVisual";
 import { createPortal } from "react-dom";
 import { lazy, Suspense, useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import {
@@ -148,7 +148,7 @@ function ParentHome({ onOpen, active, backgroundPaused }: { onOpen(route: Parent
           <section className="parent-account-summary" aria-label="Карта ребёнка">
             <div className="parent-account-top">
               <div className="parent-account-balance"><span>На карте</span><strong>{money.format(state.balance)}</strong></div>
-              <div className="parent-card-preview" role="img" aria-label={`Карта Давида, дизайн «${cardDesigns.find(item=>item.id===cardDesign)?.name}», заканчивается на 1112`}><CardVisual design={cardDesign}/></div>
+              <div className="parent-card-preview" role="img" aria-label={`Карта Давида, дизайн «${cardDesign}», заканчивается на 1112`}><CardVisual design={cardDesign}/></div>
             </div>
             <button type="button" className="parent-account-transfer" onClick={()=>onOpen('transfer')}>Перевести</button>
           </section>

@@ -1,7 +1,6 @@
 import {Component,Suspense,lazy,useEffect,useState,type ReactNode} from "react";
-import {brandPalette} from "./leoConfig";
-
-const ambientColors = [brandPalette.dark,brandPalette.base,brandPalette.light,brandPalette.soft];
+import type { Bank } from "../context/preferences";
+import { designerBrandPalette } from "./designerBrand";
 
 const MeshGradient = lazy(() =>
   import("@paper-design/shaders-react").then((module) => ({
@@ -20,7 +19,17 @@ class BackgroundBoundary extends Component<
     return this.state.failed ? null : this.props.children;
   }
 }
-export default function AmbientBackground({ active, paused = false }: { active: boolean; paused?: boolean }) {
+export default function AmbientBackground({
+  active,
+  paused = false,
+  bank = 'evoca',
+}: {
+  active: boolean;
+  paused?: boolean;
+  bank?: Bank;
+}) {
+  const palette = designerBrandPalette(bank);
+  const ambientColors = [palette.dark, palette.base, palette.light, palette.soft];
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     if (!active) {

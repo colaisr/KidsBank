@@ -3,10 +3,13 @@ import L from 'leaflet';
 import {Plus,Minus} from '@phosphor-icons/react';
 import {useReducedMotion} from 'motion/react';
 import {allPlaces,savedPlaces,type ParentPlace} from './parentPlaces';
-import {home} from './data';
+import { usePreferences } from '../context/PreferencesContext';
+import { designerChildAvatarSrc } from './designerChildAvatar';
 import 'leaflet/dist/leaflet.css';
 
 export default function ParentLocationMap({point,onSelect}:{point:ParentPlace;onSelect(place:ParentPlace):void}) {
+  const { bank } = usePreferences();
+  const avatarSrc = designerChildAvatarSrc(bank);
   const root=useRef<HTMLDivElement>(null);
   const mapRef=useRef<L.Map|null>(null);
   const markers=useRef<L.Marker[]>([]);
@@ -29,7 +32,7 @@ export default function ParentLocationMap({point,onSelect}:{point:ParentPlace;on
       const child=place===savedPlaces[0];
       const el=document.createElement('span');
       el.className=child?'geo-marker-face':'geo-marker-dot';
-      if(child){const img=document.createElement('img');img.src=home.avatar;img.alt='';el.append(img);}
+      if(child){const img=document.createElement('img');img.src=avatarSrc;img.alt='';el.append(img);}
       const marker=L.marker([place.lat,place.lng],{title:child?'Давид · Школа №27':place.name,alt:place.name,
         icon:L.divIcon({html:el,className:`geo-marker${child?' geo-marker-child':''}`,iconSize:child?[46,46]:[28,28],iconAnchor:child?[23,23]:[14,14]})}).addTo(map);
       marker.on('click',()=>selectRef.current(place));
@@ -38,7 +41,7 @@ export default function ParentLocationMap({point,onSelect}:{point:ParentPlace;on
     const updateZoom=()=>setZoom(map.getZoom());map.on('zoomend',updateZoom);
     const observer=new ResizeObserver(()=>map.invalidateSize({pan:false}));observer.observe(root.current);
     return()=>{observer.disconnect();map.remove();mapRef.current=null;markers.current=[];};
-  },[]);
+  },[avatarSrc]);
   useEffect(()=>{
     const map=mapRef.current;if(!map)return;
     map.setView([point.lat,point.lng],map.getZoom(),{animate:!reduce,duration:.35});

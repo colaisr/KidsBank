@@ -585,10 +585,24 @@
         "backUnsaved": "Back without saving",
         "group": "Card design",
         "done": "Done",
-        "ocean": "Ocean",
-        "space": "Space",
-        "leo": "Leo",
-        "jungle": "Jungle"
+        "productLabel": {
+          "amio": "AMIO KIDS",
+          "evoca": "Evoca TEENZ"
+        },
+        "skins": {
+          "amio": {
+            "ocean": "Ocean",
+            "space": "Space",
+            "leo": "Smile",
+            "jungle": "Jungle"
+          },
+          "evoca": {
+            "ocean": "Ocean",
+            "space": "Space",
+            "leo": "Leo",
+            "jungle": "Jungle"
+          }
+        }
       },
       "features": {
         "savings": "Piggy bank",

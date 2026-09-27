@@ -24,6 +24,8 @@ import CardFlight, { measureCard, type CardFlightState } from "./CardFlight";
 import HeroCarousel from "./HeroCarousel";
 import CardDesignScreen from "./CardDesignScreen";
 import { readCardDesign, type CardDesign } from "./CardVisual";
+import { writeDesignerCardDesign } from "./designerCardSkin";
+import { usePreferences } from "../context/PreferencesContext";
 import "./accounts.css";
 import { home } from "./data";
 import SharedLion from "./SharedLion";
@@ -58,7 +60,7 @@ function Header({
       <Pressable onClick={onStars} className="stars-counter" label={t('common.starsCount', { count: state.stars })}>
         <AnimatedNumber value={state.stars} />
         <img
-          className="counter-star"
+          className="counter-star brand-raster-art"
           src="/assets/star.png"
           alt=""
           width="32"
@@ -165,6 +167,7 @@ export function HomeApp({
   childDisplayName = home.name,
 }: HomeAppProps = {}) {
   const { t } = useDesignerChildT();
+  const { bank, cardSkin } = usePreferences();
   const resolvedIdentityLabel = identityAriaLabel ?? t('home.openParent');
   const {state,pay}=useDemo();
   const [petChatExpanded,setPetChatExpanded]=useState(false);
@@ -179,6 +182,9 @@ export function HomeApp({
   function closeFlow(){if(flow==='pet'&&document.activeElement instanceof HTMLTextAreaElement)document.activeElement.blur();if(history.state?.evocaFlow)history.back();else{history.replaceState(null,'',location.pathname);setFlow(null)}}
   const reduce = useReducedMotion();
   const [design, setDesign] = useState<CardDesign>(readCardDesign);
+  useEffect(() => {
+    setDesign(readCardDesign());
+  }, [cardSkin, bank]);
   const [editing, setEditing] = useState(() => location.hash === "#card-design");
   const [slide, setSlide] = useState(0);
   const main = useRef<HTMLElement>(null);
@@ -213,7 +219,7 @@ export function HomeApp({
     beginFlight(committed ?? designRef.current, "home");
     if (committed) {
       setDesign(committed);
-      try { localStorage.setItem("evoca-card-design", committed); } catch { /* optional persistence */ }
+      writeDesignerCardDesign(committed);
     }
     pendingDesign.current = undefined;
     closingRef.current = false;
@@ -251,7 +257,7 @@ export function HomeApp({
     }
   }
   return <div ref={shell} className="kb-designer-child phone-shell" data-flying={flight?.design}>
-      <AmbientBackground active paused={editing || (!!flow && flow !== "pet")} />
+      <AmbientBackground key={bank} bank={bank} active paused={editing || (!!flow && flow !== "pet")} />
       <motion.div initial={false} animate={{opacity:flow?0:1}} transition={{...childTransition,duration:reduce?0:.28}} onUpdate={v=>homeOpacity.set(Number(v.opacity))} className={`home-layer ${editing ? "is-editing" : ""}`} inert={editing || !!flight || !!flow} aria-hidden={editing || !!flow || undefined}>
         <a className="skip-link" href="#tasks-title">{t('common.skipToTasks')}</a>
         <Header

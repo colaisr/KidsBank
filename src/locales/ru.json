@@ -585,10 +585,24 @@
         "backUnsaved": "Назад без сохранения",
         "group": "Дизайн карты",
         "done": "Готово",
-        "ocean": "Океан",
-        "space": "Космос",
-        "leo": "Лео",
-        "jungle": "Джунгли"
+        "productLabel": {
+          "amio": "AMIO KIDS",
+          "evoca": "Evoca TEENZ"
+        },
+        "skins": {
+          "amio": {
+            "ocean": "Океан",
+            "space": "Космос",
+            "leo": "Улыбка",
+            "jungle": "Джунгли"
+          },
+          "evoca": {
+            "ocean": "Океан",
+            "space": "Космос",
+            "leo": "Лео",
+            "jungle": "Джунгли"
+          }
+        }
       },
       "features": {
         "savings": "Копилка",

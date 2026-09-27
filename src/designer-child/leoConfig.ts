@@ -1,4 +1,8 @@
+import type { Bank } from '../context/preferences';
+
 const validColor = (value?: string): value is string => /^#[0-9a-f]{6}$/i.test(value ?? '');
+
+const AMIO_MANE = '#05a9c7';
 
 function mixColor(color: string, toward: string, amount: number) {
   const from = color.match(/[0-9a-f]{2}/gi)!.map(value => parseInt(value,16));
@@ -26,19 +30,21 @@ export const brandPalette = {
   pale: mixColor(primaryColor, '#ffffff', .94),
   wash: mixColor(primaryColor, '#ffffff', .975),
 };
-export const leoConfig = {
-  primaryColor,
-  maneColor: validColor(config?.maneColor) ? config.maneColor : primaryColor,
-  poster: config?.poster?.startsWith('data:image/png;base64,') || config?.poster?.startsWith('/assets/')
-    ? config.poster : '/assets/lion-purple.png',
-};
+const defaultPoster =
+  config?.poster?.startsWith('data:image/png;base64,') || config?.poster?.startsWith('/assets/')
+    ? config.poster
+    : '/assets/lion-purple.png';
 
-const root = document.documentElement;
-root.style.setProperty('--brand', brandPalette.base);
-root.style.setProperty('--brand-deep', brandPalette.dark);
-root.style.setProperty('--brand-mid', brandPalette.mid);
-root.style.setProperty('--brand-light', brandPalette.light);
-root.style.setProperty('--brand-outline', brandPalette.outline);
-root.style.setProperty('--brand-soft', brandPalette.soft);
-root.style.setProperty('--brand-pale', brandPalette.pale);
-root.style.setProperty('--brand-wash', brandPalette.wash);
+export function leoConfigForBank(bank: Bank) {
+  if (bank === 'amio') {
+    return { primaryColor: AMIO_MANE, maneColor: AMIO_MANE, poster: defaultPoster };
+  }
+  return {
+    primaryColor,
+    maneColor: validColor(config?.maneColor) ? config.maneColor : primaryColor,
+    poster: defaultPoster,
+  };
+}
+
+/** Evoca defaults; prefer `leoConfigForBank` when bank is known. */
+export const leoConfig = leoConfigForBank('evoca');

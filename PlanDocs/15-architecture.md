@@ -68,7 +68,7 @@ src/
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
-  designer-child/ vendor handoff Evoca Kids (8–10): HomeApp, DemoState, assets; lazy chunk + `.kb-designer-child` scope CSS
+  designer-child/ vendor handoff Evoca Kids (8–10): HomeApp, DemoState, assets; lazy chunk + `.kb-designer-child` scope CSS; `theme-amio.css`, `designerBrand.ts`, `designerCardSkin.ts`, `designerChildAvatar.ts`; `leoConfigForBank(bank)` (без записи `--brand*` в `:root`); статика `public/assets/avatar-amio.png`
   pages/          ChildShell, ChildHomePage, DesignerChildExperience, TeenChildHomePage,
                   child-young/YoungChildHomePage, AppearanceRedirect,
                   ChildTasksPage, ChildGoalsPage, ChildPiggyBankPage,

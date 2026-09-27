@@ -585,10 +585,24 @@
         "backUnsaved": "Հետ՝ առանց պահպանելու",
         "group": "Քարտի դիզայն",
         "done": "Պատրաստ",
-        "ocean": "Օվկիանոս",
-        "space": "Տիեզերք",
-        "leo": "Լեո",
-        "jungle": "Անձրևանոց"
+        "productLabel": {
+          "amio": "AMIO KIDS",
+          "evoca": "Evoca TEENZ"
+        },
+        "skins": {
+          "amio": {
+            "ocean": "Օվկիանոս",
+            "space": "Տիեզերք",
+            "leo": "Ժպտոց",
+            "jungle": "Անձրևանոց"
+          },
+          "evoca": {
+            "ocean": "Օվկիանոս",
+            "space": "Տիեզերք",
+            "leo": "Լեո",
+            "jungle": "Անձրևանոց"
+          }
+        }
       },
       "features": {
         "savings": "Խնայարան",

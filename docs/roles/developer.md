@@ -27,6 +27,7 @@
 - Сброс сценария: `resetDemoState()` вызывает `clearDesignerHandoffStorage()` (`evoca-demo-v2`, `evoca-card-design`, трекер `syncedDesignerEntryIds`), затем `mergeKidsBankIntoHandoffStorage()`.
 - Новые операции handoff (`entries[]`) дублируются в `kidsbank.demo.transactions` идемпотентно (`designer:<entryId>`); смена языка — `i18n` `languageChanged` → re-merge задач/имён в handoff.
 - Строки child UI: `useDesignerChildT()` / `ui.designerChild.*`; QR-демо как у young — `data/youngQrPay.ts` + `DemoMerchantQrGraphic`, без `getUserMedia`.
+- AMIO/Evoca: `theme-amio.css` под `html[data-theme='amio'] .kb-designer-child`; не писать `--brand*` на `:root` из `leoConfig`; `designerCardSkin.ts` синхронизирует `kidsbank.cardSkin` с handoff-картой; `leoConfigForBank` + атрибут `color` у `lion-mascot`; подпись продукта на карте — `ui.designerChild.cardDesign.productLabel.{bank}`; Evoca-растр (★/копилка/львёнок) — класс `brand-raster-art` + фильтр в `theme-amio.css`; аватар — `designerChildAvatarSrc(bank)` → `avatar.png` / `avatar-amio.png`.
 - Не тянуть глобальные `button` reset handoff на KidsBank chrome — `kb-role-toggle`.
 
 ## Правила

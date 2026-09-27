@@ -1,7 +1,8 @@
 import type {LionEmotion} from './lionEmotions';
 import { useEffect, useRef, useState } from "react";
 import { useTapFeedback } from "./Feedback";
-import { leoConfig } from './leoConfig';
+import { leoConfigForBank } from './leoConfig';
+import { usePreferences } from '../context/PreferencesContext';
 
 type LionElement = HTMLElement & {
   ready: Promise<void>;
@@ -34,6 +35,8 @@ function loadRuntime() {
   }));
 }
 export default function Mascot({active=true,emotion,reaction=0,onInteract}:{active?:boolean;emotion?:LionEmotion;reaction?:number;onInteract?:()=>void}={}) {
+  const { bank } = usePreferences();
+  const leo = leoConfigForBank(bank);
   const tap = useTapFeedback();
   const host = useRef<HTMLSpanElement>(null);
   const lion = useRef<LionElement | null>(null);
@@ -56,7 +59,7 @@ export default function Mascot({active=true,emotion,reaction=0,onInteract}:{acti
       .then(() => {
         if (cancelled || !host.current) return;
         element = document.createElement("lion-mascot") as LionElement;
-        element.setAttribute("color", leoConfig.maneColor);
+        element.setAttribute("color", leo.maneColor);
         element.setAttribute("emotion", "wink");
         element.video.loop = false;
         element.addEventListener("cycleend", () => {
@@ -94,7 +97,12 @@ export default function Mascot({active=true,emotion,reaction=0,onInteract}:{acti
       element?.remove();
       lion.current = null;
     };
-  }, []);
+  }, [leo.maneColor]);
+  useEffect(() => {
+    const element = lion.current;
+    if (!element) return;
+    element.setAttribute('color', leo.maneColor);
+  }, [leo.maneColor]);
   useEffect(() => {
     if (!ready || !lion.current) return;
     if (paused || !active) { pendingEmotions.current = []; lion.current.setAttribute("paused", ""); }
@@ -165,8 +173,8 @@ export default function Mascot({active=true,emotion,reaction=0,onInteract}:{acti
       }}
     >
       <img
-        className="mascot-poster"
-        src={leoConfig.poster}
+        className="mascot-poster brand-raster-art"
+        src={leo.poster}
         alt=""
         width="100"
         height="100"

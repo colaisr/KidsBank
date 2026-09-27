@@ -5,6 +5,8 @@ import { CaretLeft, Check } from "@phosphor-icons/react";
 import CardVisual, { cardDesigns, type CardDesign } from "./CardVisual";
 import { useTapFeedback } from "./Feedback";
 import { useDesignerChildT } from "./useDesignerChildT";
+import { usePreferences } from "../context/PreferencesContext";
+import { designerCardSkinLabelKey } from "./CardVisual";
 
 export default function CardDesignScreen({ selected, busy, onClose }: {
   selected: CardDesign; busy: boolean; onClose(design?: CardDesign): void;
@@ -15,6 +17,8 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
   const tap = useTapFeedback();
   const present = useIsPresent();
   const { t } = useDesignerChildT();
+  const { bank } = usePreferences();
+  const skinLabel = (designId: CardDesign) => t(designerCardSkinLabelKey(bank, designId));
   const contentMotion = {
     initial: { opacity: 0, y: reduce ? 0 : 12 },
     animate: { opacity: 1, y: 0 },
@@ -43,7 +47,7 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
     </motion.header>
     <motion.div className="design-scroll" layoutScroll {...contentMotion}>
       <div className="design-grid" role="radiogroup" aria-label={t('cardDesign.group')}>
-        {cardDesigns.map((design, i) => <button key={design.id} data-design={design.id} type="button" className={`design-option ${draft === design.id ? "is-selected" : ""}`} role="radio" aria-checked={draft === design.id} aria-label={t(`cardDesign.${design.id}`)} tabIndex={draft === design.id ? 0 : -1}
+        {cardDesigns.map((design, i) => <button key={design.id} data-design={design.id} type="button" className={`design-option ${draft === design.id ? "is-selected" : ""}`} role="radio" aria-checked={draft === design.id} aria-label={skinLabel(design.id)} tabIndex={draft === design.id ? 0 : -1}
           onClick={() => { tap(); setDraft(design.id); }}
           onKeyDown={e => {
             if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
@@ -57,7 +61,7 @@ export default function CardDesignScreen({ selected, busy, onClose }: {
             <CardVisual design={design.id} />
             <motion.span initial={false} className="design-check" animate={{ opacity: present && draft === design.id ? 1 : 0, scale: present && draft === design.id ? 1 : 0.85 }} transition={{ duration: reduce ? 0 : 0.16 }}><Check size={16} weight="bold" /></motion.span>
           </div>
-          <span className="design-name">{t(`cardDesign.${design.id}`)}</span>
+          <span className="design-name">{skinLabel(design.id)}</span>
         </button>)}
       </div>
     </motion.div>

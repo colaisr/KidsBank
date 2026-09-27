@@ -1,2 +1,13 @@
-import {home} from "./data";
-export default function ChildAvatar(){return <span className="avatar"><span className="avatar-crop"><img src={home.avatar} alt="" width="64" height="64"/></span></span>}
+import { usePreferences } from '../context/PreferencesContext';
+import { designerChildAvatarSrc } from './designerChildAvatar';
+
+export default function ChildAvatar() {
+  const { bank } = usePreferences();
+  return (
+    <span className="avatar">
+      <span className="avatar-crop">
+        <img src={designerChildAvatarSrc(bank)} alt="" width="64" height="64" />
+      </span>
+    </span>
+  );
+}

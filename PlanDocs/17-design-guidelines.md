@@ -21,7 +21,7 @@
 | Возраст | UI |
 |--------|-----|
 | 6–8 | KidsBank young (AMIO/Evoca темы) |
-| 8–10 | Handoff Evoca Kids (`designer-child`); визуал Evoca до отдельного AMIO-прохода; UI copy — `ui.designerChild.*` (hy/ru/en), имя ребёнка из `demo.child.*` |
+| 8–10 | Handoff Evoca Kids (`designer-child`); **банк** через `html[data-theme]` + `theme-amio.css` (Cerulean/Atoll/Casablanca); Evoca — дефолт handoff; UI copy — `ui.designerChild.*` (на карте **AMIO KIDS** / **Evoca TEENZ**, названия скинов `cardDesign.skins.{bank}.*`); карта — `kidsbank.cardSkin` ↔ `evoca-card-design`; Evoca-растр (★, копилка, постер льва) на AMIO — CSS `brand-raster-art`; аватар Давида — `avatar-amio.png` (нейтральная кожа + AMIO-майка); лев — `leoConfigForBank` + `lion-mascot` color |
 | 10–12+ | Teen / Junior |
 
 Родительский кабинет один (KidsBank), не handoff parent.

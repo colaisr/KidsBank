@@ -44,6 +44,7 @@
 
 - **Родитель** ≈ AMIO Mobile: сетка быстрых действий 2×2 на `/parent`, hero с балансом, списки; мало детскости. Одна раскладка для обеих тем — меняется только палитра.
 - **Ребёнок** ≈ Junior: шапка-градиент, аватар-буква, счета + копилка + звёзды, задания с оранжевыми ★, цели с teal progress.
+- **8–10 designer:** при `data-theme=amio` слой `.kb-designer-child` перекрашивается Cerulean/Atoll/Casablanca (`theme-amio.css`, `designerBrand.ts`); градиенты карт `ocean|space|leo|jungle` — как young AMIO; бренд на лице карты и в пикере — **AMIO KIDS** (не Evoca TEENZ); фиолетовые PNG handoff (★, копилка в nav/экранах, лев-постер) — бирюзовый тинт через `--designer-brand-art-filter`; аватар ребёнка — отдельный `avatar-amio.png`, без фильтра на лице.
 
 Маскот: от улыбки-«a», не клоун и не персонаж Surf.
 

@@ -7,11 +7,14 @@ import confetti from "canvas-confetti";
 import { useTapFeedback } from "./Feedback";
 import { useDemo } from "./DemoState";
 import type { Task } from "./data";
-import {brandPalette} from "./leoConfig";
+import { usePreferences } from "../context/PreferencesContext";
+import { designerBrandPalette } from "./designerBrand";
 import { useDesignerChildT } from "./useDesignerChildT";
 
 export default function TaskCard({ task }: { task: Task }) {
   const { t } = useDesignerChildT();
+  const { bank } = usePreferences();
+  const brandPalette = designerBrandPalette(bank);
   const smoothRef = useSmoothCorners<HTMLLabelElement>();
   const { toggleTask } = useDemo();
   const checked = task.status === "waitingParent";
@@ -57,7 +60,7 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <label ref={smoothRef} className={`task-card task-actionable ${checked ? "waiting" : ""}`}>
       <span className="task-icon task-reward-art">
-        {[10,15,25].includes(task.reward) ? <img src={`/assets/reward-${task.reward}.png`} width="54" height="54" alt={t('common.rewardStars', { count: task.reward })} /> : <span className="task-reward-custom" role="img" aria-label={t('common.rewardStars', { count: task.reward })}><img src="/assets/star.png" width="54" height="54" alt=""/><b aria-hidden="true">{task.reward}</b></span>}
+        {[10,15,25].includes(task.reward) ? <img className="brand-raster-art" src={`/assets/reward-${task.reward}.png`} width="54" height="54" alt={t('common.rewardStars', { count: task.reward })} /> : <span className="task-reward-custom" role="img" aria-label={t('common.rewardStars', { count: task.reward })}><img className="brand-raster-art" src="/assets/star.png" width="54" height="54" alt=""/><b aria-hidden="true">{task.reward}</b></span>}
       </span>
       <span className="task-copy">
         <span className="task-status" aria-live="polite">

@@ -5,6 +5,7 @@ import { DemoProvider, FeedbackProvider } from '../designer-child/DesignerChildP
 import { HomeApp } from '../designer-child/App';
 import '@fontsource-variable/inter';
 import '../designer-child/style.css';
+import '../designer-child/theme-amio.css';
 import '../designer-child/ui-system.css';
 import '../designer-child/ui-controls.css';
 import '../designer-child/ui-neutral.css';

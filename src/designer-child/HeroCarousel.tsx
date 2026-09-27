@@ -90,7 +90,7 @@ export default function HeroCarousel({ design, editing, slide, onSlide, onEdit, 
 
         </div>
         <div className="hero-slide" aria-label={t('hero.slidePiggy')} aria-hidden={slide !== 1} inert={slide !== 1}>
-          <div className="hero-art"><button type="button" className="savings-trigger" aria-label={t('hero.openPiggy')} onClick={()=>{if(!dragged.current){tap();onSavings()}}}><img className="savings-art" src="/assets/savings-piggy.png" width="168" height="168" alt={t('hero.piggyAlt')} draggable="false" /></button></div>
+          <div className="hero-art"><button type="button" className="savings-trigger" aria-label={t('hero.openPiggy')} onClick={()=>{if(!dragged.current){tap();onSavings()}}}><img className="savings-art brand-raster-art" src="/assets/savings-piggy.png" width="168" height="168" alt={t('hero.piggyAlt')} draggable="false" /></button></div>
 
         </div>
       </motion.div>
