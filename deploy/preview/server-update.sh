@@ -19,7 +19,8 @@ git checkout "$BRANCH"
 git pull --ff-only origin "$BRANCH"
 
 export NODE_ENV=production
-npm ci
+# TypeScript 7 needs platform optional deps (@typescript/typescript-linux-x64 on VPS).
+npm ci --include=optional
 npm run build
 
 rsync -av --delete dist/ "$WEB_ROOT/"
