@@ -18,10 +18,10 @@ git fetch origin "$BRANCH"
 git checkout "$BRANCH"
 git pull --ff-only origin "$BRANCH"
 
-export NODE_ENV=production
-# TypeScript 7 needs platform optional deps (@typescript/typescript-linux-x64 on VPS).
+# DevDependencies (typescript, vite) are required for `npm run build`.
+# Do not set NODE_ENV=production before npm ci — npm would omit dev deps.
 npm ci --include=optional
-npm run build
+NODE_ENV=production npm run build
 
 rsync -av --delete dist/ "$WEB_ROOT/"
 
