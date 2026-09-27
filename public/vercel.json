@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/child",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/child/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/parent",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/parent/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}

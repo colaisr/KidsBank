@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 type AppearanceButtonProps = {
   onGradient?: boolean;
@@ -7,10 +7,12 @@ type AppearanceButtonProps = {
 
 export function AppearanceButton({ onGradient = false }: AppearanceButtonProps) {
   const { t } = useTranslation();
+  const location = useLocation();
 
   return (
     <Link
-      to="/appearance"
+      to="/child/profile"
+      state={{ from: location.pathname }}
       className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors duration-200 ${
         onGradient
           ? 'bg-white/15 text-white hover:bg-white/25'

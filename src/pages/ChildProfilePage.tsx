@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
-import { ChildPageTitle } from '../components/ChildPageTitle';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DemoSettingsPanel } from '../components/DemoSettingsPanel';
 import { RoleToggle } from '../components/RoleToggle';
 import { demoChild } from '../data/children';
+import { usePreferences } from '../context/PreferencesContext';
 
 type ProfileLocationState = {
   from?: string;
@@ -12,12 +13,29 @@ type ProfileLocationState = {
 export function ChildProfilePage() {
   const { t } = useTranslation();
   const location = useLocation();
+  const { role } = usePreferences();
   const childName = t(`demo.${demoChild.id}.name`);
-  const backTo = (location.state as ProfileLocationState | null)?.from ?? '/child';
+  const backTo =
+    (location.state as ProfileLocationState | null)?.from ??
+    (role === 'parent' ? '/parent' : '/child');
 
   return (
-    <div className="flex min-h-full flex-col bg-surface-muted">
-      <ChildPageTitle titleKey="ui.profile.settings" showSettingsLink={false} backTo={backTo} />
+    <div className="kb-app-settings flex min-h-full flex-col bg-surface-muted">
+      <header className="flex items-center justify-between gap-2 border-b border-border bg-surface px-4 py-3">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <Link
+            to={backTo}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-muted text-primary"
+            aria-label={t('ui.app.back')}
+          >
+            <span aria-hidden="true">←</span>
+          </Link>
+          <h1 className="min-w-0 truncate font-heading text-lg font-semibold text-text">
+            {t('ui.profile.settings')}
+          </h1>
+        </div>
+        <RoleToggle compact />
+      </header>
       <div className="space-y-4 px-4 py-4">
         <Link
           to="/child/onboarding/role"
@@ -37,13 +55,6 @@ export function ChildProfilePage() {
             ›
           </span>
         </Link>
-
-        <section className="rounded-card border border-border bg-surface p-4">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
-            {t('ui.profile.role')}
-          </p>
-          <RoleToggle />
-        </section>
 
         <DemoSettingsPanel />
       </div>

@@ -13,7 +13,7 @@ export function RoleToggle({ onGradient = false, compact = false }: RoleTogglePr
 
   return (
     <div
-      className={`flex rounded-full p-1 ${
+      className={`kb-role-toggle flex rounded-full p-1 ${
         onGradient ? 'bg-white/15' : 'bg-surface-muted'
       }`}
     >
@@ -24,16 +24,16 @@ export function RoleToggle({ onGradient = false, compact = false }: RoleTogglePr
             key={item}
             type="button"
             onClick={() => setRole(item)}
-            className={`rounded-full font-medium transition-colors duration-200 ${
+            className={`kb-role-toggle__btn rounded-full font-medium transition-colors duration-200 ${
               compact ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'
             } ${
               active
                 ? onGradient
-                  ? 'bg-white text-primary-dark'
-                  : 'bg-primary text-white'
+                  ? '!bg-white text-primary-dark'
+                  : '!bg-primary text-white'
                 : onGradient
                   ? 'text-white/80 hover:text-white'
-                  : 'text-text-muted hover:text-text'
+                  : '!bg-transparent text-text-muted hover:text-text'
             }`}
           >
             {t(`ui.role.${item}`)}

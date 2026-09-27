@@ -1,0 +1,75 @@
+.home-layer { height: 100%; }
+.home-layer.is-editing { opacity: 0; pointer-events: none; }
+.hero-viewport { overflow: hidden; width: 100%; touch-action: pan-y; }
+.hero-track { display: flex; width: 100%; cursor: grab; }
+.hero-track:active { cursor: grabbing; }
+.hero-slide { flex: 0 0 100%; min-width: 0; }
+.card-trigger { background: none; padding: 0; border: 0; width: 171px; height: calc(171px * 100 / 159); cursor: pointer; }
+.card-trigger:focus-visible { outline: 3px solid #f6d373; outline-offset: 5px; border-radius: 13px; }
+.card-trigger .bank-card { width: 100%; height: 100%; }
+.savings-art { width: 164px; height: 164px; object-fit: contain; user-select: none; pointer-events: none; }
+.hero-carousel .pagination { padding-left: 0; }
+.hero-carousel .dot-link { background: transparent; border: 0; padding: 0; width: 30px; cursor: pointer; }
+.hero-carousel .dot { transition: background-color 180ms ease, transform 180ms ease; }
+.hero-carousel .dot.selected { transform: scale(1.1); }
+.bank-card.card-design-space { background: url('/assets/card-space.png') center / cover, #17364e; }
+.bank-card.card-design-ocean { background: radial-gradient(ellipse at 85% 100%, #73efe7 0 26%, transparent 27%), radial-gradient(ellipse at 50% 110%, #1bd0cf 0 50%, transparent 51%), linear-gradient(130deg, #034d65, #05a9b4); }
+.bank-card.card-design-leo { background: radial-gradient(circle at 80% 55%, #ffd96b, #fa8c28 62%, #e45817); }
+.bank-card.card-design-jungle { background: linear-gradient(130deg, #04463a, #159c77 64%, #52cd9a); }
+.card-decoration { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.card-decoration img { position: absolute; width: 62%; right: 9%; bottom: -6%; transform: rotate(-10deg); }
+.card-design-leo .card-brand, .card-design-leo .card-number { text-shadow: 0 1px 3px #833c3370; }
+.card-design-jungle .card-decoration i { position: absolute; width: 43%; height: 92%; border-radius: 0 90% 0 90%; background: linear-gradient(135deg,#76eab050,#054d38); transform: rotate(28deg); right: -10%; top: -35%; border: 1px solid #85ffd52b; }
+.card-design-jungle .card-decoration i:nth-child(2) { right: 22%; top: 26%; transform: rotate(-35deg); background: linear-gradient(135deg,#87f4b485,#138560); }
+.card-design-jungle .card-decoration i:nth-child(3) { right: 65%; top: 50%; transform: rotate(5deg); }
+.design-screen { position: absolute; inset: 0; z-index: 60; display: flex; flex-direction: column; color: var(--text-primary); isolation: isolate; }
+.design-backdrop { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 75% 30%,color-mix(in srgb,var(--brand) 18%,transparent),transparent 60%),var(--surface-bg); }
+.design-header { position: relative; flex-shrink: 0; padding: calc(48px + env(safe-area-inset-top)) 45px 28px; text-align: center; }
+.design-header h1 { font-size: 25px; font-weight: 700; letter-spacing: -.6px; line-height: 1.15; outline: none; }
+.design-header p { margin: 12px auto 0; max-width: 280px; font-size: 16px; line-height: 1.35; color: var(--text-secondary); font-weight: 400; }
+.design-back { position: absolute; left: 16px; top: calc(21px + env(safe-area-inset-top)); width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; color: var(--brand); background: var(--surface-muted); }
+.design-scroll { padding: 7px 20px 30px; overflow-y: auto; flex: 1; min-height: 0; scrollbar-width: none; }
+.design-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 23px 16px; }
+.design-option { border: 0; padding: 0; color: inherit; background: transparent; cursor: pointer; min-width: 0; text-align: center; border-radius: 16px; }
+.design-card-wrap { position: relative; }
+.design-option .bank-card { width: 100%; font-size: 10px; border: 0; }
+.design-name { display: block; margin-top: 10px; font-size: 17px; font-weight: 600; color: var(--text-primary); opacity: .58; transition: opacity 160ms ease; }
+.design-option.is-selected .design-name { opacity: 1; }
+.design-check, .card-flight-check { position: absolute; top: 6px; right: 6px; width: 27px; height: 27px; display: grid; place-items: center; background: var(--brand); color: white; border: 3px solid var(--surface-bg); border-radius: 50%; pointer-events: none; }
+.design-option:focus-visible { outline: 3px solid var(--border-neutral); outline-offset: 5px; }
+.design-footer { padding: 16px 20px calc(20px + env(safe-area-inset-bottom)); flex-shrink: 0; }
+.design-done { width: 100%; min-height: 54px; border: 0; border-radius: 26px; background: var(--brand); box-shadow: 0 7px 14px color-mix(in srgb,var(--brand) 12%,transparent), inset 0 1px 0 #ffffff30; color: #fff; font-size: 18px; font-weight: 700; }
+@media (max-width: 359px) {
+  .design-header { padding-left: 52px; padding-right: 52px; }
+  .design-header h1 { font-size: 22px; }
+  .design-header p { font-size: 15px; }
+  .design-grid { gap: 22px 12px; }
+  .design-option .bank-card { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-layer, .hero-carousel .dot, .design-name { transition: none; }
+}
+/* Swipe artwork leaves at the app edge, not at the text/content gutter. */
+.hero-viewport { width: calc(100% + var(--page-gutter) * 2); margin-inline: calc(var(--page-gutter) * -1); }
+.design-done { display: grid; place-items: center; text-align: center; }
+/* Keep resting hero artwork below the header's progressive blur. */
+.phone-shell .progressive-blur.top-blur { height: calc(74px + env(safe-area-inset-top)); }
+.savings-art { width: 144px; height: 144px; }
+.hero-carousel .dot-link { width: 22px; height: 44px; }
+/* A single opaque card travels above both scenes. Scene content fades as a unit. */
+.card-flight { position: absolute; left: 0; top: 0; width: 171px; height: calc(171px * 100 / 159); transform-origin: 0 0; z-index: 100; pointer-events: none; will-change: transform; }
+.card-flight .bank-card { width: 100%; height: 100%; visibility: visible !important; }
+.phone-shell[data-flying="ocean"] .card-design-ocean,
+.phone-shell[data-flying="space"] .card-design-space,
+.phone-shell[data-flying="leo"] .card-design-leo,
+.phone-shell[data-flying="jungle"] .card-design-jungle { visibility: hidden; }
+.hero-viewport, .hero-viewport .card-trigger { cursor: grab; user-select: none; -webkit-user-select: none; }
+.hero-viewport.is-dragging, .hero-viewport.is-dragging * { cursor: grabbing !important; }
+.hero-track, .hero-track:active { cursor: inherit; }
+.hero-track .bank-card, .hero-track img { pointer-events: none; -webkit-user-drag: none; user-select: none; }
+.design-screen .bank-card { container-type: inline-size; }
+.design-screen .card-brand, .design-screen .card-number { font-size: 6.43cqw; }
+
+.phone-shell[data-flying] .design-check { visibility: hidden; }
+.savings-trigger{background:none;border:0;padding:0;cursor:pointer;display:grid;place-items:center}
+.account-summary{position:relative}.savings-summary-trigger{position:absolute;inset:0;background:none;border:0;cursor:pointer;border-radius:16px}

@@ -464,6 +464,7 @@ export function readDemoState(): DemoState {
 export function writeDemoState(state: DemoState): void {
   try {
     localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(state));
+    window.dispatchEvent(new CustomEvent('kidsbank-demo-updated'));
   } catch {
     // localStorage may be unavailable
   }

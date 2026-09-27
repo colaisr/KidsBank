@@ -9,7 +9,6 @@ import { formatCurrency } from '../lib/format';
 
 const HUB_LINKS = [
   { to: '/child/profile', key: 'profile' },
-  { to: '/appearance', key: 'appearance' },
   { to: '/child/tasks', key: 'tasks' },
   { to: '/child/goals', key: 'goals' },
 ] as const;

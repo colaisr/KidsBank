@@ -1,0 +1,246 @@
+/* Shared rhythm for existing child/parent surfaces; no layout-specific overrides. */
+:root {
+  --ui-title-size: 18px;
+  --ui-caption-size: 14px;
+  --ui-caption-color: var(--brand-ink);
+  --ui-row-gap: 4px;
+  --ui-divider: #eee6f3;
+}
+.feature-body { padding-inline: var(--page-gutter); }
+.feature-link>span { min-width:0; font-size:var(--ui-title-size); font-weight:600; line-height:1.3; }
+.feature-link small { display:block; margin-top:var(--ui-row-gap); font-size:var(--ui-caption-size); font-weight:400; line-height:1.35; color:var(--ui-caption-color); }
+.feature-link>svg { flex-shrink:0; }
+.feature-hero .currency, .balance .currency {
+  display:inline-block; font-size:12px; font-weight:600; letter-spacing:.2px;
+  margin-left:9px; opacity:.82; vertical-align:middle;
+}
+.feature-hero h2 { font-variant-numeric:tabular-nums; }
+.activity-list { background:white; border-radius:24px; padding:0 18px; }
+.activity-row { display:flex; align-items:center; gap:12px; padding:18px 0; margin:0; }
+.activity-copy, .star-history-copy { min-width:0; flex:1; }
+.activity-copy>b, .star-history-copy>b { display:block; font-size:16px; line-height:1.3; font-weight:600; overflow-wrap:anywhere; }
+.activity-copy>small, .star-history-copy>small { display:block; margin-top:var(--ui-row-gap); font-size:var(--ui-caption-size); line-height:1.35; color:var(--ui-caption-color); }
+.activity-amount { font-size:15px; font-weight:600; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.savings-history-entry.is-in .activity-amount { color:#39725d; }
+.savings-history-entry.is-out .activity-amount { color:#765b83; }
+.feature-screen--stars .stars-balance { display:flex; justify-content:center; align-items:center; gap:20px; padding:0 0 26px; text-align:left; }
+.feature-screen--stars .stars-balance>img { width:100px; height:100px; margin:0; }
+.feature-screen--stars .stars-balance h2 { margin:0; font-size:42px; line-height:1.1; }
+.feature-screen--stars .stars-balance p { margin:6px 0 0; font-size:16px; }
+.stars-actions { display:grid; gap:10px; }
+.stars-actions .feature-panel { margin:0; padding:18px; }
+.stars-explanation { margin:14px 4px 24px; font-size:14px; line-height:1.45; color:var(--ui-caption-color); }
+.star-history-amount { font-variant-numeric:tabular-nums; font-size:16px; }
+.star-history-row .star-source { flex-basis:32px; height:32px; }
+.star-history-row .star-source>svg { width:21px; height:21px; }
+.star-history-row .history-marker { width:24px; height:24px; }
+.child-cabinet-link { margin-top:20px; display:flex; align-items:center; justify-content:center; gap:8px; }
+/* Chat uses the full app width; its readable inner gutters remain intact. */
+.feature-screen--pet:has(.leo-screen) .feature-body { padding-inline:0; padding-bottom:0; }
+.leo-scene { padding-inline:var(--page-gutter); }
+.leo-chat { border:0; border-radius:0; }
+.leo-chat-header { padding-inline:var(--page-gutter); }
+.leo-messages { padding-inline:var(--page-gutter); }
+.leo-composer { padding-inline:var(--page-gutter); padding-bottom:calc(12px + env(safe-area-inset-bottom)); }
+.leo-chat-header span { font-size:14px; }
+@media(max-width:359px) {
+  .activity-list { padding-inline:14px; }
+  .activity-row { gap:9px; }
+  .activity-amount { font-size:14px; }
+}
+
+.parent-task-button .approve-task { border-radius:999px; padding-inline:16px; }
+/* Primary rows share title/descriptor rules; task/history metadata is one step smaller. */
+:root { --ui-descriptor-size:15px; --ui-task-title-size:17px; }
+.parent-service-copy b, .parent-choice-copy b, .parent-task-copy b { font-size:var(--ui-title-size); line-height:1.3; }
+.parent-service-copy small, .parent-choice-copy small, .feature-link small { font-size:var(--ui-descriptor-size); line-height:1.35; font-weight:400; }
+.parent-service-copy, .parent-choice-copy, .parent-task-copy { gap:var(--ui-row-gap); }
+.task-card .task-title { font-size:var(--ui-task-title-size); }
+.task-card .task-status, .parent-task-copy small, .history-date { font-size:var(--ui-caption-size); line-height:1.35; }
+/* Keep keyboard focus visible inside surfaces clipped to a smooth path. */
+[data-smooth-corners]:focus-visible { outline:3px solid var(--brand-light); outline-offset:-4px; }
+/* A shared section label in both cabinets. */
+.ui-section-heading, .parent-group>.ui-section-heading {
+  margin:24px 2px 12px; color:var(--text-secondary); font-size:16px;
+  line-height:1.3; font-weight:600; letter-spacing:0;
+}
+.parent-group>.ui-section-heading { margin-top:0; }
+.feature-screen--tasks .task-stats { margin-bottom:24px; }
+.feature-screen--tasks .task-stat-value { display:flex; align-items:center; gap:8px; }
+.feature-screen--tasks .task-stat-value>img, .feature-screen--tasks .task-stat-value>svg {
+  position:static; width:30px; height:30px; flex:none; object-fit:contain;
+}
+.achievement-check { display:block; width:36px; height:36px; flex:none; }
+.feature-screen--tasks .history-achievement { align-self:flex-start; margin-top:20px; width:30px; height:30px; }
+.feature-screen--tasks .history-task { gap:12px; }
+.feature-screen--tasks .history-reward {
+  display:inline-flex; align-items:center; gap:4px; margin-top:12px;
+  padding:6px 10px; border-radius:12px; background:var(--surface-muted);
+  color:var(--brand-ink); font-size:14px; line-height:1.25;
+}
+.history-reward>b { font-size:17px; font-weight:700; }
+.history-reward>img { width:19px; height:19px; object-fit:contain; }
+.history-reward>span { margin-left:3px; }
+/* Leo shares the home background; the chat remains a rounded, calm surface. */
+.phone-shell:has(.feature-screen--pet) > .ambient { visibility:visible; }
+.feature-screen--pet { background:transparent; }
+.feature-screen--pet .feature-header h1, .leo-stat { color:white; }
+.feature-screen--pet .header-blur { background:linear-gradient(to bottom,color-mix(in srgb,var(--brand) 50%,transparent),transparent); }
+.phone-shell .feature-screen--pet .feature-header>button { color:white; background:#ffffff24; }
+.leo-level { color:white; background:#ffffff26; }
+.leo-chat { border-radius:26px; background:var(--surface-bg); }
+@media(max-width:359px) { .feature-screen--tasks .task-stat-value { gap:5px; } .feature-screen--tasks .task-stat-value>img, .feature-screen--tasks .task-stat-value>svg { width:26px; height:26px; } }
+/* First payment card clears the full fade of the sticky header. */
+.payment-flow:not(.payment-flow--qr) .payment-content { margin-top:52px; }
+.phone-number small { font-size:var(--ui-descriptor-size); line-height:1.35; }
+.phone-number strong { font-size:18px; line-height:1.3; }
+
+.feature-screen--stars .stars-balance h2 { display:flex; align-items:center; line-height:1; }
+.feature-screen--stars .stars-balance p { margin-top:0; }
+.parent-add-recipient { min-height:48px; margin-top:18px; padding:12px 16px; border-radius:999px; background:var(--surface-muted); color:var(--brand); box-shadow:none; font-size:17px; line-height:1.3; }
+.parent-add-recipient svg { flex:none; }
+/* Tint only the raster map, never the avatar, controls or attribution. */
+.parent-real-map .leaflet-tile-pane { filter:grayscale(1) sepia(.18) hue-rotate(205deg) saturate(1.5) contrast(.92); }
+.spending-chart { position:relative; width:min(100%,270px); margin:8px auto 12px; }
+.spending-chart>svg { display:block; width:100%; height:auto; }
+.spending-chart-total { position:absolute; inset:auto 0 12%; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.spending-chart-total strong { font-size:30px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums; }
+.spending-chart-total span { font-size:14px; color:var(--brand-ink); }
+.report-legend { margin-top:18px; gap:0; }
+.report-legend>div { min-height:52px; padding:12px 0; }
+.report-legend>div+div { border-top:1px solid var(--ui-divider); }
+.report-legend b { display:flex; flex-wrap:wrap; align-items:baseline; column-gap:6px; }
+.report-legend b small { opacity:.85; }
+.setting-row.limit-recipient { gap:12px; }
+.setting-row .limit-recipient-avatar { display:grid; width:44px; height:44px; flex:none; }
+.setting-row .limit-recipient-copy { min-width:0; flex:1; }
+.limit-recipient-copy small { overflow-wrap:anywhere; }
+@media(max-width:359px) { .setting-row.limit-recipient { gap:9px; } .setting-row .limit-recipient-avatar { width:36px; height:36px; } }
+.money-value { display:inline-flex; align-items:baseline; column-gap:.3em; white-space:nowrap; font-variant-numeric:tabular-nums; letter-spacing:0; }
+.money-value .money-number { font-size:1em; font-weight:600; }
+.money-value .money-unit { display:inline; font-size:.78em; font-weight:500; letter-spacing:.02em; opacity:.82; }
+.money-value--hero { align-items:center; column-gap:9px; }
+.money-value--hero .money-number { font-weight:700; letter-spacing:-.025em; }
+.money-value--hero .money-unit { font-size:12px; font-weight:600; }
+.report-legend>div>.money-value,.report-legend>div>span:has(.money-value),.history-row>strong,.activity-amount { font-size:17px; }
+.cash-limit .money-value { display:inline-flex; flex-direction:row; align-items:baseline; }
+.cash-limit .money-number,.cash-limit .money-unit { display:inline; }
+@media(max-width:359px) { .report-legend>div>span:has(.money-value),.history-row>strong,.activity-amount { font-size:15px; } }
+/* Account identity: one smooth surface, no clipped rectangular border. */
+.phone-number { border:0; padding:20px; gap:14px; background:linear-gradient(145deg,#fff 35%,var(--surface-bg)); box-shadow:none; }
+.phone-number>span { width:36px; height:40px; flex:none; background:none; color:var(--brand-mid); border-radius:0; }
+.phone-number>span>svg { width:30px; height:30px; }
+.phone-number>div { min-width:0; }
+.phone-number strong { margin-top:4px; font-size:20px; font-weight:600; letter-spacing:-.2px; white-space:nowrap; }
+.amount-options button.is-active { background:var(--brand); color:#fff; border-color:transparent; box-shadow:0 4px 12px color-mix(in srgb,var(--brand) 14%,transparent); }
+@media(max-width:359px) { .phone-number { padding:18px 16px; gap:10px; } .phone-number strong { font-size:18px; } }
+/* Native list separators: text-aligned start, trailing edge of the surface. */
+.activity-row { position:relative; --divider-inset:0px; --divider-outset:18px; }
+.star-history-row { --divider-inset:44px; }
+.activity-row+.activity-row { border-top:0; }
+.activity-row+.activity-row::before { content:""; position:absolute; top:0; left:var(--divider-inset); right:calc(-1 * var(--divider-outset)); height:1px; background:var(--ui-divider); }
+.setting-row.limit-recipient { position:relative; }
+.setting-row.limit-recipient+.limit-recipient { border-top:0; }
+.setting-row.limit-recipient+.limit-recipient::before { content:""; position:absolute; top:0; left:58px; right:-17px; height:1px; background:var(--ui-divider); }
+.history-row { position:relative; border-bottom:0; }
+.history-row:not(:last-child)::after { content:""; position:absolute; bottom:0; left:0; right:-16px; height:1px; background:var(--ui-divider); }
+.report-legend>div { position:relative; }
+.report-legend>div+div { border-top:0; }
+.report-legend>div+div::before { content:""; position:absolute; top:0; left:20px; right:-20px; height:1px; background:var(--ui-divider); }
+@media(max-width:359px) { .activity-row { --divider-outset:14px; } .star-history-row { --divider-inset:41px; } .setting-row.limit-recipient+.limit-recipient::before { left:47px; } }
+.payment-content--transfer { display:flex; flex-direction:column; min-height:calc(100% - 108px); }
+.transfer-recipients,.transfer-amount-card { border-radius:24px; background:#fff; padding:20px 16px; }
+.transfer-recipients h2 { margin:0 4px; font-size:18px; line-height:1.3; font-weight:600; }
+.transfer-recipients .recipient-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 8px; margin-top:20px; }
+.transfer-recipients .recipient { max-width:none; min-width:0; font-size:15px; font-weight:600; color:var(--brand-ink); padding:0; }
+.transfer-recipients .recipient.is-selected { color:var(--brand); }
+.transfer-recipients .recipient.is-selected .recipient-avatar { box-shadow:none; border-color:var(--brand); }
+.transfer-helper { margin:10px 4px 22px; font-size:14px; line-height:1.35; color:var(--brand-ink); }
+.transfer-amount-card .payment-amount { margin:0; }
+.transfer-amount-card .amount-options { margin-top:20px; gap:6px; }
+.transfer-amount-card .amount-options button { padding-inline:12px; }
+.transfer-available { margin:18px 0 0; text-align:center; font-size:14px; line-height:1.35; color:var(--brand-ink); }
+.transfer-footer { margin-top:auto; padding-top:24px; }
+.transfer-footer .payment-cta { margin-top:0; }
+.transfer-footer .payment-error { margin:0 0 14px; }
+@media(max-width:359px) { .transfer-amount-card .amount-options button { font-size:13px; padding-inline:10px; } }
+/* Quick amounts are compact chips, secondary to the amount and primary action. */
+.amount-options button,.parent-presets button,.feature-chips button {
+  min-height:36px; padding:7px 12px; font-size:14px; line-height:20px;
+  font-weight:600; border-radius:999px; width:auto; min-width:0;
+}
+.parent-presets { gap:6px; }
+.parent-presets button { padding-inline:10px; font-size:13px; }
+.parent-presets button.is-active { background:var(--brand); border-color:transparent; color:white; }
+.transfer-amount-card .amount-options button { min-height:36px; }
+.payment-content--phone .phone-number { margin-bottom:22px; }
+/* Parent forms share one field rhythm, with quiet secondary actions. */
+.parent-sheet .task-form { display:flex; flex-direction:column; gap:20px; }
+.parent-sheet .task-form label,.form-options legend { margin:0; padding:0; color:var(--text-secondary); font-size:14px; font-weight:500; line-height:1.35; }
+.parent-sheet .task-form label { gap:8px; }
+.parent-sheet .task-form input,.parent-sheet .task-form select { height:48px; min-height:48px; padding:0 14px; border:1px solid var(--border-neutral); border-radius:14px; background:#fff; font-size:16px; font-weight:500; }
+.parent-sheet .task-form input:focus-visible,.parent-sheet .task-form select:focus-visible { outline:2px solid var(--brand-light); outline-offset:2px; }
+.form-options { min-width:0; margin:0; padding:0; border:0; }
+.form-options .parent-presets { justify-content:flex-start; margin-top:10px; }
+.parent-sheet .task-form>.time-presets { margin:-10px 0 0; }
+.parent-sheet .task-form>.parent-primary { margin:4px 0 0; box-shadow:none; }
+.parent-sheet .task-form>.parent-secondary { margin:-12px 0 0; min-height:40px; padding:8px; background:transparent; box-shadow:none; font-size:15px; font-weight:500; }
+.parent-sheet .task-form>p { margin:0; font-size:14px; }
+.task-empty { display:flex; align-items:flex-start; gap:14px; margin:0; padding:20px; background:#ffffff80; }
+.task-empty>svg { flex:none; color:#a18bb5; margin-top:2px; }
+.task-empty b { font-size:16px; font-weight:600; color:#665572; }
+.task-empty p { margin:5px 0 0; font-size:14px; line-height:1.45; color:#887993; }
+.parent-task-row { gap:14px; padding:18px 16px; }
+.parent-task-copy b { font-size:17px; }
+.parent-task-button .approve-task { min-height:36px; padding-inline:12px; font-size:13px; font-weight:600; background:var(--surface-muted); color:var(--brand-ink); }
+.parent-new-task { box-shadow:none; }
+/* A single amount surface keeps source, destination and value together. */
+.parent-transfer-layout .parent-transfer-card { margin:0; padding:16px; }
+.parent-transfer-card .parent-segmented { margin:0 0 24px; padding:4px; border:0; border-radius:15px; box-shadow:none; background:var(--surface-bg); }
+.parent-transfer-card .parent-segmented button { min-height:38px; font-size:14px; border-radius:11px; }
+.parent-transfer-card .parent-amount-label { display:flex; align-items:center; flex-direction:column; gap:8px; font-size:14px; }
+.parent-amount-input { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; }
+.parent-amount-label .parent-amount-input input { width:5ch; max-width:calc(100% - 45px); height:60px; margin:0; padding:0; border:0; text-align:center; font-size:40px; line-height:1.1; field-sizing:content; }
+.parent-amount-label .parent-amount-input span { position:static; font-size:13px; font-weight:500; }
+.parent-amount-input input:focus-visible { outline:2px solid var(--border-neutral); outline-offset:2px; border-radius:8px; }
+.parent-transfer-card .parent-presets { margin-top:18px; gap:6px; }
+.parent-custom-amount { display:block; margin:12px auto 0; padding:5px 8px; border:0; background:transparent; color:var(--brand-ink); font-size:13px; }
+.parent-transfer-card .parent-wallet { justify-content:center; gap:5px; margin:20px -16px -16px; padding:14px 10px; border-top:1px solid var(--ui-divider); font-size:13px; }
+.parent-transfer-layout>.setting-row { margin-top:14px; padding:18px 16px; }
+.parent-transfer-layout>.setting-row b { font-size:16px; font-weight:600; }
+.parent-transfer-layout>.setting-row small { font-size:14px; }
+.parent-transfer-layout>.parent-primary { margin-top:24px; box-shadow:none; }
+/* Dream overview: one introduction, short section labels, separate progress and value. */
+.feature-screen--goals .dreams-empty { text-align:center; padding:24px 20px 20px; }
+.dreams-empty>img { display:block; width:72px; height:72px; object-fit:contain; margin:0 auto 14px; }
+.feature-screen--goals .dreams-empty h2 { font-size:20px; }
+.feature-screen--goals .dreams-empty p { margin:8px auto 20px; max-width:250px; font-size:14px; }
+.goals-section-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:28px 2px 12px; }
+.goals-section-header .ui-section-heading { margin:0; }
+.goals-section-header>span { display:flex; align-items:center; gap:4px; color:var(--brand-ink); font-size:14px; font-weight:600; }
+.goals-section-header img { width:18px; height:18px; }
+.reward-goals-child .feature-row h2 { font-size:18px; font-weight:600; }
+.reward-goals-child .feature-row svg { width:24px; height:24px; color:var(--text-secondary); }
+.reward-goals-child .feature-secondary { min-height:42px; font-size:15px; margin-top:0; }
+.parent-sheet .task-form>.task-ideas { display:flex; flex-wrap:wrap; gap:6px; margin:-10px 0 0; }
+.task-ideas button { padding:7px 10px; min-height:32px; border:0; border-radius:10px; color:var(--text-secondary); background:#ece4f4; font-size:12px; font-weight:500; line-height:18px; }
+.task-ideas button[aria-pressed="true"] { color:var(--brand-ink); background:var(--surface-muted); }
+.star-value { display:inline-flex; align-items:center; gap:4px; vertical-align:baseline; white-space:nowrap; font-variant-numeric:tabular-nums; line-height:1.2; }
+.star-value>svg { flex:none; width:.8em; height:.8em; color:var(--brand-mid); }
+.parent-presets .is-active .star-value>svg { color:currentColor; }
+.parent-goal-option>strong .star-value>span { color:inherit; font-size:inherit; }
+
+.activity-copy>b,.star-history-copy>b { line-height:22px; }
+.activity-copy>small,.star-history-copy>small { line-height:20px; }
+.activity-amount { flex:none; }
+/* Cancel is one quiet action across child and parent forms. */
+button.ui-cancel,.feature-body button.ui-cancel,.scanner-sheet-actions button.ui-cancel { min-height:40px; padding:8px 12px; border:0; background:transparent; box-shadow:none; color:var(--text-secondary); font-size:15px; line-height:24px; font-weight:500; }
+.form-field { min-width:0; margin:0; padding:0; border:0; }
+.parent-sheet .task-form label,.form-options legend,.form-field legend { color:var(--text-secondary); font-size:14px; font-weight:600; line-height:20px; }
+.form-field legend { padding:0; margin-bottom:8px; }
+.form-field .parent-presets { justify-content:flex-start; margin:8px 0 0; gap:6px; }
+.parent-sheet .task-form>.form-intro { margin:-4px 0 0; color:#92839c; font-size:13px; font-weight:400; line-height:1.45; }
+.goal-icon-options { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:8px; }
+.goal-icon-options button { display:grid; place-items:center; min-height:44px; padding:8px 0; border:1px solid var(--border-neutral); border-radius:12px; background:white; color:var(--brand-mid); }
+.goal-icon-options button[aria-pressed="true"] { background:var(--surface-muted); border-color:var(--border-neutral); color:var(--brand-ink); }
+.goal-icon-options button svg { width:24px; height:24px; }

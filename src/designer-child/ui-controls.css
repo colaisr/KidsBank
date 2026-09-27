@@ -1,0 +1,147 @@
+/* Canonical control styles shared by both cabinets. Keep visual variants here. */
+:root { --control-radius:18px; --field-radius:14px; --control-primary:var(--brand); --control-secondary:color-mix(in srgb, var(--brand) 10%, transparent); --text-primary:var(--text-primary); --text-secondary:var(--text-secondary); }
+:root :is(.parent-primary,.feature-primary,.payment-cta,.design-done) { min-height:52px; border:0; border-radius:var(--control-radius); padding:14px 18px; background:var(--control-primary); color:#fff; font-size:17px; line-height:24px; font-weight:600; box-shadow:none; }
+:root :is(.parent-secondary,.feature-secondary) { min-height:48px; border:0; border-radius:var(--control-radius); padding:12px 18px; background:var(--control-secondary); color:var(--brand-ink); font-size:17px; line-height:24px; font-weight:600; box-shadow:none; }
+:root :is(.amount-options,.parent-presets,.feature-chips) { display:flex; flex-wrap:wrap; gap:6px; }
+:root :is(.amount-options,.parent-presets,.feature-chips) button { flex:0 0 auto; width:auto; min-width:0; min-height:36px; padding:7px 12px; border:1px solid var(--border-neutral); border-radius:999px; background:white; color:var(--text-secondary); font-size:14px; line-height:20px; font-weight:600; box-shadow:none; }
+:root :is(.amount-options,.parent-presets,.feature-chips) button.is-active { color:white; background:var(--control-primary); border-color:var(--control-primary); box-shadow:none; }
+:root :is(.task-form,.feature-form) label,.form-options legend,.form-field legend { color:var(--text-secondary); font-size:14px; font-weight:600; line-height:20px; }
+:root :is(.task-form,.feature-form) input:not(.amount-panel input),:root .task-form select { min-height:48px; height:48px; padding:0 14px; margin-top:0; border:1px solid var(--border-neutral); border-radius:var(--field-radius); background:white; color:var(--text-primary); font-size:16px; font-weight:500; }
+:root :is(.task-form,.feature-form) input:focus-visible { outline:2px solid var(--brand-light); outline-offset:2px; }
+:root button.ui-cancel,:root .task-form>button.ui-cancel,:root .scanner-sheet-actions button.ui-cancel { min-height:40px; padding:8px 12px; background:transparent; border:0; box-shadow:none; color:var(--text-secondary); font-size:17px; line-height:24px; font-weight:600; }
+.amount-panel { padding:24px 18px 20px; background:white; border-radius:24px; }
+.amount-panel .amount-panel-label,.feature-form .amount-panel-label { display:block; margin:0 0 8px; color:var(--text-secondary); font-size:14px; font-weight:500; line-height:20px; text-align:center; }
+.amount-panel-value { display:block; text-align:center; font-size:40px; line-height:52px; }
+.amount-panel-input { display:flex; justify-content:center; align-items:center; gap:9px; min-height:52px; }
+.amount-panel .amount-panel-input input { display:block; max-width:calc(100% - 42px); min-width:1ch; min-height:52px; height:52px; margin:0; padding:0; border:0; border-radius:6px; background:transparent; color:var(--text-primary); font:700 40px/52px "Evoca Rounded",sans-serif; font-variant-numeric:tabular-nums; letter-spacing:-.025em; text-align:center; }
+.amount-panel-input>span { font-size:12px; line-height:20px; font-weight:600; color:var(--text-secondary); }
+.amount-panel .amount-options { justify-content:center; margin:20px 0 0; }
+.amount-panel-custom { display:block; margin:10px auto 0; padding:4px 8px; border:0; background:transparent; color:var(--brand-ink); font-size:13px; line-height:20px; font-weight:500; }
+.amount-panel .amount-panel-hint { margin:18px 0 0; color:var(--text-secondary); text-align:center; font-size:14px; font-weight:400; line-height:20px; }
+.amount-panel>.parent-segmented { margin:0 0 24px; border:0; padding:4px; border-radius:14px; background:var(--surface-bg); }
+.amount-panel>.parent-segmented button { min-height:36px; border-radius:10px; font-size:14px; }
+.feature-form>h2 { font-size:20px; line-height:26px; font-weight:600; margin:0 0 20px; }
+.feature-form>label { display:flex; flex-direction:column; gap:8px; margin:0 0 20px; }
+.feature-form>.feature-note { margin:0 0 20px!important; font-size:13px!important; }
+.feature-form>.amount-panel { margin-top:0; }
+@media(max-width:359px) { :root :is(.amount-options,.parent-presets,.feature-chips) button { font-size:13px; padding-inline:10px; } }
+:root .amount-panel .amount-panel-label { margin:0 0 8px; color:var(--text-secondary); font-size:14px; line-height:20px; font-weight:500; }
+/* Keep fixed chrome inside rounded overflow; clip-path creates a backdrop root in WebKit. */
+.phone-shell { transform:translateZ(0); clip-path:none; }
+.phone-shell>.ambient { top:0; bottom:0; }
+.phone-shell .header-chrome { top:0; }
+.phone-shell .bottom-chrome { bottom:0; }
+.phone-shell .progressive-blur.top-blur { top:-32px; }
+.phone-shell .progressive-blur.bottom-blur { bottom:-32px; }
+/* Shared grid anchors the check to the title, independent of metadata height. */
+.feature-screen--tasks .history-task { display:grid; grid-template-columns:30px minmax(0,1fr); column-gap:12px; row-gap:6px; align-items:start; }
+.feature-screen--tasks .history-task>div { display:contents; }
+.feature-screen--tasks .history-date { grid-column:2; grid-row:1; margin:0; line-height:20px; }
+.feature-screen--tasks .history-task h3 { grid-column:2; grid-row:2; line-height:24px; }
+.feature-screen--tasks .history-reward { grid-column:2; grid-row:3; justify-self:start; margin:0; }
+.feature-screen--tasks .history-achievement { grid-column:1; grid-row:2; align-self:start; margin:-3px 0 0; width:30px; height:30px; }
+:root .feature-body .history-more { background:var(--control-secondary); color:var(--brand-ink); border:0; }
+/* Values in peer list rows share the same typography; units remain subordinate. */
+:root .ui-row-amount { font-size:17px; line-height:24px; font-weight:600; color:var(--text-primary); font-variant-numeric:tabular-nums; }
+:root .ui-row-amount>.star-value { color:inherit; font-size:inherit; }
+:root .ui-row-amount.positive { color:#39725d; }
+.parent-goal-option { position:relative; border-bottom:0; }
+.parent-goal-option:not(:last-child)::after { content:""; position:absolute; left:0; right:-18px; bottom:0; height:1px; background:var(--ui-divider); }
+.parent-goal-option h3,.history-copy b { line-height:24px; }
+.parent-goal-option p,.history-copy small { line-height:20px; }
+.parent-sheet>.parent-choice { position:relative; border-bottom:0; }
+.parent-sheet>.parent-choice+.parent-choice::before { content:""; position:absolute; top:0; left:4px; right:-20px; height:1px; background:var(--ui-divider); }
+
+/* Item value and saving progress are separate groups. */
+.reward-goals-child>.feature-panel { display:flex; flex-direction:column; gap:20px; padding:20px; }
+.reward-goal-heading { display:flex; align-items:center; gap:12px; }
+.reward-goal-heading>svg { width:36px; height:36px; margin:0; flex:none; color:var(--text-secondary); }
+.reward-goal-heading h2 { font-size:18px; font-weight:600; line-height:24px; }
+.feature-body .reward-goal-value { margin:4px 0 0; font-size:14px; line-height:20px; color:var(--text-secondary); }
+.reward-goal-value .money-value,.reward-goal-value .money-number,.reward-goal-value .money-unit { font-size:inherit; font-weight:inherit; opacity:1; }
+.feature-body .reward-goal-count { display:flex; align-items:center; gap:4px; margin:0; color:var(--brand-ink); font-size:14px; font-weight:600; line-height:20px; }
+.reward-goals-child .reward-goal-progress progress { display:block; margin:8px 0 0; height:6px; }
+.reward-goals-child .feature-panel>.feature-secondary { margin:0; }
+
+/* Shared action tile on the home screen and in Leo. */
+:root .action-tile { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; min-height:110px; padding:16px 6px; border:0; border-radius:26px; background:#fcfaff; color:var(--text-primary); box-shadow:none; text-align:center; cursor:pointer; }
+.action-tile-icon { display:grid; place-items:center; width:28px; height:28px; flex:none; color:var(--text-secondary); }
+.action-tile-icon svg { width:28px; height:28px; }
+:root .action-tile-copy { display:flex; flex-direction:column; justify-content:center; gap:2px; min-height:36px; font-size:13px; font-weight:600; line-height:18px; letter-spacing:0; }
+:root .action-tile-copy small { font-size:13px; font-weight:600; line-height:18px; color:var(--text-secondary); }
+.action-tile:active { transform:scale(.97); }
+.action-tile:disabled { opacity:.4; cursor:default; }
+.leo-chat-header { align-items:baseline; padding-top:18px; padding-bottom:12px; gap:8px; }
+.leo-chat-header b { color:var(--text-primary); font-size:17px; line-height:24px; font-weight:600; }
+.leo-chat-header span { color:var(--text-secondary); font-size:13px; line-height:20px; font-weight:400; }
+.leo-bubble { width:fit-content; overflow-wrap:anywhere; font-size:16px; line-height:24px; font-weight:400; padding:12px 14px; letter-spacing:0; }
+.leo-bubble.you { background:var(--brand); }
+.leo-bubble.leo { background:color-mix(in srgb, var(--brand) 6%, transparent); color:var(--text-primary); }
+.leo-suggestions { gap:8px; margin-top:12px; }
+.leo-suggestions button { min-height:36px; padding:8px 12px; font-size:13px; line-height:20px; font-weight:600; color:var(--brand-ink); background:transparent; border:1.5px solid currentColor; border-radius:999px; }
+.leo-composer textarea { font-size:16px; line-height:24px; font-weight:400; }
+.leo-composer textarea::placeholder { color:var(--text-secondary); opacity:1; }
+
+.parent-detail:has(.parent-goals-footer) { display:flex; flex-direction:column; overflow:hidden; padding-bottom:0; }
+.parent-detail:has(.parent-goals-footer)>.parent-detail-header { flex-shrink:0; }
+.parent-detail-body:has(.parent-goals-footer) { position:relative; display:flex; flex-direction:column; flex:1; min-height:0; width:100%; overflow:visible; }
+.parent-goals-scroll { flex:1; min-height:0; overflow:auto; scrollbar-width:none; padding-bottom:calc(104px + env(safe-area-inset-bottom)); scroll-padding-bottom:calc(104px + env(safe-area-inset-bottom)); }
+.parent-goals-footer { position:absolute; z-index:2; inset:auto 0 0; padding:12px 0 calc(20px + env(safe-area-inset-bottom)); }
+.parent-goals-footer .progressive-blur.bottom-blur { position:absolute; z-index:0; left:-20px; right:-20px; bottom:-32px; width:auto; height:156px; transform:none; }
+@media(max-width:359px) { .parent-goals-footer .progressive-blur.bottom-blur { left:-16px; right:-16px; } }
+.parent-goals-footer>.parent-primary { position:relative; z-index:1; margin:0; display:flex; align-items:center; justify-content:center; gap:8px; }
+
+/* Keep mobile navigation close to the safe edge without adding a second inset. */
+@media (max-width:479px) {
+  .bottom-chrome { padding-bottom:env(safe-area-inset-bottom); }
+  .bottom-nav .nav-item { top:0; }
+}
+.payment-content--transfer .transfer-recipients + .amount-panel { margin-top:20px; }
+.scanner-sheet-actions { flex-direction:column; gap:8px; }
+.scanner-sheet-actions button { flex:none; width:100%; }
+.scanner-sheet-actions .payment-cta { margin:0; }
+.scanner-sheet dl { margin-top:24px; }
+
+/* The chat is a two-position sheet; only its message list scrolls. */
+.feature-screen--pet { top:0; bottom:0; height:100%; }
+.feature-screen--pet:has(.leo-screen) .feature-body { padding-top:calc(104px + env(safe-area-inset-top)); }
+.leo-screen { position:relative; display:block; min-height:0; }
+.leo-screen .leo-scene { transition:opacity .18s ease-out; }
+.leo-screen[data-chat-expanded="true"] .leo-scene { opacity:0; pointer-events:none; }
+.leo-screen .leo-chat { position:absolute; z-index:1; left:0; right:0; bottom:var(--leo-keyboard-inset,0px); min-height:0; border-radius:26px 26px 0 0; }
+.leo-chat-grab { display:grid; place-items:center; flex:none; width:100%; height:44px; padding:0; background:transparent; border:0; touch-action:none; cursor:grab; }
+.leo-chat-grab>span { width:36px; height:4px; border-radius:4px; background:rgb(77 45 111 / 18%); }
+.leo-chat-grab:active { cursor:grabbing; transform:none!important; }
+.leo-chat-header { flex-shrink:0; padding-top:0; }
+.leo-messages { overscroll-behavior:contain; overflow-anchor:none; }
+.leo-composer { flex-shrink:0; }
+.leo-screen[data-keyboard-open="true"] .leo-composer { padding-bottom:12px; }
+@media(prefers-reduced-motion:reduce) { .leo-screen .leo-scene { transition:none; } }
+
+.reward-goal-select>.star-value { font:inherit; line-height:inherit; }
+.reward-goal-select>.star-value>span { line-height:inherit; }
+/* Hidden overflow can still be scrolled by native focus; clip cannot. */
+.phone-shell:has(.feature-screen--pet),
+.feature-screen--pet:has(.leo-screen) .feature-body,
+.leo-screen .leo-chat { overflow:clip; }
+
+/* The sheet owns its surface; neither the shared mascot nor header blur paints over it. */
+.shared-lion-layer--pet { clip-path:inset(0 0 max(0px, calc(100% - var(--leo-chat-edge,100%))) 0); }
+.feature-screen--pet .header-blur { bottom:0; }
+.reward-goal-select { column-gap:8px; }
+
+/* The keyboard moves the visible viewport. Pin its entire mobile scene, not an inner clipped screen. */
+@media(max-width:479px) {
+ .phone-shell[data-leo-viewport="pinned"] { position:fixed; top:var(--leo-visible-top,0px); left:0; right:0; bottom:auto; width:100%; max-width:none; height:var(--leo-visible-height,100dvh); min-height:0; margin:0; border-radius:0; }
+ html[data-leo-keyboard="true"],html[data-leo-keyboard="true"] body { background:#fcfaff; color-scheme:only light; }
+ .phone-shell[data-leo-viewport="pinned"] .feature-screen--pet { background:#fcfaff; }
+ .phone-shell[data-leo-viewport="pinned"] .feature-header h1 { color:var(--text-primary); }
+ .phone-shell[data-leo-viewport="pinned"] .feature-header>button { color:var(--text-secondary); background:rgb(77 45 111 / 8%); }
+ .phone-shell[data-leo-viewport="pinned"] .header-blur { background:#fcfaff; backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+.leo-composer { color-scheme:only light; }
+.leo-screen[data-keyboard-open="true"] .leo-chat-grab { height:28px; }
+/* During opaque-route exits, the home mascot stays behind the departing surface just like home content. */
+.phone-shell:has(.feature-screen:not(.feature-screen--pet),.payment-flow)>.shared-lion-layer { z-index:59!important; }
+
+.child-flow-backdrop { position:absolute; inset:0; z-index:60; pointer-events:none; background:linear-gradient(160deg,var(--surface-bg),var(--surface-bg)); }

@@ -1,0 +1,1001 @@
+@font-face {
+  font-family: "Evoca Rounded";
+  src: local("SF Pro Rounded Regular"), local("SFProRounded-Regular");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Evoca Rounded";
+  src: local("SF Pro Rounded Semibold"), local("SFProRounded-Semibold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Evoca Rounded";
+  src: local("SF Pro Rounded Bold"), local("SFProRounded-Bold");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+.kb-designer-child {
+  font-family:
+    "Evoca Rounded", "SF Pro Rounded", ui-rounded, system-ui, sans-serif;
+  color: #271839;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --brand: #6a00de;
+  --brand-light: #a05bec;
+  --brand-mid: #874cc6;
+  --brand-deep: #5900bd;
+  --brand-ink: #54227c;
+  --brand-outline: #cbb5df;
+  --brand-soft: #eedeff;
+  --brand-pale: #f5edff;
+  --brand-wash: #faf7fd;
+  --surface: #fff;
+  --ink: #271839;
+  --ink-secondary: #756b81;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --page-gutter: 24px;
+  --shell-width: 430px;
+  --bottom-space: 156px;
+}
+* {
+  box-sizing: border-box;
+}
+.kb-designer-child a {
+  color: inherit;
+  text-decoration: none;
+}
+.kb-designer-child button,
+.kb-designer-child a {
+  -webkit-tap-highlight-color: transparent;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+a:focus-visible {
+  outline: 3px solid #f6d373;
+  outline-offset: 5px;
+}
+::selection {
+  background: var(--brand-soft);
+  color: #42117e;
+}
+.phone-shell {
+  position: relative;
+  isolation: isolate;
+  max-width: var(--shell-width);
+  min-height: 100svh;
+  margin: 0 auto;
+  background: var(--brand);
+}
+.ambient {
+  position: fixed;
+  inset: 0 auto 0 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--shell-width));
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--brand-deep) 0%, var(--brand-light) 43%, var(--brand-soft) 100%);
+}
+.ambient-mesh {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+.ambient-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb,var(--brand) 94%,transparent) 0%,
+    color-mix(in srgb,var(--brand) 72%,transparent) 18%,
+    color-mix(in srgb,var(--brand-light) 18%,transparent) 42%,
+    color-mix(in srgb,var(--brand-light) 72%,transparent) 70%,
+    color-mix(in srgb,var(--brand-soft) 98%,transparent) 100%
+  );
+}
+.home {
+  position: relative;
+  padding: calc(28px + env(safe-area-inset-top)) var(--page-gutter)
+    calc(var(--bottom-space) + env(safe-area-inset-bottom));
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 46px;
+  color: #fff;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+.avatar {
+  width: 43px;
+  height: 43px;
+  background: var(--brand-soft);
+  border-radius: 17px;
+  overflow: hidden;
+  border: 1px solid #ffffff28;
+  box-shadow: inset 0 -1px 0 #ffffff3b;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+}
+.stars-counter {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  min-height: 40px;
+  border-radius: 18px;
+  background: color-mix(in srgb,var(--brand) 18%,transparent);
+  box-shadow: inset 0 -1px 0 #ffffff26;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.8px;
+}
+.hero {
+  text-align: center;
+  color: #fff;
+}
+.hero-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 179px;
+  padding-top: 14px;
+}
+.bank-card {
+  display: block;
+  width: 171px;
+  border-radius: 13px;
+  transform: rotate(-5deg);
+  box-shadow: 0 12px 28px -12px #42008a55;
+  overflow: hidden;
+}
+.bank-card {
+  position: relative;
+  aspect-ratio: 159/100;
+  transform: none;
+}
+
+.balance {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1.45px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.currency {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+  margin-left: 7px;
+  opacity: 0.82;
+  vertical-align: middle;
+}
+.account-label {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--brand-soft);
+  line-height: 1.5;
+  margin-top: 3px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 51px;
+  gap: 0;
+  padding-left: 13px;
+}
+.dot {
+  display: block;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff60;
+}
+.dot.selected {
+  background: #fff;
+}
+.dot-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 44px;
+}
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+.quick-action {
+  min-height: 110px;
+  border-radius: var(--radius-xl);
+  padding: 15px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: #fffffff0;
+  box-shadow: 0 4px 12px color-mix(in srgb,var(--brand) 7%,transparent);
+  border: 1px solid #ffffff70;
+}
+.quick-action svg {
+  color: var(--brand);
+}
+.quick-action span:not(.sr-only) {
+  font-size: 13px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+}
+.tasks {
+  margin-top: 29px;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.section-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.65px;
+}
+.count {
+  display: grid;
+  place-items: center;
+  min-width: 29px;
+  height: 29px;
+  background: color-mix(in srgb,var(--brand) 14%,transparent);
+  box-shadow: inset 0 -1px 0 #ffffff2b;
+  border-radius: 13px;
+  font-size: 15px;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+.all-tasks {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.task-list {
+  display: grid;
+  gap: 9px;
+}
+.task-card {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  min-height: 91px;
+  padding: 16px 15px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 3px 9px color-mix(in srgb,var(--brand) 4%,transparent);
+}
+.task-icon {
+  display: grid;
+  place-items: center;
+  width: 41px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: var(--brand-soft);
+  color: var(--brand-mid);
+}
+.task-icon.walkDog {
+  background: #fff1e1;
+  color: #be792d;
+}
+.task-icon.hangLaundry {
+  background: #e7efff;
+  color: #517bbb;
+}
+.task-copy {
+  flex: 1;
+  min-width: 0;
+}
+.task-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+  line-height: 1.25;
+}
+.task-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.task-status svg {
+  flex-shrink: 0;
+}
+.task-end {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+.reward {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--brand-mid);
+  background: var(--brand-pale);
+  border-radius: 9px;
+  padding: 3px 6px;
+}
+.task-details {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--brand);
+  margin-right: -8px;
+}
+.bottom-chrome {
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--shell-width));
+  padding: 22px 24px calc(16px + env(safe-area-inset-bottom));
+  isolation: isolate;
+}
+
+.bottom-nav {
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr;
+  align-items: end;
+  min-height: 68px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 60px;
+  color: var(--brand-mid);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.mascot {
+  width: 100px;
+  height: 100px;
+  justify-self: center;
+  margin-bottom: -7px;
+  filter: drop-shadow(0 5px 10px color-mix(in srgb,var(--brand) 12%,transparent));
+}
+.mascot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: 8px;
+  transform: translateY(-200%);
+  background: white;
+  padding: 10px 18px;
+  border-radius: 14px;
+  z-index: 20;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+@media (hover: hover) {
+  .quick-action:not(:disabled):hover {
+    box-shadow: inset 0 1px 1px #fff, inset 0 -1px 2px #c9c3d640, 0 6px 14px #49257124;
+  }
+  .nav-item:not(:disabled):hover,
+  .task-details:not(:disabled):hover {
+    color: #460099;
+  }
+  .all-tasks:not(:disabled):hover {
+    text-decoration: underline;
+  }
+}
+@media (min-width: 600px) {
+  .phone-shell {
+    box-shadow: 0 0 60px #33234412;
+  }
+}
+@media (max-width: 359px) {
+  :root {
+    --page-gutter: 18px;
+  }
+  .identity {
+    font-size: 16px;
+  }
+  .balance {
+    font-size: 37px;
+  }
+  .hero-art {
+    height: 164px;
+  }
+
+  .bank-card {
+    width: 156px;
+  }
+  .quick-action {
+    border-radius: 23px;
+    min-height: 104px;
+  }
+  .quick-action span:not(.sr-only) {
+    font-size: 12px;
+  }
+  .task-card {
+    padding: 14px 12px;
+    gap: 9px;
+  }
+  .task-icon {
+    width: 33px;
+    height: 37px;
+  }
+  .task-title {
+    font-size: 13px;
+  }
+  .task-status {
+    font-size: 10px;
+  }
+  .bottom-nav {
+    grid-template-columns: 1fr 100px 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Shared button baseline. Navigational rows override alignment explicitly. */
+.kb-designer-child button {
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-align: center;
+  background: none;
+  font: inherit;
+}
+.kb-designer-child button:disabled {
+  opacity: 1;
+  -webkit-text-fill-color: currentColor;
+  cursor: default;
+}
+.stars-counter {
+  padding: 5px 12px;
+  background: color-mix(in srgb,var(--brand) 18%,transparent);
+}
+.quick-action {
+  padding: 15px 6px;
+  background: #fffffff0;
+  border: 1px solid #ffffff70;
+  text-align: center;
+}
+.task-details {
+  padding: 0;
+}
+.nav-item {
+  color: var(--brand-mid);
+}
+.all-tasks {
+  color: #fff;
+}
+.identity {
+  color: #fff;
+}
+.task-details {
+  color: var(--brand);
+}
+
+.counter-star {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  margin: -4px -4px -4px 0;
+}
+.bank-card {
+  background:
+    url("/assets/card-space.png") center / cover no-repeat,
+    #17364e;
+  border: 1px solid #ffffff18;
+  color: white;
+  font-family: "Inter Variable", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.card-brand {
+  position: absolute;
+  top: 12%;
+  left: 7.54%;
+  line-height: 1;
+}
+.card-number {
+  position: absolute;
+  top: 77%;
+  left: 7.54%;
+  line-height: 1;
+}
+.card-chip {
+  position: absolute;
+  top: 42.7%;
+  right: 7.52%;
+  width: 12.95%;
+  height: 15.9%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.card-chip img {
+  position: absolute;
+  width: 107.59%;
+  max-width: none;
+  height: 120.08%;
+  top: -10.62%;
+  left: -5.84%;
+}
+.bank-card .card-network {
+  position: absolute;
+  width: 19.09%;
+  height: 23.14%;
+  top: 71.59%;
+  left: 77.27%;
+}
+.mascot {
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 50%;
+}
+.mascot-host {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.mascot-poster {
+  position: absolute;
+  inset: 0;
+}
+.mascot[data-ready="true"] .mascot-poster {
+  visibility: hidden;
+}
+.mascot:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+.mascot lion-mascot {
+  width: 100% !important;
+  height: 100%;
+}
+
+.avatar {
+  position: relative;
+  overflow: visible;
+}
+.avatar-crop {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  top: -12px;
+  overflow: hidden;
+  border-radius: 0 0 17px 17px;
+}
+.avatar .avatar-crop img {
+  position: absolute;
+  width: 138%;
+  max-width: none;
+  height: auto;
+  left: -19%;
+  top: -2px;
+  object-fit: contain;
+}
+
+.quick-action span:not(.sr-only) {
+  font-weight: 700;
+}
+
+.task-copy,
+.task-title {
+  display: block;
+}
+button.task-card {
+  width: 100%;
+  padding: 16px 15px;
+  background: var(--surface);
+}
+.pressable {
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 160ms ease,
+    box-shadow 180ms ease,
+    color 160ms ease;
+  transform-origin: center;
+}
+.pressable:active {
+  transform: scale(0.97);
+  transition-duration: 90ms;
+}
+.pressable:focus-visible {
+  outline: 3px solid #f6d373;
+  outline-offset: 4px;
+}
+@media (max-width: 359px) {
+  button.task-card {
+    padding: 14px 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pressable {
+    transition: none;
+  }
+  .pressable:active {
+    transform: none;
+    filter: brightness(0.96);
+  }
+}
+
+/* Task completion: reward sits directly before the large checkbox. */
+.task-card {
+  padding: 15px 18px;
+  min-height: 82px;
+  gap: 11px;
+}
+.task-card .task-icon {
+  width: 34px;
+  height: 38px;
+  border-radius: 13px;
+}
+.task-card .task-end {
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  gap: 9px;
+}
+.task-card .reward {
+  padding: 4px 5px;
+}
+.task-actionable {
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.task-actionable:active {
+  transform: scale(0.97);
+  transition-duration: 90ms;
+}
+.task-checkbox-wrap {
+  position: relative;
+  display: block;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+}
+.task-checkbox-wrap input {
+  position: absolute;
+  inset: -5px;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.task-checkbox-wrap input:disabled {
+  cursor: default;
+}
+.task-checkbox {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #ded5e9;
+  border-radius: 11px;
+  background: #fff;
+  color: #fff;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+.task-checkbox svg {
+  opacity: 0;
+  transform: scale(0.65);
+  transition:
+    opacity 120ms ease,
+    transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1.3);
+}
+.task-checkbox-wrap input:checked + .task-checkbox {
+  background: var(--brand-mid);
+  border-color: var(--brand-mid);
+}
+.task-checkbox-wrap input:checked + .task-checkbox svg {
+  opacity: 1;
+  transform: scale(1);
+}
+.task-checkbox-wrap input:focus-visible + .task-checkbox {
+  outline: 3px solid #b27bea;
+  outline-offset: 4px;
+}
+.task-confetti {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 4;
+}
+.all-tasks {
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0 3px;
+  min-height: 44px;
+  text-decoration: none !important;
+}
+@media (max-width: 359px) {
+  .task-card {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .task-card .task-icon {
+    width: 29px;
+    height: 34px;
+  }
+  .task-card .task-end {
+    gap: 6px;
+  }
+  .task-card .reward {
+    font-size: 12px;
+    padding: 3px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .task-actionable,
+  .task-checkbox,
+  .task-checkbox svg {
+    transition: none;
+  }
+  .task-actionable:active {
+    transform: none;
+  }
+}
+/* Contain the small checkbox burst within the mobile canvas, without disabling vertical scroll. */
+.phone-shell {
+  overflow-x: clip;
+}
+
+/* Host stacking: content 0, Details blur 10, navigation 20, header 30. */
+.bottom-chrome { z-index: 20; }
+.header-chrome { position: fixed; z-index: 30; top: 0; left: 50%; transform: translateX(-50%); width: min(100%, var(--shell-width)); padding: calc(28px + env(safe-area-inset-top)) var(--page-gutter) 16px; background: linear-gradient(var(--brand) 20%, color-mix(in srgb,var(--brand) 93%,transparent) 70%, transparent); }
+.home { padding-top: calc(74px + env(safe-area-inset-top)); }
+#tasks-title { scroll-margin-top: 110px; }
+.animated-number { display: inline-grid; }
+.animated-number > * { grid-area: 1 / 1; }
+.number-measure { visibility: hidden; }
+.animated-number number-flow-react { justify-self: end; }
+
+.header-chrome { background: transparent; }
+.quick-action .action-symbol { display: grid; place-items: center; width: 35px; height: 37px; border-radius: 12px; background: transparent; box-shadow: none; }
+.quick-action .action-symbol svg { color: #43414c; width: 25px; height: 25px; }
+.nav-item { color: #302839; }
+.nav-item svg { color: #302839; }
+.ambient-mesh { opacity: 1; }
+
+.skip-link { z-index: 40; }
+
+.task-card .task-icon { background: transparent; border-radius: 0; width: 38px; height: 42px; }
+.task-icon img { width: 42px; height: 42px; max-width: none; object-fit: contain; filter: drop-shadow(0 2px 1px #2c23351a); }
+
+/* The dimensional surface belongs to the entire action, not a nested icon badge. */
+.quick-action { background: linear-gradient(145deg, #ffffff 0%, #f5f4f8 55%, #e8e6ee 100%); border: 1px solid #ffffffb3; box-shadow: inset 0 1px 1px #fff, inset 0 -1px 2px #c9c3d640, 0 5px 10px #49257112; }
+
+/* Air around task illustrations; reward uses the same sculpted star as the balance. */
+.task-card .task-icon { margin-right: 6px; }
+.task-card .task-title { font-size: 16px; line-height: 1.28; }
+.task-card .task-status { font-size: 11.5px; line-height: 1.35; }
+.task-card .reward { padding: 0; gap: 2px; background: transparent; border-radius: 0; color: #694795; font-size: 14px; letter-spacing: -0.3px; }
+.reward-plus { font: inherit; color: inherit; }
+.reward img { width: 20px; height: 20px; object-fit: contain; }
+@media (max-width: 359px) {
+  .task-card .task-icon { margin-right: 4px; width: 32px; }
+  .task-card .task-title { font-size: 15px; }
+  .task-card .task-status { font-size: 11px; }
+  .task-card .reward { font-size: 13px; }
+  .reward img { width: 18px; height: 18px; }
+}
+
+/* Selected porcelain tab navigation; titles stay quiet beside the central lion. */
+.bottom-nav .nav-item { font-weight: 600; font-size: 13px; gap: 6px; color: #493951; }
+.nav-illustration { width: 48px; height: 48px; object-fit: contain; }
+.quick-action .action-symbol svg { width: 28px; height: 28px; color: #51465f; }
+.task-card .task-reward-art { width: 54px; height: 54px; margin-right: 7px; }
+.task-reward-art img { width: 54px; height: 54px; filter: none; }
+.task-card .task-status { margin-top: 0; margin-bottom: 5px; font-weight: 500; }
+.task-checkbox-wrap, .task-checkbox { width: 36px; height: 36px; }
+.task-checkbox-wrap { flex-basis: 36px; }
+.task-checkbox-wrap input { inset: -4px; }
+.task-checkbox { border-radius: 50%; border: 2px dashed #b8a8ca; background: transparent; }
+.task-checkbox-wrap input:checked + .task-checkbox { border-style: solid; background: var(--brand-mid); border-color: var(--brand-mid); }
+.marker-check { width: 30px; height: 30px; object-fit: contain; clip-path: inset(0 100% 0 0); opacity: 0; }
+.task-checkbox-wrap input:checked + .task-checkbox .marker-check { opacity: 1; clip-path: inset(0); animation: marker-draw 280ms ease-out both; }
+@keyframes marker-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@media (max-width: 359px) {
+  .task-card .task-reward-art, .task-reward-art img { width: 46px; height: 46px; }
+  .task-card .task-reward-art { margin-right: 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .task-checkbox-wrap input:checked + .task-checkbox .marker-check { animation: none; }
+}
+/* Match the source's viewport app shell: full mobile screen, inset desktop frame. */
+:root { --shell-width: 100%; --shell-inset: 0px; }
+body { height: 100dvh; overflow: hidden; }
+.phone-shell { width: 100%; height: 100dvh; min-height: 0; overflow: hidden; }
+.home { height: 100%; overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: none; }
+.home::-webkit-scrollbar { display: none; }
+.ambient { top: var(--shell-inset); bottom: var(--shell-inset); }
+.header-chrome { top: var(--shell-inset); }
+.bottom-chrome { bottom: var(--shell-inset); }
+.progressive-blur.top-blur { top: calc(var(--shell-inset) - 32px); }
+.progressive-blur.bottom-blur { bottom: calc(var(--shell-inset) - 32px); }
+@media (min-width: 480px) {
+  :root { --shell-width: 390px; --shell-inset: 16px; }
+  .phone-shell { height: calc(100dvh - 32px); margin: 16px auto; border-radius: 32px; clip-path: inset(0 round 32px); }
+}
+
+.all-tasks { display: inline-flex; align-items: center; gap: 4px; }
+.bottom-nav .nav-item { font-size: 14px; font-weight: 500; letter-spacing: -0.1px; }
+/* Tint the navigation surface, leaving the canonical progressive blur intact. */
+.bottom-chrome::before {
+  content: "";
+  position: absolute;
+  inset: -28px 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb,var(--brand) 8%,transparent) 28%, color-mix(in srgb,var(--brand) 26%,transparent) 66%, color-mix(in srgb,var(--brand) 34%,transparent) 100%);
+}
+.bottom-nav .nav-item { position: relative; top: -8px; color: #35223f; font-size: 14px; font-weight: 600; line-height: 1.2; letter-spacing: 0; }
+.task-card .task-reward-art, .task-reward-art img { width: 46px; height: 46px; }
+.task-card .task-reward-art { margin-right: 0; }
+.marker-check { width: 25px; height: 25px; }
+@media (max-width: 359px) {
+  .task-card .task-reward-art, .task-reward-art img { width: 42px; height: 42px; }
+  .task-card .task-reward-art { margin-right: 0; }
+}
+.home { overflow-x: hidden; }
+.bottom-chrome::before {
+  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb,var(--brand) 20%,transparent) 18%, color-mix(in srgb,var(--brand) 48%,transparent) 40%, color-mix(in srgb,var(--brand) 55%,transparent) 62%);
+}
+.task-card { overflow: clip; }
+.bottom-chrome::before { content: none; }
+
+.task-card { padding-right: 23px; }
+.nav-illustration { filter: drop-shadow(0 3px 3px #65348c40) drop-shadow(0 1px 1px #63378a20); }
+
+.nav-star-art { mask-image: url("/assets/nav-star.png"); -webkit-mask-image: url("/assets/nav-star.png"); mask-size: contain; -webkit-mask-size: contain; mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat; mask-mode: alpha; }
+
+.nav-illustration { filter: none; }
+.nav-art-shadow { filter: drop-shadow(0 3px 3px #65348c40) drop-shadow(0 1px 1px #63378a20); }
+/* A light, more stable dock surface; no dark tint. */
+.bottom-chrome::before {
+  content: "";
+  background: linear-gradient(to bottom, color-mix(in srgb,var(--brand-soft) 0%,transparent) 0%, color-mix(in srgb,var(--brand-soft) 70%,transparent) 30%, color-mix(in srgb,var(--brand-soft) 78%,transparent) 65%, color-mix(in srgb,var(--brand-soft) 91%,transparent) 100%);
+}
+.nav-star-art { width: 44px; height: 44px; }
+.nav-art-shadow { display: grid; place-items: center; width: 48px; height: 48px; }
+.header-chrome { padding-top: calc(22px + env(safe-area-inset-top)); }
+.home { padding-top: calc(68px + env(safe-area-inset-top)); }
+.hero-art { height: 163px; padding-top: 8px; }
+.balance { line-height: 1.12; }
+.account-label { margin-top: 0; line-height: 1.35; }
+.pagination { height: 45px; }
+
+/* Asset shadows are baked into the transparent PNGs. */
+.nav-art-shadow { filter: none; }
+.nav-star-art { mask-image: none; -webkit-mask-image: none; }
+.nav-art-shadow img:not(.nav-star-art) { transform: scaleX(-1); }
+.bottom-chrome { padding-bottom: calc(7px + env(safe-area-inset-bottom)); }
+.stars-counter, .count {
+  background: color-mix(in srgb,var(--brand-deep) 62%,transparent);
+  border: 1px solid rgb(255 255 255 / 15%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 4px 14px rgb(30 0 65 / 14%);
+}
+.count { color: #fff; }
+/* Keep the top backdrop inside the app's visible viewport. The edge fill must
+   sit ABOVE the filtering layers: a background behind them is blurred again. */
+.phone-shell .progressive-blur.top-blur {
+  top: var(--shell-inset);
+  height: calc(128px + env(safe-area-inset-top));
+}
+.top-blur::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: linear-gradient(to bottom, var(--brand) 0,
+    var(--brand) calc(env(safe-area-inset-top) + 8px),
+    transparent calc(env(safe-area-inset-top) + 44px));
+}
+@media (max-width: 479px) {
+  html, body { background: var(--brand); }
+}
+.ambient-mesh { animation: mesh-reveal 700ms ease-out both; }
+@keyframes mesh-reveal { from { opacity: 0; } to { opacity: 1; } }
+/* Keep Safari's native switch rendered: display:none suppresses its tactile feedback. */
+label[for^="web-haptics-"] { opacity: 0 !important; pointer-events: none !important; width: 1px; height: 1px; overflow: hidden; padding: 0 !important; }
+@media (prefers-reduced-motion: reduce) { .ambient-mesh { animation: none; } }
+
+/* Canonical TaskCard layout on home and the task screen. */
+.task-card{padding:16px 18px;gap:12px;min-height:88px}
+.task-card .task-title{display:block;font-size:17px;line-height:1.28;letter-spacing:-.15px}
+.task-card .task-status{font-size:14px;line-height:1.35;font-weight:500;color:var(--brand-ink);gap:5px;margin:0 0 5px;align-items:flex-start}
+.task-card .task-status svg{width:14px;height:14px;margin-top:2px}
+@media(max-width:359px){.task-card{padding:16px 14px;gap:10px}}

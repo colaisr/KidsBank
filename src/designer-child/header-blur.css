@@ -1,0 +1,13 @@
+.header-blur{position:absolute;inset:0 0 -36px;pointer-events:none;z-index:0;overflow:hidden;background:linear-gradient(to bottom,color-mix(in srgb,var(--surface-bg) 97%,transparent) 0%,color-mix(in srgb,var(--surface-bg) 86%,transparent) 48%,color-mix(in srgb,var(--surface-bg) 0%,transparent) 100%);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(to bottom,#000 0 55%,#000b 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0 55%,#000b 72%,transparent 100%)}
+.header-blur .progressive-blur{display:none}
+.feature-screen .feature-header{position:absolute;inset:0 0 auto;z-index:3;isolation:isolate;background:none}
+.feature-screen .feature-body{padding-top:calc(132px + env(safe-area-inset-top))}
+.design-screen .design-header{position:absolute;inset:0 0 auto;z-index:3;isolation:isolate}
+.design-screen .design-scroll{padding-top:calc(200px + env(safe-area-inset-top))}
+.payment-flow .payment-header{position:sticky;top:calc(-13px - env(safe-area-inset-top));z-index:5;isolation:isolate}
+.payment-flow--qr .payment-header{position:absolute;top:0;background:none}
+.phone-shell .payment-flow--qr .header-blur{background:linear-gradient(to bottom,#11141acc,#11141a66 60%,transparent);-webkit-mask-image:linear-gradient(to bottom,#000 0 58%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0 58%,transparent 100%)}
+.design-screen .design-header{padding-top:calc(68px + env(safe-area-inset-top));padding-bottom:12px}
+.feature-header>button,.feature-header>h1,.feature-header>span,.design-header>h1,.design-header>p{position:relative;z-index:1}
+.design-header>.design-back,.payment-header>*:not(.header-blur){z-index:1}
+.payment-flow:not(.payment-flow--qr) .header-blur{inset:calc(-13px - env(safe-area-inset-top)) -24px -40px}

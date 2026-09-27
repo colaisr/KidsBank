@@ -1,28 +1,46 @@
 import type { OnboardingAgeRangeId } from '../data/onboardingAgeRanges';
 
-export type ChildExperience = 'young' | 'teen';
+/** 6–8: current KidsBank young UI. 8–10: designer handoff child shell. 10–12+: teen UI. */
+export type ChildExperience = 'young' | 'youngDesigner' | 'teen';
 
 export const CHILD_EXPERIENCE_STORAGE_KEY = 'kidsbank.childExperience';
 export const CHILD_AGE_RANGE_STORAGE_KEY = 'kidsbank.childAgeRange';
 
-const VALID: ChildExperience[] = ['young', 'teen'];
+const VALID: ChildExperience[] = ['young', 'youngDesigner', 'teen'];
 
 export const DEFAULT_CHILD_EXPERIENCE: ChildExperience = 'teen';
 
 export function experienceFromAgeRange(ageRange: OnboardingAgeRangeId): ChildExperience {
-  if (ageRange === '6-8' || ageRange === '8-10') {
+  if (ageRange === '6-8') {
     return 'young';
+  }
+  if (ageRange === '8-10') {
+    return 'youngDesigner';
   }
   return 'teen';
 }
 
 export function defaultAgeRangeForExperience(experience: ChildExperience): OnboardingAgeRangeId {
-  return experience === 'young' ? '8-10' : '10-12';
+  if (experience === 'young') {
+    return '6-8';
+  }
+  if (experience === 'youngDesigner') {
+    return '8-10';
+  }
+  return '10-12';
+}
+
+export function isYoungChildExperience(experience: ChildExperience): boolean {
+  return experience === 'young' || experience === 'youngDesigner';
 }
 
 export function readStoredChildExperience(): ChildExperience {
   try {
     const stored = localStorage.getItem(CHILD_EXPERIENCE_STORAGE_KEY) as ChildExperience | null;
+    const ageRange = readStoredChildAgeRange();
+    if (stored === 'young' && ageRange === '8-10') {
+      return 'youngDesigner';
+    }
     if (stored && VALID.includes(stored)) {
       return stored;
     }

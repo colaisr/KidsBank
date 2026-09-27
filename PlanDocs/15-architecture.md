@@ -43,7 +43,8 @@ src/locales/en.json
 | Ключ | Что хранит | Сброс |
 |------|------------|--------|
 | `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role` | оформление показа | не сбрасывается кнопкой «Сбросить сценарий» |
-| `kidsbank.childExperience`, `kidsbank.childAgeRange` | young (6–10) vs teen (10–12+) UI ребёнка | не сбрасывается кнопкой «Сбросить сценарий» |
+| `kidsbank.childExperience`, `kidsbank.childAgeRange` | три child UI: `young` (6–8), `youngDesigner` (8–10), `teen` (10–12+) | не сбрасывается кнопкой «Сбросить сценарий» |
+| `evoca-demo-v2` (только слой 8–10) | локальное состояние handoff child; синхронизируется с `kidsbank.demo` через мост | отдельно от «Сбросить сценарий» (см. bridge) |
 | `kidsbank.cardSkin` | скин карты ребёнка (`ocean` … `racing`) | «Сбросить сценарий» → `ocean` |
 | `kidsbank.demo` | живое демо v5: карта, копилка (`shareSlug`), ★, `taskStats`, задания (`templateId`, `dueTime`, `customTitle`), цели (`selected`, `redeemed`), лимит карты, кошелёк родителя, `pet`, `transactions[]` (в т.ч. `cardToPiggy`, `piggyToCard`, `taskReward`) | «Сбросить сценарий» в настройках или «Оформлении» |
 
@@ -67,8 +68,9 @@ src/
                   TransactionRow, PiggyDepositRow, PiggyTransferModal,
                   TransferModal, LimitModal,
                   DemoSettingsPanel, DemoSettingsLink, StarsWalletCard
-  pages/          ChildShell (layout + Outlet), ChildHomePage, TeenChildHomePage,
-                  child-young/YoungChildHomePage, YoungTotemPlaceholderPage,
+  designer-child/ vendor handoff Evoca Kids (8–10): HomeApp, DemoState, assets; lazy chunk + `.kb-designer-child` scope CSS
+  pages/          ChildShell, ChildHomePage, DesignerChildExperience, TeenChildHomePage,
+                  child-young/YoungChildHomePage, AppearanceRedirect,
                   ChildTasksPage, ChildGoalsPage, ChildPiggyBankPage,
                   ChildCardDesignPage,
                   ChildTransactionsPage,
@@ -79,7 +81,8 @@ src/
   components/pet/ PetLevelBadge, PetSpeechBubble, PetCharacter, PetNeedBars,
                   PetActionButtons
   context/        PreferencesContext (bank, locale, role, cardSkin, childExperience + persistence),
-                  childExperience.ts (age range → young|teen),
+                  childExperience.ts (age → young|youngDesigner|teen),
+                  designer-child/kidsbankDemoBridge.ts (demo sync + `kidsbank-demo-updated`),
                   DemoStateContext (сценарий демо + reset),
                   demoActions.ts (чистые мутации состояния)
   data/           demoBaseline v5, goalCatalog.ts, taskTemplates.ts, cardSkins.ts, starEconomy.ts,
@@ -91,7 +94,7 @@ src/
                   leoChatApi.ts (young totem → `/api/kidsbank/leo/chat`)
 ```
 
-Роуты ребёнка: `/child` (teen или young home по `childExperience`), `/child/young/totem`, `/child/tasks`, `/child/goals`, `/child/piggy`, `/child/card-design`, `/child/transactions`, `/child/pet`, `/child/hub`, `/child/profile`, `/child/onboarding/role`, `/child/onboarding/age`.
+Роуты ребёнка: `/child` (teen | young | designer handoff по `childExperience`), `/child/profile` (единые настройки), `/child/young/*` (только `young`), `/child/onboarding/*`, остальные teen/young маршруты как в `01`. `/appearance` → `/child/profile`.
 
 Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.childExperience`, `kidsbank.childAgeRange`, `kidsbank.demo` (v5, включает `pet` и `goals[].selected`).
 

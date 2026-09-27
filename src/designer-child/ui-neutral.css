@@ -1,0 +1,156 @@
+/* Bank accents and neutral UI surfaces are deliberately independent. */
+:root {
+  --surface-bg: #f2f2f2;
+  --surface: #fff;
+  --surface-muted: #ededee;
+  --border-neutral: #d6d6d9;
+  --border-secondary: rgb(41 41 45 / 7%);
+  --text-primary: #29292d;
+  --text-secondary: #737378;
+  --ink: var(--text-primary);
+  --ink-secondary: var(--text-secondary);
+  --ui-caption-color: var(--text-secondary);
+  --ui-divider: #e7e7e9;
+  --control-secondary: #fff;
+  color: var(--text-primary);
+}
+html, body { background: #ebebed; }
+.parent-shell { --parent-bg: var(--surface-bg); --parent-ink: var(--text-primary); --parent-muted: var(--text-secondary); }
+.feature-screen, .parent-detail, .design-backdrop,
+.child-flow-backdrop { background: var(--surface-bg); }
+.phone-shell:has(.feature-screen), .phone-shell:has(.design-screen),
+.parent-shell:has(.parent-detail) { background: var(--surface-bg); }
+.parent-home { background: var(--surface-bg); }
+.parent-home-content { background: var(--surface); }
+.parent-sheet, .scanner-sheet { background: var(--surface-bg); }
+.parent-sheet-backdrop { background: rgb(20 20 24 / 34%); }
+.scanner-sheet-handle { background: #d6d6d9; }
+.phone-number { background: #fff; }
+:root .recipient-avatar:has(img) { background: transparent; }
+:root .transfer-recipients .recipient-avatar:has(img),
+:root .limit-recipient-avatar:has(img) { background: var(--surface-muted); }
+.parent-panel, .task-empty { background: #fff; box-shadow: none; }
+.task-empty b { color: var(--text-primary); }
+.task-empty p, .task-empty>svg { color: var(--text-secondary); }
+.task-stat, .task-stat-done, .empty-task-state { background: #fff; color: var(--text-primary); }
+.feature-screen--tasks .history-task .history-reward,
+.feature-level { background: var(--surface-muted); color: var(--text-primary); }
+.history-date, .star-history-copy small, .task-card .task-status,
+.feature-section-title, .section-heading, .feature-body .reward-goal-count,
+.star-history-amount { color: var(--text-secondary); }
+.task-title, .nav-item, .bottom-nav .nav-item { color: var(--text-primary); }
+.task-checkbox { border-color: #b4b4ba; }
+.star-source { background: var(--surface-muted); color: var(--text-secondary); }
+.star-source-task { background: var(--brand-mid); color: #fff; }
+.parent-goal-progress, .parent-expense-bar.is-empty { background: var(--surface-muted); }
+.parent-switch:not(.is-on) { background: #ceced2; }
+.parent-choice, .setting-row.compact, .history-row { border-color: var(--ui-divider); }
+.parent-service:active { background: var(--surface-muted); }
+.parent-home .parent-service-icon, .action-tile-icon { color: #626268; }
+.parent-home .parent-account-balance>span, .parent-home .parent-pending-copy small,
+.parent-choice .parent-choice-copy small { color: var(--text-secondary); }
+.parent-segmented { background: var(--surface-muted); }
+.parent-segmented button { color: var(--text-secondary); }
+.parent-segmented button.is-active { color: var(--text-primary); box-shadow: 0 2px 6px #0000000a; }
+.parent-child-settings { background: color-mix(in srgb,var(--brand-deep) 62%,transparent); border: 1px solid rgb(255 255 255 / 15%); color: #fff; box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%); backdrop-filter: blur(12px); }
+.bottom-chrome::before { background: linear-gradient(to bottom, #f5f5f500, #f5f5f5b3 30%, #f5f5f5e8); }
+
+/* Secondary actions: one surface, stroke and silhouette in every flow. */
+:root :is(.feature-secondary,.parent-secondary):not(.ui-cancel),
+:root :is(.parent-add-recipient,.task-ideas button,.goal-icon-options button,
+  .cash-limit button,.map-zoom button,.leo-suggestions button,
+  .scanner-guidance button,.camera-demo,.approve-task),
+:root .feature-body .history-more,
+:root :is(.amount-options,.parent-presets,.feature-chips) button {
+  --control-border-color: var(--border-secondary);
+  background: #fff;
+  border: 1.5px solid var(--control-border-color);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+:root :is(.feature-secondary,.parent-secondary):not(.ui-cancel),
+:root .parent-add-recipient { border-radius: var(--control-radius); }
+:root .feature-body .history-more { border-radius: var(--control-radius); }
+:root :is(.feature-secondary,.parent-secondary):not(.ui-cancel) {
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 4%));
+}
+:root :is(.amount-options,.parent-presets,.feature-chips) button.is-active {
+  background: var(--brand); color: #fff; border-color: var(--brand);
+}
+:root :is(.task-ideas,.goal-icon-options) button[aria-pressed="true"] {
+  --control-border-color: var(--brand);
+  background: #fff; color: var(--brand);
+}
+@media (hover:hover) {
+  :root :is(.feature-secondary,.parent-secondary):not(.ui-cancel):enabled:hover,
+  :root :is(.action-tile,.task-ideas button,.goal-icon-options button,.leo-suggestions button):not([aria-pressed="true"]):enabled:hover {
+    --control-border-color: rgb(41 41 45 / 14%);
+    --control-surface: #fafafa;
+    background: #fafafa;
+  }
+}
+:root #root [data-smooth-outline="true"] {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+  border-color: transparent;
+}
+:root [data-smooth-outline="true"]::before {
+  content: "";
+  position: absolute;
+  inset: var(--smooth-border-inset, 0px);
+  z-index: -1;
+  pointer-events: none;
+  background: var(--control-surface, #fff);
+  clip-path: var(--smooth-fill-path);
+}
+/* A native rectangle border gets clipped by a squircle. Draw the same curve. */
+:root [data-smooth-outline="true"]::after {
+  content: "";
+  position: absolute;
+  inset: var(--smooth-border-inset, 0px);
+  pointer-events: none;
+  background: var(--control-border-color, var(--border-neutral));
+  -webkit-mask: var(--smooth-border-mask) center / 100% 100% no-repeat;
+  mask: var(--smooth-border-mask) center / 100% 100% no-repeat;
+}
+:root [data-smooth-outline="true"]:focus-visible {
+  --control-border-color: var(--brand);
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+/* Large icon tiles keep a clean white silhouette without an outline. */
+:root :is(.action-tile,.feature-two>button,.feature-pet-actions button) { border: 0; background: #fff; }
+:root :is(.task-form,.feature-form) input:not(.amount-panel input),
+:root .task-form select { border-color: var(--border-neutral); }
+:root :is(.task-form,.feature-form) input:focus-visible,
+:root .task-form select:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+:root button.ui-cancel { color: var(--text-secondary); }
+
+/* Back controls retain their filled, borderless navigation treatment. */
+.phone-shell :is(.feature-header>button,.payment-back,.design-back,.parent-back) {
+  background: #e2e2e4; color: var(--text-primary); border: 0; box-shadow: none;
+}
+.phone-shell:has(.feature-screen--pet)>.ambient { visibility: visible; }
+.feature-screen--pet, .phone-shell[data-leo-viewport="pinned"] .feature-screen--pet { background: transparent; }
+.feature-screen--pet .feature-header h1, .leo-stat,
+.phone-shell[data-leo-viewport="pinned"] .feature-header h1 { color: #fff; }
+.leo-level { background: #ffffff26; color: #fff; }
+.phone-shell .feature-screen--pet .feature-header>button,
+.phone-shell[data-leo-viewport="pinned"] .feature-header>button { background: #ffffff24; color: #fff; }
+.feature-screen--pet .header-blur {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--brand) 50%, transparent), transparent);
+}
+.phone-shell[data-leo-viewport="pinned"] .header-blur { background: var(--brand); }
+.phone-shell .payment-flow--qr .payment-back {
+  background: #ffffff26; color: #fff; backdrop-filter: blur(16px);
+}
+.leo-chat { background: #fff; }
+.leo-chat-header b { color: var(--text-primary); }
+.leo-bubble.leo { background: var(--surface-muted); color: var(--text-primary); }
+.leo-chat-grab>span { background: #d6d6d9; }
+.leo-chat-header span, .leo-composer textarea::placeholder { color: var(--text-secondary); }
+.leo-composer { border-color: var(--ui-divider); }
+.leo-composer textarea { color: var(--text-primary); }
+.leo-voice-status { color: var(--text-secondary); }
+html[data-leo-keyboard="true"], html[data-leo-keyboard="true"] body { background: var(--brand); }

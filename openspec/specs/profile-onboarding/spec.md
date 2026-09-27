@@ -91,12 +91,17 @@ The onboarding role and age screens SHALL be full-step views without the child b
 
 ### Requirement: Age choice drives child experience
 
-The system SHALL map the selected onboarding age range to `childExperience` when the user taps Continue: `6-8` and `8-10` → `young`; `10-12`, `12-14`, and `14-17` → `teen`. The mapping SHALL be persisted to `kidsbank.childExperience` and the selected range to `kidsbank.childAgeRange`. Demo balances and tasks in `kidsbank.demo` SHALL remain unchanged by age selection alone.
+The system SHALL map the selected onboarding age range to `childExperience` when the user taps Continue: `6-8` → `young`; `8-10` → `youngDesigner`; `10-12`, `12-14`, and `14-17` → `teen`. The mapping SHALL be persisted to `kidsbank.childExperience` and the selected range to `kidsbank.childAgeRange`. Demo balances and tasks in `kidsbank.demo` SHALL remain unchanged by age selection alone.
 
 #### Scenario: Continue after young age selection
 
+- **WHEN** the user selects `6-8` and taps Continue
+- **THEN** the young child home (6–8 layout) is shown and `kidsbank.childExperience` is `young`
+
+#### Scenario: Continue after designer age selection
+
 - **WHEN** the user selects `8-10` and taps Continue
-- **THEN** the young child home is shown and `kidsbank.childExperience` is `young`
+- **THEN** the designer handoff child UI is shown and `kidsbank.childExperience` is `youngDesigner`
 
 #### Scenario: Continue after teen age selection
 

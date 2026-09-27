@@ -19,6 +19,13 @@
 4. Change: `openspec/changes/<name>/{proposal,design,tasks}.md` (или архив + `openspec/specs/`)
 5. Соседний код того же экрана/темы
 
+## Модуль `designer-child` (8–10)
+
+- Vendor-код handoff в `src/designer-child/`, статика в `public/assets/`.
+- Точка входа: `DesignerChildExperience` (lazy), обёртка `HomeApp`; CSS scoped `.kb-designer-child`.
+- Демо: `kidsbankDemoBridge.ts` + событие `kidsbank-demo-updated` при записи `kidsbank.demo`.
+- Не тянуть глобальные `button` reset handoff на KidsBank chrome — `kb-role-toggle`.
+
 ## Правила
 
 - Спека первична: конфликт спеки и кода → СТОП, правка спеки, потом код

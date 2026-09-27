@@ -3,7 +3,7 @@ import { PhoneFrame } from './components/PhoneFrame';
 import { PreferencesProvider } from './context/PreferencesContext';
 import { DemoStateProvider } from './context/DemoStateContext';
 import { readInitialPreferences } from './context/preferences';
-import { AppearancePage } from './pages/AppearancePage';
+import { AppearanceRedirect } from './pages/AppearanceRedirect';
 import { ChildGoalsPage } from './pages/ChildGoalsPage';
 import { ChildHomePage } from './pages/ChildHomePage';
 import { ChildHubPage } from './pages/ChildHubPage';
@@ -74,7 +74,7 @@ export default function App() {
               <Route path="goals" element={<ParentGoalsPage />} />
               <Route path="*" element={<Navigate to="/parent" replace />} />
             </Route>
-            <Route path="/appearance" element={<AppearancePage />} />
+            <Route path="/appearance" element={<AppearanceRedirect />} />
             <Route path="*" element={<RoleRedirect />} />
           </Routes>
         </div>

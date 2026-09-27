@@ -205,3 +205,11 @@ html[data-theme='evoca'] .kb-card-mark::after {
   font-family: var(--font-sans);
   z-index: 0;
 }
+
+/* KidsBank chrome: designer handoff resets global `button` — keep role toggle readable */
+.kb-role-toggle .kb-role-toggle__btn {
+  border: 0;
+  text-align: center;
+  font: inherit;
+  line-height: inherit;
+}

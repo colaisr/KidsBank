@@ -11,13 +11,13 @@ When `childExperience` is `young`, the child home at `/child` SHALL show: a grad
 
 #### Scenario: Young home after onboarding
 
-- **WHEN** the user completes onboarding with age `6-8` or `8-10` and taps Continue
+- **WHEN** the user completes onboarding with age `6-8` and taps Continue
 - **THEN** `/child` shows the young home layout and the child tab bar is hidden
 
 #### Scenario: Quick actions are visual only
 
-- **WHEN** the user taps a quick-action tile on the young home
-- **THEN** no navigation or demo mutation occurs
+- **WHEN** the user taps a quick-action tile on the young home for age `6-8`
+- **THEN** navigation opens the corresponding young demo route (`/child/young/phone-topup`, `/child/young/qr-pay`, or `/child/young/transfer`)
 
 ### Requirement: Lion totem opens placeholder hub route
 
