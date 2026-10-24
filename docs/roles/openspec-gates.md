@@ -50,10 +50,19 @@ Valid skip: `docs-only` (все файлы из allowlist), `meloch` (1–2 фа
 
 ## После `openspec init` / `openspec update`
 
-Генератор перезаписывает сгенерированные файлы и стирает наши вставки. Сразу после него через `git diff` проверь и восстанови:
+Генератор перезаписывает сгенерированные файлы, стирает наши вставки и удаляет проектные команды, которых нет в профиле. Сразу после него восстанови всё одной командой и просмотри `git diff`:
 
-1. шаг **4b «KidsBank checkpoint»** в `.cursor/commands/opsx-archive.md`, `.cursor/skills/openspec-archive-change/SKILL.md`, `.claude/commands/opsx/archive.md`, `.claude/skills/openspec-archive-change/SKILL.md`;
-2. блок «tasks.md must end with» в `.cursor/skills/openspec-propose/SKILL.md` и `.claude/skills/openspec-propose/SKILL.md`.
+```bash
+npm run openspec:restore
+```
+
+Скрипт `scripts/openspec-restore.mjs` идемпотентен: повторный запуск ничего не меняет. Эталоны лежат в `scripts/openspec-inserts/` (вставки `*.md` и копии кастомных файлов в `files/`) — правки вставок делай там, потом запускай restore. Если OpenSpec сдвинул разметку и якорь не найден, скрипт падает с exit 1 и называет файл: поправь якорь в скрипте, смысл вставки не меняй. `npm run openspec:restore -- --check` ничего не пишет и падает, если чего-то нет; он же входит в `npm run verify:change-gates:selftest`.
+
+Справка — что восстанавливает скрипт:
+
+1. строку «KidsBank — гейты и Archive feedback loop» сразу после вводной строки и шаг **4b «KidsBank checkpoint»** перед «5. Perform the archive» в `.cursor/commands/opsx-archive.md`, `.cursor/skills/openspec-archive-change/SKILL.md`, `.claude/commands/opsx/archive.md`, `.claude/skills/openspec-archive-change/SKILL.md` (в скиллах строка идёт в тело, не во frontmatter `description`: там она ломает YAML);
+2. блок «tasks.md must end with» перед **Guardrails** в `.cursor/skills/openspec-propose/SKILL.md` и `.claude/skills/openspec-propose/SKILL.md`;
+3. кастомные файлы `.cursor/commands/opsx-update.md` и `.cursor/skills/openspec-update-change/SKILL.md`.
 
 Замок archive от этого не зависит: его держит хук. Профиль OpenSpec глобальный (`~/.config/openspec/config.json`): в нём должен быть workflow `verify`.
 

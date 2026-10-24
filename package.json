@@ -11,12 +11,13 @@
     "deploy:preview:local": "bash scripts/deploy-preview.sh",
     "openspec": "openspec",
     "openspec:doctor": "openspec doctor",
+    "openspec:restore": "node scripts/openspec-restore.mjs",
     "verify:change-gates": "tsx scripts/verify-change-gates.ts",
-    "verify:change-gates:selftest": "tsx scripts/verify-change-gates-selftest.ts",
+    "verify:change-gates:selftest": "tsx scripts/verify-change-gates-selftest.ts && node scripts/openspec-restore.mjs --check",
     "verify:deploy-gates": "tsx scripts/verify-deploy-gates.ts"
   },
   "devDependencies": {
-    "@fission-ai/openspec": "^1.5.0",
+    "@fission-ai/openspec": "^1.15.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/canvas-confetti": "^1.9.0",
     "@types/leaflet": "^1.9.22",

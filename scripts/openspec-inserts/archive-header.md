@@ -1,0 +1,1 @@
+**KidsBank — гейты и Archive feedback loop (жёсткий гейт, шаг 4b):** перед archive выполни `npm run verify:change-gates -- --change "<name>" --archive` и `docs/ARCHIVE-FEEDBACK-LOOP.md` (PlanDocs, `docs/roles/*`, секция в `tasks.md`). Владельца отдельно не спрашивать — делать по чеклисту. Синк `openspec/specs/` не заменяет PlanDocs и роли.
