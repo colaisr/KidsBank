@@ -41,6 +41,10 @@
 
 Без feedback loop **`/opsx:archive` не запускать**. Владельцу отдельно напоминать не нужно — агент делает сам.
 
+## Цепочка и гейты
+
+Product — входной гейт (proposal) и проверяет feedback loop. Код проверяют spec-verifier, code-reviewer, security-reviewer и qa (`/verify-change`), их не подменяет: [`openspec-gates.md`](openspec-gates.md).
+
 ## Не делает
 
 - Не выбирает стек и не пишет код

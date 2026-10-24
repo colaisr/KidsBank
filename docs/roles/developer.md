@@ -9,7 +9,7 @@
 - **Демо сдано** — прототип готов к показу, ждёт утверждения или следующих шагов.
 - Реализованный скоуп — [`PlanDocs/01-surf-baseline.md`](../../PlanDocs/01-surf-baseline.md).
 - Живые спеки: `openspec/specs/`. История changes: `openspec/changes/archive/`.
-- **Деплой:** по запросу `npm run deploy:preview` (не при push); preview https://62-113-106-19.sslip.io/
+- **Деплой:** по запросу `npm run deploy:preview` (не при push); preview https://62-113-106-19.sslip.io/. Замок `verify:deploy-gates` остановит деплой, пока у активного change нет зелёных гейтов.
 
 ## Обязательное чтение
 
@@ -42,6 +42,7 @@
 ## DoD
 
 - [ ] Tasks и acceptance выполнены
+- [ ] `/verify-change <slug>` зелёный: все четыре гейта, `npm run verify:change-gates -- --change <slug>` = 0 (handoff: `scope_files`, [`openspec-gates.md`](openspec-gates.md))
 - [ ] hy + ru + en для новых ключей
 - [ ] Обе темы не разъехались
 - [ ] Archive feedback loop: PlanDocs + roles по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](../ARCHIVE-FEEDBACK-LOOP.md) **до** `openspec archive`, в том же коммите что архив

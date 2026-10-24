@@ -36,9 +36,12 @@ npx openspec list
 npm run dev                  # локально
 npm run build                # прод-сборка
 # деплой preview вручную: npm run deploy:preview (см. 16); push в main не деплоит
+npm run verify:change-gates -- --change <slug>    # четыре гейта change (spec-verify, code-reviewer, security-reviewer, qa)
+npm run verify:change-gates:selftest              # самотест гейтов
+npm run verify:deploy-gates                       # замок деплоя: активные changes без зелёных гейтов не выкатываем
 ```
 
-Роли Cursor: `/product` `/designer` `/developer` `/devops` и `/opsx:*`.
+Роли Cursor: `/product` `/designer` `/developer` `/devops` и `/opsx:*`; гейты: `/spec-verifier` `/code-reviewer` `/security-reviewer` `/qa` и оркестратор `/verify-change`. Claude Code: те же роли субагентами (`.claude/agents/`), `/verify-change <slug>`, `CLAUDE.md` подключает этот файл.
 
 ## 4. Карта знаний
 
@@ -55,8 +58,10 @@ npm run build                # прод-сборка
 | Тема AMIO | [`PlanDocs/17-theme-bank-1.md`](PlanDocs/17-theme-bank-1.md) |
 | Тема Evoca | [`PlanDocs/17-theme-bank-2.md`](PlanDocs/17-theme-bank-2.md) |
 | Что нельзя ломать | [`docs/INVARIANTS.md`](docs/INVARIANTS.md) |
+| Цепочка гейтов, замки, `/verify-change` | [`docs/roles/openspec-gates.md`](docs/roles/openspec-gates.md) |
+| Правила code review и security review | [`docs/REVIEW.md`](docs/REVIEW.md), [`docs/SECURITY-REVIEW.md`](docs/SECURITY-REVIEW.md) |
 | Открытые вопросы | [`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) |
-| Роли | [`docs/roles/`](docs/roles/) |
+| Роли (индекс) | [`docs/roles/README.md`](docs/roles/README.md) |
 | Archive feedback loop (чеклист) | [`docs/ARCHIVE-FEEDBACK-LOOP.md`](docs/ARCHIVE-FEEDBACK-LOOP.md) |
 | Живые спеки / changes | `openspec/` |
 
@@ -66,9 +71,10 @@ npm run build                # прод-сборка
 2. **designer** — UI по `17` + теме банка; три языка; не впритык под русский.
 3. `/opsx:propose` → proposal + design + tasks (в tasks — пункт обновить затронутые PlanDocs).
 4. Утверждение владельцем.
-5. `/opsx:apply` (**developer**) строго по tasks.
-6. **devops** — preview-хост и CI уже есть (`16`); менять инфраструктуру только по задаче.
-7. **Archive feedback loop (обязателен, каждый change):** перед `/opsx:archive` и в том же коммите, что архив — выровнять документацию по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](docs/ARCHIVE-FEEDBACK-LOOP.md): PlanDocs (`01`, `15`, `17`, …), при необходимости `docs/roles/` (designer, developer, product). В `tasks.md` change — секция «Archive feedback loop» с чекбоксами. Затем `openspec archive` (delta specs). Архив **без** feedback loop — нарушение процесса. Агент **не ждёт** отдельной просьбы владельца «обнови доки».
+5. `/opsx:apply` (**developer**) строго по tasks, в основном чате.
+6. **`/verify-change <slug>`** — шаг verify: spec-verifier (код против спеки) → code-reviewer ∥ security-reviewer → qa (сборка и сценарии: темы × языки × мобильный). Каждая стадия отдельным субагентом со свежим контекстом и входом только slug; четыре файла гейтов в `openspec/changes/<slug>/gates/`. Verify только находит и сообщает: чиним в основном чате и запускаем заново, пока всё не зелёное. Подробности и замки — [`docs/roles/openspec-gates.md`](docs/roles/openspec-gates.md).
+6a. **devops** — preview-хост (`16`); менять инфраструктуру только по задаче. Деплой ручной, по запросу владельца; замок деплоя требует зелёных гейтов активного change.
+7. **Archive feedback loop (обязателен, каждый change):** перед `/opsx:archive` и в том же коммите, что архив — выровнять документацию по [`docs/ARCHIVE-FEEDBACK-LOOP.md`](docs/ARCHIVE-FEEDBACK-LOOP.md): PlanDocs (`01`, `15`, `17`, …), при необходимости `docs/roles/` (designer, developer, product). В `tasks.md` change — секция «Archive feedback loop» с чекбоксами. Затем `openspec archive` (delta specs): хук-замок пропустит его только при четырёх зелёных гейтах и закрытых задачах. Архив **без** feedback loop или без гейтов — нарушение процесса. Агент **не ждёт** отдельной просьбы владельца «обнови доки».
 
 Мелочь (опечатка, однострочный баг без продуктовой двусмысленности) — без полного change, с acceptance и инвариантами.
 

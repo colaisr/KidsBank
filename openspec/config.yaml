@@ -9,10 +9,10 @@ context: |
   Three locales from day one: hy, ru, en — UI and demo fixture copy both live in i18n catalogs and switch together.
   Appearance screen ("Оформление") switches bank + language and is always reachable. Role (child/parent) is a separate control.
   Stack: Vite + React + TypeScript + Tailwind. Demo entities by id in src/data/, strings in src/locales/.
-  localStorage + ?bank=&lang=. Preview: https://62-113-106-19.sslip.io/ (push main → GitHub Actions deploy). Entry: AGENTS.md. Work plan: PlanDocs/19 (phase 4 next).
+  localStorage + ?bank=&lang=. Preview: https://62-113-106-19.sslip.io/ (manual deploy: npm run deploy:preview; push to main does not deploy). Entry: AGENTS.md. Work plan: PlanDocs/19 (phase 4 next).
   Design: PlanDocs/17 + 17-theme-bank-1 (AMIO) + 17-theme-bank-2 (Evoca). Architecture: PlanDocs/15.
-  Invariants: docs/INVARIANTS.md. Roles: docs/roles/{product,designer,developer,devops}.md.
-  No QA/SEO/marketing agents. Never commit secrets.
+  Invariants: docs/INVARIANTS.md. Roles: docs/roles/{product,designer,developer,devops,spec-verifier,code-reviewer,security-reviewer,qa}.md; chain and locks: docs/roles/openspec-gates.md.
+  Gate roles (verify step): spec-verifier, code-reviewer, security-reviewer, qa. No SEO/marketing/content-manager agents. Never commit secrets.
 
 rules:
   proposal:
@@ -30,3 +30,6 @@ rules:
     - "Last group is always validation: both themes, three languages, mobile viewport, against acceptance."
     - "Include an explicit task to update PlanDocs so they describe the new behavior (01 scenarios, 02 competitors/references, 17/themes, 19 phase journal — whichever apply). Archive is forbidden until that task is done."
     - "Do not add a backend, database, or auth unless the change explicitly says so."
+    - "End tasks.md with a group « Гейты и Archive feedback loop » per docs/roles/openspec-gates.md: a verify task (/verify-change <slug>, npm run verify:change-gates exit 0), PlanDocs, docs/roles. Do NOT add a task for the archive itself: the archive lock requires every task closed."
+    - "Before archive: npm run verify:change-gates -- --change <slug> --archive MUST exit 0 (all four gates: spec-verify, code-reviewer, security-reviewer, qa; pass or valid skip; no unchecked tasks). The OpenSpec CLI does not call agents: the owner runs /verify-change. A hook (scripts/hooks/guard-archive.mjs) blocks the archive move when this fails."
+    - "Manual deploy (npm run deploy:preview) is blocked by scripts/verify-deploy-gates.ts while any active change lacks green gates."

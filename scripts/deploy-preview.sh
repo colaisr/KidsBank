@@ -11,6 +11,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
+# Замок на деплой (OpenSpec): активный change без зелёных гейтов не выкатываем.
+# Подробности: scripts/verify-deploy-gates.ts, docs/roles/openspec-gates.md
+npx --no-install tsx scripts/verify-deploy-gates.ts
+
 HOST="${KIDSBANK_DEPLOY_HOST:-62.113.106.19}"
 USER="${KIDSBANK_DEPLOY_USER:-root}"
 PATH_ON_SERVER="${KIDSBANK_DEPLOY_PATH:-/var/www/kidsbank}"

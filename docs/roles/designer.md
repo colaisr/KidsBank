@@ -29,6 +29,10 @@ Mobile-first, плавность, красота. Один UI, две банко
 - [ ] Этот файл (`designer.md`) — если появился новый гейт или паттерн (как Evoca `accent-kids-ink`)
 - [ ] Чеклист: [`ARCHIVE-FEEDBACK-LOOP.md`](../ARCHIVE-FEEDBACK-LOOP.md)
 
+## Цепочка и гейты
+
+Дизайн-ревью экрана остаётся до `/verify-change` и по `PlanDocs/17*`. Шаг verify красоту не оценивает, но code-reviewer ловит захардкоженные цвета банка, форк вёрстки под тему и строки без i18n (`docs/REVIEW.md`); qa проходит обе темы и три языка на мобильном viewport. [`openspec-gates.md`](openspec-gates.md)
+
 ## Не делает
 
 - Не меняет продуктовую ценность (это product)

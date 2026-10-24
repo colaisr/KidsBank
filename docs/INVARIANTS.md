@@ -37,3 +37,9 @@
 - Экраны показа с продуктовой механикой **должны** иметь muted ℹ️ → bottom sheet (ценность ребёнку / банку / сценарий), если не обоснован skip в change.
 - Copy — `ui.presenter.*` в `presenter.{hy,ru,en}.json`, не хардкод.
 - Пропуск уместен для: `/child/profile`, layout-shell'ов, модалок. Новая фича без sheet — только с явным обоснованием в proposal.
+
+## 7. Процесс и гейты
+
+- Перед `/opsx:archive` обязателен шаг verify: `npm run verify:change-gates -- --change <slug> --archive` = 0 (четыре гейта и закрытые задачи). Не обходить правкой гейт-файлов вручную; `owner-waiver` ставит только владелец.
+- Деплой preview ручной; пока есть активный change без зелёных гейтов, `verify:deploy-gates` его останавливает. Замок не ослаблять.
+- После `openspec init` / `openspec update` восстанавливать наши вставки (шаг 4b в archive-командах и скиллах, хвост `tasks.md` в propose): `docs/roles/openspec-gates.md`.

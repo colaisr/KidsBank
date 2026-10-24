@@ -14,7 +14,7 @@
 | TLS | Let's Encrypt (certbot, автообновление) |
 | Деплой | `npm run deploy:preview` / `scripts/deploy-preview.sh` (локальный build → rsync) |
 | SSH (локально) | `ssh -i ~/.ssh/kidsbank_vps root@62.113.106.19` |
-| GitHub Actions | **нет** автодеплоя при push (только git remote) |
+| GitHub Actions | **нет** автодеплоя при push (только git remote); замок деплоя стоит в скриптах деплоя |
 
 Домена нет — hostname через [sslip.io](https://sslip.io). Собственный домен позже = новый certbot `-d`.
 
@@ -37,6 +37,10 @@
 - [x] `?bank=` и `?lang=` работают
 - [x] Ручной деплой документирован (`16`, `scripts/deploy-preview.sh`)
 - [x] В diff нет секретов
+
+## Замок деплоя
+
+`scripts/verify-deploy-gates.ts` вызывается в начале `scripts/remote-deploy.sh` и `scripts/deploy-preview.sh`: пока есть активный change без четырёх зелёных гейтов, деплой не идёт. Скрипты деплоя и `deploy/**` при изменении получают security-ревью глубины deep ([`openspec-gates.md`](openspec-gates.md)).
 
 ## Не делает
 

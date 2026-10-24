@@ -2,7 +2,7 @@
 
 Каждый `/opsx:archive` **заканчивается** выровненной документацией. Синк `openspec/specs/` **не заменяет** PlanDocs и роли агентов.
 
-**Порядок:** реализация → этот чеклист → `openspec archive` → коммит (доки + архив + specs) → push по запросу владельца.
+**Порядок:** реализация → `/verify-change <slug>` (четыре гейта) → этот чеклист → `openspec archive` (замок `--archive`) → коммит (доки + архив + specs) → push и деплой по запросу владельца.
 
 Агент **не спрашивает** владельца «обновить ли документацию» — делает по чеклисту сам, если change затрагивает соответствующий слой.
 
@@ -36,6 +36,7 @@
 | **designer** | [`designer.md`](roles/designer.md) | новый layout (young/teen), токены, IA, запреты цветов |
 | **developer** | [`developer.md`](roles/developer.md) | новые модули, маршруты, ключи storage, DoD |
 | **devops** | [`devops.md`](roles/devops.md) | CI, деплой, env |
+| **spec-verifier, code-reviewer, security-reviewer, qa** | [`openspec-gates.md`](roles/openspec-gates.md) и файлы ролей | новые правила ревью (`REVIEW.md`, `SECURITY-REVIEW.md`), новый триггер deep, смена гейтов или замков |
 
 Также при необходимости:
 
