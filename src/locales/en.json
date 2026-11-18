@@ -676,6 +676,7 @@
         "leoName": "Leo",
         "online": "online",
         "thinking": "Leo is thinking…",
+        "chatError": "Could not get a reply. Try again.",
         "messagePlaceholder": "Ask Leo…",
         "messageLabel": "Message to Leo",
         "send": "Send message",

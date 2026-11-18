@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 # Подробности: scripts/verify-deploy-gates.ts, docs/roles/openspec-gates.md
 npx --no-install tsx scripts/verify-deploy-gates.ts
 
-HOST="${KIDSBANK_DEPLOY_HOST:-62.113.106.19}"
+HOST="${KIDSBANK_DEPLOY_HOST:-82.202.128.45}"
 USER="${KIDSBANK_DEPLOY_USER:-root}"
 SSH_KEY="${KIDSBANK_SSH_KEY:-$HOME/.ssh/kidsbank_vps}"
 SCRIPT="${KIDSBANK_SERVER_UPDATE:-/opt/kidsbank/src/deploy/preview/server-update.sh}"

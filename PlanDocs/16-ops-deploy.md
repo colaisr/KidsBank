@@ -10,13 +10,13 @@ HTTPS URL, который открывается на телефоне. Стат
 
 | | |
 |---|---|
-| **HTTPS (основной)** | https://62-113-106-19.sslip.io/ |
-| **IP** | `62.113.106.19` → редирект на HTTPS URL выше |
+| **HTTPS (основной)** | https://82-202-128-45.sslip.io/ |
+| **IP** | `82.202.128.45` → редирект на HTTPS URL выше |
 | **Путь на сервере** | `/var/www/kidsbank/` |
 | **TLS** | Let's Encrypt (certbot, автообновление) |
-| **SSH** | `ssh -i ~/.ssh/kidsbank_vps root@62.113.106.19` |
+| **SSH** | `ssh -i ~/.ssh/kidsbank_vps root@82.202.128.45` |
 
-Домена нет — используется [sslip.io](https://sslip.io) (`62-113-106-19.sslip.io` резолвится в IP VPS). Сертификат валидный, без предупреждения браузера.
+Домена нет — используется [sslip.io](https://sslip.io) (`82-202-128-45.sslip.io` резолвится в IP VPS). Сертификат валидный, без предупреждения браузера.
 
 ### Деплой
 
@@ -39,7 +39,7 @@ npm run deploy:preview
 
 ```bash
 npm run build
-rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@62.113.106.19:/var/www/kidsbank/
+rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@82.202.128.45:/var/www/kidsbank/
 ```
 
 ## Чеклист
@@ -61,7 +61,7 @@ rsync -avz --delete -e "ssh -i ~/.ssh/kidsbank_vps" dist/ root@62.113.106.19:/va
 
 ## Co-hosted: AI-tutor (2026-09-09)
 
-На **том же VPS** (`62.113.106.19`) планируется AI-tutor:
+На **том же VPS** (`82.202.128.45`) co-hosted AI-tutor:
 
 | Путь | Проект |
 | --- | --- |

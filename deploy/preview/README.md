@@ -7,8 +7,8 @@ GitHub — только хранилище кода. Деплой по запр�
 Один раз на сервере (после добавления deploy key в GitHub):
 
 ```bash
-scp -i ~/.ssh/kidsbank_vps deploy/preview/server-bootstrap.sh root@62.113.106.19:/tmp/
-ssh -i ~/.ssh/kidsbank_vps root@62.113.106.19 'bash /tmp/server-bootstrap.sh'
+scp -i ~/.ssh/kidsbank_vps deploy/preview/server-bootstrap.sh root@82.202.128.45:/tmp/
+ssh -i ~/.ssh/kidsbank_vps root@82.202.128.45 'bash /tmp/server-bootstrap.sh'
 ```
 
 Деплой с Mac:
@@ -43,7 +43,7 @@ chmod +x /opt/kidsbank/src/deploy/preview/server-update.sh
 Деплой (вручную или агент по SSH):
 
 ```bash
-ssh -i ~/.ssh/kidsbank_vps root@62.113.106.19 \
+ssh -i ~/.ssh/kidsbank_vps root@82.202.128.45 \
   '/opt/kidsbank/src/deploy/preview/server-update.sh'
 ```
 

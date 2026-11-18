@@ -6,18 +6,22 @@ import {useEffect,useLayoutEffect,useRef,useState,type PointerEvent} from 'react
 import {animate,motion,useMotionValue,useReducedMotion} from 'motion/react';
 import {PaperPlaneTilt,Heart,GameController,Moon,Microphone} from '@phosphor-icons/react';
 import {useDemo} from './DemoState';
-import {money} from './data';
 import './pet-screen.css';
 import { useDesignerChildT } from './useDesignerChildT';
 import i18n from '../i18n';
+import { sendLeoChat, type LeoChatMessage } from '../lib/leoChatApi';
+type ChatBubble = { role: 'leo' | 'you'; text: string };
+function bubblesToLeoChat(bubbles: ChatBubble[]): LeoChatMessage[] {
+ return bubbles.filter((m) => m.text.trim()).map((m) => ({ role: m.role === 'you' ? 'user' : 'assistant', content: m.text }));
+}
 type VoiceRecognition = {lang:string;continuous:boolean;interimResults:boolean;onresult:((event:{resultIndex:number;results:ArrayLike<ArrayLike<{transcript:string}>>})=>void)|null;onerror:((event:{error:string})=>void)|null;onend:(()=>void)|null;start():void;stop():void};
 type SpeechWindow=Window&{SpeechRecognition?:new()=>VoiceRecognition;webkitSpeechRecognition?:new()=>VoiceRecognition};
 export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{onEmotion(value:LionEmotion):void;taps:number;onChatExpanded(value:boolean):void;keyboardOpen:boolean}){
  const { t } = useDesignerChildT();
  const {state,petAction}=useDemo();const [fullness,setFullness]=useState(80),[joy,setJoy]=useState(65),[draft,setDraft]=useState(''),[typing,setTyping]=useState(false);
- const [messages,setMessages]=useState([{role:'leo',text:''}]);
+ const [messages,setMessages]=useState<ChatBubble[]>([{role:'leo',text:''}]);
  useEffect(()=>{setMessages([{role:'leo',text:t('pet.greeting')}])},[t]);
- const timer=useRef<ReturnType<typeof setTimeout>|null>(null);
+ const [chatError,setChatError]=useState<string|null>(null);
  const recognition=useRef<VoiceRecognition|null>(null);
  const [listening,setListening]=useState(false),[voiceMessage,setVoiceMessage]=useState('');
  const root=useRef<HTMLDivElement>(null),scene=useRef<HTMLElement>(null),log=useRef<HTMLDivElement>(null),input=useRef<HTMLTextAreaElement>(null);
@@ -52,7 +56,6 @@ export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{
  function endDrag(e:PointerEvent<HTMLButtonElement>,cancelled=false){const g=gesture.current;if(!g||g.id!==e.pointerId)return;gesture.current=null;suppressClick.current=!cancelled&&g.moved;const next=cancelled?expanded:chatTop.get()+g.velocity*150<collapsedTop/2;if(!next)input.current?.blur();setExpanded(next);settling.current?.stop();settling.current=animate(chatTop,next?0:collapsedTop,reduced?{duration:0}:{type:'spring',stiffness:360,damping:38});}
  function toggleChat(){if(suppressClick.current){suppressClick.current=false;return}if(expanded)input.current?.blur();setExpanded(v=>!v)}
 
- useEffect(()=>()=>{if(timer.current)clearTimeout(timer.current)},[]);
  useEffect(()=>()=>recognition.current?.stop(),[]);
  function toggleVoice(){
   if(listening){recognition.current?.stop();setListening(false);return}
@@ -66,7 +69,7 @@ export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{
  }
  useEffect(()=>{if(taps)onEmotion(lionEmotions[(taps-1)%lionEmotions.length])},[taps]);
  function action(kind:string){if(!petAction(kind==='feed'?5:kind==='play'?8:3))return;onEmotion(kind==='sleep'?'rest':kind==='play'?'play':'feed');if(kind==='feed')setFullness(n=>Math.min(100,n+35));if(kind==='play')setJoy(n=>Math.min(100,n+35));setMessages(m=>[...m,{role:'leo',text:kind==='feed'?t('pet.replyFeed'):kind==='play'?t('pet.replyPlay'):t('pet.replySleep')}])}
- function send(text=draft){if(!text.trim()||typing)return;const q=text.trim();setDraft('');setMessages(m=>[...m,{role:'you',text:q}]);setTyping(true);onEmotion('think');timer.current=setTimeout(()=>{let answer=t('pet.replyDefault');if(/копил|мечт|накоп|piggy|dream|savings|խնայ/i.test(q))answer=t('pet.replyPiggy',{savings:money.format(state.savings)});else if(/дн|день|сколько|day|count|օր/i.test(q))answer=t('pet.replyDays');else if(/зв[её]зд|задан|star|task|աստղ/i.test(q))answer=t('pet.replyStars',{stars:state.stars});else if(/баланс|карт|денег|balance|card|քարտ/i.test(q))answer=t('pet.replyBalance',{balance:money.format(state.balance)});else if(/привет|как дел|hello|hi|բարև/i.test(q))answer=t('pet.replyHello');setMessages(m=>[...m,{role:'leo',text:answer}]);setTyping(false);onEmotion(/привет|как дел|hello|hi|բարև/i.test(q)?'laugh':'wink')},550)}
+ async function send(text=draft){if(!text.trim()||typing)return;const q=text.trim();setChatError(null);setDraft('');const nextMessages:ChatBubble[]=[...messages,{role:'you',text:q}];setMessages(nextMessages);setTyping(true);onEmotion('think');try{const reply=await sendLeoChat(bubblesToLeoChat(nextMessages));setMessages((m)=>[...m,{role:'leo',text:reply}]);onEmotion(/привет|как дел|hello|hi|բարև/i.test(reply)?'laugh':'wink')}catch{setChatError(t('pet.chatError'));setMessages((m)=>m.slice(0,-1));setDraft(q)}finally{setTyping(false)}}
  return <div ref={root} className="leo-screen" data-chat-expanded={expanded} data-keyboard-open={keyboardOpen}>
   <section ref={scene} className="leo-scene" inert={expanded}>
    <div className="leo-level">{t('pet.level',{level:1+Math.floor(state.xp/100)})}</div>
@@ -77,6 +80,7 @@ export default function PetScreen({onEmotion,taps,onChatExpanded,keyboardOpen}:{
    <button type="button" className="leo-chat-grab" aria-label={expanded?t('pet.collapseChat'):t('pet.expandChat')} aria-expanded={expanded} onClick={toggleChat} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={e=>endDrag(e)} onPointerCancel={e=>endDrag(e,true)}><span/></button>
    <div className="leo-chat-header"><b>{t('pet.leoName')}</b><span>{t('pet.online')}</span></div>
    <div ref={log} className="leo-messages" role="log" aria-live="polite">{messages.map((m,i)=><div key={i} className={`leo-bubble ${m.role}`}>{m.text}</div>)}{typing&&<div className="leo-bubble leo">{t('pet.thinking')}</div>}{messages.length===1&&<div className="leo-suggestions"><button onClick={()=>send(t('pet.suggestDaysQuestion'))}>{t('pet.suggestDays')}</button><button onClick={()=>send(t('pet.suggestPiggyQuestion'))}>{t('pet.suggestPiggy')}</button></div>}</div>
+   {chatError&&<p className="leo-voice-status" role="alert">{chatError}</p>}
    {voiceMessage&&<p className="leo-voice-status" role="status">{voiceMessage}</p>}
    <form className="leo-composer" onSubmit={e=>{e.preventDefault();send()}}><textarea ref={input} onFocus={()=>setExpanded(true)} aria-label={t('pet.messageLabel')} rows={1} placeholder={t('pet.messagePlaceholder')} value={draft} maxLength={500} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}}/>
     {draft.trim()?<button type="submit" onPointerDown={e=>e.preventDefault()} aria-label={t('pet.send')} disabled={typing}><PaperPlaneTilt size={22} weight="fill"/></button>:<button type="button" onClick={toggleVoice} onPointerDown={e=>e.preventDefault()} className={listening?'is-listening':''} aria-label={listening?t('pet.voiceStop'):t('pet.voiceStart')} aria-pressed={listening}><Microphone size={22} weight="fill"/></button>}

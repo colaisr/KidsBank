@@ -9,7 +9,8 @@
 - **Демо сдано** — прототип готов к показу, ждёт утверждения или следующих шагов.
 - Реализованный скоуп — [`PlanDocs/01-surf-baseline.md`](../../PlanDocs/01-surf-baseline.md).
 - Живые спеки: `openspec/specs/`. История changes: `openspec/changes/archive/`.
-- **Деплой:** по запросу `npm run deploy:preview` (не при push); preview https://62-113-106-19.sslip.io/. Замок `verify:deploy-gates` остановит деплой, пока у активного change нет зелёных гейтов.
+- **Деплой:** по запросу `npm run deploy:preview` (не при push); preview https://82-202-128-45.sslip.io/. Замок `verify:deploy-gates` остановит деплой, пока у активного change нет зелёных гейтов.
+- **Leo chat (LLM):** `src/lib/leoChatApi.ts` → `POST /api/kidsbank/leo/chat` (proxy `deploy/leo-chat`, ключ только на VPS). Клиенты: `YoungLeoChat` (young totem), `designer-child/PetScreen` (`#pet`).
 
 ## Обязательное чтение
 

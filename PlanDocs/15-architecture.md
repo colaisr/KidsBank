@@ -92,15 +92,15 @@ src/
   i18n/           инициализация i18next
   themes/         amio.css, evoca.css, card-skins.css — CSS-токены на [data-theme] + [data-card-skin]
   lib/            format.ts, tasks.ts, goals.ts, piggy.ts, pet.ts (уровень, decay, hints, tab badge),
-                  leoChatApi.ts (young totem → `/api/kidsbank/leo/chat`)
+                  leoChatApi.ts (young totem + designer `#pet` → `/api/kidsbank/leo/chat`)
 ```
 
 Роуты ребёнка: `/child` (teen | young | designer handoff по `childExperience`), `/child/profile` (единые настройки), `/child/young/*` (только `young`), `/child/onboarding/*`, остальные teen/young маршруты как в `01`. `/appearance` → `/child/profile`.
 
 Default locale: `ru`. Ключи localStorage: `kidsbank.bank`, `kidsbank.lang`, `kidsbank.role`, `kidsbank.cardSkin`, `kidsbank.childExperience`, `kidsbank.childAgeRange`, `kidsbank.demo` (v5, включает `pet` и `goals[].selected`).
 
-Preview: https://62-113-106-19.sslip.io/ — ручной деплой `npm run deploy:preview` (см. `16`).
+Preview: https://82-202-128-45.sslip.io/ — ручной деплой `npm run deploy:preview` (см. `16`).
 
 ## 5. Чего нет
 
-Auth, API, Prisma, Docker runtime, микросервисы. **Исключение для показа:** на preview VPS — лёгкий proxy `deploy/leo-chat` (Polza) только для чата young-тотема; см. `16`. Остальное демо — по-прежнему статика + `localStorage`.
+Auth, API, Prisma, Docker runtime, микросервисы. **Исключение для показа:** на preview VPS — лёгкий proxy `deploy/leo-chat` (Polza) для чата young-тотема и designer handoff `#pet`; см. `16`. Остальное демо — по-прежнему статика + `localStorage`.

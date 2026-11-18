@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build KidsBank locally and rsync dist/ to the demo VPS.
 # Usage: ./scripts/deploy-preview.sh
-# Env: KIDSBANK_DEPLOY_HOST (default 62.113.106.19)
+# Env: KIDSBANK_DEPLOY_HOST (default 82.202.128.45)
 #      KIDSBANK_DEPLOY_USER (default root)
 #      KIDSBANK_DEPLOY_PATH (default /var/www/kidsbank)
 #      KIDSBANK_SSH_KEY (default ~/.ssh/kidsbank_vps)
@@ -15,7 +15,7 @@ cd "$ROOT"
 # Подробности: scripts/verify-deploy-gates.ts, docs/roles/openspec-gates.md
 npx --no-install tsx scripts/verify-deploy-gates.ts
 
-HOST="${KIDSBANK_DEPLOY_HOST:-62.113.106.19}"
+HOST="${KIDSBANK_DEPLOY_HOST:-82.202.128.45}"
 USER="${KIDSBANK_DEPLOY_USER:-root}"
 PATH_ON_SERVER="${KIDSBANK_DEPLOY_PATH:-/var/www/kidsbank}"
 SSH_KEY="${KIDSBANK_SSH_KEY:-$HOME/.ssh/kidsbank_vps}"
@@ -37,4 +37,4 @@ rsync -avz --delete \
   -e "ssh -i \"$SSH_KEY\" -o StrictHostKeyChecking=accept-new" \
   dist/ "${USER}@${HOST}:${PATH_ON_SERVER}/"
 
-echo "Done: https://62-113-106-19.sslip.io/"
+echo "Done: https://82-202-128-45.sslip.io/"
